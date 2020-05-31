@@ -1,1 +1,19 @@
-<p>home works!</p>
+<div id="cover_photo">
+  <img src="assets/images/common/cover.jpg">
+</div>
+<div class="container">
+
+  <div class="row">
+
+    <div *ngFor="let speciality of specialities" class="card  col-12 col-md-4">
+      <a routerLink="/doctor/specialities">
+        <img class="card-img-top" src="assets/images/specialities/{{speciality}}.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{speciality}}</h5>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+</div>
