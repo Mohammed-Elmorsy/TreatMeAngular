@@ -1,0 +1,15 @@
+#cover_photo{
+    margin-bottom: 20px;
+}
+
+#cover_photo img{
+    width: 100%;
+    height: 400px;
+}
+
+a:hover{
+    text-decoration: none;
+}
+a img:hover{
+    opacity: .8;
+}
