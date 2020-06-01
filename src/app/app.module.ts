@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from "./home/home.module";
 import {DoctorModule} from "./doctor/doctor.module";
+
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
