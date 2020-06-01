@@ -8,7 +8,12 @@ a:hover{
 #bar a{
     color: white;
 }
-#bar a:hover{
+#bar a:hover {
    background-color: rgb(20, 123, 219);
    border-radius: 10px;
 }
+
+.active{
+    background-color: rgb(20, 123, 219);
+    border-radius: 10px;
+ }
