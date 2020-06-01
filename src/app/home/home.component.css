@@ -3,7 +3,7 @@
     background-image: url('../../assets/images/common/cover2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 650px;
+    height: 700px;
     text-align: center;
 
 }
@@ -11,6 +11,7 @@
 {
     display: block;
     margin: 25px auto;
+    margin-top: 200px;
     text-align: center;
     height: 70px;
     width: 270px;
@@ -18,15 +19,15 @@
 }
 #caption{
 
-    height: 200px;
-    width: 500px;
+    width:40%;
     position: relative;
-    margin: 150px ;
+    margin: 50px auto ;
+    
     display: inline-block;
     color: white;
 
 
-background-color: rgba(9, 34, 87, 0.7);
+background-color: rgba(52, 177, 154, 0.6);
 border-radius: 20px;
 
 
