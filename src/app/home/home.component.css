@@ -10,6 +10,15 @@
 a:hover{
     text-decoration: none;
 }
-a img:hover{
+
+#card_wrapper{
+    padding: 10px;
+}
+
+#speciality_card:hover{
     opacity: .8;
+}
+
+#speciality_card img{
+    height: 200px;
 }

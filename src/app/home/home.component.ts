@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { DoctorService } from '../core/services/doctor/doctor.service';
 
+import { Speciality } from '../_models/speciality';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,12 +11,15 @@ import { DoctorService } from '../core/services/doctor/doctor.service';
 })
 export class HomeComponent implements OnInit {
 
-  specialities:String[];
+  specialities:Speciality[];
   constructor(private doctorService:DoctorService) { }
 
 
   ngOnInit() {
-    this.specialities = this.doctorService.getSpecialities();
+    this.doctorService.getSpecialities()
+                            .subscribe(
+                              (_specialities)=> this.specialities = _specialities
+                              );
     console.log(this.specialities);
   }
   

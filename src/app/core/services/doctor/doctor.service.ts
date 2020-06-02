@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Doctor } from "../../../_models/doctor";
+import { Speciality } from 'src/app/_models/speciality';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorService {
 
-  constructor() { }
+   constructor(private httpClient:HttpClient) { }
 
-  doctors:Doctor[] = [
+/*   doctors:Doctor[] = [
     {
       id:1,
       fullName:"Mohammed Abd Elhady",
@@ -36,15 +40,15 @@ export class DoctorService {
 
   speicalities = [
     "Cardiology", "Dermatology" , "Gastroenterology"
-  ]
+  ] */
 
   //-----------------------------------------methods------------------------------------
-  getDoctors(){
-    return this.doctors;
+  getDoctors() {
+    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/Doctors/Index");
   }
 
   getSpecialities(){
-    return this.speicalities;
-  }
+    return this.httpClient.get<Speciality[]>(environment.baseURL+"api/speciality");
+  }  
 
 }
