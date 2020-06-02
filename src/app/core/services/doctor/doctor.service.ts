@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DoctorService {
 
+  doctor:Doctor;
    constructor(private httpClient:HttpClient) { }
 
 /*   doctors:Doctor[] = [
@@ -51,4 +52,8 @@ export class DoctorService {
     return this.httpClient.get<Speciality[]>(environment.baseURL+"api/speciality");
   }  
 
+  getDoctor(id){
+
+    return this.httpClient.get<Doctor>(environment.baseURL+"api/Doctors/Details/"+id);
+  }
 }
