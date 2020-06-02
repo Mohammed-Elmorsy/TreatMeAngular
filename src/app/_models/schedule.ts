@@ -1,6 +1,14 @@
 export class Schedule {
 
-    constructor(){
-        
+    constructor(
+
+        Id:Number,
+        date:Date, 
+        StartTime:Date,
+        EndTime:Date,
+        IsBooked:Boolean,
+        DoctorId :Number
+    ){
+
     }
 }
