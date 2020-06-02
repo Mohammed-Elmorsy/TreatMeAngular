@@ -4,14 +4,12 @@
 <div class="container">
 
   <div class="row">
-    <div *ngFor="let speciality of specialities" class="col-12 col-md-4" id="card_wrapper">
-      <div  class="card text-white bg-info" id="speciality_card">
-        <a routerLink="/doctor/specialities">
-          <img class="card-img-top" src="assets/images/specialities/{{speciality.name}}.jpg" alt="{{speciality.name}}">
-          <div class="card-body">
-            <h5 class="card-title text-white text-center">{{speciality.name}}</h5>
-          </div>
-        </a>
+    <div *ngFor="let speciality of specialities" class="col-12 col-md-4" id="card_wrapper" (click)="navigateToDocsList(speciality.id)">
+      <div class="card text-white bg-primary" id="speciality_card">
+        <img class="card-img-top" src="assets/images/specialities/{{speciality.name}}.jpg" alt="{{speciality.name}}">
+        <div class="card-body">
+          <h5 class="card-title text-white text-center">{{speciality.name}}</h5>
+        </div>
       </div>
     </div>
 

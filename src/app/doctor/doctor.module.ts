@@ -6,11 +6,13 @@ import { RouterModule } from '@angular/router';
 import { DoctorRoutingModule } from './doctor-routing.module';
 
 import { DoctorComponent } from "./doctor-profile/doctor.component";
+import { DoctorListComponent } from './doctor-list/doctor-list.component';
 
 
 @NgModule({
   declarations: [
-    DoctorComponent
+    DoctorComponent,
+    DoctorListComponent
   ],
   imports: [
    SharedModule,
