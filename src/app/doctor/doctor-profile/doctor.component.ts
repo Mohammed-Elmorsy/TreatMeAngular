@@ -24,18 +24,15 @@ export class DoctorComponent implements OnInit {
 
   let url=window.location.href;
   let docId = url.substring(url.lastIndexOf('/') + 1);
-  console.log(docId);
 
-  this.service.getDoctor(docId) 
+  this.service.getDoctor(docId)
   .subscribe(
     (_doctor)=> this.doctor = _doctor
     );  
 
-
-
   this.docImg="../../assets/images/doctors/"+docId+".jpg";
-  console.log(this.docImg);
+
 
   }
- 
+
 }

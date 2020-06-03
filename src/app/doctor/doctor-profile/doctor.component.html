@@ -1,24 +1,49 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="container">
-    
-    <div class="row">
-        <div class="col-6">
-            <img  [src]="docImg" style="border-radius: 50%;" height="100%" width="180" > 
-        </div>
-        <div class="col-6">
-            <h1>{{doctor.name}}</h1>
-            <h2>{{doctor.speciality}}</h2>
-            <h2>{{doctor.address}}</h2>
-            <h2>{{doctor.phoneNumber}}</h2>
+<div class="container" style="border-radius: 10px; margin-top: 50px;" id="doc">
 
-            <div *ngIf="doctor.rating>0" >
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked" *ngIf="doctor.rating>1" ></span>
-                <span class="fa fa-star checked" *ngIf="doctor.rating>2" ></span>
-                <span class="fa fa-star checked" *ngIf="doctor.rating>3" ></span>
-                <span class="fa fa-star checked" *ngIf="doctor.rating>4" ></span>
+    <div class="row text-center" style=" border-radius: 5%;">
+        <div class="col-6" style="margin-top: 20px;  margin-bottom: 50px;">
+            <img [src]="docImg"
+                style=" border-style: solid; border-width: 5px; border-color: chartreuse; border-radius: 60%; margin-top: 20px;"
+                height="50%" width="200">
+            <h1 class=""
+                style="margin-top: 60px; color:aliceblue; font-family:'Times New Roman', Times, serif; margin-left: 20px;">
+                Dr. {{doctor.name}} </h1>
+            <h2>{{doctor.speciality}}</h2>
+
+        </div>
+        <div class="col-6" style="margin-top: 20px; margin-bottom: 50px;">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h4> Age : {{doctor.age}}</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Patients Rating </h5>
+                    <h4>
+                        <div class="alert alert-dark" *ngIf="doctor.rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked border-light" *ngIf="doctor.rating>1"></span>
+                            <span class="fa fa-star checked" *ngIf="doctor.rating>2"></span>
+                            <span class="fa fa-star checked" *ngIf="doctor.rating>3"></span>
+                            <span class="fa fa-star checked" *ngIf="doctor.rating>4"></span>
+                        </div>
+                    </h4>
+
+                </div>
+                <div class="card-footer text-muted">
+                    <h3> Address : {{doctor.address}}</h3>
+                    <h3> Phone : {{doctor.phoneNumber}}</h3>
+                    <h3> E-Mail : {{doctor.mail}}</h3>
+                    <a href='{{doctor.cv}}'><button class="btn btn-warning" (click)="getCV()"> Get More
+                            Details</button></a>
+                </div>
             </div>
+
+
+
+
+
         </div>
     </div>
 </div>
