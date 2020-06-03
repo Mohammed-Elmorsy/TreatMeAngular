@@ -13,12 +13,11 @@ import { Schedule } from './_models/schedule';
 const routes: Routes = [
   {path:"",redirectTo:"home" ,pathMatch:"full"},
   {path:"home",component:HomeComponent},
-<<<<<<< HEAD
+  
   {path:"ss",component:ScheduleComponent},
 
   {path:"doctor/1",component:DoctorComponent},
-=======
->>>>>>> b4943a9a488d86d8c2df17724bbb346707e3e48a
+
   {path:"**",component:PageNotFoundComponent}
  
 ];

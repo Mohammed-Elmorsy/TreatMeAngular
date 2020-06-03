@@ -9,6 +9,8 @@ import { Schedule } from 'src/app/_models/schedule';
 })
 export class ScheduleComponent implements OnInit {
 
+
+  choocedDate:Date;
   constructor(private scheduleService:ScheduleService) { }
   ScheduleTimes:Schedule[];
 
