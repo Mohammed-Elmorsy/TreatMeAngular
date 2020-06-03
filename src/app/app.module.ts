@@ -9,12 +9,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ScheduleComponent } from './featuers/schedule/schedule.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+    ScheduleComponent,
     
   ],
   imports: [
