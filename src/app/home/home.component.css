@@ -7,9 +7,16 @@
     height: 400px;
 }
 
-a:hover{
-    text-decoration: none;
+#card_wrapper{
+    padding: 20px;
 }
-a img:hover{
+
+#speciality_card:hover{
     opacity: .8;
+    cursor: pointer;
+    border: 1px white solid;
+}
+
+#speciality_card img{
+    height: 200px;
 }

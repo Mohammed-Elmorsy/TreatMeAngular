@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DoctorService } from 'src/app/core/services/doctor/doctor.service';
+import { Doctor } from 'src/app/_models/doctor';
 
 
 @Component({
@@ -6,20 +8,33 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './doctor.component.html',
   styleUrls: ['./doctor.component.css']
 })
+
 export class DoctorComponent implements OnInit {
 
   docImg:string;
-  rating:number;
-  constructor() { }
+ 
+  doctor:Doctor;
+
+ 
+  constructor(private service:DoctorService) {
+ 
+   }
 
   ngOnInit() {
-  
+
   let url=window.location.href;
   let docId = url.substring(url.lastIndexOf('/') + 1);
   console.log(docId);
-  this.docImg="../../../assets/images/doctors/"+docId+".jpg";
+
+  this.service.getDoctor(docId) 
+  .subscribe(
+    (_doctor)=> this.doctor = _doctor
+    );  
+
+
+
+  this.docImg="../../assets/images/doctors/"+docId+".jpg";
   console.log(this.docImg);
- 
 
   }
  

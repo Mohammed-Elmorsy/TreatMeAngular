@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { DoctorService } from '../core/services/doctor/doctor.service';
 
+import { Speciality } from '../_models/speciality';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,13 +12,20 @@ import { DoctorService } from '../core/services/doctor/doctor.service';
 })
 export class HomeComponent implements OnInit {
 
-  specialities:String[];
-  constructor(private doctorService:DoctorService) { }
+  specialities:Speciality[];
+  constructor(private doctorService:DoctorService, 
+    private router:Router) { }
 
 
   ngOnInit() {
-    this.specialities = this.doctorService.getSpecialities();
+    this.doctorService.getSpecialities().subscribe((_specialities)=>
+     this.specialities = _specialities );
+                             
     console.log(this.specialities);
+  }
+
+  navigateToDocsList(specialityID:number){
+    this.router.navigate(["doctor/list", specialityID])
   }
   
 
