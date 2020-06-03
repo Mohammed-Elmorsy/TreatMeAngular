@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path:"doctor", children:[
       //any doctor child routes with components are added here
-    {path:"profile/:id", component:DoctorComponent},
+    {path:"details/:id", component:DoctorComponent},
     {path:"list/:specialityID", component:DoctorListComponent}
   ]
 }
