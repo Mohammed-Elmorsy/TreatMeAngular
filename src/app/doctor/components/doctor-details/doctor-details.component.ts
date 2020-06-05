@@ -4,12 +4,12 @@ import { Doctor } from 'src/app/_models/doctor';
 
 
 @Component({
-  selector: 'app-doctor',
-  templateUrl: './doctor.component.html',
-  styleUrls: ['./doctor.component.css']
+  selector: 'app-doctor-details',
+  templateUrl: './doctor-details.component.html',
+  styleUrls: ['./doctor-details.component.css']
 })
 
-export class DoctorComponent implements OnInit {
+export class DoctorDetailsComponent implements OnInit {
 
   docImg:string;
  
