@@ -18,7 +18,10 @@ export class ScheduleComponent implements OnInit {
 
   ngOnInit() {
 
-    this.ScheduleTimes=this.scheduleService.scheduleTimes;
+   this.scheduleService.getSchedules().subscribe(schedule=>
+    this.ScheduleTimes=schedule);
+
+   
 
   }
 
