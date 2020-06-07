@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './doctor-list.component.html',
   styleUrls: ['./doctor-list.component.css']
 })
-export class DoctorListComponent implements OnInit {
+export class DoctorListComponent implements OnInit { 
 
   private doctors:Doctor[];
   private specialityID:number;
