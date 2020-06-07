@@ -22,7 +22,7 @@ export class ScheduleService {
 getScheduleByDoctorId(Id:Number)
 {
 
-return this.httpClient.get<Schedule[]>(environment.baseURL+Id)
+return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/GetDoctorSchedules/"+Id)
 
 }
 

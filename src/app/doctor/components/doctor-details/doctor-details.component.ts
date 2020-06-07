@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from 'src/app/core/services/doctor/doctor.service';
 import { Doctor } from 'src/app/_models/doctor';
+import { ScheduleService } from 'src/app/core/services/schedule/schedule.service';
+import { Schedule } from 'src/app/_models/schedule';
 
 
 @Component({
@@ -16,6 +18,9 @@ export class DoctorDetailsComponent implements OnInit {
   doctor:Doctor;
 
  
+
+
+
   constructor(private service:DoctorService) {
  
    }
