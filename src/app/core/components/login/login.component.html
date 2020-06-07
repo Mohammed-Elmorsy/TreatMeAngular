@@ -1,0 +1,35 @@
+<div>
+  <div class="col-12 col-md-7 float-left" id="leftDiv"><!-- image -->
+    <img src="assets/images/doctors/{{pictureName}}-register.jpg" alt="loading"> 
+  </div>  
+  <div class="col-12 col-md-5 float-right p-4" id="rightDiv"><!-- form -->
+    <h3 class="text-center mb-5 mt-5">تسجيل الدخول</h3>
+    <div class="text-center" id="radioBtnGroup">
+      <div class="form-check form-check-inline">
+        <label class="form-check-label mr-1">مستخدم</label>
+        <input class="form-check-input" type="radio" name="user" value="patient" [(ngModel)]="this.pictureName">
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label mr-1" for="inlineRadio2">طبيب</label>
+        <input class="form-check-input" type="radio" name="user" value="doctor" [(ngModel)]="this.pictureName">
+      </div>
+    </div>
+    <form class=" text-right" dir="rtl">
+      <div class="form-group">
+        <label>اسم المستخدم</label>
+        <input type="text" class="form-control">
+        <small id="emailHelp" class="form-text text-muted">client side validation will be here</small>
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input type="password" class="form-control">
+      </div>
+      <div class="form-group">
+        <a routerLink="#">نسيت كلمة المرور ؟</a>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-success">دخول</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -20,3 +20,14 @@
 #speciality_card img{
     height: 200px;
 }
+
+#carouselExampleIndicators img{   
+    width: 100%;
+    height:500px;  
+}
+
+div.carousel-caption{
+    color: darkblue;
+    text-shadow: 2px 2px white;
+    font-weight: bold;    
+}

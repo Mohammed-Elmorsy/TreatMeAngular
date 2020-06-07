@@ -4,9 +4,9 @@
       <div *ngFor="let doctor of doctors" class="col-12 col-sm-6 col-md-4 col-lg-3" id="card_wrapper" (click)="navigateToDocDetails(doctor.id)">
         <div class="card bg-light text-center" id="speciality_card" >
           <img class="card-img-top" src="assets/images/doctors/profile-pic.png" alt="{{doctor.name}}">
-          <div class="card-body">
-            <h5 class="card-title text-center">{{doctor.name}}</h5>
-            <p class="card-text text-center">اخصائى فشيخ جدا</p>
+          <div class="card-body">        
+            <h5 class="card-title text-center">اخصائى فشيخ</h5>   
+            <p class="card-text text-center">{{doctor.title}}</p>
             <p class="card-text text-center">EGP تمن الجلسة : {{doctor.fees}}</p>
             <button class="btn btn-primary" (click)="navigateToSchedule()">احجز جلسة</button> 
           </div>

@@ -9,14 +9,14 @@
                 height="50%" width="200">
             <h1 class=""
                 style="margin-top: 60px; color:aliceblue; font-family:'Times New Roman', Times, serif; margin-left: 20px;">
-                Dr. {{doctor.name}} </h1>
-            <h2>{{doctor.speciality}}</h2>
+                Dr. {{doctor.user.firstName}} {{doctor.user.lastName}} </h1>
+            <h2>{{doctor.speciality.name}}</h2>
 
         </div>
         <div class="col-6" style="margin-top: 20px; margin-bottom: 50px;">
             <div class="card text-center">
                 <div class="card-header">
-                    <h4> Age : {{doctor.age}}</h4>
+                    <h4> Age : {{doctor.user.age}}</h4>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Patients Rating </h5>
@@ -32,9 +32,9 @@
 
                 </div>
                 <div class="card-footer text-muted">
-                    <h3> Address : {{doctor.address}}</h3>
-                    <h3> Phone : {{doctor.phoneNumber}}</h3>
-                    <h3> E-Mail : {{doctor.mail}}</h3>
+                    <h3> Address : {{doctor.user.address}}</h3>
+                    <h3> Phone : {{doctor.user.phoneNumber}}</h3>
+                    <h3> E-Mail : {{doctor.user.mail}}</h3>
                     <a href='{{doctor.cv}}'><button class="btn btn-warning" (click)="getCV()"> Get More
                             Details</button></a>
 
