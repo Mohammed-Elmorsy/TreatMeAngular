@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Schedule} from '../../../_models/schedule'
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -7,8 +9,25 @@ import {Schedule} from '../../../_models/schedule'
 })
 export class ScheduleService {
 
-  constructor() { }
-  scheduleTimes:Schedule[]=[
+  constructor(private httpClient:HttpClient) { }
+
+
+
+  getSchedules()
+  {
+
+      return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/Index")
+
+  }
+getScheduleByDoctorId(Id:Number)
+{
+
+return this.httpClient.get<Schedule[]>(environment.baseURL+Id)
+
+}
+
+
+ /* scheduleTimes:Schedule[]=[
     {
       Id:1,
       date: new Date('6/15/2020'),
@@ -52,5 +71,5 @@ export class ScheduleService {
     },
       
 
-  ];
+  ];*/
 }

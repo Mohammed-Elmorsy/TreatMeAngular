@@ -16,7 +16,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [ //components
-    AppComponent,
+    AppComponent
     
   ],
   imports: [ //modules
