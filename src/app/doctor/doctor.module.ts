@@ -7,12 +7,14 @@ import { DoctorRoutingModule } from './doctor-routing.module';
 
 import { DoctorDetailsComponent } from "./components/doctor-details/doctor-details.component";
 import { DoctorListComponent } from './components/doctor-list/doctor-list.component';
+import { DoctorProfileComponent } from './components/doctor-profile/doctor-profile.component';
 
 
 @NgModule({
   declarations: [
     DoctorDetailsComponent,
-    DoctorListComponent
+    DoctorListComponent,
+    DoctorProfileComponent
   ],
   imports: [
    SharedModule,
