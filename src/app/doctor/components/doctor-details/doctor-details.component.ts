@@ -44,12 +44,8 @@ export class DoctorDetailsComponent implements OnInit {
 
   this.service.getDoctor(docId)
   .subscribe(
-    (_doctor)=> {this.doctor = _doctor
+    (_doctor)=> {this.doctor = _doctor});  
     console.log(this.doctor);
-
-    
-    });  
-
   this.docImg="../../assets/images/doctors/"+docId+".jpg";
 
 
