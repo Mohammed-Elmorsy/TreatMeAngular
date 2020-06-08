@@ -17,9 +17,9 @@ export class ScheduleComponent implements OnInit {
 
   DoctorSchedule:Schedule[];
 
-  GetDoctorScheduleTimes(id:Number)
+  GetDoctorScheduleTimes(id:Number,choocedDate)
   {
-     this.scheduleService.getScheduleByDoctorId(id).subscribe((a)=>{
+     this.scheduleService.getScheduleByDoctorId(id,choocedDate).subscribe((a)=>{
        this.DoctorSchedule=a;
       console.log(this.DoctorSchedule);
       
