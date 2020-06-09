@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Doctor } from 'src/app/_models/doctor';
 
 @Component({
   selector: 'app-doctor-register',
@@ -7,9 +8,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoctorRegisterComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  private doctor:Doctor;
+  constructor() { 
+    this.doctor = {
+      userId:null,
+      fees:null,
+      rating:null,
+      CV:null,  
+      specialityId:null,  
+      user:{
+        id:null,
+        firstName: '',
+        lastName:'', 
+        userName:'',   
+        age:null,
+        address:'',
+        gender:null,
+        phoneNumber:null,
+        mail:'',
+        password:'',
+        role:'',
+        image:''
+      },
+    }
   }
+  
+  ngOnInit() {
+
+  }
+
+
 
 }

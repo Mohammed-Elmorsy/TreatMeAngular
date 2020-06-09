@@ -9,6 +9,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { DoctorRegisterComponent } from './components/doctor-register/doctor-register.component';
 import { PatientRegisterComponent } from './components/patient-register/patient-register.component';
 import { LoginComponent } from './components/login/login.component';
+//directives
+import { NoWhiteSpaces } from './directives/noWhiteSpaces.directive';
+import { ConfirmEqualValidatorDirective } from './directives/confirmEqualValidator.directive';
   
 
 @NgModule({
@@ -18,7 +21,10 @@ import { LoginComponent } from './components/login/login.component';
     PageNotFoundComponent,
     DoctorRegisterComponent,
     PatientRegisterComponent,
-    LoginComponent
+    LoginComponent,
+
+    NoWhiteSpaces,
+    ConfirmEqualValidatorDirective   
   ],
   imports: [
     CommonModule,
@@ -32,6 +38,7 @@ import { LoginComponent } from './components/login/login.component';
     DoctorRegisterComponent,
     PatientRegisterComponent,
     LoginComponent
+
   ]
 })
 export class CoreModule { }

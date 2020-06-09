@@ -11,10 +11,10 @@
     padding: 20px;
 }
 
-#speciality_card:hover{
+.card:hover{
     opacity: .8;
     cursor: pointer;
-    border: 1px white solid;
+    border: 3px white solid;
 }
 
 #speciality_card img{
@@ -30,4 +30,10 @@ div.carousel-caption{
     color: darkblue;
     text-shadow: 2px 2px white;
     font-weight: bold;    
+}
+
+.card{
+    background-color: rgb(2, 7, 78);
+    border:3px solid rgb(2, 7, 78);
+    border-radius: 5px;
 }

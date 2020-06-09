@@ -1,86 +1,190 @@
 <div>
-    <div class="col-12 col-md-7 float-left" id="leftDiv"><!-- image -->
+    <div class="col-12 col-md-7 float-left" id="leftDiv">
+        <!-- image -->
         <img src="assets/images/doctors/doctor-register.jpg" alt="loading">
     </div>
-    <div class="col-12 col-md-5 float-right p-4" id="rightDiv"> <!-- form --> 
-        <h3 class="text-center mb-3 mt-5">انضم لأطباء عالجنى</h3>
-        <form class=" text-right" dir="rtl">
+    <div class="col-12 col-md-5 float-right p-4" id="rightDiv">
+        <h3 class="text-center mb-3">انضم لأطباء عالجنى</h3>
+        <!-- form -->
+        <form name="form" #form="ngForm" class=" text-right" dir="rtl" (ngSubmit)="onSubmit()">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="الاسم الاول">
+                    <input type="text" class="form-control" placeholder="الاسم الاول" name="firstName"
+                        #firstName="ngModel"
+                        [(ngModel)]="doctor.user.firstName"
+                        required 
+                        maxlength="20"
+                        minlength="3"
+                        noWhiteSpaces
+                        [ngClass]="{ 'is-invalid': firstName.invalid && firstName.dirty }" />
+                    <!--cs validation -->
+                    <div *ngIf="firstName.invalid" class="invalid-feedback">
+                        <span *ngIf="firstName.errors?.required && firstName.dirty">
+                            *</span>
+                        <span *ngIf="firstName.errors?.minlength && firstName.dirty">
+                             يجب أن لا يقل الاسم عن 3 أحرف</span>
+                        <span *ngIf="firstName.errors.hasWhiteSpace && firstName.dirty">
+                            يجب أن لا يحتوى الاسم على مسافات</span>
+                    </div>
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="الاسم الاخير">
+                    <input type="text" class="form-control" placeholder="الاسم الاخير" name="lastName"
+                        #lastName="ngModel"
+                        [(ngModel)]="doctor.user.lastName"
+                        required 
+                        maxlength="20"
+                        minlength="3"
+                        noWhiteSpaces
+                        [ngClass]="{ 'is-invalid': lastName.invalid && lastName.dirty }" /> 
+                    <!--cs validation --> 
+                    <div *ngIf="lastName.invalid" class="invalid-feedback">
+                        <span *ngIf="lastName.errors?.required && lastName.dirty">
+                            *</span>
+                        <span *ngIf="lastName.errors?.minlength && lastName.dirty">
+                            يجب أن لا يقل الاسم عن 3 أحرف</span>
+                        <span *ngIf="lastName.errors?.hasWhiteSpace && lastName.dirty">
+                                 يجب أن لا يحتوى الاسم على مسافات</span> 
+                    </div>     
                 </div>
+    
+            </div> <!-- end of class form-row -->
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="اسم المستخدم" name="userName"
+                #userName="ngModel"
+                ngModel    
+                required
+                maxlength="30"
+                minlength="6"
+                noWhiteSpaces
+                [ngClass]="{ 'is-invalid': userName.invalid && userName.dirty }" />  
+                <!--cs validation --> 
+                <div *ngIf="userName.invalid" class="invalid-feedback">
+                    <span  *ngIf="userName.errors?.required && userName.dirty">
+                         *</span>
+                    <span  *ngIf="userName.errors?.minlength && userName.dirty">
+                      يجب أن لا يقل الاسم عن 6 أحرف</span>
+                    <span *ngIf="userName.errors?.hasWhiteSpace && userName.dirty">
+                        يجب أن لا يحتوى الاسم على مسافات</span> 
+                </div> 
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="اسم المستخدم">
+                <input type="email" class="form-control" placeholder="عنوان البريد الالكترونى" name="email"
+                #email="ngModel"
+                ngModel
+                required
+                noWhiteSpaces
+                [ngClass]="{ 'is-invalid': email.invalid && email.dirty }" />
+                <!--cs validation --> 
+                <div *ngIf="email.invalid" class="invalid-feedback">
+                    <span  *ngIf="email.errors?.required && email.dirty">
+                        *</span>
+                    <span  *ngIf="email.errors?.email && email.dirty">
+                          يجب أن لا يقل الاسم عن 6 أحرف</span>
+                    <span *ngIf="email.errors?.hasWhiteSpace && email.dirty">
+                        يجب أن لا يحتوى الاسم على مسافات</span> 
+               </div> 
             </div>
-            <div class="form-group">
-                <input type="email" class="form-control" placeholder="عنوان البريد الالكترونى">
-            </div>
-            <div class="form-row">
+            <div class="form-row"  ngModelGroup="passwordGroup"  #passwordGroup="ngModelGroup" [ngClass]="{ 'is-invalid': confirmPassword.invalid && confirmPassword.dirty }">
+  
                 <div class="form-group col-md-6">
-                    <input type="password" class="form-control" placeholder="كلمة المرور">
+                    <input type="password" class="form-control" placeholder="كلمة المرور" name="password"
+                    #password="ngModel"
+                    ngModel  
+                    required 
+                    maxlength="30"
+                    minlength="6"
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': password.invalid && password.dirty }"
+                    (input)="confirmPassword.control.updateValueAndValidity()">  
+                <!--cs validation -->
+                    <div *ngIf="password.invalid" class="invalid-feedback">
+                        <span *ngIf="password.errors?.required && password.dirty">
+                            *</span>
+                        <span *ngIf="password.errors?.minlength && password.dirty">
+                            يجب أن لا تقل كلمة المرور عن 6 أحرف</span>
+                        <span *ngIf="password.errors?.hasWhiteSpace && password.dirty">
+                            يجب أن لا تحتوى كلمة المرور على مسافات</span>
+                    </div>
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="password" class="form-control" placeholder="تأكيد كلمة المرور">
+                    <input type="password" class="form-control" placeholder="تأكيد كلمة المرور"
+                    name="confirmPassword"
+                    #confirmPassword="ngModel"
+                    ngModel
+                    required 
+                    maxlength="30"
+                    minlength="6"  
+                    noWhiteSpaces
+                    ConfirmEqualValidator="password"
+                    [ngClass]="{ 'is-invalid': confirmPassword.invalid && confirmPassword.dirty }">
+                                    <!--cs validation -->
+                    <div *ngIf="confirmPassword.invalid" class="invalid-feedback">
+                        <span *ngIf="confirmPassword.errors?.required && confirmPassword.dirty">
+                        *</span>
+                        <span *ngIf="confirmPassword.errors?.notEqual && confirmPassword.dirty">
+                        كلمتان المرور غير متطابقتان</span>
+                    <span *ngIf="confirmPassword.errors?.hasWhiteSpace && confirmPassword.dirty">
+                            يجب أن لا تحتوى كلمة المرور على مسافات</span>
+                    </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="inputTitle">اللقب</label>
-                    <select id="inputTitle" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                    <select id="inputTitle" class="form-control" name="title" ngModel>
+                        <option selected disabled>اختر من هنا</option>
+                        <option>أ</option>
+                        <option>د</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label>تفاصيل اللقب</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="titleDetails" ngModel>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputSpeciality">التخصص</label>
                     <select id="inputSpeciality" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                        <option selected disabled>اختر من هنا</option>
+                        <option>القلب</option>
+                        <option>الباطنة</option>
+                        <option>العظام</option>
+                        <option>الجلدية و التناسلية</option>
                     </select>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="العنوان">
+                    <input type="text" class="form-control" placeholder="العنوان" name="address" ngModel>
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="رقم الموبايل">
+                    <input type="text" class="form-control" placeholder="رقم الموبايل" name="phoneNumber" ngModel>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>الجنس</label>
-                    <select class="form-control">
+                    <select class="form-control" name="gender" ngModel>
+                        <option selected disabled>اختر من هنا</option>
                         <option>ذكر</option>
                         <option>أنثى</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label>تاريخ الميلاد</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="age" ngModel>
                 </div>
             </div>
-            <form>
-                <div class="form-group">
-                  <label for="exampleFormControlFile1">ارفع السيرة الذاتية</label>
-                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                </div>
-              </form>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">ارفع السيرة الذاتية</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="cv" ngModel>
+            </div>
 
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="terms" ngModel>
                 <label class="form-check-label mr-3 mb-3" for="exampleCheck1">موافق على الشروط و الأحكام</label>
             </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-success">انضم للأطباء</button>
+            <div class="text-center">  
+                <button type="submit" class="btn btn-success" [disabled]="form.invalid">انضم للأطباء</button>
             </div>
         </form>
     </div>
