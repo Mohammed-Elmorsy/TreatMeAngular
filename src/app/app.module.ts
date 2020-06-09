@@ -7,7 +7,7 @@ import { CoreModule } from './core/core.module';
 import { HomeModule } from "./home/home.module";
 import {DoctorModule} from "./doctor/doctor.module";
 import { ScheduleModule } from './schedule/schedule.module';
-import {PatientModule} from './patient/patient.module'
+import {PatientModule} from './patient/patient.module';
 //other modules
 import { HttpClientModule , HttpClient } from '@angular/common/http';
 import { TranslateModule , TranslateLoader } from "@ngx-translate/core";
