@@ -14,13 +14,16 @@ import { TranslateModule , TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 //components
 import { AppComponent } from './app.component';
+import { DoctorProfileModalComponent } from './doctor/components/doctor-profile-modal/doctor-profile-modal.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
   declarations: [ //components
     AppComponent
-    
+
   ],
+  entryComponents:[DoctorProfileModalComponent],
   imports: [ //modules
     BrowserModule, //always the first one
     CoreModule,
@@ -29,6 +32,8 @@ import { AppComponent } from './app.component';
     ScheduleModule,
     PatientModule,
     HttpClientModule,
+    NgbModalModule,
+   
     
     TranslateModule.forRoot({
       defaultLanguage: 'en' ,

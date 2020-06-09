@@ -8,18 +8,23 @@ import { DoctorRoutingModule } from './doctor-routing.module';
 import { DoctorDetailsComponent } from "./components/doctor-details/doctor-details.component";
 import { DoctorListComponent } from './components/doctor-list/doctor-list.component';
 import { DoctorProfileComponent } from './components/doctor-profile/doctor-profile.component';
+import { DoctorProfileModalComponent } from './components/doctor-profile-modal/doctor-profile-modal.component';
 
 
 @NgModule({
   declarations: [
     DoctorDetailsComponent,
     DoctorListComponent,
-    DoctorProfileComponent
+    DoctorProfileComponent,
+    DoctorProfileModalComponent
+
   ],
+  entryComponents:[DoctorProfileModalComponent],
   imports: [
    SharedModule,
    DoctorRoutingModule
 
-  ]
+  ],
+  exports:[DoctorProfileModalComponent]
 })
 export class DoctorModule { }
