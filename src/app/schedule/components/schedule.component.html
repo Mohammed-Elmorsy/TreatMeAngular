@@ -1,7 +1,8 @@
-<input type="date" [(ngModel)]="choocedDate" >
 
 
 
+<h1>asd</h1>
+<input type="date" [(ngModel)]="choocedDate" (change)="GetDoctorScheduleTimes(1 ,choocedDate)" />
 <h1>enter date is {{choocedDate}}</h1>
 
     <table  style="width: 70% ; margin: 10px auto;" class="table table-striped table-dark">
@@ -14,40 +15,40 @@
             </tr>
           </thead>
           <tbody>
-        <tr *ngFor="let time of ScheduleTimes"> 
+        <tr *ngFor="let time of DoctorSchedule"> 
             <td>
-               Date {{time.date  | date:'shortDate'}}
+                {{time.date  | date:'shortDate'}}
             </td> 
              <td>
-                start time {{time.StartTime | date:'mediumTime'}}
+                 {{time.startTime | date:'mediumTime'}}
             </td>   
             <td>
-                end time {{time.EndTime | date:'mediumTime'}}
+                 {{time.endTime | date:'mediumTime'}}
             </td> 
               
                 
-              
-               
-
-          
-           
-
-            
-            <td *ngIf="time.IsBooked; else elseBlock">
+            <td *ngIf="time.isBooked == 0; else elseBlock">
                 <button disabled class="btn btn-danger" >
                     محجوز
                 </button>
+
+               
             </td>
-              <ng-template #elseBlock>
-                <button disabled class="btn btn-success" >
-                    إحجز الآن
-                </button>
-              </ng-template>
+            <ng-template #elseBlock>
+              <button  class="btn btn-success" >
+                  إحجز الآن
+              </button>
+            </ng-template>
     
 
 
         </tr>
           </tbody>
     </table>
+
+
+
+
+
 
   

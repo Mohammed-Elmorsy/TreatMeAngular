@@ -19,10 +19,10 @@ export class ScheduleService {
       return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/Index")
 
   }
-getScheduleByDoctorId(Id:Number)
+getScheduleByDoctorId(Id:Number,date:Date)
 {
 
-return this.httpClient.get<Schedule[]>(environment.baseURL+Id)
+return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/GetDoctorSchedules/"+Id+"/"+date)
 
 }
 

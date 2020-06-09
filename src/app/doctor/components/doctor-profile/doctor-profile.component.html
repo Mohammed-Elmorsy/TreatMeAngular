@@ -1,0 +1,55 @@
+<div style="margin-top: 50px;">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <div class="container" style="border-radius: 10px; margin-top: 50px;" id="docProfile">
+    
+        <div class="row text-center" style=" border-radius: 5%;">
+            <div class="col-6" style="margin-top: 20px;  margin-bottom: 50px;">
+                <img [src]="docImg"
+                    style=" border-style: solid; border-width: 5px; border-color: chartreuse; border-radius: 60%; margin-top: 20px;"
+                    height="50%" width="200">
+                <h1 class=""
+                    style="margin-top: 60px; color:aliceblue; font-family:'Times New Roman', Times, serif; margin-left: 20px;">
+                    Dr. {{doctor.user.firstName}} {{doctor.user.lastName}} </h1>
+              <h2 style="color: black;">{{doctor.speciality.name}}</h2>  
+    
+            </div>
+            <div class="col-6" style="margin-top: 60px; margin-bottom: 50px;">
+              
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h4> Age : {{doctor.user.age}}</h4>
+                     
+                            <h4> Address : {{doctor.user.address}}</h4>
+                            <h4> Phone : {{doctor.user.phoneNumber}}</h4>
+                            <h4> E-Mail : {{doctor.user.mail}}</h4>
+                            
+        
+        
+                    </div>
+                    <button class="btn btn-danger">Update Your Info</button>
+        
+        
+        
+    
+    
+    
+                        
+    
+            </div>
+            
+        </div>
+     
+    </div>
+    
+</div>
+<div class="container" style="border-radius: 10px; margin-top: 15px;">
+
+<div class="row text-center" style="background-color:beige; border-radius: 10px;">
+    <div class="col-4 text-center" >   <h3>Dates</h3><input placeholder="From" /> <input placeholder="To" /><br></div>
+    <div class="col-4 text-center" >   <h3>Hours</h3><input placeholder="From" /> <input placeholder="To" /><br><br><button class="btn btn-success">Add Sessions</button></div>
+   <div class="col-4 text-center">
+    <h3>Duration</h3><input placeholder="In minutes" /><br>
+    </div>
+</div>
+</div>

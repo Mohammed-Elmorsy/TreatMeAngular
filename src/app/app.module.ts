@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 //feature modules
 import { HomeModule } from "./home/home.module";
 import {DoctorModule} from "./doctor/doctor.module";
 import { ScheduleModule } from './schedule/schedule.module';
+import {PatientModule} from './patient/patient.module'
 //other modules
 import { HttpClientModule , HttpClient } from '@angular/common/http';
 import { TranslateModule , TranslateLoader } from "@ngx-translate/core";
@@ -25,9 +27,9 @@ import { AppComponent } from './app.component';
     HomeModule,
     DoctorModule,
     ScheduleModule,
+    PatientModule,
     HttpClientModule,
     
-
     TranslateModule.forRoot({
       defaultLanguage: 'en' ,
       loader:{
