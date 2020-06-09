@@ -30,7 +30,7 @@ export class DoctorListComponent implements OnInit {
   }
 
   navigateToSchedule(){
-    this.router.navigate(['/schedule']);
+    this.router.navigate(['/schedule/index']);
   }
 
 }

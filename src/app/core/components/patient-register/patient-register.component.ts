@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {NgForm} from '@angular/forms';
+import { Patient } from 'src/app/_models/patient';
 
 @Component({
   selector: 'app-patient-register',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PatientRegisterComponent implements OnInit {
 
+  patient:Patient={};
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSubmit(){
+     
   }
 
 }
