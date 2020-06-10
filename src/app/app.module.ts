@@ -12,6 +12,8 @@ import {PatientModule} from './patient/patient.module'
 import { HttpClientModule , HttpClient } from '@angular/common/http';
 import { TranslateModule , TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { BrowserAnimationsModule  } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";  
 //components
 import { AppComponent } from './app.component';
 
@@ -29,6 +31,12 @@ import { AppComponent } from './app.component';
     ScheduleModule,
     PatientModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut:4000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    }),
     
     TranslateModule.forRoot({
       defaultLanguage: 'en' ,
