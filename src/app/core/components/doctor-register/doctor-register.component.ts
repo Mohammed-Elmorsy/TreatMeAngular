@@ -1,5 +1,9 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit} from '@angular/core';
 import { Doctor } from 'src/app/_models/doctor';
+import {NgForm} from '@angular/forms';
+import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-register',
@@ -9,15 +13,15 @@ import { Doctor } from 'src/app/_models/doctor';
 export class DoctorRegisterComponent implements OnInit {
 
   private doctor:Doctor;
-  constructor() { 
+  constructor(private authService:AuthService, private router:Router ,
+    private toastr:ToastrService) { 
     this.doctor = {
       userId:null,
-      fees:null,
+      fees:200,
       rating:null,
       CV:null,  
       specialityId:null,  
       user:{
-        id:null,
         firstName: '',
         lastName:'', 
         userName:'',   
@@ -27,7 +31,7 @@ export class DoctorRegisterComponent implements OnInit {
         phoneNumber:null,
         mail:'',
         password:'',
-        role:'',
+        role:1,
         image:''
       },
     }
@@ -35,6 +39,24 @@ export class DoctorRegisterComponent implements OnInit {
   
   ngOnInit() {
 
+  }
+
+  onSubmit(){
+    this.authService.registerDoctorUser(this.doctor)
+    .subscribe(
+      res =>{
+        console.log(res);
+        //alert("You have registered successfully! ..please wait to confirm your acount");
+        this.toastr.success('لقد تم تسجيل حسابك بنجاح','مرحبا بك'); 
+        this.router.navigate(["/"]);
+
+      },  
+      err => {
+        console.log(err);
+        //alert("there are some errors during registeration!");
+        this.toastr.error('نأسف لذلك هناك مشكلة فى عملية تسجيل حسابك','حدث خطأ ما'); 
+      }
+    )
   }
 
 

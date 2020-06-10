@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 //directives
 import { NoWhiteSpaces } from './directives/noWhiteSpaces.directive';
 import { ConfirmEqualValidatorDirective } from './directives/confirmEqualValidator.directive';
+import { NoStartOrDoubleSpacesDirective } from './directives/noStartOrDoubleSpaces.directive copy';
   
 
 @NgModule({
@@ -21,10 +22,11 @@ import { ConfirmEqualValidatorDirective } from './directives/confirmEqualValidat
     PageNotFoundComponent,
     DoctorRegisterComponent,
     PatientRegisterComponent,
-    LoginComponent,
+    LoginComponent, 
 
     NoWhiteSpaces,
-    ConfirmEqualValidatorDirective   
+    ConfirmEqualValidatorDirective,
+    NoStartOrDoubleSpacesDirective 
   ],
   imports: [
     CommonModule,
