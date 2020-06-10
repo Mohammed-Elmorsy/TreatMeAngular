@@ -32,7 +32,7 @@ import { NoStartOrDoubleSpacesDirective } from './directives/noStartOrDoubleSpac
     CommonModule,
     RouterModule,
     FormsModule
-  ],
+  ],  
   exports:[
     HeaderComponent,
     FooterComponent,
