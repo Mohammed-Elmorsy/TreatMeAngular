@@ -14,35 +14,40 @@ import { DoctorProfileModalComponent } from '../doctor-profile-modal/doctor-prof
 export class DoctorProfileComponent implements OnInit {
 
   doctor:Doctor;
-  DoctorSchedule:Schedule[];
+
+  DoctorSessions:Schedule[]=[];
+
   days=["Sat","Sun","Mon","Tue","Wed","Thu","Fri"];
   
   daysChecked = [];
 
   docImg:String;
+  docId:Number;
 
   hours:number[];
   
   duration:number[];
+
   
   schedule={
-    
-  date1:Date,
-  date2:Date,
-  
-  days:Number,
-  hour1:Number,
-  hour2:Number,
-  durtaion:Number
+      
+    date1:Date,
+    date2:Date,
+    days:Number,
+    hour1:Number,
+    hour2:Number,
+    durtaion:Number
   };
 
-
+  initSchedule:Schedule;
+  
 
 
   constructor(private doctorService:DoctorService,private scheduleService:ScheduleService,private modalService:NgbModal) {
       this.hours=Array(24).fill(0);
       this.duration=Array(11).fill(0);
-      
+ 
+   
   }   
 
 
@@ -50,16 +55,16 @@ export class DoctorProfileComponent implements OnInit {
     
    
   let url=window.location.href;
-  let docId = url.substring(url.lastIndexOf('/') + 1);
+  this.docId =Number( url.substring(url.lastIndexOf('/') + 1));
 
-  console.log(docId);
-  this.doctorService.getDoctor(docId)
+  console.log(this.docId);
+  this.doctorService.getDoctor(this.docId)
   .subscribe(
     (_doctor)=> {
       this.doctor = _doctor}); 
 
     console.log(this.doctor);
-    this.docImg="../../assets/images/doctors/"+docId+".jpg";
+    this.docImg="../../assets/images/doctors/"+this.docId+".jpg";
       this.setIterators();
   }
   
@@ -91,44 +96,44 @@ export class DoctorProfileComponent implements OnInit {
 
 
   addSessions(){
-    //print props
+    
+ 
     let dates=this.betweenDate(this.schedule.date1,this.schedule.date2);
-    console.log(dates);
+    //console.log(dates);
 
     for (let i = 0; i < dates.length; i++) {
       for (let index = 0; index < this.daysChecked.length; index++) {
         const element = this.daysChecked[index];
         if (element==dates[i].toString().split(' ')[0]) {
           //the needed dates for the doctor
-          console.log(dates[i]);    
+          let sessionsPerDay=60/Number(this.schedule.durtaion)*(Number(this.schedule.hour2)-Number(this.schedule.hour1));
+           for (let x = 0; x < sessionsPerDay ; x++) {
+            let currSession:Schedule={
+                Id:null,
+                DoctorId:this.docId,
+                IsBooked:false,
+                date:new Date(dates[i].setHours(Number(this.schedule.hour1),Number(this.schedule.durtaion)*x)),
+                startTime:new Date(dates[i].setHours(Number(this.schedule.hour1),Number(this.schedule.durtaion)*x)),
+                endTime:new Date(dates[i].setHours(Number(this.schedule.hour1),(Number(this.schedule.durtaion)*x)+Number(this.schedule.durtaion)))
+              };
+
+              this.DoctorSessions.push(currSession);
+              
+          }
+          
         }
          
       }
    
     }
 
+   // call service
 
-
- 
-
-    console.log(this.schedule.hour1);
-    console.log(this.schedule.hour2);
-    
-    console.log(this.schedule.durtaion);
-
-
-    //dividing code
-
-    //call service and post 
-    
-    // this.doctorService.addSchedules(this.DoctorSchedule).subscribe((a)=>{
-    //   this.DoctorSchedule=a;
-    //  console.log(this.DoctorSchedule);
-     
-    //  });
-
-  
+    this.doctorService.addSchedules(this.DoctorSessions);
+    alert("Sessions Added Successfully")
   }
+
+
 
 
 
