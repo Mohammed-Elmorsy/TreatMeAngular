@@ -39,44 +39,52 @@
 <div class="container" style="border-radius: 10px; margin-top: 15px;">
 
 <div class="row text-center" style="background-color:beige; border-radius: 10px;">
-    <div class="col-3 text-center "  >
+    <div class="col-4 text-center "  >
         <h3>Dates</h3>
-        <div class="row" style="padding-left: 50px;">   
-            <label>From  <br> <input class="date" type="date" [value]="schedule.date1" (input)="schedule.date1=$event.target.value"/></label>
+        
+        <div class="row" style="padding-left: 30%;">   
+            <label>From  <br> <input data-provider="datepicker" class="date" type="date" [value]="schedule.date1" (input)="schedule.date1=$event.target.value"/></label>
           
-        </div>
+        </div>  
      
-        <div class="row" style="padding-left: 50px;"> 
+        <div class="row" style="padding-left: 30%;"> 
             <label>To  &nbsp; &nbsp;  <br> <input class="date" type="date" [value]="schedule.date2" (input)="schedule.date2=$event.target.value"/></label>
          
         </div>
         <br>
     </div><br>
     <div class="col-3 text-center" >
-        <h3>Days</h3>
-       <label>From <select id="dateFrom" class="form-control" [value]="schedule.day1" (input)="schedule.day1=$event.target.value">
-            
-            <option value="1">Saturday</option>
-            <option value="2">Sunday</option>
-            <option value="3">Monday</option>
-            <option value="4">Tuesday</option>
-            <option value="5">Wednesday</option>
-            <option value="6">Thursday</option>
-            <option value="7">Friday</option>
-        </select></label>
-        <label>To &nbsp; &nbsp; <select id="dateTo" class="form-control" [value]="schedule.day2" (input)="schedule.day2=$event.target.value">
+        <!-- <h3>Days</h3> -->
+        <div class="form-group">
+            <label for="days"><h3>Days</h3> </label>
+            <div *ngFor="let option of days; let i = index">
+                <label>
+                    <input type="checkbox"
+                           name="days"
+                           value="{{option}}"
+
+                           (change)="updateCheckedOptions(option, $event)"/>
+                    {{option}}
+                </label>
+            </div>
+        </div>
+       <!-- <label>press ctrl to choose more than one day 
+        <label *ngFor="#option of options" class="form-control">
+            <input type="checkbox" name="options" value="option" /> {{option}}
+        </label>            
+            <option value="Sat">Saturday</option>
+            <option value="Sun">Sunday</option>
+            <option value="Mon">Monday</option>
+            <option value="Tue">Tuesday</option>
+            <option value="Wed">Wednesday</option>
+            <option value="Thu">Thursday</option>
+            <option value="Fri">Friday</option>
        
-            <option value="1">Saturday</option>
-            <option value="2">Sunday</option>
-            <option value="3">Monday</option>
-            <option value="4">Tuesday</option>
-            <option value="5">Wednesday</option>
-            <option value="6">Thursday</option>
-            <option value="7">Friday</option>
-        </select></label>
+           
+      </label> -->
         <br>
     </div>
-    <div class="col-3 text-center" >
+    <div class="col-2 text-center" >
         <h3>Hours</h3>
         <label>From <select  id="hoursFrom" class="form-control" [value]="schedule.hour1" (input)="schedule.hour1=$event.target.value" >
         
@@ -101,7 +109,7 @@
 
 </div>
 <div class="row">
-    <div class="col-12"><button style="width: 100%;" class="btn btn-success" (click)="addSessions()"> Add Sessions</button>
+    <div class="col-12"><button style="width: 100%;" class="btn btn-success" (click)="addSessions();"> Add Sessions</button>
     </div>
 </div>
 </div>
