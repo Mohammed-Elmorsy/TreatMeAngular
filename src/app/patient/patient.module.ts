@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+
 import { SharedModule } from '../shared/shared.module';
 import { PatientRoutingModule } from './patient-routing.module';
 import { PatientComponent } from './compnents/patient/patient.component';
+
 
 
 @NgModule({
   declarations: [PatientComponent],
   imports: [
     SharedModule,
-    PatientRoutingModule
+    PatientRoutingModule,
+    
   ]
 })
 export class PatientModule { }

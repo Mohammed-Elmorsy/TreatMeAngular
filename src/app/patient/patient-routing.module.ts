@@ -4,8 +4,8 @@ import { PatientComponent } from './compnents/patient/patient.component';
 
 
 const routes: Routes = [
-  {path:"patient/profile",component:PatientComponent},
-   
+  {path:"patient/profile/:id",component:PatientComponent},
+
 
 
 ];

@@ -9,19 +9,41 @@ import { Patient } from 'src/app/_models/patient';
   styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
-
+  patient:Patient;
+  patient_modified:Patient;
   constructor(private patientservice:PatientService) { }
-  patients:Patient;
 
 
+  Patient_modified:Patient;
+ 
+  Update()
+  {
+    console.log("updated",this.patient_modified);
+    console.log(this.patient_modified.user.id);
+  
+    this.patientservice.UpdatePatient(this.patient_modified.user.id,this.patient_modified)
+    .subscribe((res)=>{
 
+      alert("        done");
+
+    },err=>{
+      console.log('error');
+    })
+  
+  }
 
   ngOnInit() {
-console.log('test run')
-    this.patientservice.getPatientById(2).subscribe((data)=>{
-    console.log(data);
+
+    let url=window.location.href;
+    let PatientId = url.substring(url.lastIndexOf('/') + 1);
+      this.patientservice.getPatientById(PatientId).subscribe((_patient)=>{
+    this.patient=_patient;
+    this.patient_modified=_patient;
+    console.log(_patient);
+
 
     })
   }
+
 
 }
