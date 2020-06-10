@@ -5,6 +5,7 @@ import { Doctor } from "../../../_models/doctor";
 import { Speciality } from 'src/app/_models/speciality';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Schedule } from 'src/app/_models/schedule';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,10 @@ export class DoctorService {
 
     return this.httpClient.get<Doctor>(environment.baseURL+"api/Doctors/Details/"+id);
   }
+
+  addSchedules(schedules){
+   return this.httpClient.post<Schedule[]>(environment.baseURL+"api/doctors/AddSchedules",schedules);
+  }
+
   
 }

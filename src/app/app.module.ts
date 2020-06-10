@@ -7,7 +7,7 @@ import { CoreModule } from './core/core.module';
 import { HomeModule } from "./home/home.module";
 import {DoctorModule} from "./doctor/doctor.module";
 import { ScheduleModule } from './schedule/schedule.module';
-import {PatientModule} from './patient/patient.module'
+import {PatientModule} from './patient/patient.module';
 //other modules
 import { HttpClientModule , HttpClient } from '@angular/common/http';
 import { TranslateModule , TranslateLoader } from "@ngx-translate/core";
@@ -16,13 +16,16 @@ import { BrowserAnimationsModule  } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";  
 //components
 import { AppComponent } from './app.component';
+import { DoctorProfileModalComponent } from './doctor/components/doctor-profile-modal/doctor-profile-modal.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
   declarations: [ //components
     AppComponent
-    
+
   ],
+  entryComponents:[DoctorProfileModalComponent],
   imports: [ //modules
     BrowserModule, //always the first one
     CoreModule,
@@ -37,6 +40,8 @@ import { AppComponent } from './app.component';
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
+    NgbModalModule,
+   
     
     TranslateModule.forRoot({
       defaultLanguage: 'en' ,
