@@ -9,7 +9,7 @@ import { Patient } from 'src/app/_models/patient';
 })
 export class PatientRegisterComponent implements OnInit {
 
-  patient:Patient={};
+  patient:Patient;
   constructor() { }
 
   ngOnInit() {
