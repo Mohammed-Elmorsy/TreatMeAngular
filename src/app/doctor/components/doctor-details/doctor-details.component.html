@@ -42,22 +42,13 @@
     
     
                 </div>
-    
-    
-    
-    
-
-
-
-                    
-
         </div>
-        
     </div>
    
 </div>
-<div class="row">
-    <input class="date" type="date" [value]="choocedDate" (input)="choocedDate =$event.target.value" (change)="GetDoctorScheduleTimes(doctor.userId ,choocedDate)"/>
+<div class="row text-center">
+    <span style="margin-left: 35%;" class="badge badge-dark"><h3>Select Date For Sessions   </h3> <input class="date" type="date" [value]="choocedDate" (input)="choocedDate =$event.target.value" (change)="GetDoctorScheduleTimes(doctor.userId ,choocedDate)"/>
+    </span>
    </div>
 <table [hidden]="!DoctorSchedule"  style="width: 70% ; margin: 10px auto;" class="table table-striped table-dark">
     <thead>

@@ -5,6 +5,7 @@ import { ScheduleService } from 'src/app/core/services/schedule/schedule.service
 import { Schedule } from 'src/app/_models/schedule';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DoctorProfileModalComponent } from '../doctor-profile-modal/doctor-profile-modal.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-profile',
@@ -43,7 +44,7 @@ export class DoctorProfileComponent implements OnInit {
   
 
 
-  constructor(private doctorService:DoctorService,private scheduleService:ScheduleService,private modalService:NgbModal) {
+  constructor(private doctorService:DoctorService,private route:ActivatedRoute , private router:Router, private scheduleService:ScheduleService,private modalService:NgbModal) {
       this.hours=Array(24).fill(0);
       this.duration=Array(11).fill(0);
  
@@ -68,6 +69,13 @@ export class DoctorProfileComponent implements OnInit {
       this.setIterators();
   }
   
+
+  navigateToDocDetails(doctorID:number){
+    this.router.navigate(['doctor/details',doctorID]) 
+  }
+
+
+
   setIterators(){
     for (let index = 0; index < 24; index++) {
       this.hours[index] =index+1;
@@ -117,6 +125,15 @@ export class DoctorProfileComponent implements OnInit {
                 endTime:new Date(dates[i].setHours(Number(this.schedule.hour1),(Number(this.schedule.durtaion)*x)+Number(this.schedule.durtaion)))
               };
 
+      // let currSession:Schedule={
+                  
+      //     "date": "2020-02-02T00:00:00",
+      //     "startTime": "2020-02-02T00:00:00",
+      //     "endTime": "2020-02-02T00:00:00",
+      //     "isBooked": false,
+      //     "doctorId": 1
+      //      }
+
               this.DoctorSessions.push(currSession);
               
           }
@@ -130,7 +147,9 @@ export class DoctorProfileComponent implements OnInit {
    // call service
 
     this.doctorService.addSchedules(this.DoctorSessions);
-    alert("Sessions Added Successfully")
+    alert("Sessions Added Successfully");
+    console.log(this.DoctorSessions);
+    
   }
 
 
