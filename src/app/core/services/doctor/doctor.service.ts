@@ -34,7 +34,7 @@ export class DoctorService {
   }
 
   addSchedules(schedules){
-   return this.httpClient.post<Schedule[]>(environment.baseURL+"api/doctors/AddSchedules",schedules);
+   return this.httpClient.post<Schedule[]>(environment.baseURL+"api/Schedule/AddSchedules",schedules);
   }
 
   
