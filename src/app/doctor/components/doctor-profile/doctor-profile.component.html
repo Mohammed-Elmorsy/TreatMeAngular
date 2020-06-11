@@ -27,7 +27,156 @@
         
         
                     </div>
-                    <button class="btn btn-danger" (click)="editDoctor()">Update Your Info</button>
+
+                    <!-- *********************** modal************************************************************** -->
+                    <button class="btn btn-danger"  data-toggle="modal" data-target="#exampleModalCenter">Update Your Info</button>
+                    <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">تعديل البيانات الشخصية</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form name="form" #form="ngForm" class="text-right" dir="rtl">
+                <div class="form-row"> 
+                    <div class="form-group col-md-6">
+                        <label>الإسم الأول </label>
+                        <input type="text" class="form-control" placeholder="{{doctor.user.firstName}}" name="fName"
+                        #fName="ngModel"
+                        [(ngModel)]="doctor_modified.user.firstName"
+                        required 
+                        maxlength="20"
+                        minlength="3"
+                        noWhiteSpaces
+                        [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }">
+                    <!--cs validation -->
+                        <div *ngIf="fName.invalid" class="invalid-feedback">
+                            <span *ngIf="fName.errors?.required && fName.dirty">
+                                *</span>
+                            <span *ngIf="fName.errors?.minlength && fName.dirty">
+                                يجب أن لا يقل الاسم عن 3 أحرف</span>
+                            <span *ngIf="fName.errors.hasWhiteSpace && fName.dirty">
+                                يجب أن لا يحتوى الاسم على مسافات</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>الإسم الآخير </label>
+                        <input type="text" class="form-control" placeholder="{{doctor.user.lastName}}" name="lName"
+                        #lName="ngModel"
+                        [(ngModel)]="doctor_modified.user.lastName"
+
+                        required 
+                        maxlength="20"
+                        minlength="3"
+                        noWhiteSpaces
+                        [ngClass]="{ 'is-invalid': lName.invalid && lName.dirty }">
+                    <!--cs validation -->
+                        <div *ngIf="lName.invalid" class="invalid-feedback">
+                            <span *ngIf="lName.errors?.required && lName.dirty">
+                                *</span>
+                            <span *ngIf="lName.errors?.minlength && lName.dirty">
+                                يجب أن لا يقل الاسم عن 3 أحرف</span>
+                            <span *ngIf="lName.errors.hasWhiteSpace && lName.dirty">
+                                يجب أن لا يحتوى الاسم على مسافات</span>
+                        </div>
+                    </div>
+                </div>
+             <!--   <div class="form-group">
+                    <label>التخصص </label>
+                    <input type="text" class="form-control" placeholder="{{doctor.speciality.name}}" name="speciality"
+                    #speciality="ngModel"
+                    [(ngModel)]="doctor_modified.speciality.name"
+
+                    required 
+                    maxlength="20"
+                    minlength="6"
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': speciality.invalid && speciality.dirty }">
+                <!--cs validation 
+                    <div *ngIf="speciality.invalid" class="invalid-feedback">
+                        <span *ngIf="speciality.errors?.required && speciality.dirty">
+                            *</span>
+                        <span *ngIf="speciality.errors?.minlength && speciality.dirty">
+                            يجب أن لا يقل الاسم عن 6 أحرف</span>
+                        <span *ngIf="speciality.errors.hasWhiteSpace && speciality.dirty">
+                            يجب أن لا يحتوى الاسم على مسافات</span>
+                    </div>
+                </div> -->   
+                <div class="form-group">
+                    <label>البريد الإلكتروني </label>
+                    <input type="email" class="form-control" placeholder="{{doctor.user.mail}}" name="email"
+                    #email="ngModel"
+                    [(ngModel)]="doctor_modified.user.mail"
+
+                    required 
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': email.invalid && email.dirty }">
+                <!--cs validation -->
+                    <div *ngIf="email.invalid" class="invalid-feedback">
+                        <span *ngIf="email.errors?.required && email.dirty">
+                            *</span>
+                        <span *ngIf="email.errors?.email && email.dirty">
+                            ادخل صيغة صحيحة</span>
+                        <span *ngIf="email.errors.hasWhiteSpace && email.dirty">
+                            يجب أن لا يحتوى الاسم على مسافات</span>
+                    </div>
+                </div>  
+              
+
+                
+                
+                <div class="form-group">
+                    <label>رقم التليفون </label>
+                    <input type="text" class="form-control" placeholder="{{doctor.user.phoneNumber}}" name="phoneNumber"
+                    #phoneNumber="ngModel"
+                    [(ngModel)]="doctor_modified.user.phoneNumber"
+
+                    required 
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': phoneNumber.invalid && phoneNumber.dirty }">
+                <!--cs validation -->
+                   
+                </div>  
+              
+              
+ 
+              
+
+
+                   
+                    <div class="form-group col-md-4">
+                        <label>السن </label>
+                        <input type="text" class="form-control" name="age"  [(ngModel)]="doctor_modified.user.age" placeholder="{{doctor.user.age}}" >
+                    </div>
+               
+      
+                <div class="text-center">   
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" [disabled]="form.invalid" (click)="editDoctor()" data-dismiss="modal"> تعديل</button>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                
+                </div>
+            </form>
+        
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+
+
+
     
             </div>
             

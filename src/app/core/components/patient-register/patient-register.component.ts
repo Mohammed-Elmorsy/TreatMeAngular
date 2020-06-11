@@ -38,6 +38,9 @@ export class PatientRegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+  OnSelectedFile(event)
+  {
+  }
   onSubmit(){
     this.authService.registerPatientUser(this.patient)
     .subscribe(

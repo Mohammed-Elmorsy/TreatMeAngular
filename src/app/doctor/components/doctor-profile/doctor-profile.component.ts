@@ -5,7 +5,7 @@ import { ScheduleService } from 'src/app/core/services/schedule/schedule.service
 import { Schedule } from 'src/app/_models/schedule';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DoctorProfileModalComponent } from '../doctor-profile-modal/doctor-profile-modal.component';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-doctor-profile',
   templateUrl: './doctor-profile.component.html',
@@ -14,6 +14,7 @@ import { DoctorProfileModalComponent } from '../doctor-profile-modal/doctor-prof
 export class DoctorProfileComponent implements OnInit {
 
   doctor:Doctor;
+  doctor_modified:Doctor;
   DoctorSchedule:Schedule[];
   days=["Sat","Sun","Mon","Tue","Wed","Thu","Fri"];
   
@@ -39,7 +40,7 @@ export class DoctorProfileComponent implements OnInit {
 
 
 
-  constructor(private doctorService:DoctorService,private scheduleService:ScheduleService,private modalService:NgbModal) {
+  constructor(private toastr:ToastrService, private doctorService:DoctorService,private scheduleService:ScheduleService,private modalService:NgbModal) {
       this.hours=Array(24).fill(0);
       this.duration=Array(11).fill(0);
       
@@ -56,9 +57,13 @@ export class DoctorProfileComponent implements OnInit {
   this.doctorService.getDoctor(docId)
   .subscribe(
     (_doctor)=> {
-      this.doctor = _doctor}); 
+      this.doctor = _doctor;
+      this.doctor_modified=_doctor;
+      console.log(this.doctor);
+      console.log(this.doctor_modified);
 
-    console.log(this.doctor);
+
+    }); 
     this.docImg="../../assets/images/doctors/"+docId+".jpg";
       this.setIterators();
   }
@@ -74,19 +79,16 @@ export class DoctorProfileComponent implements OnInit {
   }
 
   editDoctor(){
-  let ref=  this.modalService.open(DoctorProfileModalComponent);
-  ref.componentInstance.doctor=this.doctor;
 
-  ref.result.then((yes)=>{
-    console.log("Ok Click");
-    
-  },
-  (cancel)=>
-  {
-    console.log("Cancel Click");
-    
-  })
+    this.doctorService.UpdateDoctor(this.doctor_modified.user.id,this.doctor_modified)
+    .subscribe(()=>{  
+      
+        this.toastr.success('تم تعديل البيانات بنجاح')
 
+
+
+    })
+ 
   }
 
 

@@ -1,12 +1,12 @@
 body{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    background:  -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
 .emp-profile{
     padding: 3%;
     margin-top: 5%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
-    background: #fff;
+    background: rgba(163, 138, 15, 0.2);
 }
 .profile-img{
     text-align: center;

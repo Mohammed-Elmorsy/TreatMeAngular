@@ -37,5 +37,12 @@ export class DoctorService {
    return this.httpClient.post<Schedule[]>(environment.baseURL+"api/doctors/AddSchedules",schedules);
   }
 
+
+
+  UpdateDoctor(id:Number,_doctor:Doctor)
+  {
+     return this.httpClient.put(environment.baseURL+"api/Doctors/Edit/"+id,_doctor);
+  }
+
   
 }

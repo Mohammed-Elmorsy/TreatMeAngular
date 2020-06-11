@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientService } from 'src/app/core/services/patient/patient.service';
 import { Patient } from 'src/app/_models/patient';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -11,7 +14,8 @@ import { Patient } from 'src/app/_models/patient';
 export class PatientComponent implements OnInit {
   patient:Patient;
   patient_modified:Patient;
-  constructor(private patientservice:PatientService) { }
+  PatientImg:String;
+  constructor(private patientservice:PatientService , private toastr:ToastrService,private route:Router) { }
 
 
   Patient_modified:Patient;
@@ -24,10 +28,13 @@ export class PatientComponent implements OnInit {
     this.patientservice.UpdatePatient(this.patient_modified.user.id,this.patient_modified)
     .subscribe((res)=>{
 
-      alert("        done");
+            
 
+     this.toastr.success("تم التعديل بنجاح");
+  
     },err=>{
-      console.log('error');
+      this.toastr.error('نأسف لذلك هناك مشكلة فى عملية تعديل بيانات حسابك','حدث خطأ ما'); 
+
     })
   
   }
@@ -39,6 +46,11 @@ export class PatientComponent implements OnInit {
       this.patientservice.getPatientById(PatientId).subscribe((_patient)=>{
     this.patient=_patient;
     this.patient_modified=_patient;
+
+    this.PatientImg="../../assets/images/patients/"+this.patient_modified.user.id+".jpg";
+
+
+
     console.log(_patient);
 
 
