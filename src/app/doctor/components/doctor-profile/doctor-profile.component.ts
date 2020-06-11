@@ -5,7 +5,9 @@ import { ScheduleService } from 'src/app/core/services/schedule/schedule.service
 import { Schedule } from 'src/app/_models/schedule';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DoctorProfileModalComponent } from '../doctor-profile-modal/doctor-profile-modal.component';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-doctor-profile',
   templateUrl: './doctor-profile.component.html',
@@ -16,34 +18,40 @@ export class DoctorProfileComponent implements OnInit {
   doctor:Doctor;
   doctor_modified:Doctor;
   DoctorSchedule:Schedule[];
+
+  DoctorSessions:Schedule[]=[];
+
   days=["Sat","Sun","Mon","Tue","Wed","Thu","Fri"];
   
   daysChecked = [];
 
   docImg:String;
+  docId:Number;
 
   hours:number[];
   
   duration:number[];
+
   
   schedule={
-    
-  date1:Date,
-  date2:Date,
-  
-  days:Number,
-  hour1:Number,
-  hour2:Number,
-  durtaion:Number
+      
+    date1:Date,
+    date2:Date,
+    days:Number,
+    hour1:Number,
+    hour2:Number,
+    durtaion:Number
   };
 
+  initSchedule:Schedule;
+  
 
 
-
-  constructor(private toastr:ToastrService, private doctorService:DoctorService,private scheduleService:ScheduleService,private modalService:NgbModal) {
+  constructor(private toastr:ToastrService,private doctorService:DoctorService,private route:ActivatedRoute , private router:Router, private scheduleService:ScheduleService,private modalService:NgbModal) {
       this.hours=Array(24).fill(0);
       this.duration=Array(11).fill(0);
-      
+ 
+   
   }   
 
 
@@ -51,10 +59,10 @@ export class DoctorProfileComponent implements OnInit {
     
    
   let url=window.location.href;
-  let docId = url.substring(url.lastIndexOf('/') + 1);
+  this.docId =Number( url.substring(url.lastIndexOf('/') + 1));
 
-  console.log(docId);
-  this.doctorService.getDoctor(docId)
+  console.log(this.docId);
+  this.doctorService.getDoctor(this.docId)
   .subscribe(
     (_doctor)=> {
       this.doctor = _doctor;
@@ -64,10 +72,18 @@ export class DoctorProfileComponent implements OnInit {
 
 
     }); 
-    this.docImg="../../assets/images/doctors/"+docId+".jpg";
+    console.log(this.doctor);
+    this.docImg="../../assets/images/doctors/"+this.docId+".jpg";
       this.setIterators();
   }
   
+
+  navigateToDocDetails(doctorID:number){
+    this.router.navigate(['doctor/details',doctorID]) 
+  }
+
+
+
   setIterators(){
     for (let index = 0; index < 24; index++) {
       this.hours[index] =index+1;
@@ -93,44 +109,55 @@ export class DoctorProfileComponent implements OnInit {
 
 
   addSessions(){
-    //print props
+    
+ 
     let dates=this.betweenDate(this.schedule.date1,this.schedule.date2);
-    console.log(dates);
+    //console.log(dates);
 
     for (let i = 0; i < dates.length; i++) {
       for (let index = 0; index < this.daysChecked.length; index++) {
         const element = this.daysChecked[index];
         if (element==dates[i].toString().split(' ')[0]) {
           //the needed dates for the doctor
-          console.log(dates[i]);    
+          let sessionsPerDay=60/Number(this.schedule.durtaion)*(Number(this.schedule.hour2)-Number(this.schedule.hour1));
+           for (let x = 0; x < sessionsPerDay ; x++) {
+            let currSession:Schedule={
+                Id:null,
+                DoctorId:this.docId,
+                IsBooked:false,
+                date:new Date(dates[i].setHours(Number(this.schedule.hour1),Number(this.schedule.durtaion)*x)),
+                startTime:new Date(dates[i].setHours(Number(this.schedule.hour1),Number(this.schedule.durtaion)*x)),
+                endTime:new Date(dates[i].setHours(Number(this.schedule.hour1),(Number(this.schedule.durtaion)*x)+Number(this.schedule.durtaion)))
+              };
+
+      // let currSession:Schedule={
+                  
+      //     "date": "2020-02-02T00:00:00",
+      //     "startTime": "2020-02-02T00:00:00",
+      //     "endTime": "2020-02-02T00:00:00",
+      //     "isBooked": false,
+      //     "doctorId": 1
+      //      }
+
+              this.DoctorSessions.push(currSession);
+              
+          }
+          
         }
          
       }
    
     }
 
+   // call service
 
-
- 
-
-    console.log(this.schedule.hour1);
-    console.log(this.schedule.hour2);
+    this.doctorService.addSchedules(this.DoctorSessions);
+    alert("Sessions Added Successfully");
+    console.log(this.DoctorSessions);
     
-    console.log(this.schedule.durtaion);
-
-
-    //dividing code
-
-    //call service and post 
-    
-    // this.doctorService.addSchedules(this.DoctorSchedule).subscribe((a)=>{
-    //   this.DoctorSchedule=a;
-    //  console.log(this.DoctorSchedule);
-     
-    //  });
-
-  
   }
+
+
 
 
 
