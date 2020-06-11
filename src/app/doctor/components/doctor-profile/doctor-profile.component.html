@@ -1,12 +1,12 @@
 <div style="margin-top: 50px;">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <div class="container" style="border-radius: 10px; margin-top: 50px;" id="docProfile">
+    <div class="container" style="border-radius: 10px; margin-top: 40px;" id="docProfile">
     
         <div class="row text-center" style=" border-radius: 5%;">
-            <div class="col-6" style="margin-top: 20px;  margin-bottom: 50px;">
+            <div class="col-6" style="margin-top: 20px;  margin-bottom: 40px;">
                 <img [src]="docImg"
-                    style=" border-style: solid; border-width: 5px; border-color: chartreuse; border-radius: 60%; margin-top: 20px;"
+                    style=" border-style: solid; border-width: 5px; border-color: beige; border-radius: 60%; margin-top: 20px;"
                     height="50%" width="200">
                 <h1 class=""
                     style="margin-top: 60px; color:aliceblue; font-family:'Times New Roman', Times, serif; margin-left: 20px;">
@@ -27,14 +27,7 @@
         
         
                     </div>
-                    <button class="btn btn-danger">Update Your Info</button>
-        
-        
-        
-    
-    
-    
-                        
+                    <button class="btn btn-danger" (click)="editDoctor()">Update Your Info</button>
     
             </div>
             
@@ -46,10 +39,78 @@
 <div class="container" style="border-radius: 10px; margin-top: 15px;">
 
 <div class="row text-center" style="background-color:beige; border-radius: 10px;">
-    <div class="col-4 text-center" >   <h3>Dates</h3><input placeholder="From" /> <input placeholder="To" /><br></div>
-    <div class="col-4 text-center" >   <h3>Hours</h3><input placeholder="From" /> <input placeholder="To" /><br><br><button class="btn btn-success">Add Sessions</button></div>
-   <div class="col-4 text-center">
-    <h3>Duration</h3><input placeholder="In minutes" /><br>
+    <div class="col-4 text-center "  >
+        <h3>Dates</h3>
+        
+        <div class="row" style="padding-left: 30%;">   
+            <label>From  <br> <input data-provider="datepicker" class="date" type="date" [value]="schedule.date1" (input)="schedule.date1=$event.target.value"/></label>
+          
+        </div>  
+     
+        <div class="row" style="padding-left: 30%;"> 
+            <label>To  &nbsp; &nbsp;  <br> <input class="date" type="date" [value]="schedule.date2" (input)="schedule.date2=$event.target.value"/></label>
+         
+        </div>
+        <br>
+    </div><br>
+    <div class="col-3 text-center" >
+        <!-- <h3>Days</h3> -->
+        <div class="form-group">
+            <label for="days"><h3>Days</h3> </label>
+            <div *ngFor="let option of days; let i = index">
+                <label>
+                    <input type="checkbox"
+                           name="days"
+                           value="{{option}}"
+
+                           (change)="updateCheckedOptions(option, $event)"/>
+                    {{option}}
+                </label>
+            </div>
+        </div>
+       <!-- <label>press ctrl to choose more than one day 
+        <label *ngFor="#option of options" class="form-control">
+            <input type="checkbox" name="options" value="option" /> {{option}}
+        </label>            
+            <option value="Sat">Saturday</option>
+            <option value="Sun">Sunday</option>
+            <option value="Mon">Monday</option>
+            <option value="Tue">Tuesday</option>
+            <option value="Wed">Wednesday</option>
+            <option value="Thu">Thursday</option>
+            <option value="Fri">Friday</option>
+       
+           
+      </label> -->
+        <br>
     </div>
+    <div class="col-2 text-center" >
+        <h3>Hours</h3>
+        <label>From <select  id="hoursFrom" class="form-control" [value]="schedule.hour1" (input)="schedule.hour1=$event.target.value" >
+        
+            <option value="{{hour}}" *ngFor="let hour of hours">{{hour}}</option>
+        </select></label><br>
+        <label>To &nbsp; &nbsp;<select id="hoursTo" class="form-control" [value]="schedule.hour2" (input)="schedule.hour2=$event.target.value">
+            
+            <option value="{{hour}}" *ngFor="let hour of hours">{{hour}}</option>
+        </select></label>
+        <br>
+    </div>
+    <div class="col-3 text-center" >
+        <h3>Duration</h3>
+        <select id="" class="form-control" [value]="schedule.durtaion" (input)="schedule.durtaion=$event.target.value">
+            <option value="0">In Minutes..</option>
+            <option value="{{min}}" *ngFor="let min of duration">{{min}}</option>
+        </select>
+       
+        <br>
+    </div>
+    <br>
+
+</div>
+<div class="row">
+    <div class="col-12"><button style="width: 100%;" class="btn btn-success" (click)="addSessions();"> Add Sessions</button>
+    </div>
+</div>
 </div>
 </div>

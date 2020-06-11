@@ -5,6 +5,7 @@ import { Doctor } from "../../../_models/doctor";
 import { Speciality } from 'src/app/_models/speciality';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Schedule } from 'src/app/_models/schedule';
 
 @Injectable({
   providedIn: 'root'
@@ -13,35 +14,6 @@ export class DoctorService {
 
   doctor:Doctor;
    constructor(private httpClient:HttpClient) { }
-
-/*   doctors:Doctor[] = [
-    {
-      id:1,
-      fullName:"Mohammed Abd Elhady",
-      age:25,
-      address:"Aga",
-      speciality:"Cardiologist"
-    },
-    {
-      id:2,
-      fullName:"Mina Ibrahim",
-      age:25,
-      address:"Dekernes",
-      speciality:"Dermatologist"
-    },
-    {
-      id:3,
-      fullName:"Mohammed Elmorsy",
-      age:26,
-      address:"Elshrouk",
-      speciality:"Gastroenterologist"
-    }
-
-  ];
-
-  speicalities = [
-    "Cardiology", "Dermatology" , "Gastroenterology"
-  ] */
 
   //-----------------------------------------methods------------------------------------
   getDoctors() {
@@ -60,5 +32,10 @@ export class DoctorService {
 
     return this.httpClient.get<Doctor>(environment.baseURL+"api/Doctors/Details/"+id);
   }
+
+  addSchedules(schedules){
+   return this.httpClient.post<Schedule[]>(environment.baseURL+"api/doctors/AddSchedules",schedules);
+  }
+
   
 }

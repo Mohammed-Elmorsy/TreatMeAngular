@@ -3,7 +3,7 @@
   <div class="row">
     <div *ngFor="let doctor of doctors" class="col-12 col-sm-6 col-md-4 col-lg-3" id="card_wrapper" (click)="navigateToDocDetails(doctor.userId)">
       <div class="card bg-light text-center" id="speciality_card" >
-        <img class="card-img-top" style="margin-top:10px" src="assets/images/doctors/{{doctor.userId}}.jpg" alt="{{doctor.user.firstName}">
+        <img class="card-img-top" style="margin-top:10px" src="assets/images/doctors/profile-pic.png" alt="{{doctor.user.firstName}">
         <div class="card-body">        
           <h4 class="card-text text-center">{{doctor.title}} {{doctor.user.firstName}} {{doctor.user.lastName}}</h4>
 
