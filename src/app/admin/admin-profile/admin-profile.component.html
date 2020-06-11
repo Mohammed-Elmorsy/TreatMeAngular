@@ -1,0 +1,43 @@
+<div class="container-fluid row mx-auto">
+    <div class="col-md-3 mb-4" id="cardWrapper" style="height: 500px;">
+            <div class="card bg-light text-center" id="profileCard" style="height: 500px;">
+                <img class="card-img-top" style="margin-top: 10px;" src="assets/images/doctors/profile-pic.png" alt="profile pic">
+                <div class="card-body">
+                    <h5 class="card-title">firstName lastName</h5>
+                    <p class="card-text">title</p>
+                    <div>
+                        <span class="badge badge-warning">Admin</span>
+                    </div>
+                </div>
+              </div>
+        </div>  
+    <div class="col-md-9" id="tabsWrapper" style="height: 500px;">  
+<!--             <nav class="bg-light justify-content-center" style="padding: 10px;">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <a class="nav-item nav-link active" id="nav-doctorsRequests" data-toggle="tab" href="#nav-doctorsRequests" role="tab" aria-controls="nav-doctorsRequests" aria-selected="true">
+                        Doctors Requests <span class="badge badge-primary">4</span>
+                  </a>  
+                  <a class="nav-item nav-link" id="nav-doctors-tab" data-toggle="tab" href="#nav-doctors" role="tab" aria-controls="nav-doctors" aria-selected="false">Doctors</a>
+                  <a class="nav-item nav-link" id="nav-specialities-tab" data-toggle="tab" href="#nav-specialities" role="tab" aria-controls="nav-specialities" aria-selected="false">Specialities</a>
+                  <a class="nav-item nav-link" id="nav-patients-tab" data-toggle="tab" href="#nav-patients" role="tab" aria-controls="nav-patients" aria-selected="false">Patients</a>
+                </div>   
+              </nav>  -->
+              <nav class="bg-light justify-content-center" style="padding: 10px;">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <a class="nav-item nav-link active" id="nav-doctorsRequests-tab" data-toggle="tab" href="#nav-doctorsRequests" aria-selected="true">
+                        Doctors Requests <span class="badge badge-primary">4</span>
+                  </a>  
+                  <a class="nav-item nav-link" id="nav-doctors-tab" data-toggle="tab" href="#nav-doctors" aria-selected="false">Doctors</a>
+                  <a class="nav-item nav-link" id="nav-specialities-tab" data-toggle="tab" href="#nav-specialities"  aria-selected="false">Specialities</a>
+                  <a class="nav-item nav-link" id="nav-patients-tab" data-toggle="tab" href="#nav-patients"  aria-selected="false">Patients</a>
+                </div>   
+              </nav> 
+              <div class="tab-content bg-light p-3" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-doctorsRequests" ><app-admin-doctors-requests></app-admin-doctors-requests></div>
+                <div class="tab-pane fade" id="nav-doctors" ><app-admin-doctors-list></app-admin-doctors-list> </div>
+                <div class="tab-pane fade" id="nav-specialities" ><app-admin-specialities-list></app-admin-specialities-list></div>
+                <div class="tab-pane fade" id="nav-patients" ><app-admin-patients-list></app-admin-patients-list></div>  
+              </div>
+
+    </div>
+</div>  

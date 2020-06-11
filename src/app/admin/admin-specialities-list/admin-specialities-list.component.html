@@ -1,0 +1,20 @@
+<button class="btn btn-success float-right mb-2">Add Speciality</button>
+<table class="table table-hover text-center">
+    <thead class="bg-primary text-light">  
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Operations</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr *ngFor="let speciality of specialities">
+        <th scope="row">{{speciality.id}}</th>
+        <td>{{speciality.name}}</td>
+        <td>
+            <button class="btn btn-warning">Edit</button>|  
+            <button class="btn btn-danger">Delete</button> 
+        </td>
+      </tr>
+    </tbody>
+  </table>

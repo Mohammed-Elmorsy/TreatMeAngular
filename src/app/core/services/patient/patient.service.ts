@@ -10,6 +10,10 @@ import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/output_ast';
 export class PatientService {
 
   constructor(private httpclient:HttpClient) { }
+  getPatients(){
+    return this.httpclient.get<Patient[]>(environment.baseURL+"api/patient");
+  }
+
   getPatientById(id)
   {
 
