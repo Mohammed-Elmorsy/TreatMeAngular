@@ -57,7 +57,6 @@ export class DoctorProfileComponent implements OnInit {
 
   ngOnInit() {
     
-   
   let url=window.location.href;
   this.docId =Number( url.substring(url.lastIndexOf('/') + 1));
 

@@ -56,16 +56,16 @@ export class AuthService {
       console.log(role);
       switch(role){
         case "Doctor":
-          this.router.navigate(["/doctor/profile/"+id]);
+          return "/doctor/profile/"+id;
           break;
         case "Patient":
-          this.router.navigate(["/patient/profile/"+id]);
+          return "/patient/profile/"+id; 
           break;
         case "Admin":  
-          this.router.navigate(["/admin/profile"]);
+          return "/admin/profile";
           break;
         default:
-          this.router.navigate(["/home"]); 
+          return "/";
       }
     }
 

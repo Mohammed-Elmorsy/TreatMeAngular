@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
       res=>{
       localStorage.setItem('token',res.token);
       this.toastr.success('تم تسجيل دخولك بنجاح')
-      this.authService.navigateByRole();
+      let profileRoute:string = this.authService.navigateByRole();
+      this.router.navigate([profileRoute]);
       
       
 
@@ -44,7 +45,12 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/login']);
       }
       else
-        console.log(err);
+      {
+        console.log(err);  
+        this.toastr.error('حدث خطأ فى عملية تسجيل الدخول من فضلك تحدث مع المسئول عن السيرفر');
+        this.router.navigate(['/login']);
+      }
+
     }
     )
   }
