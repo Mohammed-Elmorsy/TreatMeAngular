@@ -8,22 +8,32 @@
 
       <ul class="navbar-nav float-left">
         <li class="nav-item">
-          <a class="nav-link" routerLink="patient/register" routerLinkActive="active">حساب جديد</a>
+          <a class="nav-link" *ngIf = "!authService.isLoggedIn()" routerLink="patient/register" routerLinkActive="active">حساب جديد</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="doctor/register" routerLinkActive="active">انضم للأطباء</a>
+          <a class="nav-link" *ngIf = "!authService.isLoggedIn()" routerLink="doctor/register" routerLinkActive="active">انضم للأطباء</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">تسجيل دخول</a>
+          <a class="nav-link" *ngIf = "!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active">تسجيل دخول</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf = "authService.isLoggedIn()" (click)="authService.logout()">تسجيل خروج</a>
         </li>
 
       </ul>
+      <div id="homeNavItem">
+        <ul class="navbar-nav" >  
+          <li class="navbar-nav">
+            <a class="nav-link" *ngIf = "authService.isLoggedIn()" routerLink="~/profile" routerLinkActive="active" 
+            (click)="authService.navigateByRole()">البروفايل</a> 
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">الصفحة الرئيسية <span class="sr-only">(current)</span></a>
+          </li>
 
-      <ul class="navbar-nav float-right mr-right">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">الصفحة الرئيسية <span class="sr-only">(current)</span></a>
-        </li>
-      </ul>
+        </ul>
+
+      </div>
 
     </div>
   </nav>

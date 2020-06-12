@@ -142,7 +142,7 @@ export class DoctorProfileComponent implements OnInit {
               this.DoctorSessions.push(currSession);
               
           }
-          
+        
         }
          
       }
