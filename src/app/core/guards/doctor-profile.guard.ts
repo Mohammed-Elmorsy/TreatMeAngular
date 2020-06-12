@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth/auth.service';
 export class DoctorProfileGuard implements CanActivate {
 
   constructor(private _authService:AuthService,
-    private _router:Router){}
+    private _router:Router){} 
 
   canActivate(
     next: ActivatedRouteSnapshot,
