@@ -4,7 +4,7 @@
         <img src="assets/images/doctors/doctor-register.jpg" alt="loading">
     </div>
     <div class="col-12 col-md-5 float-right p-4" id="rightDiv">
-        <h3 class="text-center mb-3">انضم لأطباء عالجنى</h3>
+        <h4 class="text-center mb-4">انضم لأطباء عالجنى</h4>    
         <!-- form -->
         <form name="form" #form="ngForm" class=" text-right" dir="rtl" (ngSubmit)="onSubmit()">
             <div class="form-row"> 
@@ -17,10 +17,10 @@
                     minlength="3"
                     noStartOrDoubleSpaces
                     [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }">
+                    <span [ngClass]="{'invalid-feedback':fName.errors?.required && fName.dirty }">
+                        *</span>  
                 <!--cs validation -->
                     <div *ngIf="fName.invalid" class="invalid-feedback">
-                        <span *ngIf="fName.errors?.required && fName.dirty">
-                            *</span>
                         <span *ngIf="fName.errors?.minlength && fName.dirty">
                             يجب أن لا يقل الاسم عن 3 أحرف</span>
                         <span *ngIf="fName.errors?.startsWithSpace && fName.dirty">
@@ -28,7 +28,7 @@
                         <span *ngIf="fName.errors?.hasDoubleSpace && fName.dirty">
                                 يجب أن لا يحتوى الاسم على مسافتين متتاليتين </span>
                     </div>
-                </div>
+                </div> 
                 <div class="form-group col-md-6">
                     <input type="text" class="form-control" placeholder="الاسم الاخير" name="lName"
                     #lName="ngModel"
@@ -38,10 +38,10 @@
                     minlength="3"
                     noStartOrDoubleSpaces
                     [ngClass]="{ 'is-invalid': lName.invalid && lName.dirty }">
+                    <span [ngClass]="{'invalid-feedback':lName.errors?.required && lName.dirty }">
+                        *</span>
                 <!--cs validation -->
                     <div *ngIf="lName.invalid" class="invalid-feedback">
-                        <span *ngIf="lName.errors?.required && lName.dirty">
-                            *</span>
                         <span *ngIf="lName.errors?.minlength && lName.dirty">
                             يجب أن لا يقل الاسم عن 3 أحرف</span>
                         <span *ngIf="lName.errors.hasWhiteSpace && lName.dirty">
@@ -61,11 +61,11 @@
                 maxlength="30"
                 minlength="6"
                 noWhiteSpaces
-                [ngClass]="{ 'is-invalid': userName.invalid && userName.dirty }" />  
+                [ngClass]="{ 'is-invalid': userName.invalid && userName.dirty }" /> 
+                <span [ngClass]="{'invalid-feedback':userName.errors?.required && userName.dirty }">
+                    *</span> 
                 <!--cs validation --> 
                 <div *ngIf="userName.invalid" class="invalid-feedback">
-                    <span  *ngIf="userName.errors?.required && userName.dirty">
-                         *</span>
                     <span  *ngIf="userName.errors?.minlength && userName.dirty">
                       يجب أن لا يقل الاسم عن 6 أحرف</span>
                     <span *ngIf="userName.errors?.hasWhiteSpace && userName.dirty">
@@ -79,10 +79,10 @@
                 required
                 noWhiteSpaces
                 [ngClass]="{ 'is-invalid': email.invalid && email.dirty }" />
+                <span [ngClass]="{'invalid-feedback':email.errors?.required && email.dirty }">
+                    *</span>
                 <!--cs validation --> 
                 <div *ngIf="email.invalid" class="invalid-feedback">
-                    <span  *ngIf="email.errors?.required && email.dirty">
-                        *</span>
                     <span  *ngIf="email.errors?.email && email.dirty"><!-- still need work -->
                           يجب أن لا يقل الاسم عن 6 أحرف</span>
                     <span *ngIf="email.errors?.hasWhiteSpace && email.dirty">
@@ -102,10 +102,10 @@
                     noWhiteSpaces
                     [ngClass]="{ 'is-invalid': password.invalid && password.dirty }"
                     (input)="confirmPassword.control.updateValueAndValidity()">  
+                    <span [ngClass]="{'invalid-feedback':password.errors?.required && password.dirty }">
+                        *</span>
                 <!--cs validation -->
                     <div *ngIf="password.invalid" class="invalid-feedback">
-                        <span *ngIf="password.errors?.required && password.dirty">
-                            *</span>
                         <span *ngIf="password.errors?.minlength && password.dirty">
                             يجب أن لا تقل كلمة المرور عن 6 أحرف</span>
                         <span *ngIf="password.errors?.hasWhiteSpace && password.dirty">
@@ -123,10 +123,11 @@
                     noWhiteSpaces
                     ConfirmEqualValidator="password"
                     [ngClass]="{ 'is-invalid': confirmPassword.invalid && confirmPassword.dirty }">
+                    <span [ngClass]="{'invalid-feedback':confirmPassword.errors?.required && confirmPassword.dirty }">
+                        *</span>
+                    
                                     <!--cs validation -->
                     <div *ngIf="confirmPassword.invalid" class="invalid-feedback">
-                        <span *ngIf="confirmPassword.errors?.required && confirmPassword.dirty">
-                        *</span>
                         <span *ngIf="confirmPassword.errors?.notEqual && confirmPassword.dirty">
                         كلمتان المرور غير متطابقتان</span>
                     </div>
@@ -205,12 +206,14 @@
             </div>
 
             <div class="form-check"><!-- still need work -->
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" 
+                <input type="checkbox" class="form-check-input" 
                 name="terms" 
                 #terms="ngModel"  
                 ngModel
                 required>>
-                <label class="form-check-label mr-3 mb-3" for="exampleCheck1">موافق على الشروط و الأحكام</label>
+                <label class="form-check-label mr-3 mb-3">موافق على الشروط و الأحكام</label>
+                <span>
+                    *</span> 
             </div>
             <div class="text-center">  
                 <button type="submit" class="btn btn-success" [disabled]="form.invalid || form.submitted">انضم للأطباء</button>

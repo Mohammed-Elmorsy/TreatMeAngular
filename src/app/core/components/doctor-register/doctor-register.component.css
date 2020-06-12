@@ -11,5 +11,12 @@ button[type='submit']{
 #leftDiv img{
     width: 100%;
     height: 100%; 
+} 
+h4{
+    border: 2px solid rgb(2, 7, 78); 
+    padding: 10px;
+    width: 60%;  
+    border-radius: 8px;
+    margin: auto;
+    color:rgb(2, 7, 78);
 }
-
