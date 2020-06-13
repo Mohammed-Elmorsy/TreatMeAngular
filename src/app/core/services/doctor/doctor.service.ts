@@ -39,10 +39,16 @@ export class DoctorService {
 
 
 
-  UpdateDoctor(id:Number,_doctor:Doctor)
+  UpdateDoctor(id,_doctor)
   {
      return this.httpClient.put(environment.baseURL+"api/Doctors/Edit/"+id,_doctor);
   }
+
+DeleteDoctor(id)
+{
+  return this.httpClient.delete(environment.baseURL+"api/Doctors/Delete/"+id);
+}
+
 
   
 }

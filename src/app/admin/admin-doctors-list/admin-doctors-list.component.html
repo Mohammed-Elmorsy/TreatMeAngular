@@ -10,15 +10,270 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let doctor of doctors">
-        <th scope="row">{{doctor.userId}}</th>
+      <tr *ngFor="let doctor of doctors ">
+        <th scope="row">{{doctor.user.id}}</th>
         <td>{{doctor.user.firstName}}</td>
         <td>{{doctor.user.lastName}}</td>
         <td>{{doctor.user.userName}}</td>
-        <td><button class="btn btn-info">Details</button>|
-            <button class="btn btn-warning">Edit</button>|  
-            <button class="btn btn-danger">Delete</button> 
+        <td><button class="btn btn-info" (click)="SelectDoctorToDelete(doctor)" data-toggle="modal" data-target="#DetailsModal">Details</button>|
+            <button class="btn btn-warning"(click)="SelectDoctorToEdit(doctor)"class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" name="btnAddMore" > edit
+          </button>|  
+            <button class="btn btn-danger" (click)="SelectDoctorToDelete(doctor)" data-toggle="modal" data-target="#DeleteModal" >Delete</button> 
         </td>
       </tr>
     </tbody>
   </table>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">تعديل بيانات الطبيب</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form name="form" #form="ngForm" class="text-right" dir="rtl">
+            <div class="form-row"> 
+                <div class="form-group col-md-6">
+                    <label>الإسم الأول </label>
+                    <input type="text" class="form-control"  name="fName"
+                    #fName="ngModel"
+                    [(ngModel)]="doctor_modified.user.firstName"
+                    required 
+                    maxlength="20"
+                    minlength="3"
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }">
+                <!--cs validation -->
+                    <div *ngIf="fName.invalid" class="invalid-feedback">
+                        <span *ngIf="fName.errors?.required && fName.dirty">
+                            *</span>
+                        <span *ngIf="fName.errors?.minlength && fName.dirty">
+                            يجب أن لا يقل الاسم عن 3 أحرف</span>
+                        <span *ngIf="fName.errors.hasWhiteSpace && fName.dirty">
+                            يجب أن لا يحتوى الاسم على مسافات</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>الإسم الآخير </label>
+                  <input type="text" class="form-control" name="lName"
+                  #lName="ngModel"
+                  [(ngModel)]="doctor_modified.user.lastName"
+
+                  required 
+                  maxlength="20"
+                  minlength="3"
+                  noWhiteSpaces
+                  [ngClass]="{ 'is-invalid': lName.invalid && lName.dirty }">
+              <!--cs validation -->
+                  <div *ngIf="lName.invalid" class="invalid-feedback">
+                      <span *ngIf="lName.errors?.required && lName.dirty">
+                          *</span>
+                      <span *ngIf="lName.errors?.minlength && lName.dirty">
+                          يجب أن لا يقل الاسم عن 3 أحرف</span>
+                      <span *ngIf="lName.errors.hasWhiteSpace && lName.dirty">
+                          يجب أن لا يحتوى الاسم على مسافات</span>
+                  </div>
+              </div>
+            </div><!--first Row-->
+
+            <div class="form-row"> 
+              <div class="form-group col-md-6">
+                <label>العنوان </label>
+                <input type="text" class="form-control"  name="address"
+                #address="ngModel"
+                [(ngModel)]="doctor_modified.user.address"
+
+                required 
+                noWhiteSpaces
+                [ngClass]="{ 'is-invalid': address.invalid && address.dirty }">
+            <!--cs validation -->
+                <div *ngIf="address.invalid" class="invalid-feedback">
+                    <span *ngIf="address.errors?.required && address.dirty">
+                        *</span>
+                    <span *ngIf="address.errors?.address && address.dirty">
+                        ادخل صيغة صحيحة</span>
+                    <span *ngIf="address.errors.hasWhiteSpace && address.dirty">
+                        يجب أن لا يحتوى العنوان على مسافات</span>
+                </div>
+            </div>  
+          
+
+
+
+
+            <!--  <div class="form-group col-md-6">
+                <label>التخصص</label>
+                <select class="form-control" name="speciality"  [(ngModel)]="doctor_modified.speciality.id">
+               
+                    <option *ngFor="let speciality of Specialities" [value]="speciality.id">{{speciality.name}}</option>
+                   
+                </select>
+
+
+
+              </div> -->
+              
+              <div class="form-group col-md-6">
+                <label>البريد الإلكتروني </label>
+                <input type="email" class="form-control"  name="email"
+                #email="ngModel"
+                [(ngModel)]="doctor_modified.user.mail"
+
+                required 
+                noWhiteSpaces
+                [ngClass]="{ 'is-invalid': email.invalid && email.dirty }">
+            <!--cs validation -->
+                <div *ngIf="email.invalid" class="invalid-feedback">
+                    <span *ngIf="email.errors?.required && email.dirty">
+                        *</span>
+                    <span *ngIf="email.errors?.email && email.dirty">
+                        ادخل صيغة صحيحة</span>
+                    <span *ngIf="email.errors.hasWhiteSpace && email.dirty">
+                        يجب أن لا يحتوى الاسم على مسافات</span>
+                </div>
+            </div>  
+          
+
+            
+            
+
+
+            </div>  <!--secound row-->
+            <div class="form-row">   
+            <div class="form-group col-md-6 ">
+              <label>رقم التليفون </label>
+              <input type="text" class="form-control"  name="phoneNumber"
+              #phoneNumber="ngModel"
+              [(ngModel)]="doctor_modified.user.phoneNumber"
+
+              required 
+              noWhiteSpaces
+              [ngClass]="{ 'is-invalid': phoneNumber.invalid && phoneNumber.dirty }">
+          <!--cs validation -->
+             
+          </div>  
+          <div class="form-group col-md-6">
+            <label>السن </label>
+            <input type="text" class="form-control" name="age"  [(ngModel)]="doctor_modified.user.age"  >
+        </div>
+  
+
+
+
+        </div><!-- thied row-->
+
+
+          </form>
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="Update()">تعديل</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--  **************** delete modal************************************************-->
+
+
+  <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">تأكيد الحذف</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+          <div class="row">
+            <div class="col-md-12" style="text-align: center;">
+            <p style="font-size:x-large; color: red;">  هل تريد حذف الطبيب / {{doctor_ForOperation.user.firstName}}  {{doctor_ForOperation.user.lastName}} ؟؟
+            </p>
+            </div>
+
+          </div>
+            
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" (click)="DeleteDoctor()" data-dismiss="modal">حذف</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!------------ details Modal ----->
+  
+  <div class="modal fade" id="DetailsModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">معلومات عن الطبيب</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <img src="../../../assets/images/doctors/doctor-register.jpg" alt="" class="img-rounded img-responsive" style="width:90%; height:120px;" />
+                        </div>
+                        <div class="col-sm-6 col-md-8">
+                            <h5>
+                             د.  {{doctor_ForOperation.user.firstName}}  {{doctor_ForOperation.user.lastName}} </h5>
+                              
+                            <small><cite >اخصائي {{doctor_ForOperation.speciality.name}} <i class="glyphicon glyphicon-map-marker">
+                            </i></cite></small>
+                            <p>
+                                <i class="glyphicon glyphicon-envelope"></i>{{doctor_ForOperation.user.mail}}
+                                <br />
+                                <span class="glyphicon glyphicon-envelope"> العنوان :</span>{{doctor_ForOperation.user.address}}
+                                <br />
+                                <span class="glyphicon glyphicon-envelope">رقم الهاتف :</span>{{doctor_ForOperation.user.phoneNumber}}
+                                <br />
+                                <span class="glyphicon glyphicon-envelope">سعر الكشف       :</span> <span class="badge badge-warning"></span>{{doctor_ForOperation.fees}}  جنيه مصري
+                                <br />
+                                <span class="glyphicon glyphicon-envelope">التفييم :</span> <span class="badge badge-warning">{{doctor_ForOperation.rating}} /5</span>
+                                <br />
+                                <span class="glyphicon glyphicon-envelope">العمر       :</span> <span class="badge badge-warning"></span>{{doctor_ForOperation.user.age}} 
+                                <br />
+                               
+                               
+                            <!-- Split button -->
+                           
+                        </div>
+               
+          
+        </div>
+
+         
+     
+   
+
+
+
+
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
