@@ -25,3 +25,7 @@ nav a:hover{
 .navbar .navbar-toggler .navbar-toggler-icon{
     color: white !important;
 }
+
+#homeNavItem{
+margin-left: 800px;
+}

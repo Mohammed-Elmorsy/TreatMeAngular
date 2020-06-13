@@ -15,10 +15,12 @@ import { TranslateModule , TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { BrowserAnimationsModule  } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";  
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 //components
 import { AppComponent } from './app.component';
 import { DoctorProfileModalComponent } from './doctor/components/doctor-profile-modal/doctor-profile-modal.component';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+//interceptor providers
+import { HttpInterceptorProviders } from './core/interceptors';
 
 
 @NgModule({
@@ -56,7 +58,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
     AppRoutingModule //always the last one
   ],
-  providers: [],
+  providers: [HttpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

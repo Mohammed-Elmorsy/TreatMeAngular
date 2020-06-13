@@ -13,7 +13,7 @@ export class PatientService {
   getPatients(){
     return this.httpclient.get<Patient[]>(environment.baseURL+"api/patient");
   }
-
+  
   getPatientById(id)
   {
 

@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DoctorProfileModalComponent } from '../doctor-profile-modal/doctor-profile-modal.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { SessionDetails } from 'src/app/_models/SessionDetails';
 
 @Component({
   selector: 'app-doctor-profile',
@@ -17,39 +18,39 @@ export class DoctorProfileComponent implements OnInit {
 
   doctor:Doctor;
   doctor_modified:Doctor;
-  DoctorSchedule:Schedule[];
 
-  DoctorSessions:Schedule[]=[];
-
-  days=["Sat","Sun","Mon","Tue","Wed","Thu","Fri"];
+  sessionsDetails:SessionDetails;
+  days=["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"];
   
   daysChecked = [];
 
   docImg:String;
   docId:Number;
 
-  hours:number[];
-  
+  AMhours:number[];
+  PMhours:number[];
   duration:number[];
-
   
-  schedule={
-      
-    date1:Date,
-    date2:Date,
-    days:Number,
-    hour1:Number,
-    hour2:Number,
-    durtaion:Number
-  };
+  AMhour1:Number;
+  AMhour2:Number;
+  PMhour1:Number;
+  PMhour2:Number;
+  sessionDuration:Number;
+
+  AMworkHours:boolean;
+  PMworkHours:boolean;
+  
+  
 
   initSchedule:Schedule;
   
 
 
   constructor(private toastr:ToastrService,private doctorService:DoctorService,private route:ActivatedRoute , private router:Router, private scheduleService:ScheduleService,private modalService:NgbModal) {
-      this.hours=Array(24).fill(0);
+      this.AMhours=Array(12).fill(0);
+      this.PMhours=Array(12).fill(0);
       this.duration=Array(11).fill(0);
+      this.sessionsDetails=null;
  
    
   }   
@@ -57,7 +58,6 @@ export class DoctorProfileComponent implements OnInit {
 
   ngOnInit() {
     
-   
   let url=window.location.href;
   this.docId =Number( url.substring(url.lastIndexOf('/') + 1));
 
@@ -85,9 +85,11 @@ export class DoctorProfileComponent implements OnInit {
 
 
   setIterators(){
-    for (let index = 0; index < 24; index++) {
-      this.hours[index] =index+1;
+    for (let index = 0; index < 12; index++) {
+      this.AMhours[index] =index+1;
+      this.PMhours[index] =index+13;
     }
+
     for (let i = 1; i < 12; i++) {
       this.duration[i-1] =i*5;
     }
@@ -109,26 +111,45 @@ export class DoctorProfileComponent implements OnInit {
 
 
   addSessions(){
+    this.sessionsDetails={
+      doctorId:this.docId,
+      days:this.daysChecked,
+      duration:Number(this.sessionDuration),
+      startAM:Number(this.AMhour1),
+      endAM:Number(this.AMhour2),
+      startPM:Number(this.PMhour1),
+      endPM:Number(this.PMhour2)
+    };
+    console.log(this.sessionsDetails);
+    this.doctorService.addSchedules(this.sessionsDetails);
+    
+
+  }
+
+
+
+
+  //OLDaddSessions(){
     
  
-    let dates=this.betweenDate(this.schedule.date1,this.schedule.date2);
-    //console.log(dates);
+    // let dates=this.betweenDate(this.schedule.date1,this.schedule.date2);
+    // //console.log(dates);
 
-    for (let i = 0; i < dates.length; i++) {
-      for (let index = 0; index < this.daysChecked.length; index++) {
-        const element = this.daysChecked[index];
-        if (element==dates[i].toString().split(' ')[0]) {
-          //the needed dates for the doctor
-          let sessionsPerDay=60/Number(this.schedule.durtaion)*(Number(this.schedule.hour2)-Number(this.schedule.hour1));
-           for (let x = 0; x < sessionsPerDay ; x++) {
-            let currSession:Schedule={
-                Id:null,
-                DoctorId:this.docId,
-                IsBooked:false,
-                date:new Date(dates[i].setHours(Number(this.schedule.hour1),Number(this.schedule.durtaion)*x)),
-                startTime:new Date(dates[i].setHours(Number(this.schedule.hour1),Number(this.schedule.durtaion)*x)),
-                endTime:new Date(dates[i].setHours(Number(this.schedule.hour1),(Number(this.schedule.durtaion)*x)+Number(this.schedule.durtaion)))
-              };
+    // for (let i = 0; i < dates.length; i++) {
+    //   for (let index = 0; index < this.daysChecked.length; index++) {
+    //     const element = this.daysChecked[index];
+    //     if (element==dates[i].toString().split(' ')[0]) {
+    //       //the needed dates for the doctor
+    //       let sessionsPerDay=60/Number(this.schedule.durtaion)*(Number(this.schedule.hour2)-Number(this.schedule.hour1));
+    //        for (let x = 0; x < sessionsPerDay ; x++) {
+    //         let currSession:Schedule={
+    //             Id:null,
+    //             DoctorId:this.docId,
+    //             IsBooked:false,
+    //             date:new Date(dates[i].setHours(Number(this.schedule.hour1),Number(this.schedule.durtaion)*x)),
+    //             startTime:new Date(dates[i].setHours(Number(this.schedule.hour1),Number(this.schedule.durtaion)*x)),
+    //             endTime:new Date(dates[i].setHours(Number(this.schedule.hour1),(Number(this.schedule.durtaion)*x)+Number(this.schedule.durtaion)))
+    //           };
 
       // let currSession:Schedule={
                   
@@ -139,23 +160,23 @@ export class DoctorProfileComponent implements OnInit {
       //     "doctorId": 1
       //      }
 
-              this.DoctorSessions.push(currSession);
+              // this.DoctorSessions.push(currSession);
               
-          }
-          
-        }
+        //   }
+        
+        // }
          
-      }
+    //   }
    
-    }
+    // }
 
    // call service
 
-    this.doctorService.addSchedules(this.DoctorSessions);
-    alert("Sessions Added Successfully");
-    console.log(this.DoctorSessions);
+  //   this.doctorService.addSchedules(this.DoctorSessions);
+  //   alert("Sessions Added Successfully");
+  //   console.log(this.DoctorSessions);
     
-  }
+  // }
 
 
 
@@ -170,27 +191,27 @@ export class DoctorProfileComponent implements OnInit {
     }
   }
 
-  isDate(dateArg) {
-      var t = (dateArg instanceof Date) ? dateArg : (new Date(dateArg));
-      return !isNaN(t.valueOf());
-  }
+  // isDate(dateArg) {
+  //     var t = (dateArg instanceof Date) ? dateArg : (new Date(dateArg));
+  //     return !isNaN(t.valueOf());
+  // }
   
-  isValidRange(minDate, maxDate) {
-      return (new Date(minDate) <= new Date(maxDate));
-  }
+  // isValidRange(minDate, maxDate) {
+  //     return (new Date(minDate) <= new Date(maxDate));
+  // }
   
-   betweenDate(startDt, endDt) {
-      var error = ((this.isDate(endDt)) && (this.isDate(startDt)) && this.isValidRange(startDt, endDt)) ? false : true;
-      var between = [];
-      if (error) console.log('error occured!!!... Please Enter Valid Dates');
-      else {
-          var currentDate = new Date(startDt),
-              end = new Date(endDt);
-          while (currentDate <= end) {
-              between.push(new Date(currentDate));
-              currentDate.setDate(currentDate.getDate() + 1);
-          }
-      }
-      return between;
-  }
+  //  betweenDate(startDt, endDt) {
+  //     var error = ((this.isDate(endDt)) && (this.isDate(startDt)) && this.isValidRange(startDt, endDt)) ? false : true;
+  //     var between = [];
+  //     if (error) console.log('error occured!!!... Please Enter Valid Dates');
+  //     else {
+  //         var currentDate = new Date(startDt),
+  //             end = new Date(endDt);
+  //         while (currentDate <= end) {
+  //             between.push(new Date(currentDate));
+  //             currentDate.setDate(currentDate.getDate() + 1);
+  //         }
+  //     }
+  //     return between;
+  // }
 }

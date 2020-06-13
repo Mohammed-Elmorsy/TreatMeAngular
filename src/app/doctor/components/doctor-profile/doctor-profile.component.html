@@ -195,21 +195,9 @@
 <div class="container" style="border-radius: 10px; margin-top: 15px;">
 
 <div class="row text-center" style="background-color:beige; border-radius: 10px;">
-    <div class="col-4 text-center "  >
-        <h3>Dates</h3>
+    
         
-        <div class="row" style="padding-left: 30%;">   
-            <label>From  <br> <input data-provider="datepicker" class="date" type="date" [value]="schedule.date1" (input)="schedule.date1=$event.target.value"/></label>
-          
-        </div>  
-     
-        <div class="row" style="padding-left: 30%;"> 
-            <label>To  &nbsp; &nbsp;  <br> <input class="date" type="date" [value]="schedule.date2" (input)="schedule.date2=$event.target.value"/></label>
-         
-        </div>
-        <br>
-    </div><br>
-    <div class="col-3 text-center" >
+    <div class="col-4 text-center" >
         <!-- <h3>Days</h3> -->
         <div class="form-group">
             <label for="days"><h3>Days</h3> </label>
@@ -224,38 +212,38 @@
                 </label>
             </div>
         </div>
-       <!-- <label>press ctrl to choose more than one day 
-        <label *ngFor="#option of options" class="form-control">
-            <input type="checkbox" name="options" value="option" /> {{option}}
-        </label>            
-            <option value="Sat">Saturday</option>
-            <option value="Sun">Sunday</option>
-            <option value="Mon">Monday</option>
-            <option value="Tue">Tuesday</option>
-            <option value="Wed">Wednesday</option>
-            <option value="Thu">Thursday</option>
-            <option value="Fri">Friday</option>
-       
-           
-      </label> -->
+     
         <br>
     </div>
-    <div class="col-2 text-center" >
-        <h3>Hours</h3>
-        <label>From <select  id="hoursFrom" class="form-control" [value]="schedule.hour1" (input)="schedule.hour1=$event.target.value" >
+    <div class="col-4 text-center" >
+        <h3>AM Hours</h3>
+        <span>if there is no AM work hours,<br> check here &nbsp;&nbsp;</span><input [checked]="AMworkHours" type="checkbox"/><br>
+        <label>From <select  id="hoursFrom" class="form-control" [value]="AMhour1" (input)="AMhour1=$event.target.value" >
         
-            <option value="{{hour}}" *ngFor="let hour of hours">{{hour}}</option>
+            <option value="{{hour}}" *ngFor="let hour of AMhours">{{hour}}</option>
         </select></label><br>
-        <label>To &nbsp; &nbsp;<select id="hoursTo" class="form-control" [value]="schedule.hour2" (input)="schedule.hour2=$event.target.value">
+        <label>To &nbsp; &nbsp;<select id="hoursTo" class="form-control" [value]="AMhour2" (input)="AMhour2=$event.target.value">
             
-            <option value="{{hour}}" *ngFor="let hour of hours">{{hour}}</option>
+            <option value="{{hour}}" *ngFor="let hour of AMhours">{{hour}}</option>
+        </select></label>
+        <hr>
+        <h3> PM Hours</h3>
+        <span>if there is no PM work hours,<br> check here &nbsp;&nbsp;</span><input [checked]="PMworkHours" type="checkbox"/><br>
+        <label>From <select  id="hoursFrom" class="form-control" [value]="PMhour1" (input)="PMhour1=$event.target.value" >
+        
+            <option value="{{hour}}" *ngFor="let hour of PMhours">{{hour}}</option>
+        </select></label><br>
+        <label>To &nbsp; &nbsp;<select id="hoursTo" class="form-control" [value]="PMhour2" (input)="PMhour2=$event.target.value">
+            
+            <option value="{{hour}}" *ngFor="let hour of PMhours">{{hour}}</option>
         </select></label>
         <br>
+        <br>
     </div>
-    <div class="col-3 text-center" >
-        <h3>Duration</h3>
-        <select id="" class="form-control" [value]="schedule.durtaion" (input)="schedule.durtaion=$event.target.value">
-            <option value="0">In Minutes..</option>
+    <div class="col-4 text-center" >
+        <h3>Session Duration</h3>
+        <select id="" class="form-control" [value]="sessionDuration" (input)="sessionDuration=$event.target.value">
+           
             <option value="{{min}}" *ngFor="let min of duration">{{min}}</option>
         </select>
        
