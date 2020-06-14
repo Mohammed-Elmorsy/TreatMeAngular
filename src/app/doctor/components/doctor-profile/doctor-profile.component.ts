@@ -91,7 +91,7 @@ export class DoctorProfileComponent implements OnInit {
   setIterators(){
     for (let index = 0; index < 12; index++) {
       this.AMhours[index] =index+1;
-      this.PMhours[index] =index+13;
+      this.PMhours[index] =index+1;
     }
 
     for (let i = 1; i < 12; i++) {
@@ -125,7 +125,23 @@ export class DoctorProfileComponent implements OnInit {
       endPM:Number(this.PMhour2)
     };
     console.log(this.sessionsDetails);
-    this.doctorService.addSchedules(this.sessionsDetails);
+    this.doctorService.addSchedules(this.sessionsDetails)
+    .subscribe(
+      res =>{
+        console.log(res);
+        //alert("You have registered successfully! ..please wait to confirm your acount");
+        this.toastr.success('لقد تم اضافة جلسات',''); 
+        this.router.navigate(["/doctor/profile/"+this.docId]);
+
+      },  
+      err => {
+        console.log(err);
+        //alert("there are some errors during registeration!");
+        this.toastr.error('نأسف لذلك هناك مشكلة فى عملية اضافة الجلسات','حدث خطأ ما'); 
+      }
+    );
+    
+    alert("hello from add sessions function");
     
 
   }

@@ -34,7 +34,8 @@ export class DoctorService {
     return this.httpClient.get<Doctor>(environment.baseURL+"api/Doctors/Details/"+id);
   }
 
-  addSchedules(sessionDetails){
+  addSchedules(sessionDetails:SessionDetails){
+    // alert("hello from add schedules service");
    return this.httpClient.post<SessionDetails>(environment.baseURL+"api/Schedule/AddSchedules",sessionDetails);
   }
 
