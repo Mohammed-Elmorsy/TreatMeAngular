@@ -15,4 +15,19 @@ export class SpecialityService {
   getSpecialities(){
     return this.httpClient.get<Speciality[]>(environment.baseURL+"api/speciality")
   }
+
+
+  AddSpeciality(_speciality:Speciality)
+  {
+   return this.httpClient.post<Speciality>(environment.baseURL+"api/speciality",_speciality);
+
+  }
+ DeleteSpeciality(id)
+ {
+    return this.httpClient.delete(environment.baseURL+"api/speciality/"+id);
+
+
+ }
+
+
 }

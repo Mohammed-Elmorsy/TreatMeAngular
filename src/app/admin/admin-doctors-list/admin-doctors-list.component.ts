@@ -73,6 +73,7 @@ export class AdminDoctorsListComponent implements OnInit {
     this.doctorService.DeleteDoctor(this.doctor_ForOperation.userId).subscribe(()=>{
        this.toastr.success("تم حذف الطبيب بنجاح");
        
+    this.doctors.splice(this.doctors.indexOf(this.doctor_ForOperation),1);
 
 
   }),(err)=>{
@@ -84,5 +85,7 @@ export class AdminDoctorsListComponent implements OnInit {
 
     }
   }  
+
+  
 
 }

@@ -28,8 +28,16 @@ export class PatientService {
     return this.httpclient.put(environment.baseURL+"api/patient/"+id,_patient);
 
 
+
+
+
     
   }
 
+  DeletPatient(id:Number)
+  {
+    return this.httpclient.delete(environment.baseURL+"api/patient/"+id);
+
+  }
 
 }
