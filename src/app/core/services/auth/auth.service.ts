@@ -48,18 +48,17 @@ export class AuthService {
       }else{
         return "null";
       }
-    }
+    } 
   
     navigateByRole(){
       let role = this.getUserPayLoad().role;
-      let id = this.getUserPayLoad().id;
       console.log(role);
       switch(role){
         case "Doctor":
-          return "/doctor/profile/"+id;
+          return "/doctor/profile";  
           break;
-        case "Patient":
-          return "/patient/profile/"+id; 
+        case "Patient":  
+          return "/patient/profile";      
           break;
         case "Admin":  
           return "/admin/profile";
