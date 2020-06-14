@@ -40,10 +40,7 @@ export class DoctorProfileComponent implements OnInit {
   AMworkHours:boolean;
   PMworkHours:boolean;
   
-  
-
-  initSchedule:Schedule;
-  
+  comingSessions:Schedule[];
 
 
   constructor(private toastr:ToastrService,private doctorService:DoctorService,private route:ActivatedRoute , private router:Router, private scheduleService:ScheduleService,private modalService:NgbModal) {
@@ -72,6 +69,11 @@ export class DoctorProfileComponent implements OnInit {
 
 
     }); 
+    this.doctorService.getTodayTomorrowSessions(this.docId)
+    .subscribe(
+      (_schedule)=> {
+        this.comingSessions = _schedule;
+      });   
     console.log(this.doctor);
     this.docImg="../../assets/images/doctors/"+this.docId+".jpg";
       this.setIterators();

@@ -52,5 +52,9 @@ DeleteDoctor(id)
 }
 
 
-  
+    
+  getTodayTomorrowSessions(id){
+    return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/getTodayTomorrowSchedules/"+id);
+  }
+
 }
