@@ -5,11 +5,11 @@ import { PatientProfileGuard } from '../core/guards/patient-profile.guard';
 
 
 const routes: Routes = [
-  {path:"patient/profile/:id",component:PatientComponent, canActivate:[PatientProfileGuard]},
+  {path:"patient/profile",component:PatientComponent, canActivate:[PatientProfileGuard]},
 
 
 
-];
+];  
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

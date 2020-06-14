@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { AuthService } from '../services/auth/auth.service';
 export class LoginGuard implements CanActivate {
 
   constructor(private _authService:AuthService,
-    private _router:Router){}
+    private _router:Router, private toastr:ToastrService){}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -17,8 +18,8 @@ export class LoginGuard implements CanActivate {
     
       if(this._authService.isLoggedIn()) {
 
-        alert("you don't have access to this page");
-        this._authService.navigateByRole();
+        this.toastr.warning(' اذا اردت الدخول من حساب اخر قم بتسجيل الخروج اولا','لقد تم تسجيل دخولك بالفعل'); 
+        this._router.navigate(['/home']);    
         return false;
       } 
       else {  

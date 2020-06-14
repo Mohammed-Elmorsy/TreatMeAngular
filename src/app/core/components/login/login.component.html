@@ -59,8 +59,8 @@
         <a routerLink="#">نسيت كلمة المرور ؟</a>
       </div>
       <div class="text-center">
-        <button type="submit" class="btn btn-success" [disabled]="form.invalid || form.submitted"
-        
+        <button type="submit" #btn="ngModel" name="btn" (click)="countClicks()" ngModel class="btn btn-success" [disabled]="form.invalid || form.submitted"
+          
         >دخول</button>
       </div>
     </form>

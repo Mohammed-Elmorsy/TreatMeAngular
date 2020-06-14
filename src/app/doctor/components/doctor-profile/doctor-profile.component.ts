@@ -8,6 +8,7 @@ import { DoctorProfileModalComponent } from '../doctor-profile-modal/doctor-prof
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SessionDetails } from 'src/app/_models/SessionDetails';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-doctor-profile',
@@ -46,20 +47,23 @@ export class DoctorProfileComponent implements OnInit {
   
 
 
-  constructor(private toastr:ToastrService,private doctorService:DoctorService,private route:ActivatedRoute , private router:Router, private scheduleService:ScheduleService,private modalService:NgbModal) {
+  constructor(private toastr:ToastrService,private doctorService:DoctorService
+    ,private route:ActivatedRoute , private router:Router
+    , private scheduleService:ScheduleService,private modalService:NgbModal,
+    private authService:AuthService) 
+    {
       this.AMhours=Array(12).fill(0);
       this.PMhours=Array(12).fill(0);
       this.duration=Array(11).fill(0);
       this.sessionsDetails=null;
- 
-   
-  }   
+    }   
 
 
   ngOnInit() {
     
-  let url=window.location.href;
-  this.docId =Number( url.substring(url.lastIndexOf('/') + 1));
+/*   let url=window.location.href;
+  this.docId =Number( url.substring(url.lastIndexOf('/') + 1)); */
+  this.docId = this.authService.getUserPayLoad().id;
 
   console.log(this.docId);
   this.doctorService.getDoctor(this.docId)

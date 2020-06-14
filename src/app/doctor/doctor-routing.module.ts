@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path:"doctor", children:[
     //any doctor child routes with components are added here
-    {path:"profile/:id", component:DoctorProfileComponent, canActivate:[DoctorProfileGuard]},
+    {path:"profile", component:DoctorProfileComponent, canActivate:[DoctorProfileGuard]},
     {path:"details/:id", component:DoctorDetailsComponent},
     {path:"list/:specialityID", component:DoctorListComponent}
  

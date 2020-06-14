@@ -3,6 +3,7 @@ import { PatientService } from 'src/app/core/services/patient/patient.service';
 import { Patient } from 'src/app/_models/patient';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 
 
@@ -15,7 +16,8 @@ export class PatientComponent implements OnInit {
   patient:Patient;
   patient_modified:Patient;
   PatientImg:String;
-  constructor(private patientservice:PatientService , private toastr:ToastrService,private route:Router) { }
+  constructor(private patientservice:PatientService , private toastr:ToastrService
+    ,private route:Router, private authService:AuthService) { }
 
 
   Patient_modified:Patient;
@@ -41,8 +43,12 @@ export class PatientComponent implements OnInit {
 
   ngOnInit() {
 
-    let url=window.location.href;
-    let PatientId = url.substring(url.lastIndexOf('/') + 1);
+/*     let url=window.location.href;  
+    let PatientId = url.substring(url.lastIndexOf('/') + 1); */
+    
+    let PatientId = this.authService.getUserPayLoad().id;
+
+
       this.patientservice.getPatientById(PatientId).subscribe((_patient)=>{
     this.patient=_patient;
     this.patient_modified=_patient;
