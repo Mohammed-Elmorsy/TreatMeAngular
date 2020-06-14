@@ -4,6 +4,7 @@ import { Patient } from 'src/app/_models/patient';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { Schedule } from 'src/app/_models/schedule';
 
 
 
@@ -14,12 +15,16 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 })
 export class PatientComponent implements OnInit {
   patient:Patient;
+  
   patient_modified:Patient;
+
   PatientImg:String;
+
+  patientSessions:Schedule[];
+
   constructor(private patientservice:PatientService , private toastr:ToastrService
     ,private route:Router, private authService:AuthService) { }
-
-
+  
   Patient_modified:Patient;
  
   Update()
@@ -29,12 +34,9 @@ export class PatientComponent implements OnInit {
   
     this.patientservice.UpdatePatient(this.patient_modified.user.id,this.patient_modified)
     .subscribe((res)=>{
-
-            
-
-     this.toastr.success("تم التعديل بنجاح");
-  
-    },err=>{
+    this.toastr.success("تم التعديل بنجاح");
+    },
+    err=>{
       this.toastr.error('نأسف لذلك هناك مشكلة فى عملية تعديل بيانات حسابك','حدث خطأ ما'); 
 
     })
@@ -47,20 +49,27 @@ export class PatientComponent implements OnInit {
     let PatientId = url.substring(url.lastIndexOf('/') + 1); */
     
     let PatientId = this.authService.getUserPayLoad().id;
+    this.PatientImg="./../assets/images/patients/"+PatientId+".jpg";
 
+    
 
-      this.patientservice.getPatientById(PatientId).subscribe((_patient)=>{
+    this.patientservice.getPatientSessions(PatientId).subscribe((sessions)=>{
+      this.patientSessions=sessions;  
+      console.log(this.patientSessions);
+      });
+
+    this.patientservice.getPatientById(PatientId).subscribe((_patient)=>{
     this.patient=_patient;
     this.patient_modified=_patient;
+    });
+
 
     this.PatientImg="../../assets/images/patients/"+this.patient_modified.user.id+".jpg";
 
 
 
-    console.log(_patient);
 
 
-    })
   }
 
 
