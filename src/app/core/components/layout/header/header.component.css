@@ -26,6 +26,8 @@ nav a:hover{
     color: white !important;
 }
 
-#homeNavItem{
-margin-left: 800px;
-}
+.navbar-brand img{
+    height: 45px;   
+    margin-top: -10px;   
+}   
+

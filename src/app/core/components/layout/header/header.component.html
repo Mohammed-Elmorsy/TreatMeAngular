@@ -1,12 +1,12 @@
 <nav class="navbar fixed-top navbar-expand-lg">
-    <a class="navbar-brand" routerLink="/home">Treat Me</a>
+    <a class="navbar-brand" routerLink="/home"><img src="assets/images/common/logo.png"></a>
     <button class="navbar-toggle navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"></span> 
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      <ul class="navbar-nav float-left">
+      <ul class="navbar-nav mr-auto">   
         <li class="nav-item">
           <a class="nav-link" *ngIf = "!authService.isLoggedIn()" routerLink="patient/register" routerLinkActive="active">حساب جديد</a>
         </li>
@@ -21,8 +21,7 @@
         </li>
 
       </ul>
-      <div id="homeNavItem"> 
-        <ul class="navbar-nav" >  
+        <ul class="navbar-nav ml-auto" >  
           <li class="navbar-nav">
             <a class="nav-link" *ngIf = "authService.isLoggedIn()" routerLink={{authService.navigateByRole()}} routerLinkActive="active" 
             >البروفايل</a>   
@@ -32,8 +31,5 @@
           </li>
 
         </ul>
-
-      </div>
-
     </div>
   </nav>
