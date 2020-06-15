@@ -4,6 +4,8 @@ import { Doctor } from 'src/app/_models/doctor';
 import {NgForm} from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { Speciality } from 'src/app/_models/speciality';
+import { SpecialityService } from '../../services/speciality/speciality.service';
 
 @Component({
   selector: 'app-doctor-register',
@@ -12,11 +14,13 @@ import { Router } from '@angular/router';
 })
 export class DoctorRegisterComponent implements OnInit {
 
+  private specialities:Speciality[];
+
   private doctor:Doctor;
   constructor(private authService:AuthService, private router:Router ,
-    private toastr:ToastrService) { 
+    private toastr:ToastrService , private specialityService:SpecialityService) { 
     this.doctor = {
-      userId:null,
+      userId:null,  
       fees:200,
       rating:null,
       CV:null,  
@@ -38,6 +42,9 @@ export class DoctorRegisterComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.specialityService.getSpecialities().subscribe(res =>{
+      this.specialities = res; 
+    }) 
 
   }
 

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DoctorService } from '../../core/services/doctor/doctor.service';
-
 import { Speciality } from '../../_models/speciality';
 import { Router } from '@angular/router';
+import { SpecialityService } from 'src/app/core/services/speciality/speciality.service';
 
 @Component({
   selector: 'app-home',
@@ -12,17 +11,27 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  specialities:Speciality[];
-  constructor(private doctorService:DoctorService, 
+  private specialities:Speciality[]; 
+
+  constructor(private specialityService:SpecialityService, 
     private router:Router) { }
 
 
   ngOnInit() {
-    this.doctorService.getSpecialities().subscribe((_specialities)=>
-     this.specialities = _specialities );
-                             
-    console.log(this.specialities);
+    this.specialityService.getSpecialities().subscribe((_specialities)=>{
+      this.specialities = _specialities ;
+      console.log(_specialities);
+    },
+    err =>{
+      console.log(err); 
+    }
+     
+     );  
+     console.log(this.specialities);
+
   }
+
+  
 
   //still not considered time loading from server
   navigateToDocsList(specialityID:number){

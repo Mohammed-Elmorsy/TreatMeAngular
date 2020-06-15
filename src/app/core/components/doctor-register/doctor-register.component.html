@@ -16,9 +16,11 @@
                     maxlength="20"
                     minlength="3"
                     noStartOrDoubleSpaces
+                    pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
                     [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }">
-                    <span [ngClass]="{'invalid-feedback':fName.errors?.required && fName.dirty }">
-                        *</span>  
+                    <span *ngIf="!fName.dirty">*</span>  
+                    <span *ngIf="fName.dirty && fName.errors?.required" class="invalid-feedback">
+                        *</span> 
                 <!--cs validation -->
                     <div *ngIf="fName.invalid" class="invalid-feedback">
                         <span *ngIf="fName.errors?.minlength && fName.dirty">
@@ -27,6 +29,8 @@
                             يجب أن لا يبدأ الاسم بمسافة </span>
                         <span *ngIf="fName.errors?.hasDoubleSpace && fName.dirty">
                                 يجب أن لا يحتوى الاسم على مسافتين متتاليتين </span>
+                        <span *ngIf="fName.errors?.pattern&& fName.dirty">  
+                                    يجب ان يحتوى الاسم على حروف فقط</span>
                     </div>
                 </div> 
                 <div class="form-group col-md-6">
@@ -37,8 +41,10 @@
                     maxlength="20"
                     minlength="3"
                     noStartOrDoubleSpaces
+                    pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
                     [ngClass]="{ 'is-invalid': lName.invalid && lName.dirty }">
-                    <span [ngClass]="{'invalid-feedback':lName.errors?.required && lName.dirty }">
+                    <span *ngIf="!lName.dirty">*</span>  
+                    <span *ngIf="lName.dirty && lName.errors?.required" class="invalid-feedback">
                         *</span>
                 <!--cs validation -->
                     <div *ngIf="lName.invalid" class="invalid-feedback">
@@ -50,6 +56,8 @@
                                 يجب أن لا يبدأ الاسم بمسافة </span>
                         <span *ngIf="lName.errors?.hasDoubleSpace && lName.dirty">
                                     يجب أن لا يحتوى الاسم على مسافتين متتاليتين </span>
+                        <span *ngIf="lName.errors?.pattern&& lName.dirty">
+                            يجب ان يحتوى الاسم على حروف فقط</span> 
                     </div>
                 </div>   
             </div>
@@ -61,15 +69,22 @@
                 maxlength="30"
                 minlength="6"
                 noWhiteSpaces
+                pattern="^(?:[a-zA-Z0-9\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
                 [ngClass]="{ 'is-invalid': userName.invalid && userName.dirty }" /> 
-                <span [ngClass]="{'invalid-feedback':userName.errors?.required && userName.dirty }">
-                    *</span> 
+                <span *ngIf="!userName.dirty">*</span>  
+                <span *ngIf="userName.dirty && userName.errors?.required" class="invalid-feedback">
+                    *</span>    
                 <!--cs validation --> 
                 <div *ngIf="userName.invalid" class="invalid-feedback">
                     <span  *ngIf="userName.errors?.minlength && userName.dirty">
                       يجب أن لا يقل الاسم عن 6 أحرف</span>
+                    <span  *ngIf="userName.errors?.maxlength && userName.dirty">
+                        يجب أن لا يزيد الاسم عن 30 أحرف</span>
                     <span *ngIf="userName.errors?.hasWhiteSpace && userName.dirty">
-                        يجب أن لا يحتوى الاسم على مسافات</span> 
+                        يجب أن لا يحتوى الاسم على مسافات</span>  
+                    <span *ngIf="userName.errors?.pattern && userName.dirty">
+                            يجب ان يحتوى اسم المستخدم على حروف او ارقام فقط</span>  
+
                 </div> 
             </div>
             <div class="form-group">
@@ -77,16 +92,15 @@
                 #email="ngModel"
                 [(ngModel)]="doctor.user.mail"   
                 required
-                noWhiteSpaces
+                pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
                 [ngClass]="{ 'is-invalid': email.invalid && email.dirty }" />
-                <span [ngClass]="{'invalid-feedback':email.errors?.required && email.dirty }">
-                    *</span>
-                <!--cs validation --> 
+                <span *ngIf="!email.dirty">*</span>  
+                <span *ngIf="email.dirty && email.errors?.required" class="invalid-feedback">
+                    *</span>  
+                <!--cs validation -->  
                 <div *ngIf="email.invalid" class="invalid-feedback">
-                    <span  *ngIf="email.errors?.email && email.dirty"><!-- still need work -->
-                          يجب أن لا يقل الاسم عن 6 أحرف</span>
-                    <span *ngIf="email.errors?.hasWhiteSpace && email.dirty">
-                        يجب أن لا يحتوى الاسم على مسافات</span> 
+                    <span  *ngIf="email.errors?.pattern && email.dirty"><!-- still need work -->
+                          صيغة البريد الالكترونى غير صحيحة</span>
                     
                </div> 
             </div>
@@ -102,8 +116,9 @@
                     noWhiteSpaces
                     [ngClass]="{ 'is-invalid': password.invalid && password.dirty }"
                     (input)="confirmPassword.control.updateValueAndValidity()">  
-                    <span [ngClass]="{'invalid-feedback':password.errors?.required && password.dirty }">
-                        *</span>
+                    <span *ngIf="!password.dirty">*</span>  
+                    <span *ngIf="password.dirty && password.errors?.required" class="invalid-feedback">
+                        *</span> 
                 <!--cs validation -->
                     <div *ngIf="password.invalid" class="invalid-feedback">
                         <span *ngIf="password.errors?.minlength && password.dirty">
@@ -123,8 +138,9 @@
                     noWhiteSpaces
                     ConfirmEqualValidator="password"
                     [ngClass]="{ 'is-invalid': confirmPassword.invalid && confirmPassword.dirty }">
-                    <span [ngClass]="{'invalid-feedback':confirmPassword.errors?.required && confirmPassword.dirty }">
-                        *</span>
+                    <span *ngIf="!confirmPassword.dirty">*</span>  
+                    <span *ngIf="confirmPassword.dirty && confirmPassword.errors?.required" class="invalid-feedback">
+                        *</span> 
                     
                                     <!--cs validation -->
                     <div *ngIf="confirmPassword.invalid" class="invalid-feedback">
@@ -132,7 +148,7 @@
                         كلمتان المرور غير متطابقتان</span>
                     </div>
                 </div>
-            </div>
+            </div> 
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="inputTitle">اللقب</label>
@@ -149,17 +165,10 @@
                     >
                 </div>  
                 <div class="form-group col-md-4">
-                    <label for="inputSpeciality">التخصص</label>
+                    <label for="inputSpeciality">التخصص</label>  
                     <select id="inputSpeciality" class="form-control" name="speciality" [(ngModel)]="doctor.specialityId">
-                        <option selected disabled>اختر من هنا</option>
-                        <option value=1>القلب</option>
-                        <option value=2>الباطنة</option>
-                        <option value=3>العظام</option>
-                        <option value=4>الجلدية و التناسلية</option>
-                        <option value=5>العيون</option>
-                        <option value=6>الأطفال</option>
-                        <option value=7>أنف وأذن وحنجرة</option>  
-
+                        <option  [ngValue]="null" disabled>اختر من هنا</option>
+                        <option *ngFor='let speciality of specialities' value="{{speciality.id}}">{{speciality.name}}</option>
                     </select>
                 </div>
             </div>
@@ -185,7 +194,7 @@
                 <div class="form-group col-md-6">
                     <label>الجنس</label>
                     <select class="form-control" name="gender" [(ngModel)]="doctor.user.gender">
-                        <option selected disabled>اختر من هنا</option>
+                        <option  [ngValue]="null" disabled>اختر من هنا</option>
                         <option value=1>ذكر</option>
                         <option value=2>أنثى</option>
                     </select>
