@@ -3,6 +3,7 @@ import { DoctorService } from 'src/app/core/services/doctor/doctor.service';
 import { Doctor } from 'src/app/_models/doctor';
 import { ScheduleService } from 'src/app/core/services/schedule/schedule.service';
 import { Schedule } from 'src/app/_models/schedule';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class DoctorDetailsComponent implements OnInit {
  
   doctor:Doctor;
 
-  constructor(private service:DoctorService,private sCheduleService:ScheduleService) {
+  constructor(private service:DoctorService,private authService:AuthService,private sCheduleService:ScheduleService) {
  
    }
 
@@ -32,15 +33,25 @@ export class DoctorDetailsComponent implements OnInit {
       this.sCheduleService.getScheduleByDoctorId(id,choocedDate).subscribe((a)=>{
         this.DoctorSchedule=a;
        console.log(this.DoctorSchedule);
+       if (a.length==0) {
+        this.DoctorSchedule=[];
+      }
        
        });
+      
  
       }
 
   ngOnInit() {
+    let docId:number;
+    let role = this.authService.getUserPayLoad().role;
+    if (role=="Doctor") {
+          docId= this.authService.getUserPayLoad().id
+    }
+    else{
 
-  let url=window.location.href;
-  let docId = url.substring(url.lastIndexOf('/') + 1);
+      docId= Number(this.service.docId);
+    }
 
   this.service.getDoctor(docId)
   .subscribe(
