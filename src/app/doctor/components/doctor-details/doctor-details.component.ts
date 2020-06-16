@@ -4,6 +4,9 @@ import { Doctor } from 'src/app/_models/doctor';
 import { ScheduleService } from 'src/app/core/services/schedule/schedule.service';
 import { Schedule } from 'src/app/_models/schedule';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
+import { PatientService } from 'src/app/core/services/patient/patient.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,13 +19,25 @@ export class DoctorDetailsComponent implements OnInit {
 
   test:String;
   choocedDate:Date;
+  patientId:Number;
 
   docImg:string;
  
   doctor:Doctor;
-
-  constructor(private service:DoctorService,private authService:AuthService,private sCheduleService:ScheduleService) {
+  role:string;
+  docId:Number;
+  constructor(private service:DoctorService,private authService:AuthService,private sCheduleService:ScheduleService,private patientService:PatientService,private toastr:ToastrService) {
  
+    this.role = this.authService.getUserPayLoad().role;
+    if (this.role=="Doctor") {
+          this.docId= this.authService.getUserPayLoad().id
+    }
+    else{
+
+      this.docId= Number(this.service.docId);
+
+    }
+
    }
 
    DoctorSchedule:Schedule[];
@@ -43,23 +58,41 @@ export class DoctorDetailsComponent implements OnInit {
       }
 
   ngOnInit() {
-    let docId:number;
-    let role = this.authService.getUserPayLoad().role;
-    if (role=="Doctor") {
-          docId= this.authService.getUserPayLoad().id
+   
+    if (this.authService.getUserPayLoad().role=='Doctor') {
+      this.docId = this.authService.getUserPayLoad().id;
     }
     else{
-
-      docId= Number(this.service.docId);
+      let url=window.location.href;
+      this.docId =Number( url.substring(url.lastIndexOf('/') + 1));
     }
 
-  this.service.getDoctor(docId)
+  this.service.getDoctor(this.docId)
   .subscribe(
     (_doctor)=> {this.doctor = _doctor});  
     console.log(this.doctor);
-  this.docImg="../../assets/images/doctors/"+docId+".jpg";
+  this.docImg="../../assets/images/doctors/"+this.docId+".jpg";
 
 
   }
 
+  bookSession(sessionId){
+    let booking:doctorPatientSchedule={
+      DoctorId:this.docId,
+      PatientId:this.authService.getUserPayLoad().id,
+      ScheduleId:sessionId
+    };
+    this.patientService.bookPatientSession(booking)
+    .subscribe(()=>{  
+      
+        this.toastr.success('تم حجز الجلسة');
+
+
+
+    })
+
+    
+
+
+  }
 }

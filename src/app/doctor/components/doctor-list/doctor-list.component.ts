@@ -27,7 +27,8 @@ export class DoctorListComponent implements OnInit {
   }
   
   navigateToDocDetails(doctorID:number){
-    this.router.navigate(['doctor/details']);
+
+    this.router.navigate(['doctor/details/'+doctorID]);
     this.doctorService.docId=doctorID;
 
   }

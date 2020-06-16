@@ -75,16 +75,41 @@
                   
                     
                 <td *ngIf="time.isBooked == 1; else elseBlock">
-                    <button disabled class="btn btn-danger" >
+
+                    <span *ngIf="role == 'Patient'; else Doc">
+                        <button class="btn btn-success" disabled >
+                            محجوز
+                        </button>
+                    </span>
+                    <ng-template #Doc>
+                        <button  class="btn btn-success" disabled >
                         محجوز
-                    </button>
+                        </button>
+                        <button  class="btn btn-danger" >
+                            إلغاء الحجز
+                        </button>
+                    </ng-template>
+                
         
                    
                 </td>
                 <ng-template #elseBlock>
-                  <button  class="btn btn-success" >
-                      إحجز الآن
-                  </button>
+
+                    <span *ngIf="role == 'Patient'; else Doc2">
+                        <button class="btn btn-success" (click)="bookSession(time.id)">
+                            إحجز الآن
+                        </button>
+                    </span>
+                    <ng-template #Doc2>
+                           <button  class="btn btn-success" disabled >
+                            غير محجوز
+                            </button>
+                            <button  class="btn btn-danger" >
+                                إلغاء الميعاد
+                            </button>
+                    </ng-template>
+                
+           
                 </ng-template>
         
         
