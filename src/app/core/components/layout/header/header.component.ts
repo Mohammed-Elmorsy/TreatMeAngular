@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,17 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
   
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService, private translate:TranslateService) 
+  {
+    translate.use('ar');       
+   }
 
   ngOnInit() {
+         
+  }
+
+  useLang(lang:string){
+    this.translate.use(lang);    
   }
 
 }

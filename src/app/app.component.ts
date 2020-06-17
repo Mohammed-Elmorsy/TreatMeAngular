@@ -3,6 +3,7 @@ import {
   Router, NavigationStart, NavigationEnd,
   NavigationCancel, NavigationError, Event
 } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +15,15 @@ export class AppComponent {
 
   showLoadingIndicator = true;
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, public translate: TranslateService) {
+    
 
     this._router.events.subscribe((routerEvent: Event) => {
 
       if (routerEvent instanceof NavigationStart) {
         this.showLoadingIndicator = true;
       }
-
+  
       if (routerEvent instanceof NavigationEnd ||
         routerEvent instanceof NavigationError ||
         routerEvent instanceof NavigationCancel) {

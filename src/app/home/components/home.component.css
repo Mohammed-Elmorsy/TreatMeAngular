@@ -28,7 +28,7 @@
 
 div.carousel-caption{   
     color: rgb(2, 7, 78);
-    text-shadow: 2px 2px 0 #FFFFFF, 2px -2px 0 #FFFFFF, -2px 2px 0 #FFFFFF, -2px -2px 0 #FFFFFF, 2px 0px 0 #FFFFFF, 0px 2px 0 #FFFFFF, -2px 0px 0 #FFFFFF, 0px -2px 0 #FFFFFF;
+    text-shadow: 2px 2px 0 #94d8ff, 2px -2px 0 #94d8ff, -2px 2px 0 #94d8ff, -2px -2px 0 #94d8ff, 2px 0px 0 #94d8ff, 0px 2px 0 #94d8ff, -2px 0px 0 #94d8ff, 0px -2px 0 #94d8ff;
 }
 
 .card{

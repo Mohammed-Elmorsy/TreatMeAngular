@@ -1,0 +1,22 @@
+#patientRegister ,#doctorRegister,#login{
+    display:flex;
+    flex-flow: row;
+    position: relative; 
+    top: 0;      
+    #imgDiv{   
+        order: 1;     
+        position: sticky;     
+        float: left; 
+        top: 0;     
+    }
+    #formDiv{  
+        order: 2;  
+        float: right;    
+    }   
+} 
+
+.formRegister{
+    text-align: right;
+    direction: rtl;   
+}
+

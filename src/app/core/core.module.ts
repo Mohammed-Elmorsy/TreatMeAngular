@@ -13,8 +13,9 @@ import { LoginComponent } from './components/login/login.component';
 import { NoWhiteSpaces } from './directives/noWhiteSpaces.directive';
 import { ConfirmEqualValidatorDirective } from './directives/confirmEqualValidator.directive';
 import { NoStartOrDoubleSpacesDirective } from './directives/noStartOrDoubleSpaces.directive copy';
+//other modules
+import { TranslateModule } from '@ngx-translate/core';
   
-
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -26,12 +27,13 @@ import { NoStartOrDoubleSpacesDirective } from './directives/noStartOrDoubleSpac
 
     NoWhiteSpaces,
     ConfirmEqualValidatorDirective,
-    NoStartOrDoubleSpacesDirective 
+    NoStartOrDoubleSpacesDirective,
   ],
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ],  
   exports:[
     HeaderComponent,
@@ -43,4 +45,4 @@ import { NoStartOrDoubleSpacesDirective } from './directives/noStartOrDoubleSpac
 
   ]
 })
-export class CoreModule { }
+export class CoreModule { }  
