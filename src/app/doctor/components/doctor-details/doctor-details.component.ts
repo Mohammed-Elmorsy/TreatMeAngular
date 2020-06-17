@@ -7,7 +7,8 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
 import { PatientService } from 'src/app/core/services/patient/patient.service';
 import { ToastrService } from 'ngx-toastr';
-
+import {  BsDatepickerConfig} from "ngx-bootstrap/datepicker";
+import { now } from 'jquery';
 
 @Component({
   selector: 'app-doctor-details',
@@ -16,31 +17,30 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class DoctorDetailsComponent implements OnInit {
+  
+
+
+  datePickerConfig:Partial<BsDatepickerConfig>
 
   test:String;
-  choocedDate:Date;
+  choocedDate:String;
   patientId:Number;
+  dateOfBirth:string;
 
   docImg:string;
  
   doctor:Doctor;
   role:string;
   docId:Number;
+ 
   constructor(private service:DoctorService,private authService:AuthService,private sCheduleService:ScheduleService,private patientService:PatientService,private toastr:ToastrService) {
  
-    this.role = this.authService.getUserPayLoad().role;
-    if (this.role=="Doctor") {
-          this.docId= this.authService.getUserPayLoad().id
-    }
-    else{
-
-      this.docId= Number(this.service.docId);
-
-    }
-
    }
 
    DoctorSchedule:Schedule[];
+   getChoosedDate(){
+     alert(this.dateOfBirth+"");
+   }
 
    GetDoctorScheduleTimes(id:Number,choocedDate:Date)
    {
@@ -56,8 +56,10 @@ export class DoctorDetailsComponent implements OnInit {
       
  
       }
-
+      
+     
   ngOnInit() {
+  
    
     if (this.authService.getUserPayLoad().role=='Doctor') {
       this.docId = this.authService.getUserPayLoad().id;
@@ -75,6 +77,8 @@ export class DoctorDetailsComponent implements OnInit {
 
 
   }
+
+
 
   bookSession(sessionId){
     let booking:doctorPatientSchedule={

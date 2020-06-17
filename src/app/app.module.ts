@@ -16,6 +16,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { BrowserAnimationsModule  } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";  
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 //components
 import { AppComponent } from './app.component';
 import { DoctorProfileModalComponent } from './doctor/components/doctor-profile-modal/doctor-profile-modal.component';
@@ -39,6 +40,7 @@ import { HttpInterceptorProviders } from './core/interceptors';
     AdminModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
       timeOut:4000,
       positionClass: 'toast-top-center',
