@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DoctorService } from 'src/app/core/services/doctor/doctor.service';
 import { Doctor } from 'src/app/_models/doctor';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-doctor-list',
@@ -14,7 +15,7 @@ export class DoctorListComponent implements OnInit {
   private specialityID:number;
 
   constructor(private doctorService:DoctorService ,
-    private route:ActivatedRoute , private router:Router) { }
+    private route:ActivatedRoute , private router:Router,private authService:AuthService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -26,7 +27,10 @@ export class DoctorListComponent implements OnInit {
   }
   
   navigateToDocDetails(doctorID:number){
-    this.router.navigate(['doctor/details',doctorID]) 
+
+    this.router.navigate(['doctor/details/'+doctorID]);
+    this.doctorService.docId=doctorID;
+
   }
 
   navigateToSchedule(){

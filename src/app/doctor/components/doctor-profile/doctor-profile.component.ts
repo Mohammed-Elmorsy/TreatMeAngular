@@ -85,7 +85,7 @@ export class DoctorProfileComponent implements OnInit {
   
 
   navigateToDocDetails(doctorID:number){
-    this.router.navigate(['doctor/details',doctorID]) 
+    this.router.navigate(['doctor/details']) 
   }
 
 
@@ -133,7 +133,7 @@ export class DoctorProfileComponent implements OnInit {
         console.log(res);
         //alert("You have registered successfully! ..please wait to confirm your acount");
         this.toastr.success('لقد تم اضافة جلسات',''); 
-        this.router.navigate(["/doctor/profile/"+this.docId]);
+        this.router.navigate(["/doctor/details/"+this.docId]);
 
       },  
       err => {

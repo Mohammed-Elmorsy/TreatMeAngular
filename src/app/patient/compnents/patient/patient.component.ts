@@ -66,11 +66,10 @@ export class PatientComponent implements OnInit {
 
     this.PatientImg="../../assets/images/patients/"+this.patient_modified.user.id+".jpg";
 
-
-
-
-
   }
 
+  joinMeeting(roomName){
+    console.log(roomName);
+  }
 
 }

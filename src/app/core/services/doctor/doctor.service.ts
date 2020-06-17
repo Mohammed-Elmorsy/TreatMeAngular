@@ -14,11 +14,15 @@ import { SessionDetails } from 'src/app/_models/SessionDetails';
 export class DoctorService {
 
   doctor:Doctor;
+  docId:Number;
    constructor(private httpClient:HttpClient) { }
 
   //-----------------------------------------methods------------------------------------
   getDoctors() {
     return this.httpClient.get<Doctor[]>(environment.baseURL+"api/Doctors/Index");
+  }
+  getDocId(){
+    return this.docId;
   }
 
 /*   getSpecialities(){
