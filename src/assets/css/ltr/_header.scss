@@ -1,0 +1,10 @@
+#navbarSupportedContent{
+    display:flex;
+    flex-flow: row;
+    #loginNav{
+        order: 2;    
+    }
+    #homeNav{
+        order: 1; 
+    }   
+}

@@ -1,22 +1,22 @@
-<div>
-  <div class="col-12 col-md-7 float-left" id="leftDiv"><!-- image -->
+<div id="login">
+  <div class="col-12 col-md-7 float-left" id="imgDiv"><!-- image -->
     <img src="assets/images/doctors/{{pictureName}}-register.jpg" alt="loading"> 
   </div>  
-  <div class="col-12 col-md-5 float-right p-4" id="rightDiv"><!-- form -->
-    <h4 class="text-center mb-5 mt-5">تسجيل الدخول</h4> 
+  <div class="col-12 col-md-5 float-right p-4" id="formDiv"><!-- form -->
+    <h4 class="text-center mb-5 mt-5">{{"Login.Login" | translate}}</h4> 
     <div class="text-center" id="radioBtnGroup">
       <div class="form-check form-check-inline">
-        <label class="form-check-label mr-1">مستخدم</label>
+        <label class="form-check-label mr-1">{{"Login.User" | translate}}</label>
         <input class="form-check-input" type="radio" name="user" value="patient" [(ngModel)]="this.pictureName">
       </div>
       <div class="form-check form-check-inline">
-        <label class="form-check-label mr-1" for="inlineRadio2">طبيب</label>
+        <label class="form-check-label mr-1" for="inlineRadio2">{{"Login.Doctor" | translate}}</label>
         <input class="form-check-input" type="radio" name="user" value="doctor" [(ngModel)]="this.pictureName">
       </div>
     </div>
-    <form #form="ngForm" name="form" (ngSubmit)="onSubmit()" class=" text-right" dir="rtl">
+    <form #form="ngForm" name="form" (ngSubmit)="onSubmit()" class="formRegister">
       <div class="form-group">
-        <label>اسم المستخدم</label>
+        <label>{{"Register.Username" | translate}}</label>
         <input type="text" class="form-control" name="userName"
         #userName="ngModel"
         [(ngModel)]="loginCredentials.userName"      
@@ -29,17 +29,17 @@
         <!--cs validation --> 
         <div *ngIf="userName.invalid" class="invalid-feedback">
             <span  *ngIf="userName.errors?.required && userName.dirty">
-                 *</span>  
+              {{"Register.Validation.Required" | translate}}</span>  
             <span  *ngIf="userName.errors?.minlength && userName.dirty">
-               لا يقل اسم المستخدم عن 6 أحرف</span>
+              {{"Register.Validation.Minlength6" | translate}}</span>
             <span *ngIf="userName.errors?.hasWhiteSpace && userName.dirty">
-                  لا يحتوى اسم المستخدم على مسافات</span>
+              {{"Register.Validation.NoSpace" | translate}}</span>
             <span *ngIf="userName.errors?.pattern && userName.dirty">
-                    يحتوى اسم المستخدم على حروف او ارقام فقط</span>  
+              {{"Register.Validation.LettersOnly" | translate}}</span>  
         </div> 
       </div>
       <div class="form-group">
-        <label>كلمة المرور</label>
+        <label>{{"Register.Password" | translate}}</label>  
         <input type="password" class="form-control" name="password"
         #password="ngModel"
         [(ngModel)]="loginCredentials.password"  
@@ -51,21 +51,21 @@
     <!--cs validation -->
         <div *ngIf="password.invalid" class="invalid-feedback">
             <span *ngIf="password.errors?.required && password.dirty">
-                *</span>
+              {{"Register.Validation.Required" | translate}}</span>
             <span *ngIf="password.errors?.minlength && password.dirty">
-                يجب أن لا تقل كلمة المرور عن 6 أحرف</span>
+              {{"Register.Validation.Minlength6" | translate}}</span>
             <span *ngIf="password.errors?.hasWhiteSpace && password.dirty">
-                يجب أن لا تحتوى كلمة المرور على مسافات</span>
+              {{"Register.Validation.NoSpace" | translate}}</span>
                 
         </div>
       </div>
       <div class="form-group">
-        <a routerLink="#">نسيت كلمة المرور ؟</a>
+        <a routerLink="#">{{"Login.ForgotPassword" | translate}}</a>
       </div>
       <div class="text-center">
         <button type="submit" #btn="ngModel" name="btn" (click)="countClicks()" ngModel class="btn btn-success" [disabled]="form.invalid || form.submitted"
           
-        >دخول</button>
+        >{{"Login.Enter" | translate}}</button>
       </div>
     </form>
   </div>
