@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Schedule } from 'src/app/_models/schedule';
 import { SessionDetails } from 'src/app/_models/SessionDetails';
+import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,19 @@ DeleteDoctor(id)
     
   getTodayTomorrowSessions(id){
     return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/getTodayTomorrowSchedules/"+id);
+  }
+
+  deleteSession(id:number){
+    return this.httpClient.delete(environment.baseURL+"api/Schedule/Delete/"+id);
+
+  }
+  PatientCancelSession(id:number){
+    return this.httpClient.post<doctorPatientSchedule>(environment.baseURL+"api/DoctorPatientSchedules/PatientCancelSession",id);
+
+  }
+  DoctorCancelSession(id:number){
+    return this.httpClient.post(environment.baseURL+"api/DoctorPatientSchedules/DoctorCancelSession",id);
+
   }
 
 }

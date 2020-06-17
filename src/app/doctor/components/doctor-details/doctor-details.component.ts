@@ -9,6 +9,7 @@ import { PatientService } from 'src/app/core/services/patient/patient.service';
 import { ToastrService } from 'ngx-toastr';
 import {  BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import { now } from 'jquery';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-details',
@@ -33,7 +34,7 @@ export class DoctorDetailsComponent implements OnInit {
   role:string;
   docId:Number;
  
-  constructor(private service:DoctorService,private authService:AuthService,private sCheduleService:ScheduleService,private patientService:PatientService,private toastr:ToastrService) {
+  constructor(private service:DoctorService,private router:Router,private authService:AuthService,private sCheduleService:ScheduleService,private patientService:PatientService,private toastr:ToastrService) {
  
    }
 
@@ -62,9 +63,11 @@ export class DoctorDetailsComponent implements OnInit {
   
    
     if (this.authService.getUserPayLoad().role=='Doctor') {
+      this.role='doctor'
       this.docId = this.authService.getUserPayLoad().id;
     }
     else{
+      this.role='patient'
       let url=window.location.href;
       this.docId =Number( url.substring(url.lastIndexOf('/') + 1));
     }
@@ -90,13 +93,33 @@ export class DoctorDetailsComponent implements OnInit {
     .subscribe(()=>{  
       
         this.toastr.success('تم حجز الجلسة');
-
+        this.router.navigate(['patient/profile']);
 
 
     })
+  }
 
-    
+  deleteSession(id){
+    this.service.deleteSession(id).subscribe(()=>{  
+      
+      this.toastr.success('تم الغاء الجلسة');
+      this.router.navigate(['doctor/profile']);
+
+
+  });
 
 
   }
+  cancelSession(id){
+    this.service.DoctorCancelSession(id).subscribe(()=>{  
+      //send mail to patient
+      this.toastr.success('تم الغاء حجز الجلسة');
+      this.router.navigate(['doctor/profile']);
+ 
+    });
+
+  }
+
+
+
 }

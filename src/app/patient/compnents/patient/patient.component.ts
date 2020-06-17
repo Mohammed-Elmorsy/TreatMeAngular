@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { Schedule } from 'src/app/_models/schedule';
+import { DoctorService } from 'src/app/core/services/doctor/doctor.service';
 
 
 
@@ -22,8 +23,8 @@ export class PatientComponent implements OnInit {
 
   patientSessions:Schedule[];
 
-  constructor(private patientservice:PatientService , private toastr:ToastrService
-    ,private route:Router, private authService:AuthService) { }
+  constructor(private patientservice:PatientService ,private router:Router, private toastr:ToastrService
+    ,private route:Router,private doctorService:DoctorService, private authService:AuthService) { }
   
   Patient_modified:Patient;
  
@@ -70,6 +71,16 @@ export class PatientComponent implements OnInit {
 
   joinMeeting(roomName){
     console.log(roomName);
+  }
+  
+  cancelSession(id){
+    this.doctorService.PatientCancelSession(id).subscribe(()=>{  
+      //send mail to patient
+      this.toastr.success('تم الغاء حجز الجلسة');
+      this.router.navigate(['patient/profile']);
+ 
+    });
+
   }
 
 }
