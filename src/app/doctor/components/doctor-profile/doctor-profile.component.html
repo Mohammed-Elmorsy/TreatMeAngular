@@ -189,10 +189,13 @@
 <ul class="nav nav-tabs" style="margin-left: 10%;" id="myTab" role="tablist">
   
     <li class="nav-item">
-        <a class="nav-link active" id="coming-tab" data-toggle="tab" href="#comingSessions" role="tab" aria-controls="profile" aria-selected="true">Coming Sessions</a>
+        <a class="nav-link active" id="coming-tab" data-toggle="tab" href="#comingSessions" role="tab" aria-controls="coming" aria-selected="true"><h3>Coming Sessions</h3></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link " id="add-tab" data-toggle="tab" href="#addSessions" role="tab" aria-controls="home" aria-selected="false">Add Sessions</a>
+        <a class="nav-link " id="add-tab" data-toggle="tab" href="#addSessions" role="tab" aria-controls="add" aria-selected="false"><h3>Add Sessions</h3></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " id="booked-tab" data-toggle="tab" href="#bookedSessions" role="tab" aria-controls="booked" aria-selected="false"><h3>Booked Sessions</h3></a>
     </li>
     
 </ul>
@@ -298,9 +301,11 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let session of comingSessions;let i=index">
-                    <th scope="row">{{i}}</th>
+
+                    <th scope="row">{{i+1}}</th>
                     <td> {{session.date  | date:'shortDate'}}</td>
                     <td> {{session.startTime | date:'mediumTime'}}</td>
+
                     <td><button class="btn btn-primary">Join</button></td>
                     </tr>
                 
@@ -308,6 +313,43 @@
                 </table>
             </div>  
         </div>
+        <div class="tab-pane fade" id="bookedSessions" role="tabpanel" aria-labelledby="booked-tab">
+                   
+            <div class="col-6" style=" padding: 10px; border: solid black 1px ; background-color:burlywood;"> 
+                <h3>UpComing Sessions</h3>
+                <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let session of comingSessions;let i=index">
+
+
+                        <span *ngIf="session.isBooked == 1;">
+                            <tr>
+                                    <th scope="row">{{i+1}}</th>
+                                    <td> {{session.date  | date:'shortDate'}}</td>
+                                    <td> {{session.startTime | date:'mediumTime'}}</td>
+                                    <!-- if start time is now join else coming soon-->
+                                    <td><button class="btn btn-primary">Join</button></td>
+                            </tr>
+                        </span>
+                
+
+                       
+                    </tr>
+                
+                </tbody>
+                </table>
+            </div>  
+        </div>
+        
+
         
     </div>
 </div>
