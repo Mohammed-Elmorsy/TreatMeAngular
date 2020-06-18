@@ -23,6 +23,9 @@ import { DoctorProfileModalComponent } from './doctor/components/doctor-profile-
 import { HttpInterceptorProviders } from './core/interceptors';
 
 
+
+
+
 @NgModule({
   declarations: [ //components
     AppComponent
@@ -39,6 +42,7 @@ import { HttpInterceptorProviders } from './core/interceptors';
     AdminModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    
     ToastrModule.forRoot({
       timeOut:4000,
       positionClass: 'toast-top-center',

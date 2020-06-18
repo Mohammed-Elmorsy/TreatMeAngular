@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Patient } from 'src/app/_models/patient';
-import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/output_ast';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,33 @@ export class PatientService {
     return this.httpclient.delete(environment.baseURL+"api/patient/"+id);
 
   }
+
+
+
+  postImage(fileToUpload:File  ,id)
+  {
+
+
+      const formData: FormData = new FormData();
+      formData.append('image', fileToUpload, fileToUpload.name);
+  
+      return this.httpclient.post(environment.baseURL+"api/User/UploadImage/"+id, formData,{headers: {
+        'Accept': 'application/json',     
+        'Content-Disposition' : 'multipart/form-data'}}).subscribe(
+        (data)=>{
+          console.log('uploaded  !');
+        }
+,(err)=>{
+console.log(err);
+}
+
+      );
+    }
+  
+
+    getImageUrl(id)
+    {
+      return this.httpclient.get<String>(environment.baseURL+"api/User/GetImageUrl/"+id);
+    }
 
 }
