@@ -139,7 +139,7 @@
                                                         <td> {{session.schedule.date  | date:'shortDate'}}</td>
                                                         <td> {{session.schedule.startTime | date:'mediumTime'}}</td>
                                                         <td><button class="btn btn-primary" (click)="joinMeeting(session.doctor.user.firstName)">Join</button></td>
-                                                        <td><button class="btn btn-danger" (click)="cancelSession(session.schedule.id)">Cancel Session</button></td>
+                                                        <td><button class="btn btn-danger" (click)="cancelSession(session.schedule.id)">Cancel</button></td>
                                                       </tr>
                                                      
                                                     </tbody>
