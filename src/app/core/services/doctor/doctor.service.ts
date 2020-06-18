@@ -30,8 +30,8 @@ export class DoctorService {
   }  */ 
 
   getDoctorsBySpecialityID(specialityID:number){
-    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/doctors/getbyspeciality/"+specialityID);
-  }  
+    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/doctors/GetSomeDoctorDetailsBySpecialityId/"+specialityID);
+  }    
 
   getDoctor(id){
 

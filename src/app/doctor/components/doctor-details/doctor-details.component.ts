@@ -7,8 +7,6 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
 import { PatientService } from 'src/app/core/services/patient/patient.service';
 import { ToastrService } from 'ngx-toastr';
-import {  BsDatepickerConfig} from "ngx-bootstrap/datepicker";
-import { now } from 'jquery';
 
 @Component({
   selector: 'app-doctor-details',
@@ -19,8 +17,6 @@ import { now } from 'jquery';
 export class DoctorDetailsComponent implements OnInit {
   
 
-
-  datePickerConfig:Partial<BsDatepickerConfig>
 
   test:String;
   choocedDate:String;

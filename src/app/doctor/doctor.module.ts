@@ -9,7 +9,6 @@ import { DoctorDetailsComponent } from "./components/doctor-details/doctor-detai
 import { DoctorListComponent } from './components/doctor-list/doctor-list.component';
 import { DoctorProfileComponent } from './components/doctor-profile/doctor-profile.component';
 import { DoctorProfileModalComponent } from './components/doctor-profile-modal/doctor-profile-modal.component';
-import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 
 @NgModule({
   declarations: [
@@ -22,9 +21,7 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
   entryComponents:[DoctorProfileModalComponent],
   imports: [
    SharedModule,
-   DoctorRoutingModule,
-   BsDatepickerModule.forRoot()
-
+   DoctorRoutingModule
   ],
   exports:[DoctorProfileModalComponent]
 })
