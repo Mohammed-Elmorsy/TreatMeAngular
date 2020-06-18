@@ -9,9 +9,6 @@ export class SessionDetails {
        public startPM:Number,
        public endPM:Number,
 
-       
-  
-
     ){
 
     }

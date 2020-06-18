@@ -29,7 +29,7 @@ export class AdminProfileGuard implements CanActivate {
             else {
               console.log(data);  
               this._router.navigate(['/login']);
-              return false;
+              return false;   
             }
 
           })

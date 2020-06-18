@@ -3,6 +3,7 @@ import { DoctorService } from './../../core/services/doctor/doctor.service';
 
 import { Doctor } from 'src/app/_models/doctor';
 import { ToastrService } from 'ngx-toastr';
+import { SpecialityService } from 'src/app/core/services/speciality/speciality.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class AdminDoctorsListComponent implements OnInit {
   doctor_ForOperation:Doctor=new  Doctor(1000,{id:0,name:""},{id:1000,firstName:"",lastName:"",role:1,gender:1,userName:"",password:""});
 
   Specialities:any;
-  constructor(private doctorService:DoctorService,private toastr:ToastrService) { }
+  constructor(private doctorService:DoctorService,private toastr:ToastrService,
+    private specialityService:SpecialityService) { }
 
 
   
@@ -25,8 +27,8 @@ export class AdminDoctorsListComponent implements OnInit {
     this.doctorService.getDoctors().subscribe(res =>{
        this.doctors = res;
        console.log(this.doctors);
-       this.doctorService.getSpecialities().subscribe((res)=>{
-         this.Specialities=res;
+       this.specialityService.getSpecialities().subscribe((res)=>{
+         this.Specialities=res;   
 
        });
 

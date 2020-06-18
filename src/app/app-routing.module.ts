@@ -6,15 +6,15 @@ import { PageNotFoundComponent } from './core/components/page-not-found/page-not
 import { DoctorRegisterComponent } from './core/components/doctor-register/doctor-register.component';
 import { PatientRegisterComponent } from './core/components/patient-register/patient-register.component'
 import { LoginComponent } from './core/components/login/login.component';
+import { LoginGuard } from './core/guards/login.guard';
    
 
 const routes: Routes = [  
   {path:"",redirectTo:"home" ,pathMatch:"full"},
   {path:"home",component:HomeComponent},
-  {path:"doctor/register",component:DoctorRegisterComponent},
-  {path:"patient/register",component:PatientRegisterComponent},
-
-  {path:"login",component:LoginComponent},
+  {path:"doctor/register",component:DoctorRegisterComponent, canActivate:[LoginGuard]},
+  {path:"patient/register",component:PatientRegisterComponent, canActivate:[LoginGuard]},
+  {path:"login",component:LoginComponent, canActivate:[LoginGuard]},
   {path:"**",component:PageNotFoundComponent}
  
 ];

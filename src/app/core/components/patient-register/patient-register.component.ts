@@ -18,7 +18,7 @@ export class PatientRegisterComponent implements OnInit {
     private toastr:ToastrService) { 
     this.patient = {
       userId:null,
-      bloodType:1,  
+      bloodType:null,    
       user:{
         firstName: '',
         lastName:'', 

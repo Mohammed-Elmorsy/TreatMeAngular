@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SessionDetails } from 'src/app/_models/SessionDetails';
 import { environment } from 'src/environments/environment';
 import { FileUploadService } from 'src/app/core/services/FileUpload/file-upload.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-doctor-profile',
@@ -45,12 +46,25 @@ export class DoctorProfileComponent implements OnInit {
   initSchedule:Schedule;
   
    DoctorImage:string;
+   comingSessions:Schedule[];
 
-  constructor(private toastr:ToastrService,private doctorService:DoctorService,private fileupload:FileUploadService,private route:ActivatedRoute , private router:Router, private scheduleService:ScheduleService,private modalService:NgbModal) {
-      this.AMhours=Array(12).fill(0);
-      this.PMhours=Array(12).fill(0);
-      this.duration=Array(11).fill(0);
-      this.sessionsDetails=null;
+
+  constructor(private toastr:ToastrService,
+    private doctorService:DoctorService,
+    private fileupload:FileUploadService,
+    private route:ActivatedRoute ,
+     private router:Router,
+      private scheduleService:ScheduleService,
+  private modalService:NgbModal, private authService:AuthService) {
+
+    this.AMhours=Array(12).fill(0);
+    this.PMhours=Array(12).fill(0);
+    this.duration=Array(11).fill(0);
+    this.sessionsDetails=null;
+
+
+
+     
  
    
   }   
@@ -61,8 +75,9 @@ export class DoctorProfileComponent implements OnInit {
   ngOnInit() {
 
     
-  let url=window.location.href;
-  this.docId =Number( url.substring(url.lastIndexOf('/') + 1));
+/*   let url=window.location.href;
+  this.docId =Number( url.substring(url.lastIndexOf('/') + 1)); */
+  this.docId = this.authService.getUserPayLoad().id;
 
   console.log(this.docId);
   this.doctorService.getDoctor(this.docId)
@@ -82,6 +97,11 @@ export class DoctorProfileComponent implements OnInit {
       }
 
     }); 
+    this.doctorService.getTodayTomorrowSessions(this.docId)
+    .subscribe(
+      (_schedule)=> {
+        this.comingSessions = _schedule;
+      });   
     console.log(this.doctor);
     
       this.setIterators();
@@ -89,7 +109,7 @@ export class DoctorProfileComponent implements OnInit {
   
 
   navigateToDocDetails(doctorID:number){
-    this.router.navigate(['doctor/details',doctorID]) 
+    this.router.navigate(['doctor/details']) 
   }
 
 
@@ -97,7 +117,7 @@ export class DoctorProfileComponent implements OnInit {
   setIterators(){
     for (let index = 0; index < 12; index++) {
       this.AMhours[index] =index+1;
-      this.PMhours[index] =index+13;
+      this.PMhours[index] =index+1;
     }
 
     for (let i = 1; i < 12; i++) {
@@ -131,7 +151,23 @@ export class DoctorProfileComponent implements OnInit {
       endPM:Number(this.PMhour2)
     };
     console.log(this.sessionsDetails);
-    this.doctorService.addSchedules(this.sessionsDetails);
+    this.doctorService.addSchedules(this.sessionsDetails)
+    .subscribe(
+      res =>{
+        console.log(res);
+        //alert("You have registered successfully! ..please wait to confirm your acount");
+        this.toastr.success('لقد تم اضافة جلسات',''); 
+        this.router.navigate(["/doctor/details/"+this.docId]);
+
+      },  
+      err => {
+        console.log(err);
+        //alert("there are some errors during registeration!");
+        this.toastr.error('نأسف لذلك هناك مشكلة فى عملية اضافة الجلسات','حدث خطأ ما'); 
+      }
+    );
+    
+    alert("hello from add sessions function");
     
 
   }

@@ -1,99 +1,107 @@
-<div>
-    <div class="col-12 col-md-7 float-left" id="leftDiv">
+<div id="doctorRegister">
+    <div class="col-12 col-md-7 float-left" id="imgDiv">
         <!-- image -->
         <img src="assets/images/doctors/doctor-register.jpg" alt="loading">
     </div>
-    <div class="col-12 col-md-5 float-right p-4" id="rightDiv">
-        <h4 class="text-center mb-4">انضم لأطباء عالجنى</h4>    
+    <div class="col-12 col-md-5 float-right p-4" id="formDiv">
+        <h4 class="text-center mb-4">{{"Register.JoinTMDoctors" | translate}}</h4>     
         <!-- form -->
-        <form name="form" #form="ngForm" class=" text-right" dir="rtl" (ngSubmit)="onSubmit()">
+        <form name="form" #form="ngForm" class="formRegister" (ngSubmit)="onSubmit()">
             <div class="form-row"> 
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="الاسم الاول" name="fName"
+                    <input type="text" class="form-control" placeholder="{{'Register.Fname' | translate}} *" name="fName"
                     #fName="ngModel"
-                    [(ngModel)]="doctor.user.firstName"
+                    [(ngModel)]="doctor.user.firstName" 
                     required 
                     maxlength="20"
                     minlength="3"
                     noStartOrDoubleSpaces
-                    [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }">
-                    <span [ngClass]="{'invalid-feedback':fName.errors?.required && fName.dirty }">
-                        *</span>  
+                    pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
+                    [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }"> 
+                    <span *ngIf="fName.dirty && fName.errors?.required" class="invalid-feedback">
+                       {{"Register.Validation.Required" | translate}}</span> 
                 <!--cs validation -->
                     <div *ngIf="fName.invalid" class="invalid-feedback">
                         <span *ngIf="fName.errors?.minlength && fName.dirty">
-                            يجب أن لا يقل الاسم عن 3 أحرف</span>
+                            {{"Register.Validation.MinLength3" | translate}}</span>
                         <span *ngIf="fName.errors?.startsWithSpace && fName.dirty">
-                            يجب أن لا يبدأ الاسم بمسافة </span>
+                            {{"Register.Validation.SpaceStart" | translate}}</span>
                         <span *ngIf="fName.errors?.hasDoubleSpace && fName.dirty">
-                                يجب أن لا يحتوى الاسم على مسافتين متتاليتين </span>
+                            {{"Register.Validation.DoubleSpace" | translate}}</span>
+                        <span *ngIf="fName.errors?.pattern&& fName.dirty">  
+                            {{"Register.Validation.LettersOnly" | translate}}</span>
                     </div>
                 </div> 
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="الاسم الاخير" name="lName"
+                    <input type="text" class="form-control" placeholder="{{'Register.Lname' | translate}} *" name="lName"
                     #lName="ngModel"
                     [(ngModel)]="doctor.user.lastName"
                     required 
                     maxlength="20"
                     minlength="3"
                     noStartOrDoubleSpaces
+                    pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
                     [ngClass]="{ 'is-invalid': lName.invalid && lName.dirty }">
-                    <span [ngClass]="{'invalid-feedback':lName.errors?.required && lName.dirty }">
-                        *</span>
+                    <span *ngIf="lName.dirty && lName.errors?.required" class="invalid-feedback">
+                        {{"Register.Validation.Required" | translate}}</span>
                 <!--cs validation -->
                     <div *ngIf="lName.invalid" class="invalid-feedback">
                         <span *ngIf="lName.errors?.minlength && lName.dirty">
-                            يجب أن لا يقل الاسم عن 3 أحرف</span>
-                        <span *ngIf="lName.errors.hasWhiteSpace && lName.dirty">
-                            يجب أن لا يحتوى الاسم على مسافات</span>
+                            {{"Register.Validation.MinLength3" | translate}}</span>
                         <span *ngIf="lName.errors?.startsWithSpace && lName.dirty">
-                                يجب أن لا يبدأ الاسم بمسافة </span>
+                            {{"Register.Validation.SpaceStart" | translate}}</span>
                         <span *ngIf="lName.errors?.hasDoubleSpace && lName.dirty">
-                                    يجب أن لا يحتوى الاسم على مسافتين متتاليتين </span>
+                            {{"Register.Validation.DoubleSpace" | translate}} </span>
+                        <span *ngIf="lName.errors?.pattern&& lName.dirty">
+                            {{"Register.Validation.LettersOnly" | translate}}</span> 
                     </div>
                 </div>   
-            </div>
+            </div> 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="اسم المستخدم" name="userName"
-                #userName="ngModel"
+                <input type="text" class="form-control" placeholder="{{'Register.Username' | translate}} *" name="userName"
+                #userName="ngModel"  
                 [(ngModel)]="doctor.user.userName"   
                 required
                 maxlength="30"
                 minlength="6"
                 noWhiteSpaces
+                pattern="^(?:[a-zA-Z0-9\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
                 [ngClass]="{ 'is-invalid': userName.invalid && userName.dirty }" /> 
-                <span [ngClass]="{'invalid-feedback':userName.errors?.required && userName.dirty }">
-                    *</span> 
+                <span *ngIf="userName.dirty && userName.errors?.required" class="invalid-feedback">
+                    {{"Register.Validation.Required" | translate}}</span>    
                 <!--cs validation --> 
                 <div *ngIf="userName.invalid" class="invalid-feedback">
                     <span  *ngIf="userName.errors?.minlength && userName.dirty">
-                      يجب أن لا يقل الاسم عن 6 أحرف</span>
+                        {{"Register.Validation.MinLength6" | translate}}</span>
+                    <span  *ngIf="userName.errors?.maxlength && userName.dirty">
+                        </span>
                     <span *ngIf="userName.errors?.hasWhiteSpace && userName.dirty">
-                        يجب أن لا يحتوى الاسم على مسافات</span> 
+                        {{"Register.Validation.NoSpace" | translate}}</span>  
+                    <span *ngIf="userName.errors?.pattern && userName.dirty">
+                        {{"Register.Validation.LettersOnly" | translate}}</span>  
+
                 </div> 
             </div>
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="عنوان البريد الالكترونى" name="email"
+                <input type="email" class="form-control" placeholder="{{'Register.Email' | translate}} *" name="email"
                 #email="ngModel"
                 [(ngModel)]="doctor.user.mail"   
                 required
-                noWhiteSpaces
+                pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
                 [ngClass]="{ 'is-invalid': email.invalid && email.dirty }" />
-                <span [ngClass]="{'invalid-feedback':email.errors?.required && email.dirty }">
-                    *</span>
-                <!--cs validation --> 
+                <span *ngIf="email.dirty && email.errors?.required" class="invalid-feedback">
+                    {{"Register.Validation.Required" | translate}}</span>  
+                <!--cs validation -->  
                 <div *ngIf="email.invalid" class="invalid-feedback">
-                    <span  *ngIf="email.errors?.email && email.dirty"><!-- still need work -->
-                          يجب أن لا يقل الاسم عن 6 أحرف</span>
-                    <span *ngIf="email.errors?.hasWhiteSpace && email.dirty">
-                        يجب أن لا يحتوى الاسم على مسافات</span> 
+                    <span  *ngIf="email.errors?.pattern && email.dirty"><!-- still need work -->
+                        {{"Register.Validation.Email" | translate}}</span>
                     
                </div> 
             </div>
             <div class="form-row"  ngModelGroup="passwordGroup"  #passwordGroup="ngModelGroup" [ngClass]="{ 'is-invalid': confirmPassword.invalid && confirmPassword.dirty }">
   
                 <div class="form-group col-md-6">
-                    <input type="password" class="form-control" placeholder="كلمة المرور" name="password"
+                    <input type="password" class="form-control" placeholder="{{'Register.Password' | translate}} *" name="password"
                     #password="ngModel"
                     [(ngModel)]="doctor.user.password"   
                     required 
@@ -102,18 +110,18 @@
                     noWhiteSpaces
                     [ngClass]="{ 'is-invalid': password.invalid && password.dirty }"
                     (input)="confirmPassword.control.updateValueAndValidity()">  
-                    <span [ngClass]="{'invalid-feedback':password.errors?.required && password.dirty }">
-                        *</span>
+                    <span *ngIf="password.dirty && password.errors?.required" class="invalid-feedback">
+                        {{"Register.Validation.Required" | translate}}</span> 
                 <!--cs validation -->
                     <div *ngIf="password.invalid" class="invalid-feedback">
                         <span *ngIf="password.errors?.minlength && password.dirty">
-                            يجب أن لا تقل كلمة المرور عن 6 أحرف</span>
+                            {{"Register.Validation.MinLength3" | translate}}</span>
                         <span *ngIf="password.errors?.hasWhiteSpace && password.dirty">
-                            يجب أن لا تحتوى كلمة المرور على مسافات</span>
+                            {{"Register.Validation.NoSpace" | translate}}</span>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="password" class="form-control" placeholder="تأكيد كلمة المرور"
+                    <input type="password" class="form-control" placeholder="{{'Register.ConfirmPassword' | translate}} *"
                     name="confirmPassword"
                     #confirmPassword="ngModel"
                     ngModel
@@ -123,82 +131,89 @@
                     noWhiteSpaces
                     ConfirmEqualValidator="password"
                     [ngClass]="{ 'is-invalid': confirmPassword.invalid && confirmPassword.dirty }">
-                    <span [ngClass]="{'invalid-feedback':confirmPassword.errors?.required && confirmPassword.dirty }">
-                        *</span>
+                    <span *ngIf="confirmPassword.dirty && confirmPassword.errors?.required" class="invalid-feedback">
+                        {{"Register.Validation.Required" | translate}}</span> 
                     
                                     <!--cs validation -->
                     <div *ngIf="confirmPassword.invalid" class="invalid-feedback">
                         <span *ngIf="confirmPassword.errors?.notEqual && confirmPassword.dirty">
-                        كلمتان المرور غير متطابقتان</span>
+                            {{"Register.Validation.ConfirmPassword" | translate}}</span>
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <label for="inputTitle">اللقب</label>
+                    <label for="inputTitle">{{"Register.Title" | translate}}</label>
                     <select id="inputTitle" class="form-control" name="title" ngModel><!-- still need work -->
-                        <option selected disabled>اختر من هنا</option>
-                        <option>أ</option>
-                        <option>د</option>  
+                        <option selected disabled>{{"Register.Choose" | translate}}</option>
+                        <option>P</option>
+                        <option>D</option>    
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>تفاصيل اللقب</label><!-- still need work -->
+                    <label>{{"Register.TitleDetails" | translate}}</label><!-- still need work -->
                     <input type="text" class="form-control" name="titleDetails" ngModel
                     noStartOrDoubleSpaces
                     >
                 </div>  
                 <div class="form-group col-md-4">
-                    <label for="inputSpeciality">التخصص</label>
+                    <label for="inputSpeciality">{{"Register.Speciality" | translate}}</label>  
                     <select id="inputSpeciality" class="form-control" name="speciality" [(ngModel)]="doctor.specialityId">
-                        <option selected disabled>اختر من هنا</option>
-                        <option value=1>القلب</option>
-                        <option value=2>الباطنة</option>
-                        <option value=3>العظام</option>
-                        <option value=4>الجلدية و التناسلية</option>
-                        <option value=5>العيون</option>
-                        <option value=6>الأطفال</option>
-                        <option value=7>أنف وأذن وحنجرة</option>  
-
+                        <option  [ngValue]="null" disabled>{{"Register.Choose" | translate}}</option>  
+                        <option *ngFor='let speciality of specialities' value="{{speciality.id}}">{{ ("Home.Speciality." + speciality.name) | translate}}</option>
                     </select>
                 </div>
             </div>
+
             <div class="form-row">
-                <div class="form-group col-md-6"><!-- still need work -->
-                    <input type="text" class="form-control" placeholder="العنوان" name="address"
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="{{'Register.Address' | translate}}" name="address"
                     #address="ngModel"
                     [(ngModel)]="doctor.user.address"
                     noStartOrDoubleSpaces
-                    >                
-                </div>
-                <div class="form-group col-md-6"><!-- still need work -->
-                    <input type="number" class="form-control" placeholder="رقم الموبايل" name="phone"
+                    >
+                    <!-- cs validation -->
+                    <div *ngIf="address.invalid" class="invalid-feedback">
+                        <span *ngIf="address.errors?.startsWithSpace && address.dirty">
+                            {{"Register.Validation.SpaceStart" | translate}}</span>
+                        <span *ngIf="address.errors?.hasDoubleSpace && address.dirty">
+                            {{"Register.Validation.DoubleSpace" | translate}}</span>
+                    </div>
+
+                </div>  
+                <div class="form-group col-md-6">
+                    <input type="number" class="form-control" placeholder="{{'Register.PhoneNumber' | translate}}" name="phone"
                     #phone="ngModel"
-                    [(ngModel)]="doctor.user.phoneNumber"
-                    noWhiteSpaces
                     min="0"
-                    max="9" 
-                    >                    
+                    max="9"
+                    [(ngModel)]="doctor.user.phoneNumber"  
+                    noWhiteSpaces
+                    > 
+                    <!-- cs validation -->
+                    <div *ngIf="phone.invalid" class="invalid-feedback">
+                        <span *ngIf="phone.errors?.hasWhiteSpace && phone.dirty">
+                            {{"Register.Validation.NoSpace" | translate}}</span>
+                    </div>   
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label>الجنس</label>
-                    <select class="form-control" name="gender" [(ngModel)]="doctor.user.gender">
-                        <option selected disabled>اختر من هنا</option>
-                        <option value=1>ذكر</option>
-                        <option value=2>أنثى</option>
+                    <label>{{'Register.Gender' | translate}}</label>
+                    <select class="form-control" name="gender" #gender="ngModel" [(ngModel)]="doctor.user.gender">
+                        <option  [ngValue]="null" disabled>{{'Register.Choose' | translate}}</option> 
+                        <option value=1 >{{'Register.Male' | translate}}</option>
+                        <option value=2>{{'Register.Female' | translate}}</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>العمر</label><!-- still need work -->
+                    <label>{{'Register.Age' | translate}}</label>
                     <input type="number" class="form-control" min="1" max="110" name="age" 
                     #age="ngModel"
                     [(ngModel)]="doctor.user.age">
                 </div>
             </div>
             <div class="form-group"><!-- still need work -->
-                <label for="exampleFormControlFile1">ارفع السيرة الذاتية</label>
+                <label for="exampleFormControlFile1">{{'Register.CV' | translate}}</label>
                 <input type="file" class="form-control-file" id="exampleFormControlFile1" 
                 name="cv" 
                 #cv="ngModel"
@@ -210,13 +225,13 @@
                 name="terms" 
                 #terms="ngModel"  
                 ngModel
-                required>>
-                <label class="form-check-label mr-3 mb-3">موافق على الشروط و الأحكام</label>
+                required>
+                <label class="form-check-label mr-3 mb-3">{{'Register.AcceptTerms' | translate}}</label>
                 <span>
                     *</span> 
             </div>
             <div class="text-center">  
-                <button type="submit" class="btn btn-success" [disabled]="form.invalid || form.submitted">انضم للأطباء</button>
+                <button type="submit" class="btn btn-success" [disabled]="form.invalid || form.submitted">{{'Register.JoinDoctors' | translate}}</button>
             </div>
         </form>
     </div>

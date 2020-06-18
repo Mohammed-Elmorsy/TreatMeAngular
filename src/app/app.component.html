@@ -1,5 +1,7 @@
-<app-header></app-header>
-<div *ngIf="showLoadingIndicator" class="spinner"></div>
-<router-outlet>
+<div id="wrapper" [ngClass]="{ 'ltr': this.translate.currentLang == 'en','rtl': this.translate.currentLang == 'ar'}">
+    <app-header></app-header> 
+    <div *ngIf="showLoadingIndicator" class="spinner"></div>
+    <router-outlet>  
 
-</router-outlet>
+    </router-outlet>
+</div>

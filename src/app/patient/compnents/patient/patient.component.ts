@@ -5,9 +5,13 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { Schedule } from 'src/app/_models/schedule';
+import { DoctorService } from 'src/app/core/services/doctor/doctor.service';
 
 import { EventEmitter } from '@angular/core';
 import { FileUploadService } from 'src/app/core/services/FileUpload/file-upload.service';
+
 
 @Component({
   selector: 'app-patient',
@@ -16,17 +20,22 @@ import { FileUploadService } from 'src/app/core/services/FileUpload/file-upload.
 })
 export class PatientComponent implements OnInit {
   patient:Patient;
+  
   patient_modified:Patient;
+
   PatientImg:String;
 
+  patientSessions:Schedule[];
 
   private fieToUpload:File=null;
-  constructor(private patientservice:PatientService , private toastr:ToastrService,private route:Router,private http:HttpClient,private fileupload:FileUploadService) { 
+  constructor(private patientservice:PatientService ,private router:Router,private doctorService:DoctorService,private authService:AuthService, private toastr:ToastrService,private route:Router,private http:HttpClient,private fileupload:FileUploadService) { 
 
     this.patient={user:{}}
   }
 
 defulatImage:String='../../assets/images/doctors/profile-pic.png';
+
+  
   Patient_modified:Patient;
   imageFromApi:String;
 
@@ -76,12 +85,9 @@ uploadFile()
   
     this.patientservice.UpdatePatient(this.patient_modified.user.id,this.patient_modified)
     .subscribe((res)=>{
-
-            
-
-     this.toastr.success("تم التعديل بنجاح");
-  
-    },err=>{
+    this.toastr.success("تم التعديل بنجاح");
+    },
+    err=>{
       this.toastr.error('نأسف لذلك هناك مشكلة فى عملية تعديل بيانات حسابك','حدث خطأ ما'); 
 
     })
@@ -93,22 +99,32 @@ uploadFile()
 
   ngOnInit() {
 
-    let url=window.location.href;
-    let PatientId = url.substring(url.lastIndexOf('/') + 1);
-      this.patientservice.getPatientById(PatientId).subscribe((_patient)=>{
-    this.patient=_patient;
-    this.patient_modified=_patient;
+/*     let url=window.location.href;  
+    let PatientId = url.substring(url.lastIndexOf('/') + 1); */
+    
+    let PatientId = this.authService.getUserPayLoad().id;
+    this.PatientImg="./../assets/images/patients/"+PatientId+".jpg";
 
         if(this.patient.user.imageName !="")
         {
           this.imageFromApi=environment.baseURL+"images/"+this.patient.user.imageName;
         }
+    
+
+    this.patientservice.getPatientSessions(PatientId).subscribe((sessions)=>{
+      this.patientSessions=sessions;  
+      console.log(this.patientSessions);
+      });
+
+    this.patientservice.getPatientById(PatientId).subscribe((_patient)=>{
+    this.patient=_patient;
+    this.patient_modified=_patient;
+    });
 
 
-        console.log(_patient);
+    this.PatientImg="../../assets/images/patients/"+this.patient_modified.user.id+".jpg";
 
-
-    })
+   
   
   }
   handleFileInput(files:FileList)
@@ -141,5 +157,20 @@ console.log(err);
     );;
   }
 
+
+  
+  joinMeeting(roomName){
+    console.log(roomName);
+  }
+  
+  cancelSession(id){
+    this.doctorService.PatientCancelSession(id).subscribe(()=>{  
+      //send mail to patient
+      this.toastr.success('تم الغاء حجز الجلسة');
+      this.router.navigate(['patient/profile']);
+ 
+    });
+
+  }
 }
 
