@@ -4,10 +4,11 @@ import { Doctor } from 'src/app/_models/doctor';
 import { ScheduleService } from 'src/app/core/services/schedule/schedule.service';
 import { Schedule } from 'src/app/_models/schedule';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DoctorProfileModalComponent } from '../doctor-profile-modal/doctor-profile-modal.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SessionDetails } from 'src/app/_models/SessionDetails';
+import { environment } from 'src/environments/environment';
+import { FileUploadService } from 'src/app/core/services/FileUpload/file-upload.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
@@ -25,7 +26,6 @@ export class DoctorProfileComponent implements OnInit {
   
   daysChecked = [];
 
-  docImg:String;
   docId:Number;
 
   AMhours:number[];
@@ -41,22 +41,39 @@ export class DoctorProfileComponent implements OnInit {
   AMworkHours:boolean;
   PMworkHours:boolean;
   
-  comingSessions:Schedule[];
+  
+
+  initSchedule:Schedule;
+  
+   DoctorImage:string;
+   comingSessions:Schedule[];
 
 
-  constructor(private toastr:ToastrService,private doctorService:DoctorService
-    ,private route:ActivatedRoute , private router:Router
-    , private scheduleService:ScheduleService,private modalService:NgbModal,
-    private authService:AuthService) 
-    {
-      this.AMhours=Array(12).fill(0);
-      this.PMhours=Array(12).fill(0);
-      this.duration=Array(11).fill(0);
-      this.sessionsDetails=null;
-    }   
+  constructor(private toastr:ToastrService,
+    private doctorService:DoctorService,
+    private fileupload:FileUploadService,
+    private route:ActivatedRoute ,
+     private router:Router,
+      private scheduleService:ScheduleService,
+  private modalService:NgbModal, private authService:AuthService) {
+
+    this.AMhours=Array(12).fill(0);
+    this.PMhours=Array(12).fill(0);
+    this.duration=Array(11).fill(0);
+    this.sessionsDetails=null;
+
+
+
+     
+ 
+   
+  }   
+  docImg:String='../../assets/images/doctors/profile-pic.png';
+  private fieToUpload:File=null;
 
 
   ngOnInit() {
+
     
 /*   let url=window.location.href;
   this.docId =Number( url.substring(url.lastIndexOf('/') + 1)); */
@@ -68,9 +85,16 @@ export class DoctorProfileComponent implements OnInit {
     (_doctor)=> {
       this.doctor = _doctor;
       this.doctor_modified=_doctor;
+
+
       console.log(this.doctor);
       console.log(this.doctor_modified);
 
+      if(this.doctor.user.imageName != "")
+      {
+        this.DoctorImage=environment.baseURL+"images/"+this.doctor.user.imageName;
+
+      }
 
     }); 
     this.doctorService.getTodayTomorrowSessions(this.docId)
@@ -79,7 +103,7 @@ export class DoctorProfileComponent implements OnInit {
         this.comingSessions = _schedule;
       });   
     console.log(this.doctor);
-    this.docImg="../../assets/images/doctors/"+this.docId+".jpg";
+    
       this.setIterators();
   }
   
@@ -142,10 +166,7 @@ export class DoctorProfileComponent implements OnInit {
         this.toastr.error('نأسف لذلك هناك مشكلة فى عملية اضافة الجلسات','حدث خطأ ما'); 
       }
     );
-    
-    alert("hello from add sessions function");
-    
-
+   
   }
 
 
@@ -236,4 +257,36 @@ export class DoctorProfileComponent implements OnInit {
   //     }
   //     return between;
   // }
+
+
+
+
+  handleFileInput(files:FileList)
+  {
+    this.fieToUpload=files.item(0);
+    this.fileupload.postImage(this.fieToUpload,this.doctor.user.id).subscribe(
+      ()=>{
+
+
+        this.toastr.info("photo Uploaded")
+
+      this.doctorService.getDoctor(this.doctor.user.id).subscribe((_doctor)=>{
+    this.doctor= _doctor;
+
+
+    this.DoctorImage=environment.baseURL+"images/"+this.doctor.user.imageName;
+    console.log(environment.baseURL+"images/"+this.doctor.user.imageName);
+      })
+
+
+
+      
+
+      }
+,(err)=>{
+console.log(err);
+}
+
+    );
+  }
 }

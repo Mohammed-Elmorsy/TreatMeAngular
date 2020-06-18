@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
 import { PatientService } from 'src/app/core/services/patient/patient.service';
 import { ToastrService } from 'ngx-toastr';
+import { now } from 'jquery';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-details',
@@ -29,7 +31,7 @@ export class DoctorDetailsComponent implements OnInit {
   role:string;
   docId:Number;
  
-  constructor(private service:DoctorService,private authService:AuthService,private sCheduleService:ScheduleService,private patientService:PatientService,private toastr:ToastrService) {
+  constructor(private service:DoctorService,private router:Router,private authService:AuthService,private sCheduleService:ScheduleService,private patientService:PatientService,private toastr:ToastrService) {
  
    }
 
@@ -41,12 +43,13 @@ export class DoctorDetailsComponent implements OnInit {
    GetDoctorScheduleTimes(id:Number,choocedDate:Date)
    {
      console.log(choocedDate);
-      this.sCheduleService.getScheduleByDoctorId(id,choocedDate).subscribe((a)=>{
+      this.sCheduleService.getScheduleByDoctorId(id,choocedDate).subscribe(
+        (a)=>{
         this.DoctorSchedule=a;
        console.log(this.DoctorSchedule);
        if (a.length==0) {
         this.DoctorSchedule=[];
-      }
+       }
        
        });
       
@@ -58,18 +61,21 @@ export class DoctorDetailsComponent implements OnInit {
   
    
     if (this.authService.getUserPayLoad().role=='Doctor') {
+      this.role='doctor'
       this.docId = this.authService.getUserPayLoad().id;
     }
     else{
+      this.role='patient'
       let url=window.location.href;
       this.docId =Number( url.substring(url.lastIndexOf('/') + 1));
     }
 
   this.service.getDoctor(this.docId)
   .subscribe(
+
     (_doctor)=> {this.doctor = _doctor});  
     console.log(this.doctor);
-  this.docImg="../../assets/images/doctors/"+this.docId+".jpg";
+     this.docImg="../../assets/images/doctors/"+this.docId+".jpg";
 
 
   }
@@ -86,13 +92,38 @@ export class DoctorDetailsComponent implements OnInit {
     .subscribe(()=>{  
       
         this.toastr.success('تم حجز الجلسة');
-
+        this.router.navigate(['patient/profile']);
 
 
     })
+  }
 
-    
+  deleteSession(session){
+    this.service.deleteSession(session.id).subscribe(()=>{  
+     
+
+      this.toastr.success('تم الغاء الجلسة');
+
+      this.DoctorSchedule.splice(this.DoctorSchedule.indexOf(session),1);
+
+      
+     
+  });
 
 
   }
+  cancelSession(id){
+    this.service.DoctorCancelSession(id).subscribe((a)=>{  
+      this.DoctorSchedule=a;
+
+      //send mail to patient
+      this.toastr.success('تم الغاء حجز الجلسة');
+      
+ 
+    });
+
+  }
+
+
+
 }

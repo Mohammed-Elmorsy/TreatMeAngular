@@ -1,18 +1,48 @@
-<div class=" emp-profile">
-            <form method="post">
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+<div class=" emp-profile"  >
+           
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img [src]="PatientImg" alt="error in loading img"  style=" border-style: solid; border-width: 5px; border-color: beige; border-radius: 50%; margin-top: 20px;
-                             height:190px; width:200"
-                           >
-                            <div class="file btn btn-lg btn-primary">
-                                update
-                                <input type="file" name="file"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+                
+
+                    <div class="col-sm-7">
+
+
+
+                            <span *ngIf="patient.user.imageName == NULL ;else imageblock ">  
+                                 <img [src]="defulatImage" width="200px" height="200px"  >
+                                    <div id="hide" class="col-lg-8 col-xs-8">
+                                        <label class="hand-cursor">
+                                            <input type="file" id="file" class=""   name="file" (change)="handleFileInput($event.target.files)"  />
+                                            <span class="fa fa-2x fa-camera"></span>
+                                         <span class="photo_text hidden-xs" style="color:black;">Upload</span>
+                                          </label>
+                                     </div>
+    
+                             </span>
+                            <ng-template #imageblock>
+
+                                <img [src]="imageFromApi"  alt="upload photo" width="200px" height="200px">
+                                    <div id="hide" class="col-lg-12 col-xs-12">
+                                        <label class="hand-cursor">
+                                            <input type="file" id="file" class=""   name="file" (change)="handleFileInput($event.target.files)"  >
+                                            <span class="fa fa-2x fa-camera" ></span>
+                                         <span class="photo_text hidden-xs" >Edit</span>
+                                          </label>
+                                     </div>
+    
+                            
+                              </ng-template>
+
+                                     
+                            
+                   </div>          
+               
+                    <div class="col-sm-10">
                         <div class="profile-head">
                                     <h5>
                                         {{patient.user.firstName}}  {{patient.user.lastName}}
@@ -29,7 +59,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <input type="submit" class="profile-edit-btn" data-toggle="modal" data-target="#exampleModal" name="btnAddMore" value="Edit Profile"/>
                     </div>
                 </div>
@@ -131,6 +161,7 @@
                                                         <th scope="col">Date</th>
                                                         <th scope="col">Time</th>
                                                         <th scope="col">Status</th>
+                                                        <th scope="col">Operation</th>
                                                       </tr>
                                                     </thead>
                                                     <tbody>
@@ -139,6 +170,7 @@
                                                         <td> {{session.schedule.date  | date:'shortDate'}}</td>
                                                         <td> {{session.schedule.startTime | date:'mediumTime'}}</td>
                                                         <td><button class="btn btn-primary" (click)="joinMeeting(session.doctor.user.firstName)">Join</button></td>
+                                                        <td><button class="btn btn-danger" (click)="cancelSession(session)">Cancel</button></td>
                                                       </tr>
                                                      
                                                     </tbody>
@@ -330,3 +362,6 @@
       </div>
     </div>
   </div>
+
+
+  

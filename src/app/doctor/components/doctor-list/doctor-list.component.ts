@@ -22,7 +22,7 @@ export class DoctorListComponent implements OnInit {
       this.specialityID = +params.get('specialityID');
     })
 
-    this.doctorService.getDoctorsBySpecialityID(this.specialityID).subscribe(doctors=>
+    this.doctorService.GetAllDoctorDetailsBySpecialityId(this.specialityID).subscribe(doctors=>
       this.doctors = doctors)     
   }
   

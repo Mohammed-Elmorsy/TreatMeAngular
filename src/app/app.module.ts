@@ -23,6 +23,9 @@ import { DoctorProfileModalComponent } from './doctor/components/doctor-profile-
 import { HttpInterceptorProviders } from './core/interceptors';
 
 
+
+
+
 @NgModule({
   declarations: [ //components
     AppComponent

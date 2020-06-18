@@ -21,7 +21,7 @@ export class AuthService {
     }
 
     registerDoctorUser(doctor:Doctor){
-      return this.httpClient.post<Doctor>(environment.baseURL+'api/user/create',doctor)
+      return this.httpClient.post<Doctor>(environment.baseURL+'api/user/Create',doctor)
     }
 
     //login
