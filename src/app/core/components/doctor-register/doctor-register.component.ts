@@ -23,7 +23,7 @@ export class DoctorRegisterComponent implements OnInit {
       userId:null,  
       fees:200,
       rating:4,   
-      title:" ",   
+      title:'',    
       CV:null,  
       specialityId:null,  
       user:{

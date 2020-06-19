@@ -47,13 +47,13 @@ export class LoginComponent implements OnInit {
     err=>{
       if(err.status == 400){
         this.toastr.error('اسم المستخدم او كلمة المرور غير صحيح');
-        this.loginForm.resetForm();  
+/*         this.loginForm.resetForm();  
         this.loginForm.getControl(this.submitBtn).enable();  
         if(this.countClicks() > 5){
           this.loginForm.getControl(this.submitBtn).disable();
           console.log(this.submitBtnClicked);
           this.toastr.error('اذا كنت نسيت كلمة المرور يمكنك الضغط على اللينك بالاسفل')
-        }
+        } */
       }
       else
       {
