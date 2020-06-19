@@ -5,13 +5,13 @@
       <div class="card bg-light text-center" id="speciality_card" >
         <img class="card-img-top" style="margin-top:10px" src="assets/images/doctors/profile-pic.png" alt="{{doctor.user.firstName}">
         <div class="card-body">        
-          <h4 class="card-text text-center">{{doctor.user.firstName}} {{doctor.user.lastName}}</h4>
+          <h4 class="card-text text-center">{{doctor.firstName}} {{doctor.lastName}}</h4>
 
-          <h5 class="card-title text-center" style="color: blue;">اخصائى / استشارى ...</h5>   
+          <h5 class="card-title text-center" style="color: blue;">{{doctor.title}}</h5>   
           <p class="card-text text-center">EGP تمن الجلسة : {{doctor.fees}}</p>
-          <button class="btn btn-primary" >احجز جلسة</button> 
+          <button class="btn btn-primary" >احجز جلسة</button>   
         </div>
-      </div>
+      </div>  
     </div>
 
   </div>

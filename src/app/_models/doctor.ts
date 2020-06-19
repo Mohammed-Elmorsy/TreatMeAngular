@@ -9,8 +9,8 @@ export class Doctor {
         public userId?:Number,       
         public fees?:Number,
         public rating?:Number,
-        public CV?:Int32Array
-
+        public CV?:Int32Array,
+        public title?:string
 
     )
     {}

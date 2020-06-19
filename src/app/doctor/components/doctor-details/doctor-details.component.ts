@@ -8,7 +8,7 @@ import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
 import { PatientService } from 'src/app/core/services/patient/patient.service';
 import { ToastrService } from 'ngx-toastr';
 import { now } from 'jquery';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-details',
@@ -31,7 +31,9 @@ export class DoctorDetailsComponent implements OnInit {
   role:string;
   docId:Number;
  
-  constructor(private service:DoctorService,private router:Router,private authService:AuthService,private sCheduleService:ScheduleService,private patientService:PatientService,private toastr:ToastrService) {
+  constructor(private service:DoctorService,private router:Router,private authService:AuthService
+    ,private sCheduleService:ScheduleService,private patientService:PatientService
+    ,private toastr:ToastrService ,private route:ActivatedRoute) {
  
    }
 
@@ -58,17 +60,17 @@ export class DoctorDetailsComponent implements OnInit {
       
      
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.docId = +params.get('id');
+    })
   
    
     if (this.authService.getUserPayLoad().role=='Doctor') {
       this.role='doctor'
-      this.docId = this.authService.getUserPayLoad().id;
     }
     else{
       this.role='patient'
-      let url=window.location.href;
-      this.docId =Number( url.substring(url.lastIndexOf('/') + 1));
-    }
+    }   
 
   this.service.getDoctor(this.docId)
   .subscribe(

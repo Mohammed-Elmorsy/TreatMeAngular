@@ -22,8 +22,8 @@ export class DoctorListComponent implements OnInit {
       this.specialityID = +params.get('specialityID');
     })
 
-    this.doctorService.GetAllDoctorDetailsBySpecialityId(this.specialityID).subscribe(doctors=>
-      this.doctors = doctors)     
+    this.doctorService.getDoctorsBySpeciality(this.specialityID).subscribe(doctors=>
+      this.doctors = doctors)       
   }
   
   navigateToDocDetails(doctorID:number){

@@ -4,10 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
-
-
-
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -18,9 +15,11 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   exports:[
     CommonModule,
-    FormsModule,
-    RouterModule,BrowserAnimationsModule,
-    ToastrModule
+    FormsModule,  
+    RouterModule,
+    BrowserAnimationsModule,
+    ToastrModule,
+    TranslateModule
       ]
 })
 export class SharedModule { }
