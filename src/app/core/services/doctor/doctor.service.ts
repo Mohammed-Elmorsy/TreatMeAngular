@@ -30,8 +30,8 @@ export class DoctorService {
     return this.httpClient.get<Speciality[]>(environment.baseURL+"api/speciality");
   }  */ 
 
-  getDoctorsBySpecialityID(specialityID:number){
-    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/doctors/getbyspeciality/"+specialityID);
+  GetAllDoctorDetailsBySpecialityId(specialityID:number){
+    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/doctors/GetAllDoctorDetailsBySpecialityId/"+specialityID);
   }  
 
   getDoctor(id){
@@ -71,7 +71,7 @@ DeleteDoctor(id)
 
   }
   DoctorCancelSession(id:number){
-    return this.httpClient.post(environment.baseURL+"api/DoctorPatientSchedules/DoctorCancelSession",id);
+    return this.httpClient.post<Schedule[]>(environment.baseURL+"api/DoctorPatientSchedules/DoctorCancelSession",id);
 
   }
 

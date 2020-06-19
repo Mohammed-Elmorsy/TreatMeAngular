@@ -166,10 +166,7 @@ export class DoctorProfileComponent implements OnInit {
         this.toastr.error('نأسف لذلك هناك مشكلة فى عملية اضافة الجلسات','حدث خطأ ما'); 
       }
     );
-    
-    alert("hello from add sessions function");
-    
-
+   
   }
 
 

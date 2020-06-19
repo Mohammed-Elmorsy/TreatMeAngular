@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { Schedule } from 'src/app/_models/schedule';
 import { DoctorService } from 'src/app/core/services/doctor/doctor.service';
+import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
 
 import { EventEmitter } from '@angular/core';
 import { FileUploadService } from 'src/app/core/services/FileUpload/file-upload.service';
@@ -26,6 +27,7 @@ export class PatientComponent implements OnInit {
   PatientImg:String;
 
   patientSessions:Schedule[];
+  docSc:doctorPatientSchedule;
 
   private fieToUpload:File=null;
   constructor(private patientservice:PatientService ,private router:Router,private doctorService:DoctorService,private authService:AuthService, private toastr:ToastrService,private route:Router,private http:HttpClient,private fileupload:FileUploadService) { 
@@ -167,11 +169,17 @@ console.log(err);
     console.log(roomName);
   }
   
-  cancelSession(id){
-    this.doctorService.PatientCancelSession(id).subscribe(()=>{  
-      //send mail to patient
+  cancelSession(session){
+   console.log(session);
+
+    this.doctorService.PatientCancelSession(session.scheduleId).subscribe((a)=>{
+     
+      
+     this.docSc =a;  
+
+      
       this.toastr.success('تم الغاء حجز الجلسة');
-      this.router.navigate(['patient/profile']);
+     
  
     });
 

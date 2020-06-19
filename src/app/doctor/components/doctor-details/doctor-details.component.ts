@@ -46,12 +46,13 @@ export class DoctorDetailsComponent implements OnInit {
    GetDoctorScheduleTimes(id:Number,choocedDate:Date)
    {
      console.log(choocedDate);
-      this.sCheduleService.getScheduleByDoctorId(id,choocedDate).subscribe((a)=>{
+      this.sCheduleService.getScheduleByDoctorId(id,choocedDate).subscribe(
+        (a)=>{
         this.DoctorSchedule=a;
        console.log(this.DoctorSchedule);
        if (a.length==0) {
         this.DoctorSchedule=[];
-      }
+       }
        
        });
       
@@ -74,9 +75,10 @@ export class DoctorDetailsComponent implements OnInit {
 
   this.service.getDoctor(this.docId)
   .subscribe(
+
     (_doctor)=> {this.doctor = _doctor});  
     console.log(this.doctor);
-  this.docImg="../../assets/images/doctors/"+this.docId+".jpg";
+     this.docImg="../../assets/images/doctors/"+this.docId+".jpg";
 
 
   }
@@ -99,22 +101,27 @@ export class DoctorDetailsComponent implements OnInit {
     })
   }
 
-  deleteSession(id){
-    this.service.deleteSession(id).subscribe(()=>{  
-      
+  deleteSession(session){
+    this.service.deleteSession(session.id).subscribe(()=>{  
+     
+
       this.toastr.success('تم الغاء الجلسة');
-      this.router.navigate(['doctor/profile']);
 
+      this.DoctorSchedule.splice(this.DoctorSchedule.indexOf(session),1);
 
+      
+     
   });
 
 
   }
   cancelSession(id){
-    this.service.DoctorCancelSession(id).subscribe(()=>{  
+    this.service.DoctorCancelSession(id).subscribe((a)=>{  
+      this.DoctorSchedule=a;
+
       //send mail to patient
       this.toastr.success('تم الغاء حجز الجلسة');
-      this.router.navigate(['doctor/profile']);
+      
  
     });
 
