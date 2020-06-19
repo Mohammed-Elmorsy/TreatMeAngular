@@ -4,6 +4,7 @@ import { DoctorService } from './../../core/services/doctor/doctor.service';
 import { Doctor } from 'src/app/_models/doctor';
 import { ToastrService } from 'ngx-toastr';
 import { SpecialityService } from 'src/app/core/services/speciality/speciality.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -18,6 +19,9 @@ export class AdminDoctorsListComponent implements OnInit {
   doctor_ForOperation:Doctor=new  Doctor(1000,{id:0,name:""},{id:1000,firstName:"",lastName:"",role:1,gender:1,userName:"",password:""});
 
   Specialities:any;
+  DocImg:String;
+  DoctorImage:String;
+
   constructor(private doctorService:DoctorService,private toastr:ToastrService,
     private specialityService:SpecialityService) { }
 
@@ -45,6 +49,13 @@ export class AdminDoctorsListComponent implements OnInit {
   SelectDoctorToDelete(_doctor:Doctor)
   {
     this.doctor_ForOperation=_doctor;
+    this.DocImg="../../assets/images/doctors/profile-pic.png";
+    if(this.doctor_ForOperation.user.imageName != null)
+    {
+
+      this.DoctorImage=environment.baseURL+"images/"+this.doctor_ForOperation.user.imageName;
+    }
+
   }
 
 

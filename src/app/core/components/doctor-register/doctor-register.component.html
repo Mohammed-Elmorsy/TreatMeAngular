@@ -1,3 +1,6 @@
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div id="doctorRegister">
     <div class="col-12 col-md-7 float-left" id="imgDiv">
         <!-- image -->
@@ -215,11 +218,17 @@
                 </div>
             </div>
             <div class="form-group"><!-- still need work -->
-                <label for="exampleFormControlFile1">{{'Register.CV' | translate}}</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1" 
-                name="cv" 
-                #cv="ngModel"
-                [(ngModel)]="doctor.CV">
+                <label for="exampleFormControlFile1"></label>
+                
+                <div id="hide" class="col-lg-8 col-xs-8">
+                    <label class="hand-cursor">
+                        <input type="file" id="file" name="CV"  name="file" (change)="handleFileInput($event.target.files)"  />
+                        <span class="fa fa-3x fa-file"></span>
+                     <span class="photo_text hidden-xs" style="color:black;">{{'Register.CV' | translate}}</span>
+                      </label>
+                 </div>
+
+
             </div>
 
             <div class="form-check"><!-- still need work -->
@@ -233,6 +242,7 @@
                     *</span> 
             </div>
             <div class="text-center">  
+                
                 <button type="submit" class="btn btn-success" [disabled]="form.invalid || form.submitted">{{'Register.JoinDoctors' | translate}}</button>
             </div>
         </form>
