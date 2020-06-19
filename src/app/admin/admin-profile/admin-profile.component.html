@@ -1,15 +1,57 @@
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div class="container-fluid row mx-auto">
     <div class="col-md-3 mb-4" id="cardWrapper" style="height: 500px;">
             <div class="card bg-light text-center" id="profileCard" style="height: 500px;">
+
+              <span *ngIf="admin.imageName == NULL; else elseblock">
                 <img class="card-img-top" style="margin-top: 10px;" src="assets/images/doctors/profile-pic.png" alt="profile pic">
-                <div class="card-body">
-                    <h5 class="card-title">firstName lastName</h5>
-                    <p class="card-text">title</p>
-                    <div>
-                        <span class="badge badge-warning">Admin</span>
-                    </div>
-                </div>
+              
+
+
+                <div id="hide" class="col-lg-8 col-xs-8" style="margin-top: -25px;">
+                  <label class="hand-cursor">
+                      <input type="file" id="file" class=""   name="file" (change)="handleFileInput($event.target.files)"  />
+                      <span class="fa fa-2x fa-camera"></span>
+                   <span class="photo_text hidden-xs" style="color:black;">Upload</span>
+                    </label>
+               </div>
+
+               <div class="card-body">
+                <div>
+                  <span class="badge badge-warning">Admin</span>
               </div>
+                <h5 class="card-title">{{admin.firstName}} {{admin.lastName}}</h5>
+              
+              </div>
+
+              </span>
+
+
+              <ng-template #elseblock>
+                <img class="card-img-top" style="margin-top: 10px;" [src]="imageFromApi" alt="profile pic">
+
+                <div class="card-body">
+                  <h5 class="card-title">{{admin.firstName}} {{admin.lastName}}</h5>
+                  <p class="card-text">title</p>
+                  <div>
+                      <span class="badge badge-warning">Admin</span>
+                  </div>
+              </div>
+
+                <div id="hide" class="col-lg-8 col-xs-8">
+                  <label class="hand-cursor">
+                      <input type="file" id="file" class=""   name="file" (change)="handleFileInput($event.target.files)"  />
+                      <span class="fa fa-2x fa-camera"></span>
+                   <span class="photo_text hidden-xs" style="color:black;">Edit</span>
+                    </label>
+               </div>
+
+
+              </ng-template>
+
+                          </div>
         </div>  
     <div class="col-md-9" id="tabsWrapper" style="height: 500px;">  
 <!--             <nav class="bg-light justify-content-center" style="padding: 10px;">

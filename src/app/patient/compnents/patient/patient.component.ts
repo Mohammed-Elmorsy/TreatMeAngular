@@ -103,13 +103,8 @@ uploadFile()
     let PatientId = url.substring(url.lastIndexOf('/') + 1); */
     
     let PatientId = this.authService.getUserPayLoad().id;
-    this.PatientImg="./../assets/images/patients/"+PatientId+".jpg";
 
-        if(this.patient.user.imageName !="")
-        {
-          this.imageFromApi=environment.baseURL+"images/"+this.patient.user.imageName;
-        }
-    
+       
 
     this.patientservice.getPatientSessions(PatientId).subscribe((sessions)=>{
       this.patientSessions=sessions;  
@@ -118,11 +113,19 @@ uploadFile()
 
     this.patientservice.getPatientById(PatientId).subscribe((_patient)=>{
     this.patient=_patient;
+
+
     this.patient_modified=_patient;
+
+
+    if(this.patient.user.imageName !="")
+    {
+      this.imageFromApi=environment.baseURL+"images/"+this.patient.user.imageName;
+    }
+
     });
 
 
-    this.PatientImg="../../assets/images/patients/"+this.patient_modified.user.id+".jpg";
 
    
   
@@ -134,10 +137,11 @@ uploadFile()
       ()=>{
 
 
+        this.toastr.info("photo Uploaded")
+
 
         let url=window.location.href;
-    let PatientId = url.substring(url.lastIndexOf('/') + 1);
-      this.patientservice.getPatientById(PatientId).subscribe((_patient)=>{
+      this.patientservice.getPatientById(this.patient.user.id).subscribe((_patient)=>{
     this.patient=_patient;
 
 

@@ -45,30 +45,7 @@ export class PatientService {
 
 
 
-  postImage(fileToUpload:File  ,id)
-  {
 
-
-      const formData: FormData = new FormData();
-      formData.append('image', fileToUpload, fileToUpload.name);
-  
-      return this.httpclient.post(environment.baseURL+"api/User/UploadImage/"+id, formData,{headers: {
-        'Accept': 'application/json',     
-        'Content-Disposition' : 'multipart/form-data'}}).subscribe(
-        (data)=>{
-          console.log('uploaded  !');
-        }
-,(err)=>{
-console.log(err);
-}
-
-      );
-    }
-  
-
-    getImageUrl(id)
-    {
-      return this.httpclient.get<String>(environment.baseURL+"api/User/GetImageUrl/"+id);
-    }
+   
 
 }

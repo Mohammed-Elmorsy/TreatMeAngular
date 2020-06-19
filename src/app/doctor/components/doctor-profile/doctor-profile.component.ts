@@ -271,6 +271,7 @@ export class DoctorProfileComponent implements OnInit {
       ()=>{
 
 
+        this.toastr.info("photo Uploaded")
 
       this.doctorService.getDoctor(this.doctor.user.id).subscribe((_doctor)=>{
     this.doctor= _doctor;
