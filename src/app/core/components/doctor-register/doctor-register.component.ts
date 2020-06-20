@@ -25,8 +25,10 @@ export class DoctorRegisterComponent implements OnInit {
       fees:200,
       rating:4,   
       title:'',    
-      CV:null,  
-      specialityId:null,  
+      titleDescription:'',       
+      CV:null,    
+      specialityId:null, 
+      confirmed:false,      
       user:{
         firstName: '',
         lastName:'', 
@@ -64,14 +66,12 @@ console.log(this.doctor);
     .subscribe(
       res =>{
         console.log(res);
-        //alert("You have registered successfully! ..please wait to confirm your acount");
         this.toastr.success('لقد تم تسجيل حسابك بنجاح','مرحبا بك'); 
         this.router.navigate(["/"]);
 
       },  
       err => {
         console.log(err);
-        //alert("there are some errors during registeration!");
         this.toastr.error('نأسف لذلك هناك مشكلة فى عملية تسجيل حسابك','حدث خطأ ما'); 
       }
     )

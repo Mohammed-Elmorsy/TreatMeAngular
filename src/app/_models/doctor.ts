@@ -11,7 +11,9 @@ export class Doctor {
         public fees?:Number,
         public rating?:Number,
         public  CV?:File,
-        public title?:string
+        public title?:string,
+        public titleDescription?:string,
+        public confirmed?:boolean
 
     )
     {}
