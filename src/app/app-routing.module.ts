@@ -7,11 +7,12 @@ import { DoctorRegisterComponent } from './core/components/doctor-register/docto
 import { PatientRegisterComponent } from './core/components/patient-register/patient-register.component'
 import { LoginComponent } from './core/components/login/login.component';
 import { LoginGuard } from './core/guards/login.guard';
+import { HomeResolver } from './core/resolvers/home.resolver';
    
 
 const routes: Routes = [  
   {path:"",redirectTo:"home" ,pathMatch:"full"},
-  {path:"home",component:HomeComponent},
+  {path:"home",component:HomeComponent, resolve:{home:HomeResolver}},
   {path:"doctor/register",component:DoctorRegisterComponent, canActivate:[LoginGuard]},
   {path:"patient/register",component:PatientRegisterComponent, canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent, canActivate:[LoginGuard]},

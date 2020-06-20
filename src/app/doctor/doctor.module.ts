@@ -8,6 +8,7 @@ import { DoctorDetailsComponent } from "./components/doctor-details/doctor-detai
 import { DoctorListComponent } from './components/doctor-list/doctor-list.component';
 import { DoctorProfileComponent } from './components/doctor-profile/doctor-profile.component';
 import { DoctorProfileModalComponent } from './components/doctor-profile-modal/doctor-profile-modal.component';
+import { DoctorsListResolver } from '../core/resolvers/doctors-list.resolver';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { DoctorProfileModalComponent } from './components/doctor-profile-modal/d
    SharedModule,
    DoctorRoutingModule
   ],
-  exports:[DoctorProfileModalComponent]
+  exports:[DoctorProfileModalComponent],
+  providers:[DoctorsListResolver]  
 })
 export class DoctorModule { }

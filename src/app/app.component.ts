@@ -10,10 +10,10 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent{
   title = 'Treat Me';
 
-  showLoadingIndicator = true;
+  showLoadingIndicator = true;  
 
   constructor(private _router: Router, public translate: TranslateService) {
     
@@ -31,5 +31,7 @@ export class AppComponent {
       }
 
     });
-  }
+  }//end of constructor
+
+
 }

@@ -11,25 +11,21 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 })
 export class DoctorListComponent implements OnInit { 
 
-  private doctors:Doctor[];
-  private specialityID:number;
+  private doctors:Doctor[];   
 
-  constructor(private doctorService:DoctorService ,
+  constructor(
     private route:ActivatedRoute , private router:Router,private authService:AuthService) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.specialityID = +params.get('specialityID');
+    this.route.data.subscribe((data: { doctorsList: any }) => {
+      this.doctors = data.doctorsList;  
     })
-
-    this.doctorService.getDoctorsBySpeciality(this.specialityID).subscribe(doctors=>
-      this.doctors = doctors)       
+     
   }
   
   navigateToDocDetails(doctorID:number){
 
     this.router.navigate(['doctor/details/'+doctorID]);
-    this.doctorService.docId=doctorID;
 
   }
 
