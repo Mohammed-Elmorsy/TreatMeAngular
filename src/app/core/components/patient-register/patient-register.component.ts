@@ -22,7 +22,7 @@ export class PatientRegisterComponent implements OnInit {
       user:{
         firstName: '',
         lastName:'', 
-        userName:'',   
+        userName:'',  
         age:null,  
         address:'',
         gender:null,

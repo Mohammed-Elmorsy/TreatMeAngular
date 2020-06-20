@@ -22,20 +22,18 @@ export class DoctorService {
   getDoctors() {
     return this.httpClient.get<Doctor[]>(environment.baseURL+"api/Doctors/Index");
   }
+
   getDocId(){
     return this.docId;
   }
 
-/*   getSpecialities(){
-    return this.httpClient.get<Speciality[]>(environment.baseURL+"api/speciality");
-  }  */ 
 
-  getDoctorsBySpeciality(specialityID:number){
-    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/doctors/GetSomeDoctorDetailsBySpecialityId/"+specialityID);
+  getDoctorsBySpeciality(specialityID:number){  
+    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/doctors/GetAllDoctorDetailsBySpecialityId/"+specialityID);
   }  
 
   getDoctor(id){
-
+        
     return this.httpClient.get<Doctor>(environment.baseURL+"api/Doctors/Details/"+id);
   }
 

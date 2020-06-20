@@ -77,6 +77,13 @@
         "Doctor":"Doctor",
         "ForgotPassword":"Forgot your password ?",
         "Enter":"Enter"
+    },
+    
+    "DoctorsList":{
+        "Fees":"Session Fees",
+        "Book":"Book a Session",
+        "P":"P",
+        "D":"D"
     }
 
 }
