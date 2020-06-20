@@ -15,6 +15,7 @@ import { SpecialityService } from '../../services/speciality/speciality.service'
 export class DoctorRegisterComponent implements OnInit {
 
   private specialities:Speciality[];
+  Cv:File=null;
 
   private doctor:Doctor;
   constructor(private authService:AuthService, private router:Router ,
@@ -40,12 +41,21 @@ export class DoctorRegisterComponent implements OnInit {
       },
     }
   }
-  
   ngOnInit() {
     this.specialityService.getSpecialities().subscribe(res =>{
       this.specialities = res; 
     }) 
 
+  }
+
+  handleFileInput(files:FileList)
+  {
+    this.Cv=files.item(0);
+    const formdata:FormData=new FormData();
+    formdata.append('cv',this.Cv,this.Cv.name);
+    this.doctor.CV=this.Cv;;
+console.log(files.item(0));
+console.log(this.doctor);
   }
 
   onSubmit(){

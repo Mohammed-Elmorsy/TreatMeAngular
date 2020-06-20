@@ -199,19 +199,7 @@
                     [(ngModel)]="patient.user.age">
                 </div>
             </div>
-            <form>
-                <div class="form-group">
-                  <label for="exampleFormControlFile1">{{'Register.MedicalHistory' | translate}}</label>
-                  <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                  name="medicalHistory" ngModel #medicalHistory="ngModel">
-                </div>
-              </form>
-
-
-              <div class="form-group form-row">
-                  <label>Upload your Photo</label>
-                  <input type="file" id="image" (change)="OnSelectedFile($event)"/>
-              </div>
+           
 
 
             <div class="form-check">

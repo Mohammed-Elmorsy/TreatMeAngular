@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import {  BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import { now } from 'jquery';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-doctor-details',
@@ -33,9 +34,9 @@ export class DoctorDetailsComponent implements OnInit {
   doctor:Doctor;
   role:string;
   docId:Number;
- 
+ DoctorImage:String;
   constructor(private service:DoctorService,private router:Router,private authService:AuthService,private sCheduleService:ScheduleService,private patientService:PatientService,private toastr:ToastrService) {
- 
+    this.doctor={userId:0,user:{},fees:40}
    }
 
    DoctorSchedule:Schedule[];
@@ -76,9 +77,19 @@ export class DoctorDetailsComponent implements OnInit {
   this.service.getDoctor(this.docId)
   .subscribe(
 
-    (_doctor)=> {this.doctor = _doctor});  
+    (_doctor)=> {this.doctor = _doctor;
+      if(this.doctor.user.imageName != null)
+      {
+        this.DoctorImage=environment.baseURL+"images/"+this.doctor.user.imageName;
+  
+      }});  
     console.log(this.doctor);
-     this.docImg="../../assets/images/doctors/"+this.docId+".jpg";
+    
+     this.docImg="../../assets/images/doctors/profile-pic.png";
+
+   
+
+
 
 
   }

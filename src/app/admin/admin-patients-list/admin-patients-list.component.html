@@ -40,7 +40,15 @@
 
           <div class="row">
                         <div class="col-sm-6 col-md-4">
-                            <img src="../../../assets/images/patients/2.jpg" alt="" class="img-rounded img-responsive" style="width:90%; height:120px;" />
+
+                          <span *ngIf="patientFoOperation.user.imageName == NULL ; else elseCode"> 
+                            <img [src]="patientImg" alt="" class="img-rounded img-responsive" style="width:90%; height:120px;" />
+
+                          </span>
+                          <ng-template #elseCode>
+                            <img [src]="PatientImage" alt="" class="img-rounded img-responsive" style="width:90%; height:120px;" />
+
+                          </ng-template>
                         </div>
                         <div class="col-sm-6 col-md-8">
                             <h5>
