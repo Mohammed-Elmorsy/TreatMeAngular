@@ -31,7 +31,7 @@
             <span  *ngIf="userName.errors?.required && userName.dirty">
               {{"Register.Validation.Required" | translate}}</span>  
             <span  *ngIf="userName.errors?.minlength && userName.dirty">
-              {{"Register.Validation.Minlength6" | translate}}</span>
+              {{"Register.Validation.MinLength6" | translate}}</span>
             <span *ngIf="userName.errors?.hasWhiteSpace && userName.dirty">
               {{"Register.Validation.NoSpace" | translate}}</span>
             <span *ngIf="userName.errors?.pattern && userName.dirty">
@@ -53,7 +53,7 @@
             <span *ngIf="password.errors?.required && password.dirty">
               {{"Register.Validation.Required" | translate}}</span>
             <span *ngIf="password.errors?.minlength && password.dirty">
-              {{"Register.Validation.Minlength6" | translate}}</span>
+              {{"Register.Validation.MinLength6" | translate}}</span>
             <span *ngIf="password.errors?.hasWhiteSpace && password.dirty">
               {{"Register.Validation.NoSpace" | translate}}</span>
                 

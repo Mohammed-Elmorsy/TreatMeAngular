@@ -155,7 +155,9 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label>{{"Register.TitleDetails" | translate}}</label><!-- still need work -->
-                    <input type="text" class="form-control" name="titleDetails" ngModel
+                    <input type="text" class="form-control" name="titleDetails" 
+                    #titleDetails = "ngModel"
+                    [(ngModel)] = "doctor.title"   
                     noStartOrDoubleSpaces
                     >
                 </div>  

@@ -10,7 +10,8 @@ export class Doctor {
         public userId?:Number,       
         public fees?:Number,
         public rating?:Number,
-        public  CV?:File
+        public  CV?:File,
+        public title?:string
 
     )
     {}

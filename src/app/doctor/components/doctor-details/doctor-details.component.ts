@@ -7,9 +7,8 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
 import { PatientService } from 'src/app/core/services/patient/patient.service';
 import { ToastrService } from 'ngx-toastr';
-import {  BsDatepickerConfig} from "ngx-bootstrap/datepicker";
 import { now } from 'jquery';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -22,8 +21,6 @@ export class DoctorDetailsComponent implements OnInit {
   
 
 
-  datePickerConfig:Partial<BsDatepickerConfig>
-
   test:String;
   choocedDate:String;
   patientId:Number;
@@ -34,9 +31,12 @@ export class DoctorDetailsComponent implements OnInit {
   doctor:Doctor;
   role:string;
   docId:Number;
- DoctorImage:String;
-  constructor(private service:DoctorService,private router:Router,private authService:AuthService,private sCheduleService:ScheduleService,private patientService:PatientService,private toastr:ToastrService) {
-    this.doctor={userId:0,user:{},fees:40}
+  DoctorImage:String;
+ 
+  constructor(private service:DoctorService,private router:Router,private authService:AuthService
+    ,private sCheduleService:ScheduleService,private patientService:PatientService
+    ,private toastr:ToastrService ,private route:ActivatedRoute) {
+ 
    }
 
    DoctorSchedule:Schedule[];
@@ -62,17 +62,17 @@ export class DoctorDetailsComponent implements OnInit {
       
      
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.docId = +params.get('id');
+    })
   
    
     if (this.authService.getUserPayLoad().role=='Doctor') {
       this.role='doctor'
-      this.docId = this.authService.getUserPayLoad().id;
     }
     else{
       this.role='patient'
-      let url=window.location.href;
-      this.docId =Number( url.substring(url.lastIndexOf('/') + 1));
-    }
+    }   
 
   this.service.getDoctor(this.docId)
   .subscribe(

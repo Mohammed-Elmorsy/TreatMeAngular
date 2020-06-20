@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from "../shared/shared.module";
 import { HomeComponent } from './components/home.component';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -11,7 +10,6 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     SharedModule,
     RouterModule,
-    TranslateModule
   ]
 })
 export class HomeModule { }
