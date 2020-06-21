@@ -28,7 +28,7 @@ export class AdminDoctorsListComponent implements OnInit {
 
   
   ngOnInit() {
-    this.doctorService.getDoctors().subscribe(res =>{
+    this.doctorService.getConfirmedDoctors().subscribe(res =>{
        this.doctors = res;
        console.log(this.doctors);
        this.specialityService.getSpecialities().subscribe((res)=>{
@@ -78,7 +78,6 @@ export class AdminDoctorsListComponent implements OnInit {
 
     }
   }
-
 
   DeleteDoctor()
   {

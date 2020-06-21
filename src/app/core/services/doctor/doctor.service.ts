@@ -19,8 +19,12 @@ export class DoctorService {
    constructor(private httpClient:HttpClient) { }
 
   //-----------------------------------------methods------------------------------------
-  getDoctors() {
-    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/Doctors/Index");
+  getConfirmedDoctors() {
+    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/Doctors/GetAllDoctorsByconfirmed/true");
+  }
+
+  getDoctorsRequests() {
+    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/Doctors/GetAllDoctorsByconfirmed/false");
   }
 
   getDocId(){

@@ -5,6 +5,7 @@ import { User } from 'src/app/_models/user';
 import { FileUploadService } from 'src/app/core/services/FileUpload/file-upload.service';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
+import { AdminDoctorsRequestsComponent } from '../admin-doctors-requests/admin-doctors-requests.component';
 
 
 @Component({
@@ -14,11 +15,14 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminProfileComponent implements OnInit {
   admin:User;
+  requestsNumber:number;
 
   fieToUpload:File;
   imageFromApi:String;
 
-  constructor(private authService:AuthService,private adminservice:AdminService,private toastr:ToastrService,private fileUploadservice:FileUploadService) { }
+  constructor(private authService:AuthService,private adminservice:AdminService
+    ,private toastr:ToastrService,private fileUploadservice:FileUploadService) { }
+
   ngOnInit() {
       let AdminId = this.authService.getUserPayLoad().id;
 

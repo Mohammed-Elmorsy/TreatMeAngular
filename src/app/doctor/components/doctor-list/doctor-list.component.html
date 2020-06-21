@@ -6,11 +6,11 @@
         <span *ngIf="doctor.user.imageName == NULL; else elseBlock">
 
        
-        <img class="card-img-top" style="margin-top:10px" src="assets/images/doctors/profile-pic.png" alt="{{doctor.user.firstName}">
+        <img class="card-img-top" style="margin-top:10px" src="assets/images/doctors/profile-pic.png" alt="{{doctor.user.firstName}}">
 
-      </span>
+      </span>  
 <ng-template #elseBlock>
-  <img class="card-img-top" style="margin-top:10px" src="https://localhost:44353/images/{{doctor.user.imageName}}" alt="{{doctor.user.firstName}">
+  <img class="card-img-top" style="margin-top:10px" src="https://localhost:44353/images/{{doctor.user.imageName}}" alt="{{doctor.user.firstName}}">
 
 </ng-template>
 
