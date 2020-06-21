@@ -21,6 +21,8 @@ import { AppComponent } from './app.component';
 import { DoctorProfileModalComponent } from './doctor/components/doctor-profile-modal/doctor-profile-modal.component';
 //interceptor providers
 import { HttpInterceptorProviders } from './core/interceptors';
+//resolvers
+import { HomeResolver } from './core/resolvers/home.resolver';
 
 
 
@@ -61,7 +63,7 @@ import { HttpInterceptorProviders } from './core/interceptors';
 
     AppRoutingModule //always the last one  
   ],
-  providers: [HttpInterceptorProviders ],  
+  providers: [HttpInterceptorProviders, HomeResolver],   
   bootstrap: [AppComponent]
 })
 export class AppModule { }
