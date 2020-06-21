@@ -73,4 +73,9 @@ DeleteDoctor(id)
 
   }
 
+  DoctorCancelDaySessions(id:number,date:Date){
+
+    return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/DoctorCancelSchedules/"+id+"/"+date)
+
+  }
 }

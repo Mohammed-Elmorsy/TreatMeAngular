@@ -77,7 +77,8 @@
                 </tr>
               </thead>
               <tbody>
-            <tr *ngFor="let time of DoctorSchedule"> 
+            <tr *ngFor="let time of DoctorSchedule;let i=Index"> 
+                
                 <td>
                     {{time.date  | date:'shortDate'}}
                 </td> 
@@ -131,6 +132,11 @@
         
             </tr>
               </tbody>
+              <tfoot>
+              <td colspan="4">              <button style="width: 100%;"  class="btn btn-danger" *ngIf="role == 'doctor'" (click)="CancelDaySessions(choocedDate)">Cancel This Day Sessions</button>
+              </td>    
+
+              </tfoot>
         </table>
     
 

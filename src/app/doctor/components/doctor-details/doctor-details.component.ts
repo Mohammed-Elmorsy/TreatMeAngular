@@ -30,7 +30,7 @@ export class DoctorDetailsComponent implements OnInit {
  
   doctor:Doctor;
   role:string;
-  docId:Number;
+  docId:number;
   DoctorImage:String;
  
   constructor(private service:DoctorService,private router:Router,private authService:AuthService
@@ -68,7 +68,9 @@ export class DoctorDetailsComponent implements OnInit {
   
    
     if (this.authService.getUserPayLoad().role=='Doctor') {
-      this.role='doctor'
+      this.role='doctor';
+      this.docId=this.authService.getUserPayLoad().id;
+
     }
     else{
       this.role='patient'
@@ -132,6 +134,19 @@ export class DoctorDetailsComponent implements OnInit {
 
       //send mail to patient
       this.toastr.success('تم الغاء حجز الجلسة');
+      
+ 
+    });
+
+  }
+
+  CancelDaySessions(choocedDate:Date){
+    this.service.DoctorCancelDaySessions(this.docId,choocedDate).subscribe((a)=>{  
+      this.DoctorSchedule=a;
+      this.DoctorSchedule=[];
+
+      //send mail to patient
+      this.toastr.success('تم الغاء حجوزات اليوم');
       
  
     });
