@@ -169,7 +169,7 @@
                                                         <th scope="row">{{session.doctor.user.firstName}} {{session.doctor.user.lastName}}</th>
                                                         <td> {{session.schedule.date  | date:'shortDate'}}</td>
                                                         <td> {{session.schedule.startTime | date:'mediumTime'}}</td>
-                                                        <td><button class="btn btn-primary" (click)="joinMeeting(session.id)">Join</button></td>
+                                                        <td><button class="btn btn-primary" (click)="joinMeeting(session.schedule.id)">Join</button></td>
                                                         <td><button class="btn btn-danger" (click)="cancelSession(session)">Cancel</button></td>
                                                       </tr>
                                                      
