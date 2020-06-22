@@ -38,10 +38,27 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     this.authService.loginUser(this.loginCredentials).subscribe(
       res=>{
-      localStorage.setItem('token',res.token);
-      this.toastr.success('تم تسجيل دخولك بنجاح');
-      let profileRoute:string = this.authService.navigateByRole();
-      this.router.navigate([profileRoute]);
+        console.log(res);
+      if(res.confirmed == true)  //then he is a doctor and check if the doctor is confirmed by admin
+      {
+        localStorage.setItem('token',res.user.token);
+        this.toastr.success('تم تسجيل دخولك بنجاح');
+        let profileRoute:string = this.authService.navigateByRole();
+        this.router.navigate([profileRoute]);
+      }
+      else if(res.role == 2 || res.role == 3)  //in case of patient or admin
+      {
+        localStorage.setItem('token',res.token); 
+        this.toastr.success('تم تسجيل دخولك بنجاح');
+        let profileRoute:string = this.authService.navigateByRole();
+        this.router.navigate([profileRoute]);
+      }
+      else
+      {
+        this.toastr.warning('لم يتم تأكيد حسابك بعد');
+        this.router.navigate(['/home']); 
+      }
+
 
     },
     err=>{
