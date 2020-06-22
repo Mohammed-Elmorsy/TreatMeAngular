@@ -10,6 +10,11 @@ import { SessionDetails } from 'src/app/_models/SessionDetails';
 import { environment } from 'src/environments/environment';
 import { FileUploadService } from 'src/app/core/services/FileUpload/file-upload.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+
+import config from '../../../../config';
+import { StateService } from '../../../stateService';
+
 
 @Component({
   selector: 'app-doctor-profile',
@@ -51,8 +56,11 @@ export class DoctorProfileComponent implements OnInit {
 
   constructor(private toastr:ToastrService,
     private doctorService:DoctorService,
+
     private fileupload:FileUploadService,
     private route:ActivatedRoute ,
+    private stateService: StateService,
+    private http:HttpClient,
      private router:Router,
       private scheduleService:ScheduleService,
   private modalService:NgbModal, private authService:AuthService) {
@@ -289,4 +297,20 @@ console.log(err);
 
     );
   }
+
+  joinMeeting(id){
+    let get_session_url = config.SAMPLE_SERVER_BASE_URL + '/api/session/getSession'
+    this.http.post(get_session_url, id).subscribe(
+      (res) => {
+        this.stateService.token$ = res['token'];
+        this.stateService.sessionId$ = res['sessionId'];
+        this.stateService.apiKey$ = res['apiKey'];
+        this.router.navigate(['/video'])
+      }
+    )
+    
+
+  }
+
+
 }

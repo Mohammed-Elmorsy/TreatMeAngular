@@ -8,6 +8,8 @@ import { PatientRegisterComponent } from './core/components/patient-register/pat
 import { LoginComponent } from './core/components/login/login.component';
 import { LoginGuard } from './core/guards/login.guard';
 import { HomeResolver } from './core/resolvers/home.resolver';
+import { VideoComponent } from './video/video.component';
+import { SubscriberComponent } from './subscriber/subscriber.component';
    
 
 const routes: Routes = [  
@@ -16,7 +18,12 @@ const routes: Routes = [
   {path:"doctor/register",component:DoctorRegisterComponent, canActivate:[LoginGuard]},
   {path:"patient/register",component:PatientRegisterComponent, canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent, canActivate:[LoginGuard]},
-  {path:"**",component:PageNotFoundComponent}
+  {path:"video",component:VideoComponent},
+  {path:"subscriber",component:SubscriberComponent},
+  {path:"**",component:PageNotFoundComponent},
+ 
+
+
  
 ];
 

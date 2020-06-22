@@ -365,7 +365,7 @@
                                     <td *ngIf="session.isBooked == 1;"> {{session.date  | date:'shortDate'}}</td>
                                     <td *ngIf="session.isBooked == 1;"> {{session.startTime | date:'mediumTime'}}</td>
                                     <!-- if start time is now join else coming soon-->
-                                    <td *ngIf="session.isBooked == 1;"><button class="btn btn-primary">Join</button></td>
+                                    <td *ngIf="session.isBooked == 1;"><button class="btn btn-primary" (click)="joinMeeting(session.id)">Join</button></td>
                             
                         
                 

@@ -13,6 +13,8 @@ import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
 import { EventEmitter } from '@angular/core';
 import { FileUploadService } from 'src/app/core/services/FileUpload/file-upload.service';
 
+import config from '../../../../config';
+import { StateService } from '../../../stateService';
 
 @Component({
   selector: 'app-patient',
@@ -30,7 +32,7 @@ export class PatientComponent implements OnInit {
   docSc:doctorPatientSchedule;
 
   private fieToUpload:File=null;
-  constructor(private patientservice:PatientService ,private router:Router,private doctorService:DoctorService,private authService:AuthService, private toastr:ToastrService,private route:Router,private http:HttpClient,private fileupload:FileUploadService) { 
+  constructor(private patientservice:PatientService , private stateService: StateService,private router:Router,private doctorService:DoctorService,private authService:AuthService, private toastr:ToastrService,private route:Router,private http:HttpClient,private fileupload:FileUploadService) { 
 
     this.patient={user:{}}
   }
@@ -165,9 +167,7 @@ console.log(err);
 
 
   
-  joinMeeting(roomName){
-    console.log(roomName);
-  }
+  
   
   cancelSession(session){
    console.log(session);
@@ -182,6 +182,20 @@ console.log(err);
      
  
     });
+
+  }
+
+  joinMeeting(id){
+    let get_session_url = config.SAMPLE_SERVER_BASE_URL + '/api/session/getSession'
+    this.http.post(get_session_url, id).subscribe(
+      (res) => {
+        this.stateService.token$ = res['token'];
+        this.stateService.sessionId$ = res['sessionId'];
+        this.stateService.apiKey$ = res['apiKey'];
+        this.router.navigate(['/video'])
+      }
+    )
+    
 
   }
 }

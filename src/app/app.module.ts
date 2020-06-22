@@ -23,6 +23,8 @@ import { DoctorProfileModalComponent } from './doctor/components/doctor-profile-
 import { HttpInterceptorProviders } from './core/interceptors';
 //resolvers
 import { HomeResolver } from './core/resolvers/home.resolver';
+import { SubscriberComponent } from './subscriber/subscriber.component';
+import { VideoComponent } from './video/video.component';
 
 
 
@@ -30,7 +32,7 @@ import { HomeResolver } from './core/resolvers/home.resolver';
 
 @NgModule({
   declarations: [ //components
-    AppComponent
+    AppComponent, SubscriberComponent, VideoComponent
 
   ],
   entryComponents:[DoctorProfileModalComponent],
