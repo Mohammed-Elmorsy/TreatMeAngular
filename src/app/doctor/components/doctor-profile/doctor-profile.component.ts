@@ -298,9 +298,9 @@ console.log(err);
     );
   }
 
-  joinMeeting(id){
-    let get_session_url = config.SAMPLE_SERVER_BASE_URL + '/api/session/getSession'
-    this.http.post(get_session_url, id).subscribe(
+  joinMeeting(RoomId){
+    let get_session_url = config.SAMPLE_SERVER_BASE_URL + '/api/session/getSession/'+RoomId;
+    this.http.get(get_session_url).subscribe(
       (res) => {
         this.stateService.token$ = res['token'];
         this.stateService.sessionId$ = res['sessionId'];
@@ -308,6 +308,8 @@ console.log(err);
         this.router.navigate(['/video'])
       }
     )
+   
+    
     
 
   }

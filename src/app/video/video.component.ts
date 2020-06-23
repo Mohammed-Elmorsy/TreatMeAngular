@@ -75,6 +75,7 @@ ngAfterViewInit(): void {
       let that = this;
       this.session.on("streamCreated", function (event) {
         that.onStreamCreated(event.stream);
+        
       });
     }
   })
