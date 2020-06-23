@@ -1,89 +1,66 @@
-
-.emp-profile{
-    width: 97%;
-    margin: 5px auto;
-    padding: 3%;
-    margin-top:1%;
-    margin-bottom: 3%;
-    border-radius:2%;
-    background:whitesmoke;
+.container-fluid{
+    padding-top: 20px;
 }
 
-.profile-head h5{
-    color: #333;
+.card img{
+    position:relative;
+    margin: auto;
+    height: 200px; 
+    width: 200px;
+    border-radius: 50%;
 }
-.profile-head h6{
-    color: #0062cc;
+  
+.tab-content{
+    width: 100%;  
+    height: 450px;
+    overflow: auto;
 }
-.profile-edit-btn{
-    border: none;
-    border-radius: 1.5rem;
-    width: 70%;
-    padding: 2%;
-    font-weight: 600;
-    color: #6c757d;
-    cursor: pointer;
+
+input[type=file]{
+    display: none;  
 }
-.proile-rating{
-    font-size: 12px;
-    color: #818182;
-    margin-top: 5%;
+
+.custom-file-upload{
+    position: absolute;
+    margin-top: -30px;  
+    padding: 8px;
+    border-radius: 50%;
+    background-color: rgb(173, 227, 245);    
 }
-.proile-rating span{
-    color: #495057;
-    font-size: 15px;
-    font-weight: 600;
+.custom-file-upload:hover{
+    cursor: pointer;  
 }
-.profile-head .nav-tabs{
-    margin-bottom:5%;
-}
-.profile-head .nav-tabs .nav-link{
-    font-weight:600;
-    border: none;
-}
-.profile-head .nav-tabs .nav-link.active{
-    border: none;
-    border-bottom:2px solid #0062cc;
-}
-.profile-work{
-    padding: 14%;
-    margin-top: -15%;
-}
-.profile-work p{
-    font-size: 12px;
-    color: #818182;
-    font-weight: 600;
-    margin-top: 10%;
-}
-.profile-work a{
-    text-decoration: none;
-    color: #495057;
-    font-weight: 600;
-    font-size: 14px;
-}
-.profile-work ul{
-    list-style: none;
-}
-.profile-tab label{
-    font-weight: 600;
-}
-.profile-tab p{
-    font-weight: 600;
-    color: #0062cc;
+
+.fa-camera:hover{
+    color: white;   
 }
 
 
-
-#leftDiv{
-    padding: 0;
-    height: 100vh;
-    position: fixed;
-}  
-
-#leftDiv img{
-    width: 100%;
-    height: 100%; 
+/* #hide{
+    margin-top: -80px;
+    margin-left: 125px;
 }
+#hide input[type=file] {
+    margin:15px;
+    display: none;
+    }
+    #hide input[type=file] + label {
+    display:inline-block;
+    margin:20px;
+    padding: 4px 32px;
+    background-color: #FFFFFF;
+    border:solid 1px #666F77;
+    border-radius: 6px;
+    color:#666F77;
+    }
+    #hide input[type=file]:active + label {
+    background-image: none;
+    background-color:#2D6C7A;
+    color:#FFFFFF;
+    }
+    .fa:hover{
+        color: darkred;
+    } */
 
 
-
+		                                                      

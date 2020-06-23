@@ -1,4 +1,4 @@
-.row{
+.container-fluid{
     padding-top: 20px;
 }
 
@@ -16,31 +16,23 @@
     overflow: auto;
 }
 
-
-#hide{
-    margin-top: -80px;
-    margin-left: 125px;
+input[type=file]{  
+    display: none;  
 }
-#hide input[type=file] {
-    margin:15px;
-    display: none;
-    }
-    #hide input[type=file] + label {
-    display:inline-block;
-    margin:20px;
-    padding: 4px 32px;
-    background-color: #FFFFFF;
-    border:solid 1px #666F77;
-    border-radius: 6px;
-    color:#666F77;
-    }
-    #hide input[type=file]:active + label {
-    background-image: none;
-    background-color:#2D6C7A;
-    color:#FFFFFF;
-    }
-    .fa:hover{
-        color: darkred;
-    }
 
-   
+.custom-file-upload{
+    position: absolute;
+    margin-top: -30px;  
+    padding: 8px;
+    border-radius: 50%;
+    background-color: rgb(173, 227, 245);    
+}
+.custom-file-upload:hover{
+    cursor: pointer;  
+}
+
+.fa-camera:hover{
+    color: white;   
+}
+
+

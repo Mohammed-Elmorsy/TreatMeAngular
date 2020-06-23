@@ -1,4 +1,4 @@
-<div style="margin-top: 50px;">
+<!-- <div style="margin-top: 50px;">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <div class="container" style="border-radius: 10px; margin-top: 40px;" id="docProfile">
@@ -57,7 +57,7 @@
         
                     </div>
 
-                    <!-- *********************** modal************************************************************** -->
+                    <!-- *********************** modal************************************************************** --
                     <button class="btn btn-danger"  data-toggle="modal" data-target="#exampleModalCenter">Update Your Info</button>
                     <!-- Button trigger modal -->
 
@@ -65,7 +65,7 @@
 
 
   
-  <!-- Modal -->
+  <!-- Modal --
   <div class="modal fade" id="exampleModalCenter"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -88,7 +88,7 @@
                         minlength="3"
                         noWhiteSpaces
                         [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }">
-                    <!--cs validation -->
+                    <!--cs validation --
                         <div *ngIf="fName.invalid" class="invalid-feedback">
                             <span *ngIf="fName.errors?.required && fName.dirty">
                                 *</span>
@@ -109,7 +109,7 @@
                         minlength="3"
                         noWhiteSpaces
                         [ngClass]="{ 'is-invalid': lName.invalid && lName.dirty }">
-                    <!--cs validation -->
+                    <!--cs validation --
                         <div *ngIf="lName.invalid" class="invalid-feedback">
                             <span *ngIf="lName.errors?.required && lName.dirty">
                                 *</span>
@@ -140,7 +140,7 @@
                         <span *ngIf="speciality.errors.hasWhiteSpace && speciality.dirty">
                             يجب أن لا يحتوى الاسم على مسافات</span>
                     </div>
-                </div> -->   
+                </div> --
                 
                 
                 <div class="form-group">
@@ -152,7 +152,7 @@
                     required 
                     noWhiteSpaces
                     [ngClass]="{ 'is-invalid': email.invalid && email.dirty }">
-                <!--cs validation -->
+                <!--cs validation --
                     <div *ngIf="email.invalid" class="invalid-feedback">
                         <span *ngIf="email.errors?.required && email.dirty">
                             *</span>
@@ -175,7 +175,7 @@
                     required 
                     noWhiteSpaces
                     [ngClass]="{ 'is-invalid': phoneNumber.invalid && phoneNumber.dirty }">
-                <!--cs validation -->
+                <!--cs validation --
                    
                 </div>  
               
@@ -242,7 +242,7 @@
         <div class="col-6" style=" padding: 10px; border: solid black 1px ; background-color:burlywood;">
             <div class="row">
               <div class="col-5 text-center" >
-                  <!-- <h3>Days</h3> -->
+                  <!-- <h3>Days</h3> --
                   <div class="form-group">
                       <label for="days"><h3>Days</h3> </label>
                       <div *ngFor="let option of days; let i = index">
@@ -365,7 +365,7 @@
                                     <td *ngIf="session.isBooked == 1;"> {{session.date  | date:'shortDate'}}</td>
 
                                     <td *ngIf="session.isBooked == 1;"> {{session.startTime | date:'mediumTime'}}</td>
-                                    <!-- if start time is now join else coming soon-->
+                                    <!-- if start time is now join else coming soon--
                                     <td *ngIf="session.isBooked == 1;"><button class="btn btn-primary" (click)="joinMeeting(session.id)">Join</button></td>
                             
                         
@@ -386,3 +386,495 @@
 
 
 </div>
+ -->
+
+<!-- new profile style -->
+<div class="container-fluid row mx-auto">
+    <div class="col-md-4 col-lg-3 mb-4" id="cardWrapper" style="height: 500px;">
+        <div class="card bg-light text-center" id="profileCard" style="height: 500px;">
+                <div class="text-center" style="position: relative;"> 
+                    <img *ngIf="doctor.user.imageName == NULL; else elseblock" 
+                    class="card-img-top" style="margin-top: 10px;" [src]="docImg"
+                    alt="profile pic">
+                    <ng-template #elseblock>
+                        <img class="card-img-top" [src]="DoctorImage" style="margin-top: 10px;"  alt="profile pic"> 
+                    </ng-template>
+
+                    <div id="uploadDiv">
+                        <label for="file-upload" class="custom-file-upload">
+                            <input type="file" id="file-upload"  name="file"
+                            (change)="handleFileInput($event.target.files)" /> 
+                            <i class="fas fa-2x fa-camera"></i>    
+                        </label> <br>  
+                        <span class="photo_text hidden-xs" style="color:black;">Upload</span>
+                    </div>
+                </div> 
+
+                <div class="card-body">
+                    <h5 class="card-title">{{doctor.user.firstName}} {{doctor.user.lastName}}</h5>
+                    <span class="badge badge-success">Doctor</span><br><br> 
+                    <span class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">Edit your information</span>
+
+                </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-lg-9" id="tabsWrapper" style="height: 500px;">   
+
+        <nav class="bg-light justify-content-center" style="padding: 10px;">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-about-tab" data-toggle="tab" href="#nav-about"
+                    aria-selected="true">
+                    About you
+                </a>
+                <a class="nav-item nav-link" id="nav-commingSessions-tab" data-toggle="tab" href="#nav-commingSessions"
+                    aria-selected="false">Coming Sessions</a>
+                <a class="nav-item nav-link" id="nav-addSessions-tab" data-toggle="tab" href="#nav-addSessions"
+                    aria-selected="false">Add Sessions</a>
+                <a class="nav-item nav-link" id="nav-bookedSessions-tab" data-toggle="tab" href="#nav-bookedSessions"
+                    aria-selected="false">Booked Sessions</a>
+                <a class="nav-item nav-link" id="nav-notifications-tab" data-toggle="tab" href="#nav-notifications"
+                    aria-selected="false">Notifications</a>
+                <a class="nav-item nav-link" id="nav-issues-tab" data-toggle="tab" href="#nav-issues"
+                    aria-selected="false">Report Issues</a>
+            </div>
+        </nav>
+        <div class="tab-content bg-light p-3" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-about"><!-- about tab -->
+                
+                <div class="container bootstrap snippet">
+                    <div class="panel-body">
+                        <div class="row"> 
+                            <strong>Information</strong>
+                            <br>  
+                            <div class="table-responsive">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fa fa-address-book" aria-hidden="true"></i>
+                                                    Identification
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.userId}} 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="far fa-address-card"></i>
+                                                    First Name
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.firstName}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="far fa-address-card"></i>
+                                                    Last Name
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.lastName}}
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-user-circle"></i>
+                                                    Username
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.userName}}
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="far fa-envelope"></i>
+                                                    Email
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.mail}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fa fa-birthday-cake" aria-hidden="true"></i> 
+                                                    Age
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.age}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-venus-mars"></i>
+                                                    Gender
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                <span *ngIf="doctor.user.gender == 1; else elseBlock">male</span>
+                                                <ng-template #elseBlock>
+                                                    <span>
+                                                        female
+                                                    </span>  
+                                              </ng-template>                                            
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    Address
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.address}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                                                    Phone Number
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.phoneNumber}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-syringe"></i>
+                                                    Blood Type
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.bloodType}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-book-medical"></i>
+                                                    Medical History
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                <button class="btn btn-info">View</button> &nbsp;
+                                                <button class="btn btn-success">Update</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-commingSessions"><!--comming sessions tab -->
+                
+                <div  style=" padding: 10px; border: solid black 1px ; background-color:burlywood;"> 
+                    <h3>UpComing Sessions</h3>
+                    <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let session of comingSessions;let i=index">
+    
+                        <th scope="row">{{i+1}}</th>
+                        <td> {{session.date  | date:'shortDate'}}</td>
+                        <td> {{session.startTime | date:'mediumTime'}}</td>
+    
+                        <td><button class="btn btn-primary">Join</button></td>
+                        </tr>
+                    
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-addSessions"><!--add sessions tab -->
+                <div  style=" padding: 10px; border: solid black 1px ; background-color:burlywood;">
+                    <div class="row">
+                      <div class="col-5 text-center" >
+                          <!-- <h3>Days</h3> -->
+                          <div class="form-group">
+                              <label for="days"><h3>Days</h3> </label>
+                              <div *ngFor="let option of days; let i = index">
+                                  <label>
+                                      <input type="checkbox"
+                                             name="days"
+                                             value="{{option}}"
+                  
+                                             (change)="updateCheckedOptions(option, $event)"/>
+                                      {{option}}
+                                  </label>
+                              </div>
+                          </div>
+                       
+                          <br>
+                      </div>
+                      <div class="col-5 text-center" >
+                          <h3> Duration</h3>
+                          <select id="" class="form-control" [value]="sessionDuration" (input)="sessionDuration=$event.target.value">
+                             
+                              <option value="{{min}}" *ngFor="let min of duration">{{min}}</option>
+                          </select>
+                         
+                          <br>
+                      </div>
+                    </div>
+              
+                      
+                    <hr>
+                <div class="row">
+                      
+                  <div class="col-6 text-center" >
+                      <h3>AM Hours</h3>
+                      <span>if there is no AM work hours,<br> check here &nbsp;&nbsp;</span><input [checked]="AMworkHours" type="checkbox"/><br>
+                      <label>From <select  id="hoursFrom" class="form-control" [value]="AMhour1" (input)="AMhour1=$event.target.value" >
+                      
+                          <option value="{{hour}}" *ngFor="let hour of AMhours">{{hour}}</option>
+                      </select></label><br>
+                      <label>To &nbsp; &nbsp;<select id="hoursTo" class="form-control" [value]="AMhour2" (input)="AMhour2=$event.target.value">
+                          
+                          <option value="{{hour}}" *ngFor="let hour of AMhours">{{hour}}</option>
+                      </select></label>
+                      
+                      <br>
+                  </div>
+                  <div class="col-6 text-center">
+                      
+                      <h3> PM Hours</h3>
+                      <span>if there is no PM work hours,<br> check here &nbsp;&nbsp;</span><input [checked]="PMworkHours" type="checkbox"/><br>
+                      <label>From <select  id="hoursFrom" class="form-control" [value]="PMhour1" (input)="PMhour1=$event.target.value" >
+                      
+                          <option value="{{hour}}" *ngFor="let hour of PMhours">{{hour}}</option>
+                      </select></label><br>
+                      <label>To &nbsp; &nbsp;<select id="hoursTo" class="form-control" [value]="PMhour2" (input)="PMhour2=$event.target.value">
+                          
+                          <option value="{{hour}}" *ngFor="let hour of PMhours">{{hour}}</option>
+                      </select></label>
+                      <br>
+                  </div>
+                  
+        
+                </div><hr>
+                  <br>
+              
+                    <div class="col-12"><button style="width: 100%;" class="btn btn-success" (click)="addSessions();"> Add Sessions</button>
+              
+              
+                    </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="nav-bookedSessions"><!--booked sessions tab -->
+                <div  style=" padding: 10px; border: solid black 1px ; background-color:burlywood;"> 
+                    <h3>UpComing Sessions</h3>
+                    <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let session of comingSessions;let i=index">
+    
+    
+                            
+                           
+                                        <th *ngIf="session.isBooked == 1;" scope="row">{{i+1}}</th>
+                                        <td *ngIf="session.isBooked == 1;"> {{session.date  | date:'shortDate'}}</td>
+                                        <td *ngIf="session.isBooked == 1;"> {{session.startTime | date:'mediumTime'}}</td>
+                                        <!-- if start time is now join else coming soon-->
+                                        <td *ngIf="session.isBooked == 1;"><button class="btn btn-primary" (click)="joinMeeting(session.id)">Join</button></td>
+                                
+                            
+                    
+    
+                           
+                        </tr>
+                    
+                    </tbody>
+                    </table>
+                </div>  
+            </div>
+            <div class="tab-pane fade" id="nav-notifications"><!-- notifications tab -->
+                notifications
+            </div>
+            <div class="tab-pane fade" id="nav-issues"><!-- issues tab --> 
+                issues
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">تعديل البيانات الشخصية</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form name="form" #form="ngForm" class="text-right" dir="rtl">
+                <div class="form-row"> 
+                    <div class="form-group col-md-6">
+                        <label>الإسم الأول </label>
+                        <input type="text" class="form-control" placeholder="{{doctor.user.firstName}}" name="fName"
+                        #fName="ngModel"
+                        [(ngModel)]="doctor_modified.user.firstName"
+                        required 
+                        maxlength="20"
+                        minlength="3"
+                        noWhiteSpaces
+                        [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }">
+                    <!--cs validation -->
+                        <div *ngIf="fName.invalid" class="invalid-feedback">
+                            <span *ngIf="fName.errors?.required && fName.dirty">
+                                *</span>
+                            <span *ngIf="fName.errors?.minlength && fName.dirty">
+                                يجب أن لا يقل الاسم عن 3 أحرف</span>
+                            <span *ngIf="fName.errors.hasWhiteSpace && fName.dirty">
+                                يجب أن لا يحتوى الاسم على مسافات</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>الإسم الآخير </label>
+                        <input type="text" class="form-control" placeholder="{{doctor.user.lastName}}" name="lName"
+                        #lName="ngModel"
+                        [(ngModel)]="doctor_modified.user.lastName"
+
+                        required 
+                        maxlength="20"
+                        minlength="3"
+                        noWhiteSpaces
+                        [ngClass]="{ 'is-invalid': lName.invalid && lName.dirty }">
+                    <!--cs validation -->
+                        <div *ngIf="lName.invalid" class="invalid-feedback">
+                            <span *ngIf="lName.errors?.required && lName.dirty">
+                                *</span>
+                            <span *ngIf="lName.errors?.minlength && lName.dirty">
+                                يجب أن لا يقل الاسم عن 3 أحرف</span>
+                            <span *ngIf="lName.errors.hasWhiteSpace && lName.dirty">
+                                يجب أن لا يحتوى الاسم على مسافات</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>التخصص </label>
+                    <input type="text" class="form-control" placeholder="{{doctor.speciality.name}}" name="speciality"
+                    #speciality="ngModel"
+                    [(ngModel)]="doctor_modified.speciality.name"
+
+                    required 
+                    maxlength="20"
+                    minlength="6"
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': speciality.invalid && speciality.dirty }">
+                <!--cs validation -->
+                    <div *ngIf="speciality.invalid" class="invalid-feedback">
+                        <span *ngIf="speciality.errors?.required && speciality.dirty">
+                            *</span>
+                        <span *ngIf="speciality.errors?.minlength && speciality.dirty">
+                            يجب أن لا يقل الاسم عن 6 أحرف</span>
+                        <span *ngIf="speciality.errors.hasWhiteSpace && speciality.dirty">
+                            يجب أن لا يحتوى الاسم على مسافات</span>
+                    </div>
+                </div> --
+
+                
+                
+                <div class="form-group">
+                    <label>البريد الإلكتروني </label>
+                    <input type="email" class="form-control" placeholder="{{doctor.user.mail}}" name="email"
+                    #email="ngModel"
+                    [(ngModel)]="doctor_modified.user.mail"
+
+                    required 
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': email.invalid && email.dirty }">
+                <!--cs validation -->
+                    <div *ngIf="email.invalid" class="invalid-feedback">
+                        <span *ngIf="email.errors?.required && email.dirty">
+                            *</span>
+                        <span *ngIf="email.errors?.email && email.dirty">
+                            ادخل صيغة صحيحة</span>
+                        <span *ngIf="email.errors.hasWhiteSpace && email.dirty">
+                            يجب أن لا يحتوى الاسم على مسافات</span>
+                    </div>
+                </div>  
+              
+
+                
+                
+                <div class="form-group">
+                    <label>رقم التليفون </label>
+                    <input type="text" class="form-control" placeholder="{{doctor.user.phoneNumber}}" name="phoneNumber"
+                    #phoneNumber="ngModel"
+                    [(ngModel)]="doctor_modified.user.phoneNumber"
+
+                    required 
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': phoneNumber.invalid && phoneNumber.dirty }">
+                <!--cs validation -->
+                   
+                </div>  
+              
+              
+ 
+              
+
+
+                   
+                    <div class="form-group col-md-4">
+                        <label>السن </label>
+                        <input type="text" class="form-control" name="age"  [(ngModel)]="doctor_modified.user.age" placeholder="{{doctor.user.age}}" >
+                    </div>
+               
+      
+                <div class="text-center">   
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" [disabled]="form.invalid" (click)="editDoctor()" data-dismiss="modal"> تعديل</button>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                
+                </div>
+            </form>
+        
+        </div>
+       
+      </div>
+    </div>
+
+</div>
+
+
