@@ -1,0 +1,10 @@
+{
+    "/medicalHistory": {
+      "target": "http://localhost:44353",
+      "secure": false,
+      "pathRewrite": {
+        "^/medicalHistory": ""
+      },
+      "logLevel": "debug"
+    }
+  }

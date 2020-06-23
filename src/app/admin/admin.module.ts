@@ -8,6 +8,7 @@ import { AdminSpecialitiesListComponent } from './admin-specialities-list/admin-
 import { AdminPatientsListComponent } from './admin-patients-list/admin-patients-list.component';
 import { AdminDoctorsRequestsComponent } from './admin-doctors-requests/admin-doctors-requests.component';
 import { from } from 'rxjs';
+import{NgxExtendedPdfViewerModule} from 'ngx-extended-pdf-viewer'
 
 
 @NgModule({
@@ -15,7 +16,9 @@ import { from } from 'rxjs';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxExtendedPdfViewerModule
+
   ]
 })
 export class AdminModule { }

@@ -30,6 +30,8 @@ export class PatientComponent implements OnInit {
   docSc:doctorPatientSchedule;
 
   private fieToUpload:File=null;
+
+  private medicalFile:File=null;
   constructor(private patientservice:PatientService ,private router:Router,private doctorService:DoctorService,private authService:AuthService, private toastr:ToastrService,private route:Router,private http:HttpClient,private fileupload:FileUploadService) { 
 
     this.patient={user:{}}
@@ -151,8 +153,7 @@ uploadFile()
     console.log(environment.baseURL+"images/"+this.patient.user.imageName);
       })
 
-
-
+    
       
 
       }
@@ -163,6 +164,17 @@ console.log(err);
     );;
   }
 
+  handleFileMedicalHistory(files:FileList)
+  {
+    this.medicalFile=files.item(0);
+    this.fileupload.PostMedicalHistory(this.medicalFile,this.patient.user.id)
+    .subscribe((res)=>{
+
+      console.log('done medical',res);
+
+    })
+
+  }
 
   
   joinMeeting(roomName){

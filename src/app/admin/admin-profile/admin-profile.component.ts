@@ -13,12 +13,18 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./admin-profile.component.css']
 })
 export class AdminProfileComponent implements OnInit {
-  admin:User;
+  admin:User={};
 
   fieToUpload:File;
   imageFromApi:String;
 
-  constructor(private authService:AuthService,private adminservice:AdminService,private toastr:ToastrService,private fileUploadservice:FileUploadService) { }
+  constructor(private authService:AuthService,
+    private adminservice:AdminService,private toastr:ToastrService
+    ,private fileUploadservice:FileUploadService) {
+
+      
+     }
+    
   ngOnInit() {
       let AdminId = this.authService.getUserPayLoad().id;
 
@@ -26,14 +32,13 @@ export class AdminProfileComponent implements OnInit {
 
         this.admin=_admin;
 
+        console.log('aaaaaaaaa',this.admin)
         if(this.admin.imageName != null)
         {
           this.imageFromApi=environment.baseURL+"images/"+this.admin.imageName;
 
 
         }
-        console.log(this.admin);
-
 
       })
 

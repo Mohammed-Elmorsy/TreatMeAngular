@@ -1,3 +1,4 @@
+
 <table class="table table-hover text-center">
     <thead class="bg-primary text-light">  
       <tr>
@@ -5,6 +6,7 @@
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
         <th scope="col">User Name</th>
+        <th scope="col">MedicalHistory</th>
         <th scope="col">Operations</th>
       </tr>
     </thead>
@@ -14,6 +16,22 @@
         <td>{{patient.user.firstName}}</td>
         <td>{{patient.user.lastName}}</td>
         <td>{{patient.user.userName}}</td>
+        <td *ngIf="patient.medicalHstoryName == NULL ; else elseCode2">
+          <h2>
+            no Medical History
+          </h2>
+
+
+        </td>
+
+
+        <ng-template #elseCode2>
+          <button class="btn btn-danger" (click)="SelectpatientForMedical(patient)" data-toggle="modal" data-target="#MedicalHistoryModal" >View medical h</button> 
+
+
+
+
+        </ng-template>
         <td><button class="btn btn-info" (click)="SelectDoctorToOperation(patient)" data-toggle="modal" data-target="#PatientDetails">Details</button>|
             <button class="btn btn-warning"(click)="SelectDoctorToOperation(patient)"class="btn btn-primary" data-toggle="modal" data-target="#PatientEdit" > edit
           </button>|
@@ -297,3 +315,35 @@
       </div>
     </div>
   </div>
+
+
+  <!--medical Historory modal-->
+
+  
+  
+  <div class="modal fade" id="MedicalHistoryModal" tabindex="-1" role="dialog"  aria-hidden="true" style=" width: 1200px;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">medicalHistory</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+        <div>
+          <ngx-extended-pdf-viewer src={{medical}} 
+          useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
+
+      </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
