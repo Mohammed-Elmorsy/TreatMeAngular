@@ -26,7 +26,7 @@ export class DoctorProfileGuard implements CanActivate {
               console.log(data);
               return true; 
             }              
-            else {
+            else { 
               console.log(data);  
               this._router.navigate(['/login']);
               return false;

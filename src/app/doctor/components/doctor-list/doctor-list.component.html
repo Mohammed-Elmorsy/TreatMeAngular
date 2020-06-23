@@ -6,22 +6,22 @@
         <span *ngIf="doctor.user.imageName == NULL; else elseBlock">
 
        
-        <img class="card-img-top" style="margin-top:10px" src="assets/images/doctors/profile-pic.png" alt="{{doctor.user.firstName}">
+        <img class="card-img-top" style="margin-top:10px" src="assets/images/doctors/profile-pic.png" alt="{{doctor.user.firstName}}">
 
-      </span>
+      </span>  
 <ng-template #elseBlock>
-  <img class="card-img-top" style="margin-top:10px" src="https://localhost:44353/images/{{doctor.user.imageName}}" alt="{{doctor.user.firstName}">
+  <img class="card-img-top" style="margin-top:10px" src="https://localhost:44353/images/{{doctor.user.imageName}}" alt="{{doctor.user.firstName}}">
 
 </ng-template>
 
         <div class="card-body">        
-          <h4 class="card-text text-center">{{doctor.firstName}} {{doctor.lastName}}</h4>
-
-          <h5 class="card-title text-center" style="color: blue;">{{doctor.title}}</h5>   
-          <p class="card-text text-center">EGP تمن الجلسة : {{doctor.fees}}</p>
-          <button class="btn btn-primary" >احجز جلسة</button>   
+          <h4 class="card-text text-center">{{doctor.title}}. {{doctor.user.firstName}} {{doctor.user.lastName}}</h4>
+ 
+          <h6 class="card-title text-center" style="color: blue;">{{doctor.titleDescription}}</h6>   
+          <p class="card-text text-center">{{"DoctorsList.Fees" | translate}} : {{doctor.fees}} EGP</p>  
+          <button class="btn btn-primary" >{{"DoctorsList.Book" | translate}}</button>   
         </div>
-      </div>  
+      </div>    
     </div>
 
   </div>

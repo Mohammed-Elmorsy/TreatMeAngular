@@ -1,7 +1,10 @@
 <div id="wrapper" [ngClass]="{ 'ltr': this.translate.currentLang == 'en','rtl': this.translate.currentLang == 'ar'}">
-    <app-header></app-header> 
-    <div *ngIf="showLoadingIndicator" class="spinner"></div>
-    <router-outlet>  
+    <app-header></app-header>
+
+    <!-- <div *ngIf="showLoadingIndicator" class="lds-dual-ring"></div> -->
+    <div *ngIf="showLoadingIndicator" id="loading"><img src="assets/images/common/loading_indicator.gif" alt="loading ...."> </div>
+    <router-outlet *ngIf="!showLoadingIndicator" >    
 
     </router-outlet>
+
 </div>

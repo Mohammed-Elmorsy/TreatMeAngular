@@ -1,24 +1,134 @@
-<table class="table table-hover text-center">
-    <thead class="bg-primary text-light">  
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">User Name</th>
-        <th scope="col">Operations</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">ID</th>
-        <td>firstName</td>
-        <td>lastName</td>
-        <td>userName</td>
-        <td><button class="btn btn-info">Details</button>|
-            <button class="btn btn-success">Confirm</button>|  
-            <button class="btn btn-danger">Cancel</button> 
+<table class="table table-hover text-center"> 
+  <thead class="bg-primary text-light">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">User Name</th>
+      <th scope="col">Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let doctor of doctorsRequests">
+      <th scope="row">{{doctor.userId}}</th> 
+      <td>{{doctor.user.firstName}}</td>
+      <td>{{doctor.user.lastName}}</td> 
+      <td>{{doctor.user.userName}}</td>
+      <td>
+          <button class="btn btn-info" (click)="SelectDoctorToDelete(doctor)" data-toggle="modal" data-target="#DetailsModal1">Details</button> |
+          <button class="btn btn-success" (click)="confirmRequest(doctor);">Confirm</button> |
+            <button class="btn btn-danger" (click)="SelectDoctorToDelete(doctor);" data-toggle="modal" data-target="#DeleteModal1" >Cancel</button> 
         </td>
-      </tr>
-    </tbody>
-  </table>
+    </tr>
+  </tbody>
+</table>
 
+
+<!--  **************** delete modal************************************************-->
+
+
+<div class="modal fade" id="DeleteModal1" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">تأكيد الحذف</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-md-12" style="text-align: center;">
+            <p style="font-size:x-large; color: red;"> هل تريد حذف الطبيب / {{doctor_ForOperation.user.firstName}}
+              {{doctor_ForOperation.user.lastName}} ؟؟
+            </p>
+          </div>
+
+        </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" (click)="DeleteDoctor()" data-dismiss="modal">حذف</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  
+<!------------ details Modal ----->
+
+<div class="modal fade" id="DetailsModal1" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">معلومات عن الطبيب</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <span *ngIf="doctor_ForOperation.user.imageName == NULL ;else elseCode">
+              <img [src]="DocImg" alt="" class="img-rounded img-responsive" style="width:90%; height:120px;" />
+
+            </span>
+            <ng-template #elseCode>
+              <img [src]="DoctorImage" alt="" class="img-rounded img-responsive" style="width:90%; height:120px;" />
+
+            </ng-template>
+          </div>
+          <div class="col-sm-6 col-md-8">
+            <h5>
+              د. {{doctor_ForOperation.user.firstName}} {{doctor_ForOperation.user.lastName}} </h5>
+
+            <small><cite>اخصائي {{doctor_ForOperation.speciality.name}} <i class="glyphicon glyphicon-map-marker">
+                </i></cite></small>
+            <p>
+              <i class="glyphicon glyphicon-envelope"></i>{{doctor_ForOperation.user.mail}}
+              <br />
+              <span class="glyphicon glyphicon-envelope"> العنوان :</span>{{doctor_ForOperation.user.address}}
+              <br />
+              <span class="glyphicon glyphicon-envelope">رقم الهاتف :</span>{{doctor_ForOperation.user.phoneNumber}}
+              <br />
+              <span class="glyphicon glyphicon-envelope">سعر الكشف :</span> <span
+                class="badge badge-warning"></span>{{doctor_ForOperation.fees}} جنيه مصري
+              <br />
+              <span class="glyphicon glyphicon-envelope">التفييم :</span> <span
+                class="badge badge-warning">{{doctor_ForOperation.rating}} /5</span>
+              <br />
+              <span class="glyphicon glyphicon-envelope">العمر :</span> <span
+                class="badge badge-warning"></span>{{doctor_ForOperation.user.age}}
+              <br />
+
+
+              <!-- Split button -->
+
+          </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+      </div>
+    </div>
+  </div>
+</div>

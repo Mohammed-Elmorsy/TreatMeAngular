@@ -21,6 +21,10 @@ import { AppComponent } from './app.component';
 import { DoctorProfileModalComponent } from './doctor/components/doctor-profile-modal/doctor-profile-modal.component';
 //interceptor providers
 import { HttpInterceptorProviders } from './core/interceptors';
+//resolvers
+import { HomeResolver } from './core/resolvers/home.resolver';
+import { SubscriberComponent } from './subscriber/subscriber.component';
+import { VideoComponent } from './video/video.component';
 
 
 
@@ -28,7 +32,7 @@ import { HttpInterceptorProviders } from './core/interceptors';
 
 @NgModule({
   declarations: [ //components
-    AppComponent
+    AppComponent, SubscriberComponent, VideoComponent
 
   ],
   entryComponents:[DoctorProfileModalComponent],
@@ -61,7 +65,7 @@ import { HttpInterceptorProviders } from './core/interceptors';
 
     AppRoutingModule //always the last one  
   ],
-  providers: [HttpInterceptorProviders ],  
+  providers: [HttpInterceptorProviders, HomeResolver],   
   bootstrap: [AppComponent]
 })
 export class AppModule { }

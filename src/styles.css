@@ -51,4 +51,10 @@ body{
         color: darkred;
     }
 
-   
+#loading img{ 
+    position: fixed; 
+    top:40%; 
+    left:40%;      
+    height: 300px;
+    width: 300px;   
+}

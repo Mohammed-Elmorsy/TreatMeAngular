@@ -147,26 +147,50 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="inputTitle">{{"Register.Title" | translate}}</label>
-                    <select id="inputTitle" class="form-control" name="title" ngModel><!-- still need work -->
+                    <select id="inputTitle" class="form-control" name="title" 
+                    #title="ngModel"
+                    [(ngModel)]="doctor.title"
+                    [ngClass]="{ 'is-invalid': title.invalid && title.dirty }"
+                    required >
+                    <!-- still need work -->
                         <option selected disabled>{{"Register.Choose" | translate}}</option>
-                        <option>P</option>
-                        <option>D</option>    
+                        <option>{{"DoctorsList.P" | translate}}</option> 
+                        <option>{{"DoctorsList.D" | translate}}</option>    
                     </select>
+
                 </div>
                 <div class="form-group col-md-6">
                     <label>{{"Register.TitleDetails" | translate}}</label><!-- still need work -->
-                    <input type="text" class="form-control" name="titleDetails" 
-                    #titleDetails = "ngModel"
-                    [(ngModel)] = "doctor.title"   
+                    <input type="text" class="form-control" name="titleDescription" 
+                    #titleDescription = "ngModel" 
+                    [(ngModel)] = "doctor.titleDescription"     
                     noStartOrDoubleSpaces
+                    required
+                    pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
+                    [ngClass]="{ 'is-invalid': titleDescription.invalid && titleDescription.dirty }"
+
                     >
+                    <span *ngIf="titleDescription.dirty && titleDescription.errors?.required" class="invalid-feedback">
+                        {{"Register.Validation.Required" | translate}}</span> 
+                 <!--cs validation -->
+                     <div *ngIf="titleDescription.invalid" class="invalid-feedback">
+                         <span *ngIf="titleDescription.errors?.startsWithSpace && titleDescription.dirty">
+                             {{"Register.Validation.SpaceStart" | translate}}</span>
+                         <span *ngIf="titleDescription.errors?.hasDoubleSpace && titleDescription.dirty">
+                             {{"Register.Validation.DoubleSpace" | translate}}</span>
+                         <span *ngIf="titleDescription.errors?.pattern && titleDescription.dirty">  
+                             {{"Register.Validation.LettersOnly" | translate}}</span>
+                     </div>
                 </div>  
                 <div class="form-group col-md-4">
                     <label for="inputSpeciality">{{"Register.Speciality" | translate}}</label>  
-                    <select id="inputSpeciality" class="form-control" name="speciality" [(ngModel)]="doctor.specialityId">
+                    <select id="inputSpeciality" class="form-control" name="speciality" [(ngModel)]="doctor.specialityId"
+                    required #speciality="ngModel"> 
                         <option  [ngValue]="null" disabled>{{"Register.Choose" | translate}}</option>  
                         <option *ngFor='let speciality of specialities' value="{{speciality.id}}">{{ ("Home.Speciality." + speciality.name) | translate}}</option>
                     </select>
+                    <span *ngIf="speciality.dirty && speciality.errors?.required" class="invalid-feedback">
+                        {{"Register.Validation.Required" | translate}}</span>
                 </div>
             </div>
 

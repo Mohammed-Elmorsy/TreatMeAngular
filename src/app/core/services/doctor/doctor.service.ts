@@ -19,23 +19,25 @@ export class DoctorService {
    constructor(private httpClient:HttpClient) { }
 
   //-----------------------------------------methods------------------------------------
-  getDoctors() {
-    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/Doctors/Index");
+  getConfirmedDoctors() {
+    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/Doctors/GetAllDoctorsByconfirmed/true");
   }
+
+  getDoctorsRequests() {
+    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/Doctors/GetAllDoctorsByconfirmed/false");
+  }
+
   getDocId(){
     return this.docId;
   }
 
-/*   getSpecialities(){
-    return this.httpClient.get<Speciality[]>(environment.baseURL+"api/speciality");
-  }  */ 
 
-  getDoctorsBySpeciality(specialityID:number){
-    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/doctors/GetSomeDoctorDetailsBySpecialityId/"+specialityID);
+  getDoctorsBySpeciality(specialityID:number){  
+    return this.httpClient.get<Doctor[]>(environment.baseURL+"api/doctors/GetAllDoctorDetailsBySpecialityId/"+specialityID);
   }  
 
   getDoctor(id){
-
+        
     return this.httpClient.get<Doctor>(environment.baseURL+"api/Doctors/Details/"+id);
   }
 
@@ -75,4 +77,9 @@ DeleteDoctor(id)
 
   }
 
+  DoctorCancelDaySessions(id:number,date:Date){
+
+    return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/DoctorCancelSchedules/"+id+"/"+date)
+
+  }
 }

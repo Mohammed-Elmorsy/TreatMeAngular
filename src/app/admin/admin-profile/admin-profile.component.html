@@ -65,17 +65,17 @@
                 </div>   
               </nav>  -->
               <nav class="bg-light justify-content-center" style="padding: 10px;">
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist"> 
                   <a class="nav-item nav-link active" id="nav-doctorsRequests-tab" data-toggle="tab" href="#nav-doctorsRequests" aria-selected="true">
-                        Doctors Requests <span class="badge badge-primary">4</span>
+                        Doctors Requests <span *ngIf="requestsNumber > 0" class="badge badge-primary">{{requestsNumber}}</span> 
                   </a>  
                   <a class="nav-item nav-link" id="nav-doctors-tab" data-toggle="tab" href="#nav-doctors" aria-selected="false">Doctors</a>
                   <a class="nav-item nav-link" id="nav-specialities-tab" data-toggle="tab" href="#nav-specialities"  aria-selected="false">Specialities</a>
                   <a class="nav-item nav-link" id="nav-patients-tab" data-toggle="tab" href="#nav-patients"  aria-selected="false">Patients</a>
                 </div>   
-              </nav> 
+              </nav>   
               <div class="tab-content bg-light p-3" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-doctorsRequests" ><app-admin-doctors-requests></app-admin-doctors-requests></div>
+                <div class="tab-pane fade show active" id="nav-doctorsRequests" ><app-admin-doctors-requests (requestsChanged)="requestsNumber = $event"></app-admin-doctors-requests></div>
                 <div class="tab-pane fade" id="nav-doctors" ><app-admin-doctors-list></app-admin-doctors-list> </div>
                 <div class="tab-pane fade" id="nav-specialities" ><app-admin-specialities-list></app-admin-specialities-list></div>
                 <div class="tab-pane fade" id="nav-patients" ><app-admin-patients-list></app-admin-patients-list></div>  

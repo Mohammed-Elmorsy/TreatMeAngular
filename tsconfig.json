@@ -23,4 +23,12 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }
+  ,"Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ApiKey": "",
+  "ApiSecret": ""
 }

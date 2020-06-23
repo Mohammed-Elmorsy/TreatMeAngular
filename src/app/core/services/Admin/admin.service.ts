@@ -13,6 +13,6 @@ export class AdminService {
 
   getAdminById(id)
   {
-    return this.httpclient.get<User>(environment.baseURL+"api/user/GetAdmin/"+id);
+    return this.httpclient.get<User>(environment.baseURL+"api/user/details/"+id);
   }
 }
