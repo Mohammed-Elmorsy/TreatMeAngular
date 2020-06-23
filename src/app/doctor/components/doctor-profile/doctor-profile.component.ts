@@ -305,7 +305,7 @@ console.log(err);
         this.stateService.token$ = res['token'];
         this.stateService.sessionId$ = res['sessionId'];
         this.stateService.apiKey$ = res['apiKey'];
-        this.router.navigate(['/video'])
+        this.router.navigate(['/video/'+RoomId])
       }
     )
    

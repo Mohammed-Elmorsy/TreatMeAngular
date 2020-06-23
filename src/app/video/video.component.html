@@ -1,9 +1,11 @@
 <div>
- 
-  <div class="publishingDiv" [ngClass]="{'publishing': publishing}" #publisherDiv></div>
+
+  <div class="publishingDiv" [ngClass]="{'publishing': publishing}" #publisherDiv><h3><button class="btn-warning">{{Name}}</button></h3></div>
   <div>  
-    <ng-template #subscriberHost></ng-template>
+    <ng-template #subscriberHost> <h1></h1></ng-template>
+
   </div>
-  <button class="btn btn-danger">End</button>
+
 </div>
+<div class="col-12" style="width: 200px; margin-top: 10px;">  <button class="btn btn-danger" (click)="endMeeting()">End Meeting</button><br>   </div>
 

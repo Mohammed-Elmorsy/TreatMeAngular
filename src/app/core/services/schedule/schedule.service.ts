@@ -25,6 +25,13 @@ getScheduleByDoctorId(Id:Number,date:Date)
 return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/GetDoctorSchedules/"+Id+"/"+date)
 
 }
+getScheduleById(id:number)
+{
+
+    return this.httpClient.get<Schedule>(environment.baseURL+"api/Schedule/Details/"+id);
+
+}
+
 
 
  /* scheduleTimes:Schedule[]=[

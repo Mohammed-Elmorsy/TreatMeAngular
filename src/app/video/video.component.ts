@@ -4,6 +4,14 @@ import * as OT from '@opentok/client';
 import { SubscriberComponent } from '../subscriber/subscriber.component';
 import { StateService } from '../stateService';
 import { Router } from '@angular/router';
+import { Stream } from 'stream';
+import { AuthService } from '../core/services/auth/auth.service';
+import { DoctorService } from '../core/services/doctor/doctor.service';
+import { PatientService } from '../core/services/patient/patient.service';
+import { PatternValidator } from '@angular/forms';
+import { Doctor } from '../_models/doctor';
+import { Patient } from '../_models/patient';
+import { ScheduleService } from '../core/services/schedule/schedule.service';
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
@@ -20,19 +28,58 @@ publishing;
 apiKey: string;
 token: string;
 sessionId: string;
-constructor(
+Name:string;
+constructor(private auth:AuthService,
   private componentFactoryResolver: ComponentFactoryResolver,
   private stateService: StateService,
+  private doctorService:DoctorService,
+  private scheduleService:ScheduleService,
+  private patientService:PatientService,
   private router: Router
 ) { }
 
 ngOnInit(): void {
+  // this.Name=this.auth.getUserPayLoad().;
   if (!this.stateService.apiKey$ || !this.stateService.token$ || !this.stateService.sessionId$) {
     this.router.navigate(['/']);
   }
+
+  let docId:number;
+
+
+
+
   this.apiKey = this.stateService.apiKey$;
   this.token = this.stateService.token$;
   this.sessionId = this.stateService.sessionId$;
+  let id=this.auth.getUserPayLoad().id;
+  let role=this.auth.getUserPayLoad().role;
+  let doctor:Doctor;
+  let patient:Patient;
+  if (role=="Doctor") {
+    this.doctorService.getDoctor(id).subscribe((a)=>{
+     
+      
+      doctor =a;  
+      this.Name=doctor.user.firstName + " "+ doctor.user.lastName; 
+ 
+       
+  
+     });
+
+  }
+  else{
+
+    this.patientService.getPatientById(id).subscribe((a)=>{
+     
+      
+      patient =a;  
+      this.Name=patient.user.firstName + " "+ patient.user.lastName; 
+ 
+       
+  
+     });;
+  }
 }
 
 
@@ -47,13 +94,21 @@ publish() {
   });
 }
 
-onStreamCreated(stream) {
-  const componentFactory = this.componentFactoryResolver.resolveComponentFactory(SubscriberComponent);
+onStreamCreated(stream,status:boolean) 
+{
+  if(status!=false)
+  {const componentFactory = this.componentFactoryResolver.resolveComponentFactory(SubscriberComponent);
   const viewContainerRef = this.subscriberHost;
   const componentRef = viewContainerRef.createComponent(componentFactory);
   (<SubscriberComponent>componentRef.instance).stream = stream;
   (<SubscriberComponent>componentRef.instance).session = this.session;
   (<SubscriberComponent>componentRef.instance).subscribe();
+}
+else{
+  stream.getTracks().forEach(function(track) {
+    track.stop();
+  });
+}
 }
 
 ngAfterViewInit(): void {
@@ -74,7 +129,7 @@ ngAfterViewInit(): void {
       this.publish()
       let that = this;
       this.session.on("streamCreated", function (event) {
-        that.onStreamCreated(event.stream);
+        that.onStreamCreated(event.stream,true);
         
       });
     }
@@ -82,5 +137,20 @@ ngAfterViewInit(): void {
 
   
 }
+  endMeeting(){
+    //destroy session
+  var r = confirm("Are you sure you want to end the meeting?");
+    if (r==true) {
+      this.session.disconnect();
+
+      this.router.navigate(['/home']);
+    }
+  
+
+
+  }
+
+
+
 
 }
