@@ -6,6 +6,8 @@ import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { Speciality } from 'src/app/_models/speciality';
 import { SpecialityService } from '../../services/speciality/speciality.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-doctor-register',
@@ -19,7 +21,7 @@ export class DoctorRegisterComponent implements OnInit {
 
   private doctor:Doctor;
   constructor(private authService:AuthService, private router:Router ,
-    private toastr:ToastrService , private specialityService:SpecialityService) { 
+    private toastr:ToastrService , private specialityService:SpecialityService,private http:HttpClient) { 
     this.doctor = {
       userId:null,  
       fees:200,
@@ -54,20 +56,34 @@ export class DoctorRegisterComponent implements OnInit {
   handleFileInput(files:FileList)
   {
     this.Cv=files.item(0);
-    const formdata:FormData=new FormData();
-    formdata.append('cv',this.Cv,this.Cv.name);
-    this.doctor.CV=this.Cv;;
-console.log(files.item(0));
+   
 console.log(this.doctor);
   }
 
   onSubmit(){
+    console.log(this.doctor)
     this.authService.registerDoctorUser(this.doctor)
     .subscribe(
       res =>{
         console.log(res);
-        this.toastr.success('لقد تم تسجيل حسابك بنجاح','مرحبا بك'); 
-        this.router.navigate(["/"]);
+        const formdata:FormData=new FormData();
+        formdata.append('cv',this.Cv,this.Cv.name);
+  
+        return this.http.post(environment.baseURL+"api/doctors/UploadCV/"+this.doctor.user.userName,formdata,{headers:{
+          'Accept': 'application/json',     
+          'Content-Disposition' : 'multipart/form-data'
+        }}).subscribe(()=>{
+          this.toastr.success('لقد تم تسجيل حسابك بنجاح','مرحبا بك');
+
+          this.router.navigate(["/"]);
+
+
+        },(err)=>{
+          console.log(err);
+        })
+        
+        
+        
 
       },  
       err => {

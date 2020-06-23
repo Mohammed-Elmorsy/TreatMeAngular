@@ -25,6 +25,7 @@ export class AdminDoctorsRequestsComponent implements OnInit {
   Specialities:any;
   DocImg:String;
   DoctorImage:String;
+  Doctorcv:String;
 
   constructor(private doctorService:DoctorService,private toastr:ToastrService) { }
 
@@ -32,6 +33,8 @@ export class AdminDoctorsRequestsComponent implements OnInit {
 
     this.doctorService.getDoctorsRequests().subscribe(res =>{
       this.doctorsRequests = res;
+      console.log(this.doctorsRequests)
+    
       this.onDoctorsRequestsChange();          
     })
   }
@@ -72,6 +75,13 @@ export class AdminDoctorsRequestsComponent implements OnInit {
 
 
     }
+  }
+
+  SelectDoctorForViewCV(doctor){
+
+    this.doctor_ForOperation=doctor;
+    this.Doctorcv=environment.baseURL+"cvs/"+this.doctor_ForOperation.cvName;
+    console.log(this.Doctorcv)
   }
   
   DeleteDoctor()

@@ -42,19 +42,6 @@ export class FileUploadService {
     }
 
 
-    getMedicalHistory(patient:Patient)
-    {
-      return this.httpclient.get<File>(environment.baseURL+"medicalHistory/"+patient.medicalHstoryName)
-    }
-    downloadPDF(patient):any{
-      return this.httpclient.get(environment.baseURL+"medicalHistory/"+patient.medicalHstoryName, { responseType: 'arraybuffer'}).pipe(map
-      
-      
-      (res => {
-        return new Blob([res], { type: 'application/pdf' });
-    }));
-  
-    }
 
 
 }

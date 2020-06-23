@@ -16,22 +16,23 @@
         <td>{{patient.user.firstName}}</td>
         <td>{{patient.user.lastName}}</td>
         <td>{{patient.user.userName}}</td>
-        <td *ngIf="patient.medicalHstoryName == NULL ; else elseCode2">
+        <td *ngIf="patient.medicalHstoryName == '' ; else elseCode3">
           <h2>
-            no Medical History
+            no medicalHistory
           </h2>
 
 
         </td>
 
 
-        <ng-template #elseCode2>
-          <button class="btn btn-danger" (click)="SelectpatientForMedical(patient)" data-toggle="modal" data-target="#MedicalHistoryModal" >View medical h</button> 
+        <ng-template #elseCode3>
+          <button class="btn btn-danger" (click)="SelectpatientForMedical(patient)" data-toggle="modal" data-target="#MedicalModal" >View Medical History</button> 
 
 
 
 
         </ng-template>
+
         <td><button class="btn btn-info" (click)="SelectDoctorToOperation(patient)" data-toggle="modal" data-target="#PatientDetails">Details</button>|
             <button class="btn btn-warning"(click)="SelectDoctorToOperation(patient)"class="btn btn-primary" data-toggle="modal" data-target="#PatientEdit" > edit
           </button>|
@@ -319,13 +320,14 @@
 
   <!--medical Historory modal-->
 
+
+
   
-  
-  <div class="modal fade" id="MedicalHistoryModal" tabindex="-1" role="dialog"  aria-hidden="true" style=" width: 1200px;">
+  <div class="modal fade" id="MedicalModal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">medicalHistory</h5>
+          <h5 class="modal-title" id="exampleModalLabel">medical</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -333,11 +335,11 @@
         <div class="modal-body">
          
         <div>
-          <ngx-extended-pdf-viewer src={{medical}} 
-          useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
-
+          <ngx-extended-pdf-viewer [src]='patientMedicalHistory' 
+          useBrowserLocale="true" height="70vh"></ngx-extended-pdf-viewer>
+  
       </div>
-
+  
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -345,5 +347,6 @@
       </div>
     </div>
   </div>
-
-
+  
+  
+  

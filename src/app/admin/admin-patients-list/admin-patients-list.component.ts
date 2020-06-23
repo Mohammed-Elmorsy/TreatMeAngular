@@ -3,7 +3,6 @@ import { PatientService } from 'src/app/core/services/patient/patient.service';
 import { Patient } from 'src/app/_models/patient';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
-import { Url } from 'url';
 import { FileUploadService } from 'src/app/core/services/FileUpload/file-upload.service';
 
 @Component({
@@ -16,10 +15,10 @@ export class AdminPatientsListComponent implements OnInit {
   private patients:Patient[];
   patientImg:String;
   PatientImage:String;
-  medical:string;
   patientFoOperation:Patient=new Patient({id:0,firstName:"",lastName:"",role:2,userName:"",password:""});
+  private PatientforMedical:Patient;
 
-
+  patientMedicalHistory:string;
 
   constructor(private patientService:PatientService,private patientservice:PatientService,private toastr:ToastrService,private fileserice:FileUploadService) { }
 
@@ -42,6 +41,19 @@ export class AdminPatientsListComponent implements OnInit {
       this.PatientImage=environment.baseURL+"images/"+this.patientFoOperation.user.imageName;
     }
   }
+
+  SelectpatientForMedical(patient)
+{
+  this.PatientforMedical=patient;
+  
+  this.patientMedicalHistory=environment.baseURL+"medicalHistory/"+this.PatientforMedical.medicalHstoryName;
+  
+  console.log(this.patientMedicalHistory)
+
+
+    
+}
+
 
   Update()
   {
@@ -76,26 +88,9 @@ export class AdminPatientsListComponent implements OnInit {
   }
 
 
-SelectpatientForMedical(patient:Patient)
-{
-  this.patientFoOperation=patient;
-  console.log(this.patientFoOperation)
-  
-  //this.medical=environment.baseURL+"medicalHistory/"+this.patientFoOperation.medicalHstoryName;
-  let tab = window.open();
-  this.fileserice
-    .downloadPDF(this.patientFoOperation)
-    .subscribe(data => {
-      const fileUrl = URL.createObjectURL(data);
-      this.medical=fileUrl;
 
 
-    });
-}
 
-downloadPDF() {
- 
-}
 /*
 this.patientFoOperation=patient;
   this.fileupload.getMedicalHistory(this.patientFoOperation)

@@ -66,14 +66,33 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work text-center">
-                            <h3>Your Medical History</h3>
 
-                            <div id="hide" class="col-lg-8 col-xs-8" style="margin-top: -25px;" style="color: darkblue; margin-top: 40px; margin-left: 28px;">
-                                <label class="hand-cursor">
-                                    <input type="file" id="file" class=""   name="file" (change)="handleFileMedicalHistory($event.target.files)"  />
-                                    <span class="fa fa-3x fa-file"></span>
-                                  </label>
-                             </div>
+                            <span *ngIf="patient.medicalHstoryName == NULL ; else mediclHistoryUploaded">
+                                <h3>Upload Your Medical History</h3>
+
+                                <div id="hide" class="col-lg-8 col-xs-8" style="margin-top: -25px;" style="color: darkblue; margin-top: 40px; margin-left: 28px;">
+                                    <label class="hand-cursor">
+                                        <input type="file" id="file" class=""   name="file" (change)="handleFileMedicalHistory($event.target.files)"  />
+                                        <span class="fa fa-3x fa-file"></span>
+                                      </label>
+                                 </div>
+                            </span>
+                            <ng-template #mediclHistoryUploaded>
+                                <div id="hide" class="col-lg-8 col-xs-8" style="margin-top: -25px;" style="color: darkblue; margin-top: 40px; margin-left: 28px;">
+                                    <label class="hand-cursor">
+                                        <input type="file" id="file" class=""   name="file" (change)="handleFileMedicalHistory($event.target.files)"  />
+                                        <span class="fa fa-3x fa-file"></span>
+                                        <label>Update your Medical History</label>
+                                      </label>
+                           
+                                 </div>
+
+
+                                 <button class="btn btn-danger" (click)="SelectPatientForViewMd(patient)" data-toggle="modal" data-target="#MDModal" >View your Medical History</button> 
+
+
+                            </ng-template>
+                           
                           
                         </div>
                     </div>
@@ -369,4 +388,32 @@
   </div>
 
 
+  
+  
+ <div class="modal fade" id="MDModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">medical History View</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+        <div>
+          <ngx-extended-pdf-viewer [src]='MedicalToView' 
+          useBrowserLocale="true" height="70vh"></ngx-extended-pdf-viewer>
+  
+      </div>
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
   

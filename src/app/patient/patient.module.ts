@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { PatientRoutingModule } from './patient-routing.module';
 import { PatientComponent } from './compnents/patient/patient.component';
+import {NgxExtendedPdfViewerModule} from 'ngx-extended-pdf-viewer';
 
 
 
@@ -12,7 +13,7 @@ import { PatientComponent } from './compnents/patient/patient.component';
   declarations: [PatientComponent],
   imports: [
     SharedModule,
-    PatientRoutingModule,
+    PatientRoutingModule,NgxExtendedPdfViewerModule
     
   ]
 })

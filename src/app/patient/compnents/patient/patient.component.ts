@@ -34,6 +34,7 @@ export class PatientComponent implements OnInit {
   private fieToUpload:File=null;
 
   private medicalFile:File=null;
+  MedicalToView:String;
   constructor(private patientservice:PatientService , private stateService: StateService,private router:Router,private doctorService:DoctorService,private authService:AuthService, private toastr:ToastrService,private route:Router,private http:HttpClient,private fileupload:FileUploadService) { 
 
     this.patient={user:{}}
@@ -172,14 +173,33 @@ console.log(err);
     this.fileupload.PostMedicalHistory(this.medicalFile,this.patient.user.id)
     .subscribe((res)=>{
 
-      console.log('done medical',res);
+      this.toastr.info("medical history Uploaded")
 
+      /* this section of code to load the current Patient with the uploaded File */
+      this.patientservice.getPatientById(this.patient.user.id).subscribe((_patient)=>{
+        this.patient=_patient;
+    
+    
+        this.patient_modified=_patient;
+    
+    
+        if(this.patient.user.imageName !="")
+        {
+          this.imageFromApi=environment.baseURL+"images/"+this.patient.user.imageName;
+        }
+    
+        });
+    
     })
 
   }
 
   
-  
+  SelectPatientForViewMd(_patient)
+  {
+    this.patient=_patient;
+    this.MedicalToView=environment.baseURL+"medicalHistory/"+this.patient.medicalHstoryName;
+  }
   
   cancelSession(session){
    console.log(session);

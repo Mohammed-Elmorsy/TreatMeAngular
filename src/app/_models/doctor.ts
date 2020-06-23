@@ -10,7 +10,8 @@ export class Doctor {
         public userId?:Number,       
         public fees?:Number,
         public rating?:Number,
-        public  CV?:File,
+        public  CV?:FormData,
+        public cvName?:String,
         public title?:string,
         public titleDescription?:string,
         public confirmed?:boolean
