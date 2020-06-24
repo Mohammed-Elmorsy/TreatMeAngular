@@ -204,14 +204,11 @@ console.log(err);
   cancelSession(session){
    console.log(session);
 
-    this.doctorService.PatientCancelSession(session.scheduleId).subscribe(()=>{
+    this.doctorService.PatientCancelSession(session.scheduleId).subscribe((a)=>{
      
     
-
-        this.toastr.success('تم الغاء الجلسة');
-  
-        this.patientSessions.splice(this.patientSessions.indexOf(session),1);
-  
+      this.patientSessions=a;
+        
         
    
 

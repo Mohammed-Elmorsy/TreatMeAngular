@@ -69,7 +69,7 @@ DeleteDoctor(id)
 
   }
   PatientCancelSession(id:number){
-    return this.httpClient.post(environment.baseURL+"api/DoctorPatientSchedules/PatientCancelSession",id);
+    return this.httpClient.post<Schedule[]>(environment.baseURL+"api/DoctorPatientSchedules/PatientCancelSession",id);
 
   }
   DoctorCancelSession(id:number){
