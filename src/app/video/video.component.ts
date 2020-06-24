@@ -61,16 +61,10 @@ ngOnInit(): void {
 
   let doctor:Doctor;
   let patient:Patient;
-  let schedule:doctorPatientSchedule={
-    
-  };
+ 
   var url = window.location.pathname;
   var scheduleId = Number(url.substring(url.lastIndexOf('/') + 1));
-  this.scheduleService.getScheduleById(scheduleId).subscribe((a)=>{
-    schedule =a;   
-    console.log(schedule);
-    
-   });
+  
 
 
 

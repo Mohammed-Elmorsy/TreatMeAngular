@@ -3,6 +3,7 @@ import {Schedule} from '../../../_models/schedule'
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
+import { doctorPatientMeeting } from 'src/app/_models/doctorPatientMeeting';
 
 
 @Injectable({
@@ -30,7 +31,6 @@ return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/GetDoct
 
   getScheduleById(id:number)
   {
-    return this.httpClient.get<doctorPatientSchedule>(environment.baseURL+"api/DoctorPatientSchedules/GetByScheduleId/"+id);
-
+    return this.httpClient.get<doctorPatientMeeting>(environment.baseURL+"api/DoctorPatientSchedules/GetByScheduleId/"+id);
   }
 }
