@@ -108,7 +108,8 @@ export class DoctorDetailsComponent implements OnInit {
     .subscribe(()=>{  
       
         this.toastr.success('تم حجز الجلسة');
-        this.router.navigate(['patient/profile']);
+
+        this.router.navigate(['/payment/'+sessionId]);
 
 
     })

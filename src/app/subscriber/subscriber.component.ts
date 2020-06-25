@@ -14,7 +14,7 @@ export class SubscriberComponent {
     const subscriber = this.session.subscribe(this.stream, this.subscriberDiv.nativeElement, {
       insertMode: "append",
       width: "100%",
-      height: "100%"
+      height: "90%"
     }, (err) => {
       if (err) {
         alert(err.message);
