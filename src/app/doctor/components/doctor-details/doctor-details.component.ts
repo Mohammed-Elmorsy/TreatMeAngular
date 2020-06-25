@@ -115,6 +115,7 @@ export class DoctorDetailsComponent implements OnInit {
   }
 
   deleteSession(session){
+
     this.service.deleteSession(session.id).subscribe(()=>{  
      
 
@@ -124,7 +125,7 @@ export class DoctorDetailsComponent implements OnInit {
 
       
      
-  });
+   });
 
 
   }

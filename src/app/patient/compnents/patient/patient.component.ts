@@ -206,8 +206,11 @@ console.log(err);
 
     this.doctorService.PatientCancelSession(session.scheduleId).subscribe((a)=>{
      
-      
-     this.docSc =a;  
+    
+      this.patientSessions=a;
+        
+        
+   
 
       
       this.toastr.success('تم الغاء حجز الجلسة');
@@ -225,7 +228,7 @@ console.log(err);
         this.stateService.token$ = res['token'];
         this.stateService.sessionId$ = res['sessionId'];
         this.stateService.apiKey$ = res['apiKey'];
-        this.router.navigate(['/video'])
+        this.router.navigate(['/video/'+RoomId])
 
       }
     )

@@ -18,7 +18,7 @@ const routes: Routes = [
   {path:"doctor/register",component:DoctorRegisterComponent, canActivate:[LoginGuard]},
   {path:"patient/register",component:PatientRegisterComponent, canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent, canActivate:[LoginGuard]},
-  {path:"video",component:VideoComponent},
+  {path:"video/:id",component:VideoComponent},
   {path:"subscriber",component:SubscriberComponent},
   {path:"**",component:PageNotFoundComponent},
  
