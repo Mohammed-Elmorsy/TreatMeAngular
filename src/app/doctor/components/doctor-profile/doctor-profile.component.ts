@@ -327,7 +327,7 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
       
 
       }
-,(err)=>{
+,(err)=>{ 
 console.log(err);
 }
 

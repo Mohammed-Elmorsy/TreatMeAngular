@@ -16,6 +16,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { BrowserAnimationsModule  } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";  
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms';
 //components
 import { AppComponent } from './app.component';
 import { DoctorProfileModalComponent } from './doctor/components/doctor-profile-modal/doctor-profile-modal.component';
@@ -25,6 +26,7 @@ import { HttpInterceptorProviders } from './core/interceptors';
 import { HomeResolver } from './core/resolvers/home.resolver';
 import { SubscriberComponent } from './subscriber/subscriber.component';
 import { VideoComponent } from './video/video.component';
+import { PaymentComponent } from './payment/payment.component';
 
 
 
@@ -32,7 +34,7 @@ import { VideoComponent } from './video/video.component';
 
 @NgModule({
   declarations: [ //components
-    AppComponent, SubscriberComponent, VideoComponent
+    AppComponent, SubscriberComponent, VideoComponent, PaymentComponent
 
   ],
   entryComponents:[DoctorProfileModalComponent],
