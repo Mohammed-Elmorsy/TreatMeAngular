@@ -21,3 +21,14 @@ h4{
     background: #0e8dbc;
 }
 
+input[type=file]{
+    display: none;  
+}
+.custom-file-upload:hover{
+    cursor: pointer;  
+}
+
+.fa-file-pdf:hover{ 
+    color: rgb(2, 7, 78);
+}
+

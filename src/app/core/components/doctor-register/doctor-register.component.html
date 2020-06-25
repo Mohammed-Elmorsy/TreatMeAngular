@@ -1,6 +1,3 @@
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <div id="doctorRegister">
     <div class="col-12 col-md-7 float-left" id="imgDiv">
         <!-- image -->
@@ -146,21 +143,25 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <label for="inputTitle">{{"Register.Title" | translate}}</label>
+                    <label for="inputTitle">{{"Register.Title" | translate}} *</label>
                     <select id="inputTitle" class="form-control" name="title" 
                     #title="ngModel"
                     [(ngModel)]="doctor.title"
-                    [ngClass]="{ 'is-invalid': title.invalid && title.dirty }"
-                    required >
+                    [ngClass]="{ 'is-invalid': title.invalid && title.touched }"
+                    required > 
                     <!-- still need work -->
                         <option selected disabled>{{"Register.Choose" | translate}}</option>
                         <option>{{"DoctorsList.P" | translate}}</option> 
                         <option>{{"DoctorsList.D" | translate}}</option>    
-                    </select>
+                    </select>  
+                    <div *ngIf="title.touched && title.errors?.required" class="invalid-feedback">
+                        <span >{{"Register.Validation.Required" | translate}}</span>  
+                    </div>
+                      
 
                 </div>
                 <div class="form-group col-md-6">
-                    <label>{{"Register.TitleDetails" | translate}}</label><!-- still need work -->
+                    <label>{{"Register.TitleDetails" | translate}} *</label><!-- still need work -->
                     <input type="text" class="form-control" name="titleDescription" 
                     #titleDescription = "ngModel" 
                     [(ngModel)] = "doctor.titleDescription"     
@@ -183,14 +184,18 @@
                      </div>
                 </div>  
                 <div class="form-group col-md-4">
-                    <label for="inputSpeciality">{{"Register.Speciality" | translate}}</label>  
+                    <label for="inputSpeciality">{{"Register.Speciality" | translate}} *</label>  
                     <select id="inputSpeciality" class="form-control" name="speciality" [(ngModel)]="doctor.specialityId"
-                    required #speciality="ngModel"> 
+                    required 
+                    #speciality="ngModel"
+                    [ngClass]="{ 'is-invalid': speciality.invalid && speciality.touched }" 
+                    > 
                         <option  [ngValue]="null" disabled>{{"Register.Choose" | translate}}</option>  
                         <option *ngFor='let speciality of specialities' value="{{speciality.id}}">{{ ("Home.Speciality." + speciality.name) | translate}}</option>
                     </select>
-                    <span *ngIf="speciality.dirty && speciality.errors?.required" class="invalid-feedback">
-                        {{"Register.Validation.Required" | translate}}</span>
+                    <div *ngIf="speciality.touched && speciality.errors?.required" class="invalid-feedback">
+                        <span >{{"Register.Validation.Required" | translate}}</span>  
+                    </div>  
                 </div>
             </div>
 
@@ -199,62 +204,61 @@
                     <input type="text" class="form-control" placeholder="{{'Register.Address' | translate}}" name="address"
                     #address="ngModel"
                     [(ngModel)]="doctor.user.address"
-                    noStartOrDoubleSpaces
                     >
-                    <!-- cs validation -->
-                    <div *ngIf="address.invalid" class="invalid-feedback">
-                        <span *ngIf="address.errors?.startsWithSpace && address.dirty">
-                            {{"Register.Validation.SpaceStart" | translate}}</span>
-                        <span *ngIf="address.errors?.hasDoubleSpace && address.dirty">
-                            {{"Register.Validation.DoubleSpace" | translate}}</span>
-                    </div>
-
                 </div>  
                 <div class="form-group col-md-6">
-                    <input type="number" class="form-control" placeholder="{{'Register.PhoneNumber' | translate}}" name="phone"
-                    #phone="ngModel"
-                    min="0"
-                    max="9"
+                    <input type="number" class="form-control" placeholder="{{'Register.PhoneNumber' | translate}}" 
+                    name="phone"
+                    #phone="ngModel"  
                     [(ngModel)]="doctor.user.phoneNumber"  
-                    noWhiteSpaces
-                    > 
-                    <!-- cs validation -->
-                    <div *ngIf="phone.invalid" class="invalid-feedback">
-                        <span *ngIf="phone.errors?.hasWhiteSpace && phone.dirty">
-                            {{"Register.Validation.NoSpace" | translate}}</span>
-                    </div>   
+                    >  
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label>{{'Register.Gender' | translate}}</label>
-                    <select class="form-control" name="gender" #gender="ngModel" [(ngModel)]="doctor.user.gender">
+                    <label>{{'Register.Gender' | translate}} *</label>
+                    <select class="form-control" name="gender" #gender="ngModel" 
+                    [(ngModel)]="doctor.user.gender"
+                    required
+                    [ngClass]="{ 'is-invalid': gender.invalid && gender.touched }" 
+                    >
                         <option  [ngValue]="null" disabled>{{'Register.Choose' | translate}}</option> 
                         <option value=1 >{{'Register.Male' | translate}}</option>
                         <option value=2>{{'Register.Female' | translate}}</option>
                     </select>
+                    <div *ngIf="gender.touched && gender.errors?.required" class="invalid-feedback">
+                        <span >{{"Register.Validation.Required" | translate}}</span>  
+                    </div>  
                 </div>
                 <div class="form-group col-md-6">
-                    <label>{{'Register.Age' | translate}}</label>
+                    <label>{{'Register.Age' | translate}} *</label>
                     <input type="number" class="form-control" min="1" max="110" name="age" 
                     #age="ngModel"
-                    [(ngModel)]="doctor.user.age">
+                    [(ngModel)]="doctor.user.age"
+                    required
+                    maxlength="3" 
+                    [ngClass]="{ 'is-invalid': age.invalid && age.dirty }"   
+                    >
+                    <div *ngIf="age.invalid && age.errors?.required" class="invalid-feedback">
+                        <span >{{"Register.Validation.Required" | translate}}</span>  
+                    </div>  
                 </div>
             </div>
-            <div class="form-group"><!-- still need work -->
-                <label for="exampleFormControlFile1"></label>
-                
-                <div id="hide" class="col-lg-8 col-xs-8">
-                    <label class="hand-cursor">
-                        <input type="file" id="file" name="CV"  name="file" (change)="handleFileInput($event.target.files)"  />
-                        <span class="fa fa-3x fa-file"></span>
-                     <span class="photo_text hidden-xs" style="color:black;">{{'Register.CV' | translate}}</span>
-                      </label>
-                 </div>
-
+            <div class="form-group">
+                <label for="file-upload" class="custom-file-upload">
+                    <input type="file" id="file-upload" name="CV" 
+                    #cv = "ngModel"
+                    [(ngModel)] = "doctor.cvName"    
+                    (change)="handleFileInput($event.target.files)"  
+                    required/>
+                    <i class="fas fa-2x fa-file-pdf"></i>
+                    &nbsp; <span>{{"Register.CV" | translate}} *</span>  
+                </label>
+                <div *ngIf="gender.touched && gender.errors?.required" class="invalid-feedback">
+                    <span >{{"Register.Validation.Required" | translate}}</span>  
+                </div> 
 
             </div>
-
             <div class="form-check"><!-- still need work -->
                 <input type="checkbox" class="form-check-input" 
                 name="terms" 

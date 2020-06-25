@@ -1,7 +1,6 @@
 <table class="table table-hover text-center"> 
   <thead class="bg-primary text-light">
     <tr>
-      <th scope="col">ID</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
       <th scope="col">User Name</th>
@@ -11,7 +10,6 @@
   </thead>
   <tbody>
     <tr *ngFor="let doctor of doctorsRequests">
-      <th scope="row">{{doctor.userId}}</th> 
       <td>{{doctor.user.firstName}}</td>
       <td>{{doctor.user.lastName}}</td> 
       <td>{{doctor.user.userName}}</td>

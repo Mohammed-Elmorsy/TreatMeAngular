@@ -10,7 +10,7 @@ export class User {
        public age?:Number,
        public address?:String,
        public gender?:Number,
-       public phoneNumber?:Number,
+       public phoneNumber?:Number, 
        public mail?:String,
        public imageName?:String
     ) 

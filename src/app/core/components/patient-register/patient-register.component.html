@@ -171,32 +171,54 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label>{{'Register.Gender' | translate}}</label>
-                    <select class="form-control" name="gender" #gender="ngModel" [(ngModel)]="patient.user.gender">
+                    <label>{{'Register.Gender' | translate}} *</label>
+                    <select class="form-control" name="gender" #gender="ngModel" 
+                    [(ngModel)]="patient.user.gender"
+                    required
+                    [ngClass]="{ 'is-invalid': gender.invalid && gender.touched }" 
+                    >
                         <option  [ngValue]="null" disabled>{{'Register.Choose' | translate}}</option> 
                         <option value=1 >{{'Register.Male' | translate}}</option>
                         <option value=2>{{'Register.Female' | translate}}</option>
                     </select>
+                    <div *ngIf="gender.touched && gender.errors?.required" class="invalid-feedback">
+                        <span >{{"Register.Validation.Required" | translate}}</span>  
+                    </div>  
                 </div>
                 <div class="form-group col-md-4">
                     <label>{{'Register.BloodType' | translate}}</label>
-                    <select class="form-control" name="bloodType" #bloodType="ngModel" [(ngModel)]="patient.bloodType">
+                    <select class="form-control" name="bloodType" #bloodType="ngModel" 
+                    [(ngModel)]="patient.bloodType"
+                    required
+                    [ngClass]="{ 'is-invalid': bloodType.invalid && bloodType.touched }" 
+
+                    >
                         <option  [ngValue]="null" disabled>{{'Register.Choose' | translate}}</option>
                         <option value=4>O-</option>      
                         <option value=36>O+</option>
                         <option value=3>A-</option>
                         <option value=28>A+</option>  
-                        <option value=2>B-</option>
+                        <option value=1>B-</option>
                         <option value=20>B+</option>
-                        <option value=1>AB-</option>  
+                        <option value=2>AB-</option>  
                         <option value=5>AB+</option>
                     </select>
+                    <div *ngIf="bloodType.touched && bloodType.errors?.required" class="invalid-feedback">
+                        <span >{{"Register.Validation.Required" | translate}}</span>  
+                    </div>  
                 </div>
                 <div class="form-group col-md-4">
-                    <label>{{'Register.Age' | translate}}</label>
+                    <label>{{'Register.Age' | translate}} *</label>
                     <input type="number" class="form-control" min="1" max="110" name="age" 
                     #age="ngModel"
-                    [(ngModel)]="patient.user.age">
+                    [(ngModel)]="patient.user.age"
+                    required
+                    maxlength="3" 
+                    [ngClass]="{ 'is-invalid': age.invalid && age.dirty }"   
+                    >
+                    <div *ngIf="age.invalid && age.errors?.required" class="invalid-feedback">
+                        <span >{{"Register.Validation.Required" | translate}}</span>  
+                    </div>  
                 </div>
             </div>
            

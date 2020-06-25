@@ -29,6 +29,7 @@ export class DoctorRegisterComponent implements OnInit {
       title:'',    
       titleDescription:'',       
       CV:null,    
+      cvName:'',    
       specialityId:null, 
       confirmed:false,      
       user:{
