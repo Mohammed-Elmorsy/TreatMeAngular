@@ -9,6 +9,7 @@ import { DoctorListComponent } from './components/doctor-list/doctor-list.compon
 import { DoctorProfileComponent } from './components/doctor-profile/doctor-profile.component';
 import { DoctorProfileModalComponent } from './components/doctor-profile-modal/doctor-profile-modal.component';
 import { DoctorsListResolver } from '../core/resolvers/doctors-list.resolver';
+import{NgxExtendedPdfViewerModule} from 'ngx-extended-pdf-viewer'
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { DoctorsListResolver } from '../core/resolvers/doctors-list.resolver';
   entryComponents:[DoctorProfileModalComponent],
   imports: [
    SharedModule,
-   DoctorRoutingModule
+   DoctorRoutingModule,
+   NgxExtendedPdfViewerModule
+
   ],
   exports:[DoctorProfileModalComponent],
   providers:[DoctorsListResolver]  

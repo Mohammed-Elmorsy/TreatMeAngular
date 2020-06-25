@@ -324,7 +324,7 @@
                     required 
                     noWhiteSpaces
                     [ngClass]="{ 'is-invalid': phoneNumber.invalid && phoneNumber.dirty }">
-                <!--cs validation --
+               cs validation --
                    
                 </div>  
               
@@ -601,8 +601,29 @@
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                <button class="btn btn-info">View</button> &nbsp;
-                                                <button class="btn btn-success">Update</button>
+                                                <span *ngIf="patient.medicalHstoryName == NULL ; else mediclHistoryUploaded">
+                    
+                                                    <div id="hide" class="col-lg-8 col-xs-8" style="margin-top: -25px;" style="color: darkblue; margin-top: 40px; margin-left: 28px;">
+                                                        <label class="hand-cursor">
+                                                            <input type="file" id="file" class=""   name="file" (change)="handleFileMedicalHistory($event.target.files)"  />
+                                                            <span class="fa fa-2x fa-file"></span>
+                                                            <label>Upload</label>
+
+                                                          </label>
+                                                     </div>
+                                                </span>
+                                                <ng-template #mediclHistoryUploaded>
+                                                    <div id="hide" class="col-lg-8 col-xs-8" style="margin-top: -25px;" style="color:darkgoldenrod; margin-top: 40px; margin-left: 28px;">
+                                                        <label class="hand-cursor">
+                                                            <input type="file" id="file" class=""   name="file" (change)="handleFileMedicalHistory($event.target.files)"  />
+                                                            <span class="fa fa-2x fa-file"></span>
+                                                            <label>Update</label>
+                                                            <button class="btn btn-danger" (click)="SelectPatientForViewMd(patient)" data-toggle="modal" data-target="#MDModal" style="margin-top: -10px;margin-left: 10px;">View </button> 
+
+                                                          </label>
+                                               
+                                                     </div>
+                                                </ng-template>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -811,5 +832,32 @@
     </div>
   </div>
 
-              
+              <!-- medical history modal ****************-->
+               
+ <div class="modal fade" id="MDModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">medical History View</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+        <div>
+          <ngx-extended-pdf-viewer [src]='MedicalToView' 
+          useBrowserLocale="true" height="70vh"></ngx-extended-pdf-viewer>
+  
+      </div>
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
 

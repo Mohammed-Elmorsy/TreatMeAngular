@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   
 
   //still not considered time loading from server
-  navigateToDocsList(specialityID:number){
+  navigateToDocsList(specialityID){
     this.router.navigate(["doctor/list", specialityID])
   }
   

@@ -69,7 +69,7 @@ console.log(this.doctor);
         const formdata:FormData=new FormData();
         formdata.append('cv',this.Cv,this.Cv.name);
   
-        return this.http.post(environment.baseURL+"api/doctors/UploadCV/"+this.doctor.user.userName,formdata,{headers:{
+        return this.http.post(environment.baseURL+"api/doctors/UploadCV/"+res.user.id,formdata,{headers:{
           'Accept': 'application/json',     
           'Content-Disposition' : 'multipart/form-data'
         }}).subscribe(()=>{

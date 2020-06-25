@@ -14,6 +14,8 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 
 import config from '../../../../config';
 import { StateService } from '../../../stateService';
+import { DoctorPatientScheduleOpject } from 'src/app/_models/doctor-patient-schedule-opject';
+import { data } from 'jquery';
 
 
 @Component({
@@ -52,6 +54,9 @@ export class DoctorProfileComponent implements OnInit {
   
    DoctorImage:string;
    comingSessions:Schedule[];
+  BookedSessions:any ;
+  Cv:File=null;
+  DoctorCv:String;
 
 
   constructor(private toastr:ToastrService,
@@ -71,7 +76,7 @@ export class DoctorProfileComponent implements OnInit {
     this.sessionsDetails=null;
 
 
-
+this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
      
  
    
@@ -109,8 +114,14 @@ export class DoctorProfileComponent implements OnInit {
     .subscribe(
       (_schedule)=> {
         this.comingSessions = _schedule;
+        console.log('comingsessiond ' + _schedule);
+        
       });   
     console.log(this.doctor);
+    this.doctorService.getBookedSessionsInMonth(this.docId).subscribe((res)=>{
+    this.BookedSessions=res;
+    
+    })
     
       this.setIterators();
   }
@@ -232,6 +243,31 @@ export class DoctorProfileComponent implements OnInit {
 
 
 
+  handleCVeInput(files:FileList)
+  {
+    this.Cv=files.item(0);
+    const formdata:FormData=new FormData();
+    formdata.append('cv',this.Cv,this.Cv.name);
+
+    return this.http.post(environment.baseURL+"api/doctors/UploadCV/"+this.doctor.user.id,formdata,{headers:{
+      'Accept': 'application/json',     
+      'Content-Disposition' : 'multipart/form-data'
+    }}).subscribe(()=>{
+      this.toastr.info("cv Updated ");
+      this.doctorService.getDoctor(this.docId)
+  .subscribe(
+    (_doctor)=> {
+      this.doctor = _doctor;})
+
+    })
+  }
+
+  SelectDoctorForViewCV(_doctor)
+  {
+    this.doctor=_doctor;
+    this.DoctorCv=environment.baseURL+"cvs/"+this.doctor.cvName;
+    console.log(this.DoctorCv)
+  }
 
   updateCheckedOptions(option, event) {
     if (event.target.checked==true) {

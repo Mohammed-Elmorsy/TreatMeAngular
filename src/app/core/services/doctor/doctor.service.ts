@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { Schedule } from 'src/app/_models/schedule';
 import { SessionDetails } from 'src/app/_models/SessionDetails';
 import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
+import { DoctorPatientScheduleOpject } from 'src/app/_models/doctor-patient-schedule-opject';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,9 @@ DeleteDoctor(id)
     
   getTodayTomorrowSessions(id){
     return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/getTodayTomorrowSchedules/"+id);
+  } 
+  getBookedSessionsInMonth(id){
+    return this.httpClient.get<any>(environment.baseURL+"api/DoctorPatientSchedules/getBookedSessionsInMonth/"+id);
   }
 
   deleteSession(id:number){
