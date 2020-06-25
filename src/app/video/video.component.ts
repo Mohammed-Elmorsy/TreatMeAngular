@@ -38,6 +38,7 @@ constructor(private auth:AuthService,
   private componentFactoryResolver: ComponentFactoryResolver,
   private stateService: StateService,
   private doctorService:DoctorService,
+
   private scheduleService:ScheduleService,
   private patientService:PatientService,
   private router: Router
@@ -85,6 +86,8 @@ ngOnInit(): void {
  
       
      });
+
+
   
 
 
@@ -113,6 +116,9 @@ ngOnInit(): void {
      });
 
   }
+
+
+
 }
 
 
@@ -169,6 +175,9 @@ ngAfterViewInit(): void {
   })
 
   
+}
+ngOnDestroy() { 
+  this.session.disconnect();
 }
   endMeeting(){
     //destroy session
