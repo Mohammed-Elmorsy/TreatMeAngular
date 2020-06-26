@@ -80,8 +80,6 @@ export class DoctorDetailsComponent implements OnInit {
    
     if (this.authService.getUserPayLoad().role=='Doctor') {
       this.role='doctor';
-      this.docId=this.authService.getUserPayLoad().id;
-
     }
     else if(this.authService.getUserPayLoad().role=='Patient'){
       this.role='Patient'

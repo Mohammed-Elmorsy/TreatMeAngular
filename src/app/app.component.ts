@@ -14,9 +14,12 @@ export class AppComponent{
   title = 'Treat Me';
 
   showLoadingIndicator = true;  
+  router = '';
 
   constructor(private _router: Router, public translate: TranslateService) {
     
+    this.router = this._router.url;
+
 
     this._router.events.subscribe((routerEvent: Event) => {
 
