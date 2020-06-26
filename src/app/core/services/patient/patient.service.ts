@@ -52,5 +52,10 @@ export class PatientService {
     return this.httpclient.post(environment.baseURL+"api/DoctorPatientReviews/Create",_review)
   }
    
+  EditDoctrorReview(modifiedReview:DoctorPatientReview)
+  {
+    return this.httpclient.put(environment.baseURL+"api/DoctorPatientReviews/Edit",modifiedReview)
+
+  }
 
 }
