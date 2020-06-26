@@ -9,6 +9,7 @@ import { Schedule } from 'src/app/_models/schedule';
 import { SessionDetails } from 'src/app/_models/SessionDetails';
 import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
 import { DoctorPatientScheduleOpject } from 'src/app/_models/doctor-patient-schedule-opject';
+import { DoctorPatientReview } from 'src/app/_models/doctor-patient-review';
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +85,12 @@ DeleteDoctor(id)
   DoctorCancelDaySessions(id:number,date:Date){
 
     return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/DoctorCancelSchedules/"+id+"/"+date)
+
+  }
+  
+  GetDoctorReviews(DoctorId:Number)
+  {
+    return this.httpClient.get<DoctorPatientReview[]>(environment.baseURL+"api/DoctorPatientReviews/GetDoctorReviews/"+DoctorId);
 
   }
 }

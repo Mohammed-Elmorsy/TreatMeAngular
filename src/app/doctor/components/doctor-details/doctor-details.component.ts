@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 import { now } from 'jquery';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { DoctorPatientReview } from 'src/app/_models/doctor-patient-review';
+import { StarRatingComponent } from 'ng-starrating';
 
 @Component({
   selector: 'app-doctor-details',
@@ -27,19 +29,27 @@ export class DoctorDetailsComponent implements OnInit {
   dateOfBirth:string;
 
   docImg:string;
- 
+  PatientId:Number;
   doctor:Doctor;
   role:string;
   docId:number;
   DoctorImage:String;
+  review:DoctorPatientReview;
+  reviews:DoctorPatientReview[];
+
  
   constructor(private service:DoctorService,private router:Router,private authService:AuthService
     ,private sCheduleService:ScheduleService,private patientService:PatientService
-    ,private toastr:ToastrService ,private route:ActivatedRoute) {
+    ,private toastr:ToastrService ,private route:ActivatedRoute,private doctorService:DoctorService) {
+      this.review={
+        DoctorId:0,PatientId:0,Comment:'',Rating:0
+      }
  
    }
 
+
    DoctorSchedule:Schedule[];
+ 
    getChoosedDate(){
      alert(this.dateOfBirth+"");
    }
@@ -74,8 +84,19 @@ export class DoctorDetailsComponent implements OnInit {
     }
     else{
       this.role='patient'
+      this.patientId=this.authService.getUserPayLoad().id;
+      console.log('paaaaaaaaaa',this.patientId);
     }   
 
+
+    /**this code to return reviews oF Doctor */
+     
+    this.doctorService.GetDoctorReviews(this.docId).subscribe((res)=>{
+      this.reviews=res;
+    })
+
+
+    /** this code to Check If Doctor has image Or Not to View Defult Image And Upload or View Current Image or Update  */
   this.service.getDoctor(this.docId)
   .subscribe(
 
@@ -89,18 +110,38 @@ export class DoctorDetailsComponent implements OnInit {
     
      this.docImg="../../assets/images/doctors/profile-pic.png";
 
-   
 
-
-
-
+     
   }
 
 
+/** THIS code to get Value of Rating  */
 
+  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
+   
+    this.review.Rating=$event.newValue;
+     
+  }
+  
+
+  /**  send Review to backEnd  */
+  postReview()
+  {
+    this.review.DoctorId=this.docId;
+    this.review.PatientId=this.patientId;
+    this.patientService.AddDoctorReview(this.review).subscribe(()=>{
+      this.toastr.warning("review Added");
+      /** to update Reviews after posting */
+      this.doctorService.GetDoctorReviews(this.docId).subscribe((res)=>{
+        this.reviews=res;
+      })
+    });
+
+  }
+ /*
   bookSession(sessionId){
     let booking:doctorPatientSchedule={
-      DoctorId:this.docId,
+      DoctorId:this.docId,doctor:null,patient:null,schedule:null,
       PatientId:this.authService.getUserPayLoad().id,
       ScheduleId:sessionId
     };
@@ -113,7 +154,7 @@ export class DoctorDetailsComponent implements OnInit {
 
     })
   }
-
+*/
   deleteSession(session){
 
     this.service.deleteSession(session.id).subscribe(()=>{  

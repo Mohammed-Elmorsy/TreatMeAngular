@@ -19,6 +19,7 @@ export class DoctorListComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: { doctorsList: any }) => {
       this.doctors = data.doctorsList;  
+      console.log(this.doctors)
     })
      
   }

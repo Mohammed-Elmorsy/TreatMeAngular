@@ -17,9 +17,12 @@
                 height="50%" width="200">
             </ng-template>
           
+
+
             <h1 class="" style="margin-top: 60px; color:aliceblue; font-family:'Times New Roman', Times, serif; margin-left: 20px;">
                 Dr. {{doctor.user.firstName}} {{doctor.user.lastName}} </h1>
           <h2>{{doctor.speciality.name}}</h2>  
+          <button *ngIf="role == 'patient' " class="btn btn-success"(click)="SelectPatientForViewMd(patient)" data-toggle="modal" data-target="#reviewModal" > add Review </button>
 
         </div>
         <div class="col-6" style="margin-top: 20px; margin-bottom: 50px;">
@@ -59,7 +62,7 @@
 </div>
 <br>
 
-<div class="container text-center" >
+<div class="container text-center"style="display:block;" >
     <div class="row text-center" style="border: 2px solid gray; border-radius: 10px ; margin: 5%; background-color: lavenderblush;">
         <span style="margin-left: 35%;" class="badge badge-dark">
             <h3>Select Date For Sessions   </h3>
@@ -143,4 +146,65 @@
        </div>
     
 
+       <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Review</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+             
+                <div style="text-align:center">
+                    <h1>
+                     Rating
+                    </h1>
+                    <star-rating value="3" totalstars="5" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+                  </div>
 
+            <div class="form-group col-md-12">
+                <label for="exampleFormControlTextarea1">add comment</label>
+                <textarea rows="5" class="form-control" name="comment" placeholder="write Comment"
+                [(ngModel)]="review.Comment"></textarea>
+
+            </div>
+      
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success"  data-dismiss="modal" (click)="postReview()">Add Review</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+      <div *ngIf="reviews != NULL" class="" style=" text-align: center; overflow-y: scroll;overflow-x:hidden; border-radius: 20px;
+      width: 400px;height: 250px; background-color: rgb(225, 227, 231);float: right; margin: 15px auto; display: block;" >
+      <h1 style="color: rgb(73, 64, 10); ">Reviews</h1>
+       <div *ngFor="let _review of reviews" >
+      <div class="review p-5" >
+          <div class="row d-flex">
+              <div class="profile-pic"><img src="https://localhost:44353/images/{{_review.patient.user.imageName}}" width="60px" height="60px"></div>
+              <div class="d-flex flex-column pl-3">
+                  <h4>{{_review.patient.user.firstName}}  {{_review.patient.user.lastName}}</h4>
+              </div>
+          </div>
+          <div class="row pb-3" style="margin-left: 75px; margin-top: -20px;">
+                               <star-rating [value]="_review.rating" [totalstars]="_review.rating" checkedcolor="gold" uncheckedcolor="gold" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
+      
+              </div>
+          </div>
+          <div class="row pb-3" style="margin-top: -50px;">
+            <label for="exampleFormControlTextarea1" style="margin-left: 40px; display: block;">comment</label>
+            <textarea style="width: 75%; border-radius: 20px; display: block; margin: 5px auto;" rows="3" class="form-control" name="comment" [placeholder]="_review.comment" disabled></textarea>
+          
+          </div>
+        
+      <hr/>
+      
+      </div>
+      </div>
+      
