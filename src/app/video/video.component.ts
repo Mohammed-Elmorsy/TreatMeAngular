@@ -190,7 +190,12 @@ ngAfterViewInit(): void {
   
 }
 ngOnDestroy() { 
-  this.session.disconnect();
+  var r = confirm("Are you sure you want to leave the meeting?");
+  if (r==true) {
+    this.session.disconnect();
+  }
+
+
   
 }
   endMeeting(){
