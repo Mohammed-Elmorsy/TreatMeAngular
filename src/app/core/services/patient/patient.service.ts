@@ -5,6 +5,7 @@ import { Patient } from 'src/app/_models/patient';
 import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/output_ast';
 import { Schedule } from 'src/app/_models/schedule';
 import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
+import { DoctorPatientReview } from 'src/app/_models/doctor-patient-review';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,10 @@ export class PatientService {
 
 
 
+  AddDoctorReview(_review:DoctorPatientReview)
+  {
+    return this.httpclient.post(environment.baseURL+"api/DoctorPatientReviews/Create",_review)
+  }
    
 
 }
