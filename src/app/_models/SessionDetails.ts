@@ -8,7 +8,8 @@ export class SessionDetails {
        public endAM:Number,
        public startPM:Number,
        public endPM:Number,
-
+       public existAM:boolean,
+       public existPM:boolean 
     ){
 
     }

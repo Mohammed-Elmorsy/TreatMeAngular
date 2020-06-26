@@ -611,8 +611,8 @@
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Start Time</th>
+                        <th scope="col">End Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -621,8 +621,7 @@
                         <th scope="row">{{i+1}}</th>
                         <td> {{session.date  | date:'shortDate'}}</td>
                         <td> {{session.startTime | date:'mediumTime'}}</td>
-    
-                        <td><button class="btn btn-primary">Join</button></td>
+                        <td> {{session.endTime | date:'mediumTime'}}</td>    
                         </tr>
                     
                     </tbody>
@@ -665,7 +664,7 @@
                       
                   <div class="col-6 text-center" >
                       <h3>AM Hours</h3>
-                      <span>if there is no AM work hours,<br> check here &nbsp;&nbsp;</span><input [checked]="AMworkHours" type="checkbox"/><br>
+                      <span>if there is no AM work hours,<br> check here &nbsp;&nbsp;</span><input (change)="AMworkHours=!AMworkHours" type="checkbox"/><br>
                       <label>From <select  id="hoursFrom" class="form-control" [value]="AMhour1" (input)="AMhour1=$event.target.value" >
                       
                           <option value="{{hour}}" *ngFor="let hour of AMhours">{{hour}}</option>
@@ -680,7 +679,7 @@
                   <div class="col-6 text-center">
                       
                       <h3> PM Hours</h3>
-                      <span>if there is no PM work hours,<br> check here &nbsp;&nbsp;</span><input [checked]="PMworkHours" type="checkbox"/><br>
+                      <span>if there is no PM work hours,<br> check here &nbsp;&nbsp;</span><input (change)="PMworkHours=!PMworkHours" type="checkbox"/><br>
                       <label>From <select  id="hoursFrom" class="form-control" [value]="PMhour1" (input)="PMhour1=$event.target.value" >
                       
                           <option value="{{hour}}" *ngFor="let hour of PMhours">{{hour}}</option>
@@ -731,7 +730,8 @@
 
                                         <td *ngIf="session.schedule.isBooked == 1;"> {{session.schedule.startTime | date:'mediumTime'}}</td>
                                         <!-- if start time is now join else coming soon-->
-                                        <td *ngIf="session.schedule.isBooked == 1;"><button class="btn btn-primary" (click)="joinMeeting(session.id)">Join</button></td>
+
+                                        <td *ngIf="session.schedule.isBooked == 1;"><button class="btn btn-primary" [ngClass]="{ 'active' :false }" (click)="joinMeeting(session.scheduleId)">Join</button></td>
                                 
                             
                     
