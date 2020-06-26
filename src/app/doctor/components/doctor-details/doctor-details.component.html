@@ -66,17 +66,17 @@
         <span style="margin-left: 35%;" class="badge badge-dark">
             <h3>Select Date For Sessions   </h3>
              <input class="date" type="date" [value]="choocedDate" (input)="choocedDate =$event.target.value" (change)="GetDoctorScheduleTimes(doctor.userId ,choocedDate)"/>
-        </span>
+        </span><br>
         
-
-        <table [hidden]="!DoctorSchedule"  style="width: 70% ; margin: 10px auto;" class="table table-striped table-dark">
+<div *ngIf="DoctorSchedule.length>0; else noDaySessions" [hidden]="DoctorSchedule.length<1"   >
+        <table  style="width: 70% ; margin: 10px auto;" class="table table-striped table-dark">
             <thead>
                 <tr>
                   <th scope="col">Date</th>
                   <th scope="col">Start Time</th>
                   <th scope="col">End Time</th>
                   <th scope="col">Status</th>
-                </tr>
+                </tr> 
               </thead>
               <tbody>
             <tr *ngFor="let time of DoctorSchedule;let i=Index"> 
@@ -140,6 +140,14 @@
 
               </tfoot>
         </table>
+        
+</div>
+    
+        <ng-template style="width: 100% "  #noDaySessions>
+            <div class="alert alert-primary text-center" role="alert" >
+               There is no sessions for the selected day, Choose another day !
+              </div>
+        </ng-template>
     
 
        </div>

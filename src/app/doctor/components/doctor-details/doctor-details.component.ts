@@ -38,7 +38,7 @@ export class DoctorDetailsComponent implements OnInit {
   reviews:DoctorPatientReview[];
   tmpReviewToUpdate:DoctorPatientReview;
   flagToRole:Number;
-
+  DoctorSchedule:Schedule[]=[];
  
   constructor(private service:DoctorService,private router:Router,private authService:AuthService
     ,private sCheduleService:ScheduleService,private patientService:PatientService
@@ -50,7 +50,7 @@ export class DoctorDetailsComponent implements OnInit {
    }
 
 
-   DoctorSchedule:Schedule[];
+  
  
    getChoosedDate(){
      alert(this.dateOfBirth+"");

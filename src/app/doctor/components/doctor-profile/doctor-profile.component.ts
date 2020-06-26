@@ -226,6 +226,7 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
     );
    
   }
+  
   modifySessions(){
     this.sessionsDetails={
       doctorId:this.docId,
