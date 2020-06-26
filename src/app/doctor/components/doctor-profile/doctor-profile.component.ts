@@ -16,6 +16,7 @@ import config from '../../../../config';
 import { StateService } from '../../../stateService';
 import { DoctorPatientScheduleOpject } from 'src/app/_models/doctor-patient-schedule-opject';
 import { data } from 'jquery';
+import { Patient } from 'src/app/_models/patient';
 
 
 @Component({
@@ -27,7 +28,9 @@ export class DoctorProfileComponent implements OnInit {
 
   doctor:Doctor;
   doctor_modified:Doctor;
-
+  patientToViewPdf:Patient;
+  PdfUrl:String;
+  DoctorCv:String;
   sessionsDetails:SessionDetails;
   days=["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"];
   
@@ -56,7 +59,6 @@ export class DoctorProfileComponent implements OnInit {
    comingSessions:Schedule[];
   BookedSessions:any ;
   Cv:File=null;
-  DoctorCv:String;
 
 
   constructor(private toastr:ToastrService,
@@ -77,7 +79,6 @@ export class DoctorProfileComponent implements OnInit {
 
 
 this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
-     
  
    
   }   
@@ -97,11 +98,12 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
   .subscribe(
     (_doctor)=> {
       this.doctor = _doctor;
+
+      console.log('doctooooooooor',this.doctor)
       this.doctor_modified=_doctor;
 
 
-      console.log(this.doctor);
-      console.log(this.doctor_modified);
+    
 
       if(this.doctor.user.imageName != "")
       {
@@ -114,18 +116,50 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
     .subscribe(
       (_schedule)=> {
         this.comingSessions = _schedule;
-        console.log('comingsessiond ' + _schedule);
         
       });   
     console.log(this.doctor);
-    this.doctorService.getBookedSessionsInMonth(this.docId).subscribe((res)=>{
+    this.doctorService.MonthBookedSessom(this.docId).subscribe((res)=>{
     this.BookedSessions=res;
     
+      console.log(this.BookedSessions);
+
     })
     
       this.setIterators();
   }
-  
+
+  SelectDoctorForViewCV(_doctor)
+  {
+    this.doctor=_doctor;
+    this.DoctorCv=environment.baseURL+"cvs/"+this.doctor.cvName;
+    console.log(this.DoctorCv)
+  }
+
+
+  /** select Patient object to get medical History Name */
+  SelectPatientForViewMd(_patient:Patient)
+  {
+
+    this.patientToViewPdf=_patient;
+    console.log(this.PdfUrl);
+  }
+/**  check if the incoming object is a doctor or patient to return path of cv or path of medical History */
+
+  SelecToViewPDF(doctor)
+  {
+    if(doctor === this.doctor)
+    {
+      this.PdfUrl=environment.baseURL+"cvs/"+this.doctor.cvName;
+    }
+    else
+    {
+      this.PdfUrl=environment.baseURL+"medicalHistory/"+this.patientToViewPdf.medicalHstoryName;
+
+    }
+  }
+
+
 
   navigateToDocDetails(doctorID:number){
     this.router.navigate(['doctor/details']) 
@@ -241,7 +275,7 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
   // }
 
 
-
+/** update doctor cv */
 
   handleCVeInput(files:FileList)
   {
@@ -262,12 +296,7 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
     })
   }
 
-  SelectDoctorForViewCV(_doctor)
-  {
-    this.doctor=_doctor;
-    this.DoctorCv=environment.baseURL+"cvs/"+this.doctor.cvName;
-    console.log(this.DoctorCv)
-  }
+
 
   updateCheckedOptions(option, event) {
     if (event.target.checked==true) {
@@ -304,7 +333,7 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
 
 
 
-
+/** upload photo */
   handleFileInput(files:FileList)
   {
     this.fieToUpload=files.item(0);

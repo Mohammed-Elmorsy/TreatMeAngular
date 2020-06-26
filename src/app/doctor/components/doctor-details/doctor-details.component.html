@@ -22,7 +22,7 @@
             <h1 class="" style="margin-top: 60px; color:aliceblue; font-family:'Times New Roman', Times, serif; margin-left: 20px;">
                 Dr. {{doctor.user.firstName}} {{doctor.user.lastName}} </h1>
           <h2>{{doctor.speciality.name}}</h2>  
-          <button *ngIf="role == 'patient' " class="btn btn-success"(click)="SelectPatientForViewMd(patient)" data-toggle="modal" data-target="#reviewModal" > add Review </button>
+          <button *ngIf=" flagToRole == 1; " class="btn btn-success"(click)="SelectPatientForViewMd(patient)" data-toggle="modal" data-target="#reviewModal" > add Review </button>
 
         </div>
         <div class="col-6" style="margin-top: 20px; margin-bottom: 50px;">
@@ -37,11 +37,8 @@
                          
                             <div class="alert alert-dark">
                             
-                                <span class="fa fa-star checked" ></span>
-                                <span class="fa fa-star checked" *ngIf="doctor.rating > 1;"></span>
-                                <span class="fa fa-star checked" *ngIf="doctor.rating > 2;"></span>
-                                <span class="fa fa-star checked" *ngIf="doctor.rating > 3;"></span>
-                                <span class="fa fa-star checked" *ngIf="doctor.rating > 4;"></span>
+                                <star-rating value="5" [totalstars]="doctor.rating" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+
                             </div>
                         </h4>
     

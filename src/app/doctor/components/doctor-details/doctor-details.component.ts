@@ -36,6 +36,7 @@ export class DoctorDetailsComponent implements OnInit {
   DoctorImage:String;
   review:DoctorPatientReview;
   reviews:DoctorPatientReview[];
+  flagToRole:Number;
 
  
   constructor(private service:DoctorService,private router:Router,private authService:AuthService
@@ -82,11 +83,14 @@ export class DoctorDetailsComponent implements OnInit {
       this.docId=this.authService.getUserPayLoad().id;
 
     }
-    else{
-      this.role='patient'
+    else if(this.authService.getUserPayLoad().role=='Patient'){
+      this.role='Patient'
+      this.flagToRole=1;
       this.patientId=this.authService.getUserPayLoad().id;
-      console.log('paaaaaaaaaa',this.patientId);
     }   
+    else{
+      this.flagToRole=3;
+    }
 
 
     /**this code to return reviews oF Doctor */
