@@ -20,7 +20,11 @@
             <h1 class="" style="margin-top: 60px; color:aliceblue; font-family:'Times New Roman', Times, serif; margin-left: 20px;">
                 Dr. {{doctor.user.firstName}} {{doctor.user.lastName}} </h1>
           <h2>{{doctor.speciality.name}}</h2>  
-          <button *ngIf=" flagToRole == 1; " class="btn btn-success"(click)="SelectPatientForViewMd(patient)" data-toggle="modal" data-target="#reviewModal" > add Review </button>
+          <button *ngIf=" flagToRole == 1 && tmpReviewToUpdate ==NULL ; else reviewExist" class="btn btn-success"(click)="SelectPatientForViewMd(patient)" data-toggle="modal" data-target="#reviewModal" > add Review </button>
+          <ng-template #reviewExist>
+            <button  *ngIf=" flagToRole == 1" class="btn btn-success"  data-toggle="modal" data-target="#EditreviewModal" > Edit Review </button>
+
+        </ng-template>
 
         </div>
         <div class="col-6" style="margin-top: 20px; margin-bottom: 50px;">
@@ -140,7 +144,7 @@
 
        </div>
     
-
+<!--******************** Review Modal *******************************-->
        <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -203,3 +207,39 @@
       </div>
       </div>
       
+
+
+         
+<!--******************** Edit Review Modal *******************************-->
+<div class="modal fade" id="EditreviewModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Your Review</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+            <div style="text-align:center">
+                <h1>
+                 Rating
+                </h1>
+                <star-rating *ngIf="tmpReviewToUpdate != NULL" [value]="tmpReviewToUpdate.rating" totalstars="5" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+              </div>
+
+        <div class="form-group col-md-12">
+            <label for="exampleFormControlTextarea1">add comment</label>
+            <textarea *ngIf="tmpReviewToUpdate != NULL" rows="5" class="form-control" name="comment" 
+            [(ngModel)]="tmpReviewToUpdate.comment"></textarea>
+
+        </div>
+  
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success"  data-dismiss="modal" (click)="UpdateReview()">Update Review</button>
+        </div>
+      </div>
+    </div>
+  </div>

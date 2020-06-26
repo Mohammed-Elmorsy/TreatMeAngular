@@ -25,7 +25,7 @@ export class DoctorDetailsComponent implements OnInit {
 
   test:String;
   choocedDate:String;
-  patientId:Number;
+  _patientId:Number;
   dateOfBirth:string;
 
   docImg:string;
@@ -36,6 +36,7 @@ export class DoctorDetailsComponent implements OnInit {
   DoctorImage:String;
   review:DoctorPatientReview;
   reviews:DoctorPatientReview[];
+  tmpReviewToUpdate:DoctorPatientReview;
   flagToRole:Number;
 
  
@@ -43,7 +44,7 @@ export class DoctorDetailsComponent implements OnInit {
     ,private sCheduleService:ScheduleService,private patientService:PatientService
     ,private toastr:ToastrService ,private route:ActivatedRoute,private doctorService:DoctorService) {
       this.review={
-        DoctorId:0,PatientId:0,Comment:'',Rating:0
+        doctorId:0,patientId:0,comment:'',rating:0
       }
  
    }
@@ -84,7 +85,9 @@ export class DoctorDetailsComponent implements OnInit {
     else if(this.authService.getUserPayLoad().role=='Patient'){
       this.role='Patient'
       this.flagToRole=1;
-      this.patientId=this.authService.getUserPayLoad().id;
+      this._patientId=this.authService.getUserPayLoad().id;
+
+      console.log('oooooooooooooooooid',this._patientId)
     }   
     else{
       this.flagToRole=3;
@@ -95,8 +98,12 @@ export class DoctorDetailsComponent implements OnInit {
      
     this.doctorService.GetDoctorReviews(this.docId).subscribe((res)=>{
       this.reviews=res;
-    })
+    console.log(this.reviews);
+    this.tmpReviewToUpdate=this.reviews.find(x=>x.patientId == this._patientId);
+    console.log(this.tmpReviewToUpdate);
 
+    })
+   
 
     /** this code to Check If Doctor has image Or Not to View Defult Image And Upload or View Current Image or Update  */
   this.service.getDoctor(this.docId)
@@ -116,12 +123,18 @@ export class DoctorDetailsComponent implements OnInit {
      
   }
 
-
+  UpdateReview()
+  {
+    this.patientService.EditDoctrorReview(this.tmpReviewToUpdate).subscribe(()=>{
+      this.toastr.success("Review Updated !");
+    })
+  }
 /** THIS code to get Value of Rating  */
 
   onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
    
-    this.review.Rating=$event.newValue;
+    this.review.rating=$event.newValue;
+    this.tmpReviewToUpdate.rating=$event.newValue;
      
   }
   
@@ -129,13 +142,17 @@ export class DoctorDetailsComponent implements OnInit {
   /**  send Review to backEnd  */
   postReview()
   {
-    this.review.DoctorId=this.docId;
-    this.review.PatientId=this.patientId;
+    this.review.doctorId=this.docId;
+    this.review.patientId=this._patientId;
+    
     this.patientService.AddDoctorReview(this.review).subscribe(()=>{
       this.toastr.warning("review Added");
       /** to update Reviews after posting */
       this.doctorService.GetDoctorReviews(this.docId).subscribe((res)=>{
         this.reviews=res;
+        this.tmpReviewToUpdate=this.reviews.find(x=>x.patientId == this._patientId);
+
+        
       })
     });
 
