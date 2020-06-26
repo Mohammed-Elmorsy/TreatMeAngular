@@ -452,17 +452,6 @@
                                         <tr>
                                             <td>
                                                 <strong>
-                                                    <i class="fa fa-address-book" aria-hidden="true"></i>
-                                                    Identification
-                                                </strong>
-                                            </td>
-                                            <td class="text-primary">
-                                                {{doctor.userId}} 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>
                                                     <i class="far fa-address-card"></i>
                                                     First Name
                                                 </strong>
@@ -510,6 +499,26 @@
                                         <tr>
                                             <td>
                                                 <strong>
+                                                    <i class="fas fa-user-tie"></i>                                                    Title
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.title}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-user-tie"></i>                                                    Title Details
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.titleDescription}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
                                                     <i class="fa fa-birthday-cake" aria-hidden="true"></i> 
                                                     Age
                                                 </strong>
@@ -548,7 +557,7 @@
                                         <tr>
                                             <td>
                                                 <strong>
-                                                    <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                                                    <i class="fas fa-phone"></i>
                                                     Phone Number
                                                 </strong>
                                             </td>
@@ -559,19 +568,19 @@
                                         <tr>
                                             <td>
                                                 <strong>
-                                                    <i class="fas fa-syringe"></i>
-                                                    Blood Type
+                                                    <i class="fas fa-dollar-sign"></i>
+                                                    Fees
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                {{doctor.user.bloodType}}
+                                                {{doctor.fees}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <strong>
-                                                    <i class="fas fa-book-medical"></i>
-                                                CV
+                                                    <i class="fas fa-file-pdf"></i>  
+                                                      CV
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
@@ -596,10 +605,9 @@
             </div>
             <div class="tab-pane fade" id="nav-commingSessions"><!--comming sessions tab -->
                 
-                <div  style=" padding: 10px; border: solid black 1px ; background-color:burlywood;"> 
-                    <h3>UpComing Sessions</h3>
-                    <table class="table">
-                    <thead class="thead-light">
+                <div  > 
+                    <table class="table table-primary table-hover"> 
+                    <thead class="bg-primary text-light">
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">Date</th>
@@ -622,28 +630,26 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="nav-addSessions"><!--add sessions tab -->
-                <div  style=" padding: 10px; border: solid black 1px ; background-color:burlywood;">
+                <div  style=" padding: 10px; border: solid black 1px ; background-color:rgb(199, 225, 250);">
                     <div class="row">
-                      <div class="col-5 text-center" >
+                      <div class="col-5 ml-5" >  
                           <!-- <h3>Days</h3> -->
-                          <div class="form-group">
-                              <label for="days"><h3>Days</h3> </label>
-                              <div *ngFor="let option of days; let i = index">
-                                  <label>
-                                      <input type="checkbox"
+                          <label><h3>Days</h3> </label>
+                          <div *ngFor="let option of days; let i = index" class="form-check">
+                                  <label class="form-check-label">  
+                                      <input type="checkbox" class="form-check-input"
                                              name="days"
                                              value="{{option}}"
                   
                                              (change)="updateCheckedOptions(option, $event)"/>
                                       {{option}}
                                   </label>
-                              </div>
                           </div>
                        
                           <br>
                       </div>
                       <div class="col-5 text-center" >
-                          <h3> Duration</h3>
+                          <h3> Duration (min)</h3> 
                           <select id="" class="form-control" [value]="sessionDuration" (input)="sessionDuration=$event.target.value">
                              
                               <option value="{{min}}" *ngFor="let min of duration">{{min}}</option>
@@ -690,17 +696,16 @@
                 </div><hr>
                   <br>
               
-                    <div class="col-12"><button style="width: 100%;" class="btn btn-success" (click)="addSessions();"> Add Sessions</button>
+                    <div class="col-12 text-center"><button style="width: 40%;" class="btn btn-success" (click)="addSessions();"> Add Sessions</button>
               
               
                     </div>
               </div>
             </div>
             <div class="tab-pane fade" id="nav-bookedSessions"><!--booked sessions tab -->
-                <div  style=" padding: 10px; border: solid black 1px ; background-color:burlywood;"> 
-                    <h3>UpComing Sessions</h3>
-                    <table class="table">
-                    <thead class="thead-light">
+                <div> 
+                    <table class="table table-primary table-hover">
+                    <thead class="bg-primary text-light">   
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Patient Name</th>
