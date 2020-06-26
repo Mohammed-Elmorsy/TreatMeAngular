@@ -10,15 +10,19 @@ import { LoginGuard } from './core/guards/login.guard';
 import { HomeResolver } from './core/resolvers/home.resolver';
 import { VideoComponent } from './video/video.component';
 import { SubscriberComponent } from './subscriber/subscriber.component';
+import { PaymentComponent } from './payment/payment.component';
    
 
 const routes: Routes = [  
   {path:"",redirectTo:"home" ,pathMatch:"full"},
   {path:"home",component:HomeComponent, resolve:{home:HomeResolver}},
+ 
   {path:"doctor/register",component:DoctorRegisterComponent, canActivate:[LoginGuard]},
   {path:"patient/register",component:PatientRegisterComponent, canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent, canActivate:[LoginGuard]},
+  {path:"payment/:id",component:PaymentComponent},
   {path:"video/:id",component:VideoComponent},
+
   {path:"subscriber",component:SubscriberComponent},
   {path:"**",component:PageNotFoundComponent},
  

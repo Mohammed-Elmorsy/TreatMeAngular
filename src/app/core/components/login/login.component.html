@@ -68,5 +68,12 @@
         >{{"Login.Enter" | translate}}</button>
       </div>
     </form>
-  </div>
+    <br>
+    <div *ngIf="pictureName == 'patient'" class="text-center">
+      {{"Login.Or" | translate}} &nbsp; <a routerLink="/patient/register">{{"Login.SignUp"| translate}}</a>
+    </div>
+    <div *ngIf="pictureName == 'doctor'" class="text-center">
+      {{"Login.Or" | translate}} &nbsp; <a routerLink="/doctor/register">{{"Login.SignUp"| translate}}</a>
+    </div>   
+  </div> 
 </div>

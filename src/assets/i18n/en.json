@@ -67,7 +67,9 @@
             "Email":"Email is invalid",
             "ConfirmPassword":"Passwords don't match"
 
-        }
+        },
+        "Or":"Or",
+        "SignIn":"SignIn" 
 
     },
 
@@ -76,7 +78,9 @@
         "User":"User",
         "Doctor":"Doctor",
         "ForgotPassword":"Forgot your password ?",
-        "Enter":"Enter"
+        "Enter":"Enter",
+        "Or":"Or",
+        "SignUp":"Sign Up"
     },
     
     "DoctorsList":{

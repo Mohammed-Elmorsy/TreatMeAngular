@@ -3,8 +3,8 @@
 
     <!-- <div *ngIf="showLoadingIndicator" class="lds-dual-ring"></div> -->
     <div *ngIf="showLoadingIndicator" id="loading"><img src="assets/images/common/loading_indicator.gif" alt="loading ...."> </div>
-    <router-outlet *ngIf="!showLoadingIndicator" >    
-
+    <router-outlet *ngIf="!showLoadingIndicator" > 
     </router-outlet>
 
 </div>
+<app-footer *ngIf="!showLoadingIndicator"></app-footer>   
