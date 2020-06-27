@@ -77,7 +77,7 @@ export class DoctorDetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.docId = +params.get('id');
     })
-  
+   
    
     if (this.authService.getUserPayLoad().role=='Doctor') {
       this.role='doctor';
@@ -159,10 +159,10 @@ export class DoctorDetailsComponent implements OnInit {
     });
 
   }
- /*
+ 
   bookSession(sessionId){
     let booking:doctorPatientSchedule={
-      DoctorId:this.docId,doctor:null,patient:null,schedule:null,
+      DoctorId:this.docId,
       PatientId:this.authService.getUserPayLoad().id,
       ScheduleId:sessionId
     };
@@ -176,7 +176,7 @@ export class DoctorDetailsComponent implements OnInit {
 
     })
   }
-*/
+
   deleteSession(session){
 
     this.service.deleteSession(session.id).subscribe(()=>{  

@@ -42,19 +42,19 @@ export class DoctorProfileComponent implements OnInit {
   PMhours:number[];
   duration:number[];
   
-  AMhour1:Number;
-  AMhour2:Number;
-  PMhour1:Number;
-  PMhour2:Number;
+  AMhour1:Number=1;
+  AMhour2:Number=1;
+  PMhour1:Number=1;
+  PMhour2:Number=1;
   sessionDuration:Number;
 
-  AMworkHours:boolean;
-  PMworkHours:boolean;
+  AMworkHours:boolean=true;
+  PMworkHours:boolean=true;
   
   
 
   initSchedule:Schedule;
-  
+   
    DoctorImage:string;
    comingSessions:Schedule[];
   BookedSessions:any ;
@@ -201,7 +201,10 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
       startAM:Number(this.AMhour1),
       endAM:Number(this.AMhour2),
       startPM:Number(this.PMhour1),
-      endPM:Number(this.PMhour2)
+      endPM:Number(this.PMhour2),
+      existAM:this.AMworkHours,
+      existPM:this.PMworkHours
+
     };
     console.log(this.sessionsDetails);
     this.doctorService.addSchedules(this.sessionsDetails)
@@ -352,9 +355,6 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
       })
 
 
-
-      
-
       }
 ,(err)=>{ 
 console.log(err);
@@ -373,11 +373,7 @@ console.log(err);
         this.router.navigate(['/video/'+RoomId])
       }
     )
-   
-    
-    
-
-  }
+   }
 
 
 }
