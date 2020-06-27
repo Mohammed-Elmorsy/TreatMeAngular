@@ -14,26 +14,21 @@
         <td>{{patient.user.firstName}}</td>
         <td>{{patient.user.lastName}}</td>
         <td>{{patient.user.userName}}</td>
-        <td *ngIf="patient.medicalHstoryName == '' ; else elseCode3">
-          <h2>
+        <td >
+          <h2 *ngIf="patient.medicalHstoryName == '' ; else elseCode3">
             no medicalHistory
           </h2>
-
-
+          <ng-template #elseCode3>
+            <span class="btn btn-danger" (click)="SelectpatientForMedical(patient)" data-toggle="modal" data-target="#MedicalModal" >View Medical History</span>             
+          </ng-template>
         </td>
 
 
-        <ng-template #elseCode3>
-          <span class="btn btn-danger" (click)="SelectpatientForMedical(patient)" data-toggle="modal" data-target="#MedicalModal" >View Medical History</span> 
 
 
-
-
-        </ng-template>
-
-        <td><span class="btn btn-info" (click)="SelectDoctorToOperation(patient)" data-toggle="modal" data-target="#PatientDetails">Details</span>|
+        <td><span class="btn btn-info" (click)="SelectDoctorToOperation(patient)" data-toggle="modal" data-target="#PatientDetails">Details</span> |
             <span class="btn btn-warning"(click)="SelectDoctorToOperation(patient)"class="btn btn-primary" data-toggle="modal" data-target="#PatientEdit" > edit
-          </span>|
+          </span> |
           <span class="btn btn-danger" (click)="SelectDoctorToOperation(patient)" data-toggle="modal" data-target="#DeletePatient" >Delete</span> 
 
       </tr>

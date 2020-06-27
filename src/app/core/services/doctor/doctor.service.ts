@@ -71,7 +71,7 @@ DeleteDoctor(id)
     return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/getTodayTomorrowSchedules/"+id);
   } 
   MonthBookedSessom(id){
-    return this.httpClient.get<doctorPatientMeeting>(environment.baseURL+"api/DoctorPatientSchedules/getBookedSessionsInMonth/"+id);
+    return this.httpClient.get<doctorPatientMeeting[]>(environment.baseURL+"api/DoctorPatientSchedules/getBookedSessionsInMonth/"+id);
   }
 
   deleteSession(id:number){
