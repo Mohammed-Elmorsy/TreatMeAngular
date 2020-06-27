@@ -4,11 +4,11 @@ import { Doctor } from './doctor';
 export class DoctorPatientReview {
 
     constructor(
-        public DoctorId:Number,
-        public PatientId:Number,
-        public Comment:String,
-        public Rating:Number,
-        public Patient?:Patient,
+        public doctorId:Number,
+        public patientId:Number,
+        public comment:String,
+        public rating:Number,
+        public patient?:Patient,
         public doctor?:Doctor
         
     )
