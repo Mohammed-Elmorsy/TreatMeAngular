@@ -92,3 +92,20 @@
     border-radius: 20px;
     height: 28px
 }
+
+.alert-primary{
+    background-color:rgb(2, 7, 78) !important ; 
+}
+
+.table-borderless button{
+    margin:5px;
+    border:2px solid whitesmoke;
+}
+
+tr:hover{
+    color: rgb(98, 169, 236) !important;  
+}
+
+.card{
+    border:0;
+}

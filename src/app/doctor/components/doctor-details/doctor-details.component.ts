@@ -146,7 +146,7 @@ export class DoctorDetailsComponent implements OnInit {
     this.review.patientId=this._patientId;
     
     this.patientService.AddDoctorReview(this.review).subscribe(()=>{
-      this.toastr.warning("review Added");
+      this.toastr.success("review Added"); 
       /** to update Reviews after posting */
       this.doctorService.GetDoctorReviews(this.docId).subscribe((res)=>{
         this.reviews=res;
