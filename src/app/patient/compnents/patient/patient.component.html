@@ -224,8 +224,65 @@
                       </div>
                 </ng-template>
             </div>
-            <div class="tab-pane fade" id="nav-notifications"><!-- notifications tab -->
-                notifications
+            <div class="tab-pane fade" id="nav-notifications" style="	background: #7F7FD5; height: 100%; overflow-y: scroll;
+            background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+             background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); " ><!-- notifications tab -->
+
+                <div >
+                    <div  *ngFor="let PatientRaoucheh of PatientRaouchehs" style=" width: 500px; height: 90%;  overflow-y: scroll;  
+                    background-color: rgba(0,0,0,0.4) !important;" >
+
+                    <div class="msg_cotainer">
+
+                            <h5 style="margin-left: 3px;">  Doctor : {{ PatientRaoucheh.doctor.user.firstName}} {{ PatientRaoucheh.doctor.user.lastName}}</h5>
+                    </div>
+                            
+                <div class="form-group col-md-12 ">
+                    <div class="msg_cotainer_send">
+							
+                    <label for="exampleFormControlTextarea1">Prescription</label>
+                    </div>
+                    <textarea style=" margin-top: auto;
+                    margin-bottom: auto;
+                    margin-left: 10px;
+                    border-radius: 25px;
+                    background-color: #82ccdd;
+                    padding: 10px; " readonly="true" rows="8" class="form-control" disabled  name="comment" >{{PatientRaoucheh.doctorFeedback}}</textarea>
+                    
+                </div>
+
+                <div class="form-group col-md-12 ">
+                    <div class="msg_cotainer_send" style="width: 275px;">
+                    <label for="exampleFormControlTextarea1">The date of the next session :</label>
+                    </div>
+                    <textarea style="margin-top: auto;
+                    margin-bottom: auto;
+                    margin-left: 10px;
+                    border-radius: 25px;
+                    background-color: #82ccdd;
+                    padding: 10px;" rows="" class="form-control" disabled  name="comment" >{{PatientRaoucheh.description}} </textarea>
+                    
+                </div>
+
+
+
+
+                  
+
+
+
+
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+                
             </div>
             <div class="tab-pane fade" id="nav-issues"><!-- issues tab --> 
                 issues

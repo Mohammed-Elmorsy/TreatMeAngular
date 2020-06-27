@@ -15,6 +15,7 @@ import { FileUploadService } from 'src/app/core/services/FileUpload/file-upload.
 
 import config from '../../../../config';
 import { StateService } from '../../../stateService';
+import { DoctorPatientRaoucheh } from 'src/app/_models/doctor-patient-raoucheh';
 
 @Component({
   selector: 'app-patient',
@@ -35,6 +36,7 @@ export class PatientComponent implements OnInit {
 
   private medicalFile:File=null;
   MedicalToView:String;
+  PatientRaouchehs:DoctorPatientRaoucheh[];
   constructor(private patientservice:PatientService , private stateService: StateService,private router:Router,private doctorService:DoctorService,private authService:AuthService, private toastr:ToastrService,private route:Router,private http:HttpClient,private fileupload:FileUploadService) { 
 
     this.patient={user:{}}
@@ -133,7 +135,13 @@ uploadFile()
 
     });
 
+    this.patientservice.GetPatientRaoucheh(PatientId).subscribe((res)=>{
+     this.PatientRaouchehs=res;
 
+     console.log( 'asssssssssssssssssssssssssssssssssssss',this.PatientRaouchehs);
+
+
+    })
 
    
   

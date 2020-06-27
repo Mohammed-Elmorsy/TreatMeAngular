@@ -9,7 +9,8 @@ export class DoctorPatientReview {
         public comment:String,
         public rating:Number,
         public patient?:Patient,
-        public doctor?:Doctor
+        public doctor?:Doctor,
+        public doctorFeedback?:String
         
     )
     {}

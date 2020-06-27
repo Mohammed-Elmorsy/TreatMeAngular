@@ -70,3 +70,31 @@ input[type=file]{
 
 
 		                                                      
+    .info {
+        background-color: #e7f3fe;
+        border-left: 6px solid #2196F3;
+        margin-top: 5px;
+    }
+    .msg_cotainer{
+		margin-top: auto;
+		margin-bottom: auto;
+		margin-left: 10px;
+		border-radius: 25px;
+		background-color: #82ccdd;
+		padding: 10px;
+        position: relative;
+        width: 250px;
+        margin-top: 5px;
+        
+    }
+    .msg_cotainer_send{
+		margin-top: 4px;
+		margin-bottom: 2px;
+		margin-right: 10px;
+		border-radius: 20px;
+		background-color: #78e08f;
+        position: relative;
+        float:right;       
+        width: 200px; 
+        text-align: center;
+	}

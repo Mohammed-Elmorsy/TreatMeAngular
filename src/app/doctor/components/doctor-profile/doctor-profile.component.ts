@@ -17,7 +17,9 @@ import { StateService } from '../../../stateService';
 import { DoctorPatientScheduleOpject } from 'src/app/_models/doctor-patient-schedule-opject';
 import { data } from 'jquery';
 import { Patient } from 'src/app/_models/patient';
+import { DoctorPatientReview } from 'src/app/_models/doctor-patient-review';
 import { doctorPatientMeeting } from 'src/app/_models/doctorPatientMeeting';
+import { DoctorPatientRaoucheh } from 'src/app/_models/doctor-patient-raoucheh';
 
 
 @Component({
@@ -32,6 +34,12 @@ export class DoctorProfileComponent implements OnInit {
   patientToViewPdf:Patient;
   PdfUrl:String;
   DoctorCv:String;
+  reviews:DoctorPatientReview[];
+  tmpReviewToDoctorFeedBack:DoctorPatientReview;
+  feedback:DoctorPatientRaoucheh;
+  patientForFeedbackOpertions:Patient;
+
+  public doctorPatientRaoucheh:DoctorPatientRaoucheh={doctorId:0,patientId:0,description:"",doctorFeedback:""};
   sessionsDetails:SessionDetails;
   days=["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"];
   
@@ -128,7 +136,13 @@ export class DoctorProfileComponent implements OnInit {
       console.log(this.BookedSessions);
 
     })
-    
+
+   
+
+      
+    this.doctorService.GetDoctorReviews(this.docId).subscribe((res)=>{
+      this.reviews=res;
+    })    
       this.setIterators();
   }
 
@@ -138,6 +152,62 @@ export class DoctorProfileComponent implements OnInit {
     this.DoctorCv=environment.baseURL+"cvs/"+this.doctor.cvName;
     console.log(this.DoctorCv)
   }
+
+/** feedBack part */
+
+SelecToAddMedicine(_patient:Patient)
+{
+   this.patientForFeedbackOpertions=_patient;
+   console.log('sdddddddddddddddddddddddddd',this.doctor.userId);
+  this.doctorPatientRaoucheh.doctorId=this.doctor.userId;
+  this.doctorPatientRaoucheh.patientId=this.patientForFeedbackOpertions.user.id;
+  this.doctorService.GetDoctorPatientRaoucheh().subscribe((res)=>{
+
+    let feedBacks=res;
+
+    this.feedback=feedBacks.find(f=>f.patientId == this.patientForFeedbackOpertions.user.id );
+    this.feedback.patientId=this.patientForFeedbackOpertions.userId;
+    this.feedback.doctorId=this.doctor.userId
+    console.log('feeeeeeeedBacks', this.feedback)
+
+
+  });
+
+  console.log(this.doctorPatientRaoucheh);
+
+
+  
+
+}
+AddFeeddBack()
+{
+  
+  this.doctorService.AddDoctorPatientRaoucheh(this.doctorPatientRaoucheh)
+  .subscribe((a)=>{
+    console.log(a);
+    this.toastr.success("feedback Added Successfully !")
+
+  })
+
+}
+
+UpdateFeedBack()
+{
+  console.log("curenec dssd ",this.feedback)
+  
+    this.doctorService.EditDoctorPatientRaoucheh(this.feedback).subscribe(()=>{
+      this.toastr.success("feedback updated successfully !");
+
+
+    });
+
+
+
+
+
+
+
+}
 
 
   /** select Patient object to get medical History Name */
