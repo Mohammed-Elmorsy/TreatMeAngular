@@ -32,6 +32,7 @@ import { PaymentComponent } from './payment/payment.component';
 
 
 
+
 @NgModule({
   declarations: [ //components
     AppComponent, SubscriberComponent, VideoComponent, PaymentComponent

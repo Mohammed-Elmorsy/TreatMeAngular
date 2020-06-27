@@ -115,7 +115,9 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
     this.doctorService.getTodayTomorrowSessions(this.docId)
     .subscribe(
       (_schedule)=> {
+
         this.comingSessions = _schedule;
+        
         
       });   
     console.log(this.doctor);
@@ -224,7 +226,37 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
     );
    
   }
+  
+  modifySessions(){
+    this.sessionsDetails={
+      doctorId:this.docId,
+      days:this.daysChecked,
+      duration:Number(this.sessionDuration),
+      startAM:Number(this.AMhour1),
+      endAM:Number(this.AMhour2),
+      startPM:Number(this.PMhour1),
+      endPM:Number(this.PMhour2),
+      existAM:this.AMworkHours,
+      existPM:this.PMworkHours
 
+    };
+    console.log(this.sessionsDetails);
+    this.doctorService.addSchedules(this.sessionsDetails)
+    .subscribe(
+      res =>{
+        console.log(res);
+        //alert("You have registered successfully! ..please wait to confirm your acount");
+        this.toastr.success('لقد تم تعديل جلساتك',''); 
+        this.router.navigate(["/doctor/details/"+this.docId]);
+
+      },  
+      err => {
+        console.log(err);
+        //alert("there are some errors during registeration!");
+        this.toastr.error('نأسف لذلك هناك مشكلة فى عملية تعديل الجلسات','حدث خطأ ما'); 
+      }
+    );
+  }
 
 
 

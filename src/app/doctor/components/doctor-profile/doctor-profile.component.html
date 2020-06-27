@@ -216,7 +216,7 @@
             </div>
             <div class="tab-pane fade" id="nav-commingSessions"><!--comming sessions tab -->
                 
-                <div  > 
+                <div  *ngIf="comingSessions.length>0; else noComingSessions"> 
                     <table class="table table-primary table-hover"> 
                     <thead class="bg-primary text-light">
                         <tr>
@@ -238,6 +238,12 @@
                     </tbody>
                     </table>
                 </div>
+                <ng-template #noComingSessions>
+                    <div class="alert alert-primary text-center" role="alert" >
+                       There is no sessions for the coming two days
+                      </div>
+                </ng-template>
+
             </div>
             <div class="tab-pane fade" id="nav-addSessions"><!--add sessions tab -->
                 <div  style=" padding: 10px; border: solid black 1px ; background-color:rgb(199, 225, 250);">
@@ -306,15 +312,21 @@
                 </div><hr>
                   <br>
               
-                    <div class="col-12 text-center"><span style="width: 40%;" class="btn btn-success" (click)="addSessions();"> Add Sessions</span>
+                    <div class="col-12 text-center">
+                        
+                        <button style="width: 30%;" class="btn btn-success" (click)="addSessions();"> Add Sessions</button>
+                       
+                        <span  style="width: 30%;"></span>
+                        
+                        <button style="width: 30%;" class="btn btn-danger" (click)="modifySessions();"> Modify Sessions</button>
               
               
                     </div>
               </div>
             </div>
             <div class="tab-pane fade" id="nav-bookedSessions"><!--booked sessions tab -->
-                <div> 
-                    <table class="table table-primary table-hover">
+                <div *ngIf="BookedSessions.length>0; else noBookedSessions">  
+                    <table  class="table table-primary table-hover">
                     <thead class="bg-primary text-light">   
                         <tr>
                             <th scope="col">#</th>
@@ -353,6 +365,12 @@
                     </tbody>
                     </table>
                 </div>  
+                <ng-template #noBookedSessions>
+                    <div class="alert alert-primary text-center" role="alert" >
+                       There is no booked sessions
+                      </div>
+                </ng-template>
+
             </div>
             <div class="tab-pane fade" id="nav-notifications"><!-- notifications tab -->
                 notifications
