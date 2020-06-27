@@ -17,6 +17,7 @@ import { StateService } from '../../../stateService';
 import { DoctorPatientScheduleOpject } from 'src/app/_models/doctor-patient-schedule-opject';
 import { data } from 'jquery';
 import { Patient } from 'src/app/_models/patient';
+import { doctorPatientMeeting } from 'src/app/_models/doctorPatientMeeting';
 
 
 @Component({
@@ -56,8 +57,8 @@ export class DoctorProfileComponent implements OnInit {
   initSchedule:Schedule;
    
    DoctorImage:string;
-   comingSessions:Schedule[];
-  BookedSessions:any ;
+   comingSessions:Schedule[]=[];
+   BookedSessions:doctorPatientMeeting[]=[];
   Cv:File=null;
 
 
@@ -66,7 +67,7 @@ export class DoctorProfileComponent implements OnInit {
 
     private fileupload:FileUploadService,
     private route:ActivatedRoute ,
-    private stateService: StateService,
+    private stateService: StateService, 
     private http:HttpClient,
      private router:Router,
       private scheduleService:ScheduleService,
@@ -78,7 +79,7 @@ export class DoctorProfileComponent implements OnInit {
     this.sessionsDetails=null;
 
 
-this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
+
  
    
   }   

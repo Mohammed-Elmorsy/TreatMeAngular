@@ -30,11 +30,12 @@ publishing;
 apiKey: string;
 token: string;
 sessionId: string;
+sessionEnd:boolean=false;
 myName:string;
 hisName:string;
 role;
 time;
-
+docId:Number;
 
 constructor(private auth:AuthService,
   private componentFactoryResolver: ComponentFactoryResolver,
@@ -70,7 +71,7 @@ ngOnInit(): void {
     this.router.navigate(['/']);
   }
 
-  let docId:number;
+ 
   this.apiKey = this.stateService.apiKey$;
   this.token = this.stateService.token$;
   this.sessionId = this.stateService.sessionId$;
@@ -79,6 +80,7 @@ ngOnInit(): void {
 
   let doctor:Doctor;
   let patient:Patient;
+ 
  
   var url = window.location.pathname;
   var scheduleId = Number(url.substring(url.lastIndexOf('/') + 1));
@@ -91,7 +93,7 @@ ngOnInit(): void {
 
    
      this.scheduleService.getScheduleById(scheduleId).subscribe((a)=>{
- 
+     
   
       this.myName="Dr : "+a.doctor.user.firstName + " "+a.doctor.user.lastName;
       this.hisName=a.patient.user.firstName + " "+a.patient.user.lastName;
@@ -112,7 +114,7 @@ ngOnInit(): void {
 
      this.scheduleService.getScheduleById(scheduleId).subscribe((a)=>{
  
-  
+     this.docId=a.doctor.userId;
       this.hisName="Dr : "+a.doctor.user.firstName + " "+a.doctor.user.lastName;
       this.myName=a.patient.user.firstName + " "+a.patient.user.lastName;
  
@@ -190,25 +192,37 @@ ngAfterViewInit(): void {
   
 }
 ngOnDestroy() { 
-  var r = confirm("Are you sure you want to leave the meeting?");
-  if (r==true) {
-    this.session.disconnect();
+ 
+  this.session.disconnect();
+
+  if (this.role=="Doctor") {
+    this.router.navigate(['/doctor/profile']);
   }
+  else{
+    this.router.navigate(['/doctor/details/'+this.docId]);
+  }
+ 
+  
+}
+ 
 
 
   
-}
+
   endMeeting(){
-    //destroy session
-  var r = confirm("Are you sure you want to end the meeting?");
+    var r = confirm("Are you sure you want to leave the meeting?");
     if (r==true) {
       this.session.disconnect();
 
-      this.router.navigate(['/home']);
+    if (this.role=="Doctor") {
+      this.router.navigate(['/doctor/profile']);
     }
+    else{
+      this.router.navigate(['/doctor/details/'+this.docId]);
+    }
+   }
+ 
   
-
-
   }
 
 

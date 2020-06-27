@@ -13,7 +13,7 @@
                 <img [src]="DoctorImage"
                 style=" border-style: solid; border-width: 5px; border-color: whitesmoke; border-radius: 60%; margin-top: 20px;"
                 height="50%" width="200">
-            </ng-template>
+            </ng-template> 
           
 
 
@@ -368,19 +368,69 @@
                     (change)="GetDoctorScheduleTimes(doctor.userId ,choocedDate)" />
             </span>
 
+            <div  *ngIf="DoctorSchedule.length>0; else noComingSessions"> 
+                <table class="table table-hover table-borderless text-light ">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Start Time</th>
+                            <th scope="col">End Time</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="thisDoctor || role == 'Patient'; else visitor" >
+                        <tr  *ngFor="let time of DoctorSchedule;let i=Index">
 
-            <table [hidden]="!DoctorSchedule" class="table table-hover table-borderless text-light ">
-                <thead>
-                    <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Start Time</th>
-                        <th scope="col">End Time</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let time of DoctorSchedule;let i=Index">
+                            <td>
+                                {{time.date  | date:'shortDate'}}
+                            </td>
+                            <td>
+                                {{time.startTime | date:'mediumTime'}}
+                            </td>
+                            <td>
+                                {{time.endTime | date:'mediumTime'}}
+                            </td>
 
+
+                            <td *ngIf="time.isBooked == 1; else elseBlock">
+
+                                <span *ngIf="role == 'Patient'; else Doc">
+                                    <button class="btn btn-success" disabled>
+                                        محجوز
+                                    </button>
+                                </span>
+                                <ng-template #Doc>
+                                    <button class="btn btn-success" disabled>
+                                        محجوز
+                                    </button>
+                                    <button class="btn btn-danger" (click)="cancelSession(time.id)">
+                                        إلغاء الحجز
+                                    </button>
+                                </ng-template>
+                            </td>
+                            <ng-template #elseBlock>
+
+                                <span *ngIf="role == 'Patient'; else Doc2">
+                                    <button class="btn btn-success" (click)="bookSession(time.id)">
+                                        إحجز الآن
+                                    </button>
+                                </span>
+                                <ng-template #Doc2>
+                                    <button class="btn btn-success" disabled>
+                                        غير محجوز
+                                    </button>
+                                    <button class="btn btn-danger" (click)="deleteSession(time)">
+                                        إلغاء الميعاد
+                                    </button>
+                                </ng-template>
+
+
+                            </ng-template>
+                        </tr>
+                    </tbody>
+                    <ng-template #visitor>
+                    <tbody>
+                        <tr  *ngFor="let time of DoctorSchedule;let i=Index">
                         <td>
                             {{time.date  | date:'shortDate'}}
                         </td>
@@ -392,49 +442,38 @@
                         </td>
 
 
-                        <td *ngIf="time.isBooked == 1; else elseBlock">
+                        <td>
 
-                            <span *ngIf="role == 'Patient'; else Doc">
+                            <span *ngIf="time.isBooked == 1; else Doc">
                                 <button class="btn btn-success" disabled>
                                     محجوز
                                 </button>
                             </span>
                             <ng-template #Doc>
-                                <button class="btn btn-success" disabled>
-                                    محجوز
-                                </button>
-                                <button class="btn btn-danger" (click)="cancelSession(time.id)">
-                                    إلغاء الحجز
+                                <button  class="btn btn-success"  >
+                                    احجز الآن
                                 </button>
                             </ng-template>
                         </td>
-                        <ng-template #elseBlock>
 
-                            <span *ngIf="role == 'Patient'; else Doc2">
-                                <button class="btn btn-success" (click)="bookSession(time.id)">
-                                    إحجز الآن
-                                </button>
-                            </span>
-                            <ng-template #Doc2>
-                                <button class="btn btn-success" disabled>
-                                    غير محجوز
-                                </button>
-                                <button class="btn btn-danger" (click)="deleteSession(time)">
-                                    إلغاء الميعاد
-                                </button>
-                            </ng-template>
+                        </tr>
+                    </tbody>
+                    </ng-template>
+                    <tfoot *ngIf="thisDoctor" >
+                        <td colspan="4">
+                            <button style="width: 100%;" class="btn btn-danger" (click)="CancelDaySessions(choocedDate)">Cancel This Day Sessions</button>
+                        </td>
+
+                    </tfoot>
+                </table>
+            </div>
+            <ng-template #noComingSessions>
+                <div class="alert alert-light text-center" role="alert" >
+                No sessions for this day, Select anothe date
+                  </div>
+            </ng-template>
 
 
-                        </ng-template>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <td colspan="4"> <button style="width: 100%;" class="btn btn-danger" *ngIf="role == 'doctor'"
-                            (click)="CancelDaySessions(choocedDate)">Cancel This Day Sessions</button>
-                    </td>
-
-                </tfoot>
-            </table>
 
 
         </div>

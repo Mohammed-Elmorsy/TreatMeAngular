@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 import { DoctorPatientReview } from 'src/app/_models/doctor-patient-review';
 import { StarRatingComponent } from 'ng-starrating';
 
-@Component({
+@Component({ 
   selector: 'app-doctor-details',
   templateUrl: './doctor-details.component.html',
   styleUrls: ['./doctor-details.component.css']
@@ -22,7 +22,7 @@ import { StarRatingComponent } from 'ng-starrating';
 export class DoctorDetailsComponent implements OnInit {
   
 
-
+  thisDoctor:Boolean=false;
   test:String;
   choocedDate:String;
   _patientId:Number;
@@ -76,14 +76,21 @@ export class DoctorDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.docId = +params.get('id');
+
     })
    
    
     if (this.authService.getUserPayLoad().role=='Doctor') {
-      this.role='doctor';
+      this.role='Doctor';
+      if (this.authService.getUserPayLoad().id==this.docId) {
+        this.thisDoctor =true;
+      }
+  
+
     }
     else if(this.authService.getUserPayLoad().role=='Patient'){
-      this.role='Patient'
+      this.role='Patient';
+      this.thisDoctor=false;
       this.flagToRole=1;
       this._patientId=this.authService.getUserPayLoad().id;
 
