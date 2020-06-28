@@ -17,6 +17,7 @@ import { StateService } from '../../../stateService';
 import { DoctorPatientScheduleOpject } from 'src/app/_models/doctor-patient-schedule-opject';
 import { data } from 'jquery';
 import { Patient } from 'src/app/_models/patient';
+import { DoctorPatientReview } from 'src/app/_models/doctor-patient-review';
 
 
 @Component({
@@ -31,6 +32,9 @@ export class DoctorProfileComponent implements OnInit {
   patientToViewPdf:Patient;
   PdfUrl:String;
   DoctorCv:String;
+  reviews:DoctorPatientReview[];
+  tmpReviewToDoctorFeedBack:DoctorPatientReview;
+
   sessionsDetails:SessionDetails;
   days=["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"];
   
@@ -125,7 +129,13 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
       console.log(this.BookedSessions);
 
     })
-    
+
+
+
+      
+    this.doctorService.GetDoctorReviews(this.docId).subscribe((res)=>{
+      this.reviews=res;
+    })    
       this.setIterators();
   }
 
@@ -135,6 +145,18 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
     this.DoctorCv=environment.baseURL+"cvs/"+this.doctor.cvName;
     console.log(this.DoctorCv)
   }
+
+/** feedBack part */
+
+SelecToAddMedicine(_patient:Patient)
+{
+
+  this.tmpReviewToDoctorFeedBack=this.reviews.find(p=>p.patientId == _patient.user.id);
+  console.log("feedBack ooooobkect"+this.tmpReviewToDoctorFeedBack);
+
+
+}
+
 
 
   /** select Patient object to get medical History Name */

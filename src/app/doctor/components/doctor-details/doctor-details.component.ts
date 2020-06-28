@@ -110,6 +110,7 @@ export class DoctorDetailsComponent implements OnInit {
   .subscribe(
 
     (_doctor)=> {this.doctor = _doctor;
+      console.log('doctoooooooooor',this.doctor)
       if(this.doctor.user.imageName != null)
       {
         this.DoctorImage=environment.baseURL+"images/"+this.doctor.user.imageName;

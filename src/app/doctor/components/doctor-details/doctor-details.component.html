@@ -39,7 +39,7 @@
                          
                             <div class="alert alert-dark">
                             
-                                <star-rating value="5" [totalstars]="doctor.rating" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+                                <star-rating [value]="doctor.rating" [totalstars]="doctor.rating" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
 
                             </div>
                         </h4>
@@ -180,7 +180,7 @@
       
 
 
-      <div *ngIf="reviews != NULL" class="" style=" text-align: center; overflow-y: scroll;overflow-x:hidden; border-radius: 20px;
+      <div *ngIf="reviews != '' ; else reviewsExist" class="" style=" text-align: center; overflow-y: scroll;overflow-x:hidden; border-radius: 20px;
       width: 400px;height: 250px; background-color: rgb(225, 227, 231);float: right; margin: 15px auto; display: block;" >
       <h1 style="color: rgb(73, 64, 10); ">Reviews</h1>
        <div *ngFor="let _review of reviews" >
@@ -207,7 +207,14 @@
       </div>
       </div>
       
-
+      <ng-template #reviewsExist>
+        <div  class="" style=" text-align: center; overflow-y: scroll;overflow-x:hidden; border-radius: 20px;
+        width: 400px;height: 250px; background-color: rgb(225, 227, 231);float: right; margin: 15px auto; display: block;" >
+        <h3 style="color: rgb(73, 10, 26); margin: 20px auto;  margin-top: 50px;">
+           OOps! No Reviews Yet
+            </h3>
+            </div>
+      </ng-template>
 
          
 <!--******************** Edit Review Modal *******************************-->

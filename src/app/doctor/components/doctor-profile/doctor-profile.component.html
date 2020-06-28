@@ -711,6 +711,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Patient Name</th>
                             <th scope="col">MedicalHistory</th>
+                            <th scope="col"> medicine</th>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
                             <th scope="col">Status</th>
@@ -728,6 +729,8 @@
 
                                             
                                         </td>
+                                        <button class="btn btn-danger" (click)="SelecToAddMedicine(session.patient)" data-toggle="modal" data-target="#feedBackModal" >FeedBack </button> 
+
                                         <td *ngIf="session.schedule.isBooked == 1;"> {{session.schedule.date  | date:'shortDate'}}</td>
 
                                         <td *ngIf="session.schedule.isBooked == 1;"> {{session.schedule.startTime | date:'mediumTime'}}</td>
@@ -1003,3 +1006,34 @@
     </div>
   </div>
   
+  <div class="modal fade" id="feedBackModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Your Review</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+            <div style="text-align:center">
+                <h1>
+                 Rating
+                </h1>
+              </div>
+
+        <div class="form-group col-md-12">
+            <label for="exampleFormControlTextarea1">add comment</label>
+            <textarea *ngIf="tmpReviewToDoctorFeedBack != NULL" rows="5" class="form-control" name="feedBack" 
+            [(ngModel)]="tmpReviewToDoctorFeedBack.doctorFeedback"></textarea>
+
+        </div>
+  
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success"  data-dismiss="modal" (click)="UpdateReview()">Update Review</button>
+        </div>
+      </div>
+    </div>
+  </div>
