@@ -1,5 +1,5 @@
   <div class="container-fluid row mx-auto">
-    <div class="col-md-4 col-lg-3 mb-4" id="cardWrapper" style="height: 80%;">
+    <div class="col-md-4 col-lg-3 mb-4" id="cardWrapper" style="height: 630px">
         <div class="card bg-light text-center" id="profileCard" style="height: 100%;">
                 <div class="text-center" style="position: relative;"> 
                     <img *ngIf="patient.user.imageName == NULL; else elseblock" 
@@ -228,11 +228,13 @@
             background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
              background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); " ><!-- notifications tab -->
 
-                <div >
-                    <div  *ngFor="let PatientRaoucheh of PatientRaouchehs" style=" width: 500px; height: 90%;  overflow-y: scroll;  
+                <div *ngIf="PatientRaouchehs != NULL" >
+                    <div  *ngFor="let PatientRaoucheh of PatientRaouchehs" style=" width: 100%; height: 100%;    
                     background-color: rgba(0,0,0,0.4) !important;" >
 
                     <div class="msg_cotainer">
+
+                        <img src="../../../../assets/images/common/logo.png" width="100px" height="100px" style="border-radius: 50%;">
 
                             <h5 style="margin-left: 3px;">  Doctor : {{ PatientRaoucheh.doctor.user.firstName}} {{ PatientRaoucheh.doctor.user.lastName}}</h5>
                     </div>
@@ -241,25 +243,36 @@
                     <div class="msg_cotainer_send">
 							
                     <label for="exampleFormControlTextarea1">Prescription</label>
+
+                    
+
+
                     </div>
-                    <textarea style=" margin-top: auto;
+
+                  
+                    <div class="form-group col-md-12  "style="margin-top:50px">
+            
+                    <textarea style=" margin-top: 40px;
                     margin-bottom: auto;
-                    margin-left: 10px;
+                    color: white;
+                    margin-right: 15px;
                     border-radius: 25px;
-                    background-color: #82ccdd;
+                    width: 85%;
+                    background-color: #57757c;
                     padding: 10px; " readonly="true" rows="8" class="form-control" disabled  name="comment" >{{PatientRaoucheh.doctorFeedback}}</textarea>
                     
                 </div>
-
+            </div>
                 <div class="form-group col-md-12 ">
                     <div class="msg_cotainer_send" style="width: 275px;">
                     <label for="exampleFormControlTextarea1">The date of the next session :</label>
                     </div>
-                    <textarea style="margin-top: auto;
-                    margin-bottom: auto;
-                    margin-left: 10px;
+                    <textarea style="margin-top: auto; color: white;
+                   margin-bottom: auto;
+                    margin-right: 15px;
                     border-radius: 25px;
-                    background-color: #82ccdd;
+                    width: 80%;
+                    background-color: #57757c;
                     padding: 10px;" rows="" class="form-control" disabled  name="comment" >{{PatientRaoucheh.description}} </textarea>
                     
                 </div>

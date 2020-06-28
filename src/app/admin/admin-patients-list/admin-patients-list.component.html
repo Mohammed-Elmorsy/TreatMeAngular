@@ -5,8 +5,7 @@
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
         <th scope="col">User Name</th>
-<!--         <th scope="col">MedicalHistory</th>
- -->        <th scope="col">Operations</th>
+        <th scope="col">Operations</th>
       </tr>
     </thead>
     <tbody>
@@ -14,14 +13,7 @@
         <td>{{patient.user.firstName}}</td>
         <td>{{patient.user.lastName}}</td>
         <td>{{patient.user.userName}}</td>
-<!--         <td >
-          <h2 *ngIf="patient.medicalHstoryName == '' ; else elseCode3">
-            no medicalHistory
-          </h2>
-          <ng-template #elseCode3>
-            <span class="btn btn-danger" (click)="SelectpatientForMedical(patient)" data-toggle="modal" data-target="#MedicalModal" >View Medical History</span>             
-          </ng-template>
-        </td> -->
+      
 
 
 
@@ -311,35 +303,3 @@
   </div>
 
 
-  <!--medical Historory modal-->
-
-
-
-  
-  <div class="modal fade" id="MedicalModal" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">medical</h5>
-          <span  class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </span>
-        </div>
-        <div class="modal-body">
-         
-        <div>
-          <ngx-extended-pdf-viewer [src]='patientMedicalHistory' 
-          useBrowserLocale="true" height="70vh"></ngx-extended-pdf-viewer>
-  
-      </div>
-  
-        </div>
-        <div class="modal-footer">
-          <span  class="btn btn-secondary" data-dismiss="modal">Close</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-  

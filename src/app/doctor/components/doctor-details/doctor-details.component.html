@@ -284,10 +284,10 @@
                             <h5 class="card-title">{{doctor.title}}. {{doctor.user.firstName}} {{doctor.user.lastName}}
                             </h5>
                             <p class="card-text"> {{doctor.titleDescription}}</p>
-                                <div class="alert alert-primary" style="width: 50%;"> 
+                                <div class="alert alert-primary" style="width: 50%;" *ngIf="doctor.rating > 0" >
 
-                                    <star-rating value="5" [totalstars]="doctor.rating" checkedcolor="gold"
-                                        uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)">
+                                    <star-rating [value]="doctor.rating" [totalstars]="doctor.rating" checkedcolor="gold"
+                                        uncheckedcolor="black" size="24px" readonly="true" >
                                     </star-rating>
 
                                 </div>
