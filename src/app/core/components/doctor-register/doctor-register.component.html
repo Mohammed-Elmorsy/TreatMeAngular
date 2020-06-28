@@ -16,7 +16,7 @@
                     maxlength="20"
                     minlength="3"
                     noStartOrDoubleSpaces
-                    pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF]))$" 
+                    pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,20}$" 
                     [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }"> 
                     <span *ngIf="fName.dirty && fName.errors?.required" class="invalid-feedback">
                        {{"Register.Validation.Required" | translate}}</span> 
@@ -40,7 +40,7 @@
                     maxlength="20"
                     minlength="3"
                     noStartOrDoubleSpaces
-                    pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF]))$" 
+                    pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,20}$" 
                     [ngClass]="{ 'is-invalid': lName.invalid && lName.dirty }">
                     <span *ngIf="lName.dirty && lName.errors?.required" class="invalid-feedback">
                         {{"Register.Validation.Required" | translate}}</span>
@@ -167,7 +167,8 @@
                     [(ngModel)] = "doctor.titleDescription"     
                     noStartOrDoubleSpaces
                     required
-                    pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF]))$" 
+                    maxlength="60" 
+                    pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,60}$" 
                     [ngClass]="{ 'is-invalid': titleDescription.invalid && titleDescription.dirty }"
 
                     >

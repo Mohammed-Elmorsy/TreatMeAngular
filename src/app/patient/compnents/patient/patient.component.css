@@ -28,12 +28,18 @@ input[type=file]{
     background-color: rgb(173, 227, 245);    
 }
 .custom-file-upload:hover{
-    cursor: pointer;  
+    cursor: pointer;    
 }
 
 .fa-camera:hover{
     color: white;   
 }
+
+.pdf-upload:hover{
+    color: darkgoldenrod;  
+    cursor: pointer; 
+}
+
 
 
 /* #hide{

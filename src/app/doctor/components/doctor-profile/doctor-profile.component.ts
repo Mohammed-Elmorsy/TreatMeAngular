@@ -18,6 +18,7 @@ import { DoctorPatientScheduleOpject } from 'src/app/_models/doctor-patient-sche
 import { data } from 'jquery';
 import { Patient } from 'src/app/_models/patient';
 import { DoctorPatientReview } from 'src/app/_models/doctor-patient-review';
+import { doctorPatientMeeting } from 'src/app/_models/doctorPatientMeeting';
 
 
 @Component({
@@ -60,8 +61,8 @@ export class DoctorProfileComponent implements OnInit {
   initSchedule:Schedule;
    
    DoctorImage:string;
-   comingSessions:Schedule[];
-  BookedSessions:any ;
+   comingSessions:Schedule[]=[];
+   BookedSessions:doctorPatientMeeting[]=[];
   Cv:File=null;
 
 
@@ -70,7 +71,7 @@ export class DoctorProfileComponent implements OnInit {
 
     private fileupload:FileUploadService,
     private route:ActivatedRoute ,
-    private stateService: StateService,
+    private stateService: StateService, 
     private http:HttpClient,
      private router:Router,
       private scheduleService:ScheduleService,
@@ -82,7 +83,7 @@ export class DoctorProfileComponent implements OnInit {
     this.sessionsDetails=null;
 
 
-this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
+
  
    
   }   
@@ -119,7 +120,9 @@ this.BookedSessions={Doctor:{},Patient:{user:{}},schedule:{}}
     this.doctorService.getTodayTomorrowSessions(this.docId)
     .subscribe(
       (_schedule)=> {
+
         this.comingSessions = _schedule;
+        
         
       });   
     console.log(this.doctor);
@@ -246,7 +249,37 @@ SelecToAddMedicine(_patient:Patient)
     );
    
   }
+  
+  modifySessions(){
+    this.sessionsDetails={
+      doctorId:this.docId,
+      days:this.daysChecked,
+      duration:Number(this.sessionDuration),
+      startAM:Number(this.AMhour1),
+      endAM:Number(this.AMhour2),
+      startPM:Number(this.PMhour1),
+      endPM:Number(this.PMhour2),
+      existAM:this.AMworkHours,
+      existPM:this.PMworkHours
 
+    };
+    console.log(this.sessionsDetails);
+    this.doctorService.addSchedules(this.sessionsDetails)
+    .subscribe(
+      res =>{
+        console.log(res);
+        //alert("You have registered successfully! ..please wait to confirm your acount");
+        this.toastr.success('لقد تم تعديل جلساتك',''); 
+        this.router.navigate(["/doctor/details/"+this.docId]);
+
+      },  
+      err => {
+        console.log(err);
+        //alert("there are some errors during registeration!");
+        this.toastr.error('نأسف لذلك هناك مشكلة فى عملية تعديل الجلسات','حدث خطأ ما'); 
+      }
+    );
+  }
 
 
 

@@ -35,4 +35,9 @@ input[type=file]{
     color: white;   
 }
 
+.pdf-upload:hover{
+    color: darkgoldenrod;  
+    cursor: pointer; 
+}
+
  

@@ -28,7 +28,7 @@ export class PatientComponent implements OnInit {
 
   PatientImg:String;
 
-  patientSessions:Schedule[];
+  patientSessions:Schedule[]=[];
   docSc:doctorPatientSchedule;
 
   private fieToUpload:File=null;
@@ -85,6 +85,7 @@ uploadFile()
 {
   
 }
+
   Update()
   {
     console.log("updated",this.patient_modified);

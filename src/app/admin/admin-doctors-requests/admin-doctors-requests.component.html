@@ -25,7 +25,7 @@
 
 
         <ng-template #elseCode2>
-          <button class="btn btn-danger" (click)="SelectDoctorForViewCV(doctor)" data-toggle="modal" data-target="#CvModal" >View Cv</button> 
+          <span class="btn btn-danger" (click)="SelectDoctorForViewCV(doctor)" data-toggle="modal" data-target="#CvModal" >View Cv</span> 
 
 
 
@@ -34,9 +34,9 @@
 
      
       <td>
-          <button class="btn btn-info" (click)="SelectDoctorToDelete(doctor)" data-toggle="modal" data-target="#DetailsModal1">Details</button> |
-          <button class="btn btn-success" (click)="confirmRequest(doctor);">Confirm</button> |
-            <button class="btn btn-danger" (click)="SelectDoctorToDelete(doctor);" data-toggle="modal" data-target="#DeleteModal1" >Cancel</button> 
+          <span class="btn btn-info" (click)="SelectDoctorToDelete(doctor)" data-toggle="modal" data-target="#DetailsModal1">Details</span> |
+          <span class="btn btn-success" (click)="confirmRequest(doctor);">Confirm</span> |
+            <span class="btn btn-danger" (click)="SelectDoctorToDelete(doctor);" data-toggle="modal" data-target="#DeleteModal1" >Cancel</span> 
         </td>
     </tr>
   </tbody>
@@ -51,9 +51,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">تأكيد الحذف</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span  class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
+        </span>
       </div>
       <div class="modal-body">
 
@@ -70,8 +70,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" (click)="DeleteDoctor()" data-dismiss="modal">حذف</button>
+        <span  class="btn btn-secondary" data-dismiss="modal">Close</span>
+        <span  class="btn btn-danger" (click)="DeleteDoctor()" data-dismiss="modal">حذف</span>
       </div>
     </div>
   </div>
@@ -87,9 +87,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">معلومات عن الطبيب</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span  class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
+        </span>
       </div>
       <div class="modal-body">
 
@@ -129,7 +129,7 @@
               <br />
 
 
-              <!-- Split button -->
+              <!-- Split span -->
 
           </div>
 
@@ -146,7 +146,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+        <span  class="btn btn-secondary" data-dismiss="modal">إغلاق</span>
       </div>
     </div>
   </div>
@@ -165,9 +165,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">CV</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span  class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
+        </span>
       </div>
       <div class="modal-body">
        
@@ -179,7 +179,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <span  class="btn btn-secondary" data-dismiss="modal">Close</span>
       </div>
     </div>
   </div>

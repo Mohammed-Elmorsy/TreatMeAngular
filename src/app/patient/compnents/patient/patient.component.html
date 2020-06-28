@@ -1,427 +1,6 @@
-<!-- 
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-
-
-<div class=" emp-profile"  >
-           
-                <div class="row">
-                
-
-                    <div class="col-sm-7">
-
-
-
-                            <span *ngIf="patient.user.imageName == NULL ;else imageblock ">  
-                                 <img [src]="defulatImage" width="200px" height="200px"  >
-                                    <div id="hide" class="col-lg-8 col-xs-8">
-                                        <label class="hand-cursor">
-                                            <input type="file" id="file" class=""   name="file" (change)="handleFileInput($event.target.files)"  />
-                                            <span class="fa fa-2x fa-camera"></span>
-                                         <span class="photo_text hidden-xs" style="color:black;">Upload</span>
-                                          </label>
-                                     </div>
-    
-                             </span>
-                            <ng-template #imageblock>
-
-                                <img [src]="imageFromApi"  alt="upload photo" width="200px" height="200px">
-                                    <div id="hide" class="col-lg-12 col-xs-12">
-                                        <label class="hand-cursor">
-                                            <input type="file" id="file" class=""   name="file" (change)="handleFileInput($event.target.files)"  >
-                                            <span class="fa fa-2x fa-camera" ></span>
-                                         <span class="photo_text hidden-xs" >Edit</span>
-                                          </label>
-                                     </div>
-    
-                            
-                              </ng-template>
-
-                                     
-                            
-                   </div>          
-               
-                    <div class="col-sm-10">
-                        <div class="profile-head">
-                                    <h5>
-                                        {{patient.user.firstName}}  {{patient.user.lastName}}
-                                    </h5>
-                                   
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Sessions</a>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <input type="submit" class="profile-edit-btn" data-toggle="modal" data-target="#exampleModal" name="btnAddMore" value="Edit Profile"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work text-center">
-
-                            <span *ngIf="patient.medicalHstoryName == NULL ; else mediclHistoryUploaded">
-                                <h3>Upload Your Medical History</h3>
-
-                                <div id="hide" class="col-lg-8 col-xs-8" style="margin-top: -25px;" style="color: darkblue; margin-top: 40px; margin-left: 28px;">
-                                    <label class="hand-cursor">
-                                        <input type="file" id="file" class=""   name="file" (change)="handleFileMedicalHistory($event.target.files)"  />
-                                        <span class="fa fa-3x fa-file"></span>
-                                      </label>
-                                 </div>
-                            </span>
-                            <ng-template #mediclHistoryUploaded>
-                                <div id="hide" class="col-lg-8 col-xs-8" style="margin-top: -25px;" style="color: darkblue; margin-top: 40px; margin-left: 28px;">
-                                    <label class="hand-cursor">
-                                        <input type="file" id="file" class=""   name="file" (change)="handleFileMedicalHistory($event.target.files)"  />
-                                        <span class="fa fa-3x fa-file"></span>
-                                        <label>Update your Medical History</label>
-                                      </label>
-                           
-                                 </div>
-
-
-                                 <button class="btn btn-danger" (click)="SelectPatientForViewMd(patient)" data-toggle="modal" data-target="#MDModal" >View your Medical History</button> 
-
-
-                            </ng-template>
-                           
-                          
-                        </div>
-                    </div>
-
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>User Name</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{patient.user.userName}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Name</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p> {{patient.user.firstName}}  {{patient.user.lastName}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Age</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p> {{patient.user.age}}  </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>User Name</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p *ngIf="patient.user.gender == 1; else elseBlock">male</p>
-                                            </div>
-                                            <ng-template #elseBlock>
-                                                <p>
-                                                    female
-                                                </p>
-                                              </ng-template>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Email</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{patient.user.mail}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Phone</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{patient.user.phoneNumber}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Address</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{patient.user.address}}</p>
-                                            </div>
-                                        </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label>Upcoming Sessions</label>
-                                            </div>
-                                            <div class="col-md-9">
-
-                                                <!-- <div class="card" style="width: 18rem;">
-                                                    <img class="card-img-top" src="./../assets/images/patients/{{}}" alt="Card image cap">
-                                                    <div class="card-body">
-                                                      <h5 class="card-title">Card title</h5>
-                                                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                    </div>
-                                                  </div> --
-                                                  <table class="table">
-                                                    <thead class="thead-light">
-                                                      <tr>
-                                                        <th scope="col">Doctor</th>
-                                                        <th scope="col">Date</th>
-                                                        <th scope="col">Time</th>
-                                                        <th scope="col">Status</th>
-                                                        <th scope="col">Operation</th>
-                                                      </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                      <tr *ngFor="let session of patientSessions">
-                                                        <th scope="row">{{session.doctor.user.firstName}} {{session.doctor.user.lastName}}</th>
-                                                        <td> {{session.schedule.date  | date:'shortDate'}}</td>
-                                                        <td> {{session.schedule.startTime | date:'mediumTime'}}</td>
-                                                        <td><button class="btn btn-primary" (click)="joinMeeting(session.schedule.id)">Join</button></td>
-                                                        <td><button class="btn btn-danger" (click)="cancelSession(session)">Cancel</button></td>
-                                                      </tr>
-                                                     
-                                                    </tbody>
-                                                  </table>
-
-                                            </div>
-                                        </div>
-                                       
-                            </div>
-                            
-
-
-        
-
-        <!-- Button trigger modal --
-
-  
-  <!-- Edit Modal --
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">edit Profile</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form name="form" #form="ngForm" class="text-right" dir="rtl">
-                <div class="form-row"> 
-                    <div class="form-group col-md-6">
-                        <input type="text" class="form-control" placeholder="{{patient.user.firstName}}" name="fName"
-                        #fName="ngModel"
-                        [(ngModel)]=" patient_modified.user.firstName"
-                        required 
-                        maxlength="20"
-                        minlength="3"
-                        noWhiteSpaces
-                        [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }">
-                    <!--cs validation --
-                        <div *ngIf="fName.invalid" class="invalid-feedback">
-                            <span *ngIf="fName.errors?.required && fName.dirty">
-                                *</span>
-                            <span *ngIf="fName.errors?.minlength && fName.dirty">
-                                يجب أن لا يقل الاسم عن 3 أحرف</span>
-                            <span *ngIf="fName.errors.hasWhiteSpace && fName.dirty">
-                                يجب أن لا يحتوى الاسم على مسافات</span>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <input type="text" class="form-control" placeholder="{{patient.user.lastName}}" name="lName"
-                        #lName="ngModel"
-                        [(ngModel)]=" patient_modified.user.lastName"
-
-                        required 
-                        maxlength="20"
-                        minlength="3"
-                        noWhiteSpaces
-                        [ngClass]="{ 'is-invalid': lName.invalid && lName.dirty }">
-                    <!--cs validation --
-                        <div *ngIf="lName.invalid" class="invalid-feedback">
-                            <span *ngIf="lName.errors?.required && lName.dirty">
-                                *</span>
-                            <span *ngIf="lName.errors?.minlength && lName.dirty">
-                                يجب أن لا يقل الاسم عن 3 أحرف</span>
-                            <span *ngIf="lName.errors.hasWhiteSpace && lName.dirty">
-                                يجب أن لا يحتوى الاسم على مسافات</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="{{patient.user.userName}}" name="userName"
-                    #userName="ngModel"
-                    [(ngModel)]=" patient_modified.user.userName"
-
-                    required 
-                    maxlength="20"
-                    minlength="6"
-                    noWhiteSpaces
-                    [ngClass]="{ 'is-invalid': userName.invalid && userName.dirty }">
-                <!--cs validation --
-                    <div *ngIf="userName.invalid" class="invalid-feedback">
-                        <span *ngIf="userName.errors?.required && userName.dirty">
-                            *</span>
-                        <span *ngIf="userName.errors?.minlength && userName.dirty">
-                            يجب أن لا يقل الاسم عن 6 أحرف</span>
-                        <span *ngIf="userName.errors.hasWhiteSpace && userName.dirty">
-                            يجب أن لا يحتوى الاسم على مسافات</span>
-                    </div>
-                </div>   
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="{{patient.user.mail}}" name="email"
-                    #email="ngModel"
-                    [(ngModel)]=" patient_modified.user.mail"
-
-                    required 
-                    noWhiteSpaces
-                    [ngClass]="{ 'is-invalid': email.invalid && email.dirty }">
-                <!--cs validation --
-                    <div *ngIf="email.invalid" class="invalid-feedback">
-                        <span *ngIf="email.errors?.required && email.dirty">
-                            *</span>
-                        <span *ngIf="email.errors?.email && email.dirty">
-                            ادخل صيغة صحيحة</span>
-                        <span *ngIf="email.errors.hasWhiteSpace && email.dirty">
-                            يجب أن لا يحتوى الاسم على مسافات</span>
-                    </div>
-                </div>  
-              
-
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="{{patient.user.address}}" name="address"
-                    #address="ngModel"
-                    [(ngModel)]=" patient_modified.user.address"
-
-                    required 
-                    noWhiteSpaces
-                    [ngClass]="{ 'is-invalid': address.invalid && address.dirty }">
-                <!--cs validation --
-                   
-                </div>  
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="{{patient.user.phoneNumber}}" name="phoneNumber"
-                    #phoneNumber="ngModel"
-                    [(ngModel)]=" patient_modified.user.phoneNumber"
-
-                    required 
-                    noWhiteSpaces
-                    [ngClass]="{ 'is-invalid': phoneNumber.invalid && phoneNumber.dirty }">
-               cs validation --
-                   
-                </div>  
-              
-              
- 
-              
-
-
-                   
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label>الجنس</label>
-                        <select class="form-control" name="gender" [(ngModel)]=" patient_modified.user.gender"
-                        >
-                            <option  selected disabled>
-                                <p *ngIf="patient.user.gender == 1; else elseBlock">ذكر</p>
-                            </option>
-                                            <ng-template #elseBlock>
-                                                <p>
-                                                    أنثى
-                                                </p>
-                                              </ng-template>
-
-
-
-
-
-                           
-                            <option value="1">ذكر</option>
-                            <option value="2">أنثى</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>فصيلة الدم</label>
-                        <select class="form-control" name="BloodType"  [(ngModel)]=" patient_modified.BloodType"
-                        >
-                            <option selected disabled>اختر من هنا</option>
-                            <option value="28">A+</option>
-                            <option value="3">A-</option>
-                            <option value="36">O+</option>
-                            <option value="1">B-</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>السن </label>
-                        <input type="text" class="form-control" name="age"  [(ngModel)]=" patient_modified.user.age" placeholder="{{patient.user.age}}" >
-                    </div>
-                </div>
-      
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" [disabled]="form.invalid" (click)="Update()" data-dismiss="modal" > Edit</button>
-
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
-            </form>
-        
-        </div>
-       
-      </div>
-    </div>
-  </div>
-
-
-  
-  
- <div class="modal fade" id="MDModal" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">medical History View</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-         
-        <div>
-          <ngx-extended-pdf-viewer [src]='MedicalToView' 
-          useBrowserLocale="true" height="70vh"></ngx-extended-pdf-viewer>
-  
-      </div>
-  
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-   -->
-
-   <!-- new style -->
-   <div class="container-fluid row mx-auto">
-    <div class="col-md-4 col-lg-3 mb-4" id="cardWrapper" style="height: 500px;">
-        <div class="card bg-light text-center" id="profileCard" style="height: 500px;">
+  <div class="container-fluid row mx-auto">
+    <div class="col-md-4 col-lg-3 mb-4" id="cardWrapper" style="height: 80%;">
+        <div class="card bg-light text-center" id="profileCard" style="height: 100%;">
                 <div class="text-center" style="position: relative;"> 
                     <img *ngIf="patient.user.imageName == NULL; else elseblock" 
                     class="card-img-top" style="margin-top: 10px;" src="assets/images/doctors/profile-pic.png"
@@ -448,7 +27,7 @@
                 </div>
         </div>
     </div>
-    <div class="col-md-8 col-lg-9" id="tabsWrapper" style="height: 500px;">  
+    <div class="col-md-8 col-lg-9 mb-2" id="tabsWrapper" style="height: 100%;">     
 
         <nav class="bg-light justify-content-center" style="padding: 10px;">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -589,29 +168,22 @@
                                                     Medical History
                                                 </strong>
                                             </td>
-                                            <td class="text-primary">
-                                                <span *ngIf="patient.medicalHstoryName == NULL ; else mediclHistoryUploaded">
-                    
-                                                    <div id="hide" class="col-lg-8 col-xs-8" style="margin-top: -25px;" style="color: darkblue; margin-top: 40px; margin-left: 28px;">
-                                                        <label class="hand-cursor">
-                                                            <input type="file" id="file" class=""   name="file" (change)="handleFileMedicalHistory($event.target.files)"  />
-                                                            <span class="fa fa-2x fa-file"></span>
-                                                            <label>Upload</label>
-
-                                                          </label>
-                                                     </div>
-                                                </span>
+                                            <td class="text-primary">                    
+                                                    <label *ngIf="patient.medicalHstoryName == NULL ; else mediclHistoryUploaded" for="cv-upload" class="pdf-upload">
+                                                        <input type="file" id="cv-upload" class=""   name="file" (change)="handleFileMedicalHistory($event.target.files)"  />
+                                                        <i class="fas fa-2x fa-file-pdf"></i><br>
+                                                         <span>update</span>
+                                                    </label>
                                                 <ng-template #mediclHistoryUploaded>
-                                                    <div id="hide" class="col-lg-8 col-xs-8" style="margin-top: -25px;" style="color:darkgoldenrod; margin-top: 40px; margin-left: 28px;">
-                                                        <label class="hand-cursor">
-                                                            <input type="file" id="file" class=""   name="file" (change)="handleFileMedicalHistory($event.target.files)"  />
-                                                            <span class="fa fa-2x fa-file"></span>
-                                                            <label>Update</label>
-                                                            <button class="btn btn-danger" (click)="SelectPatientForViewMd(patient)" data-toggle="modal" data-target="#MDModal" style="margin-top: -10px;margin-left: 10px;">View </button> 
+                                                            <label for="cv-upload" class="pdf-upload">
+                                                                <input type="file" id="cv-upload" class=""   name="file" (change)="handleFileMedicalHistory($event.target.files)"  />
+                                                                <i class="fas fa-2x fa-file-pdf"></i><br>
+                                                                 <span>update</span>
+                                                            </label>
+                                                            <div style="margin-left: 100px; margin-top: -60px;" >    
+                                                                <span class="btn btn-success" (click)="SelectPatientForViewMd(patient)" data-toggle="modal" data-target="#MDModal">View </span> 
 
-                                                          </label>
-                                               
-                                                     </div>
+                                                            </div> 
                                                 </ng-template>
                                             </td>
                                         </tr>
@@ -624,7 +196,7 @@
             </div>
             <div class="tab-pane fade" id="nav-sessions"><!-- sessions tab -->
                 
-                <table class="table table-hover text-center">
+                <table *ngIf="patientSessions.length>0; else noBookedSessions" class="table table-hover text-center">
                     <thead class="bg-primary text-light">
                         <tr>
                             <th scope="col">Doctor</th>
@@ -639,12 +211,18 @@
                             <th scope="row">{{session.doctor.user.firstName}} {{session.doctor.user.lastName}}</th>
                             <td> {{session.schedule.date  | date:'shortDate'}}</td>
                             <td> {{session.schedule.startTime | date:'mediumTime'}}</td>
-                            <td><button class="btn btn-primary" (click)="joinMeeting(session.scheduleId)">Join <i class="fas fa-video"></i></button></td>
-                            <td><button class="btn btn-danger" (click)="cancelSession(session)">Cancel</button></td>
+                            <td><span class="btn btn-primary" (click)="joinMeeting(session.scheduleId)">Join <i class="fas fa-video"></i></span></td>
+                            <td><span class="btn btn-danger" (click)="cancelSession(session)">Cancel</span></td>
                         </tr>
 
                     </tbody>
                 </table>
+                
+                <ng-template #noBookedSessions>
+                    <div class="alert alert-primary text-center" role="alert" >
+                       You haven't booked any session, Go to Home Page
+                      </div>
+                </ng-template>
             </div>
             <div class="tab-pane fade" id="nav-notifications"><!-- notifications tab -->
                 notifications
@@ -664,9 +242,9 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">{{'Modal.EditInfo' | translate}}</h5>  
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span  class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-          </button>
+          </span>
         </div>
         <div class="modal-body">
             <form name="form" #form="ngForm" class="formRegister" (ngSubmit)="onSubmit()">
@@ -846,10 +424,10 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success" [disabled]="form.invalid" (click)="Update()" data-dismiss="modal" > {{"Modal.Edit" | translate}}</button>
     
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{"Modal.Close" | translate}}</button>
+                        <span  class="btn btn-secondary" data-dismiss="modal">{{"Modal.Close" | translate}}</span>
                       </div>              
             </form>     
-        
+         
         </div>
        
       </div>
@@ -863,9 +441,9 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">medical History View</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span  class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-          </button>
+          </span>
         </div>
         <div class="modal-body">
          
@@ -877,7 +455,7 @@
   
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <span  class="btn btn-secondary" data-dismiss="modal">Close</span>
         </div>
       </div>
     </div>

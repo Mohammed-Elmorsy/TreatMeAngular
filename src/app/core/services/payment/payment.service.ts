@@ -1,25 +1,23 @@
 
 import { Injectable } from '@angular/core';
-import {Schedule} from '../../../_models/schedule'
+
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
-import { doctorPatientMeeting } from 'src/app/_models/doctorPatientMeeting';
-
+import { payParam } from 'src/app/_models/payParam';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ScheduleService {
+export class PaymentService {
 
   constructor(private httpClient:HttpClient) { }
 
 
 
-  checkOut()
+  checkOut(pay:payParam)
   {
 
-      return this.httpClient.get(environment.baseURL+"api/payment");
+      return this.httpClient.post(environment.baseURL+"api/payment",pay);
 
   }
 }

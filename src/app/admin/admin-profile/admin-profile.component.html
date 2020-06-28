@@ -1,6 +1,6 @@
 <div class="container-fluid row mx-auto">
-  <div class="col-md-4 col-lg-3 mb-4" id="cardWrapper" style="height: 500px;">
-        <div class="card bg-light text-center" id="profileCard" style="height: 500px;">
+  <div class="col-md-4 col-lg-3 mb-4" id="cardWrapper" style="height: 80%;">
+        <div class="card bg-light text-center" id="profileCard" style="height: 100%;">
             <div class="text-center" style="position: relative;"> 
               <img *ngIf="admin.imageName == NULL; else elseblock" 
               class="card-img-top" style="margin-top: 10px;" src="assets/images/doctors/profile-pic.png"
@@ -26,12 +26,12 @@
           </div>
         </div>
   </div>  
-  <div class="col-md-8 col-lg-9" id="tabsWrapper" style="height: 500px;">  
+  <div class="col-md-8 col-lg-9 mb-3" id="tabsWrapper" style="height: 100%;">   
             <nav class="bg-light justify-content-center" style="padding: 10px;">
-              <div class="nav nav-tabs" id="nav-tab" role="tablist"> 
+              <div class="nav nav-tabs bg-light" id="nav-tab" role="tablist"> 
                 <a class="nav-item nav-link active" id="nav-doctorsRequests-tab" data-toggle="tab" href="#nav-doctorsRequests" aria-selected="true">
-                      Doctors Requests <span *ngIf="requestsNumber > 0" class="badge badge-primary">{{requestsNumber}}</span> 
-                </a>  
+                      Doctors Requests <span *ngIf="requestsNumber > 0" class="badge badge-danger">{{requestsNumber}}</span> 
+                </a>    
                 <a class="nav-item nav-link" id="nav-doctors-tab" data-toggle="tab" href="#nav-doctors" aria-selected="false">Doctors</a>
                 <a class="nav-item nav-link" id="nav-specialities-tab" data-toggle="tab" href="#nav-specialities"  aria-selected="false">Specialities</a>
                 <a class="nav-item nav-link" id="nav-patients-tab" data-toggle="tab" href="#nav-patients"  aria-selected="false">Patients</a>
