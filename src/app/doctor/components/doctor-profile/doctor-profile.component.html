@@ -43,10 +43,10 @@
                     aria-selected="false">Add Sessions</a>
                 <a class="nav-item nav-link" id="nav-bookedSessions-tab" data-toggle="tab" href="#nav-bookedSessions"
                     aria-selected="false">Booked Sessions</a>
-                <a class="nav-item nav-link" id="nav-notifications-tab" data-toggle="tab" href="#nav-notifications"
+<!--                 <a class="nav-item nav-link" id="nav-notifications-tab" data-toggle="tab" href="#nav-notifications"
                     aria-selected="false">Notifications</a>
                 <a class="nav-item nav-link" id="nav-issues-tab" data-toggle="tab" href="#nav-issues"
-                    aria-selected="false">Report Issues</a>
+                    aria-selected="false">Report Issues</a> -->
             </div>
         </nav>
         <div class="tab-content bg-light p-3" id="nav-tabContent">
@@ -205,7 +205,21 @@
                                                         <span class="btn btn-success" (click)="SelecToViewPDF(doctor)" data-toggle="modal" data-target="#CVModal">View </span> 
 
                                                     </div> 
-                                             </td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-address-card"></i>  
+                                                      About you
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                <textarea name="" id="" cols="30" rows="10" 
+                                                placeholder="write about your experience and certificates">
+
+                                                </textarea>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -379,12 +393,12 @@
                 </ng-template>
 
             </div>
-            <div class="tab-pane fade" id="nav-notifications"><!-- notifications tab -->
+<!--             <div class="tab-pane fade" id="nav-notifications"><!-- notifications tab --
                 notifications
             </div>
-            <div class="tab-pane fade" id="nav-issues"><!-- issues tab --> 
+            <div class="tab-pane fade" id="nav-issues"><!-- issues tab --
                 issues
-            </div>
+            </div> -->
 
         </div>
 

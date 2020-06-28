@@ -316,23 +316,14 @@
                 </nav>
                 <div class="tab-content bg-light" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-about">
-                        <h4>about {{doctor.title}}. {{doctor.user.firstName}} {{doctor.user.lastName}}</h4>
-                        <div class="alert alert-light">
-                            ــ أعمل حالياً في مركز المصادر عن التوحد للأطفال والمراهقين، فرنسا 
-ــ حاصلة على الدكتوراه من جامعة روان (فرنسا) في مخبر علم النفس والعلوم العصبية للعمليات المعرفية والانفعالية. 
+                        <h4>عن {{doctor.title}}. {{doctor.user.firstName}} {{doctor.user.lastName}}</h4>
+                        <div class="alert alert-secondary">
 
-ــ ماجستير مهني في التربية الصحية والتثقيفية للمريض جامعة روان (فرنسا) 
-
-ـــ ماجستير في العلوم الإنسانية والاجتماعية، قسم علم النفس، اختصاص: نمو وتنظيم انفعالي وحركي، جامعة روان (فرنسا) 
-
-ــ دراسات عليا في الإرشاد النفسي والتوجيه المهني والمدرسي. جامعة دمشق (سوريا).
-
- ــ إجازة في التربية، قسم علم النفس، جامعة البعث، حمص (سوريا)
                         </div>
 
                     </div>
                     <div class="tab-pane fade" id="nav-reviews">
-                        <div *ngIf="reviews != NULL" style="height: 500px; overflow-y: scroll; overflow-x: hidden;">
+                        <div *ngIf="reviews.length > 0" style="height: 500px; overflow-y: scroll; overflow-x: hidden;">
                             <div *ngFor="let _review of reviews">
                                 <div class="review p-5">
                                     <div class="row d-flex">

@@ -5,8 +5,8 @@
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
         <th scope="col">User Name</th>
-        <th scope="col">MedicalHistory</th>
-        <th scope="col">Operations</th>
+<!--         <th scope="col">MedicalHistory</th>
+ -->        <th scope="col">Operations</th>
       </tr>
     </thead>
     <tbody>
@@ -14,14 +14,14 @@
         <td>{{patient.user.firstName}}</td>
         <td>{{patient.user.lastName}}</td>
         <td>{{patient.user.userName}}</td>
-        <td >
+<!--         <td >
           <h2 *ngIf="patient.medicalHstoryName == '' ; else elseCode3">
             no medicalHistory
           </h2>
           <ng-template #elseCode3>
             <span class="btn btn-danger" (click)="SelectpatientForMedical(patient)" data-toggle="modal" data-target="#MedicalModal" >View Medical History</span>             
           </ng-template>
-        </td>
+        </td> -->
 
 
 
