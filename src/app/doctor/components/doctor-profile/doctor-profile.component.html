@@ -215,11 +215,19 @@
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                <textarea name="" id="" cols="30" rows="10" 
-                                                placeholder="write about your experience and certificates">
+                                                <textarea style="width: 100%; height: 200px; 
+                                                overflow-y: auto; overflow-x: hidden; resize: none;"
+                                                placeholder="write about your experience and certificates"
+                                                [(ngModel)]="doctor_modified.about" >
 
                                                 </textarea>
-                                            </td>
+                                                <span *ngIf="doctor.about == NULL || doctor.about == ''; else aboutDoctor"
+                                                 class="btn btn-success" (click)="editDoctor()">Add to your details page</span>
+                                                 <ng-template #aboutDoctor>
+                                                    <span
+                                                    class="btn btn-success" (click)="editDoctor()">Update in your details page</span> 
+                                                 </ng-template>
+                                            </td>  
                                         </tr>
                                     </tbody>
                                 </table>

@@ -14,7 +14,8 @@ export class Doctor {
         public cvName?:String,
         public title?:string,
         public titleDescription?:string,
-        public confirmed?:boolean
+        public confirmed?:boolean,
+        public about?:string
 
     )
     {}
