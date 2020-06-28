@@ -398,15 +398,15 @@
                             <td *ngIf="time.isBooked == 1; else elseBlock">
 
                                 <span *ngIf="role == 'Patient'; else Doc">
-                                    <button class="btn btn-success" disabled>
+                                    <button  style="width: 110px;" class="btn btn-success" disabled>
                                         محجوز
                                     </button>
                                 </span>
                                 <ng-template #Doc>
-                                    <button class="btn btn-success" disabled>
+                                    <button style="width: 110px;"  class="btn btn-success" disabled>
                                         محجوز
                                     </button>
-                                    <button class="btn btn-danger" (click)="cancelSession(time.id)">
+                                    <button style="width: 110px;"  class="btn btn-danger" (click)="cancelSession(time.id)">
                                         إلغاء الحجز
                                     </button>
                                 </ng-template>
@@ -414,15 +414,15 @@
                             <ng-template #elseBlock>
 
                                 <span *ngIf="role == 'Patient'; else Doc2">
-                                    <button class="btn btn-success" (click)="bookSession(time.id)">
+                                    <button style="width: 110px;"  class="btn btn-success" (click)="bookSession(time.id)">
                                         إحجز الآن
                                     </button>
                                 </span>
                                 <ng-template #Doc2>
-                                    <button class="btn btn-success" disabled>
+                                    <button  style="width: 110px;"  class="btn btn-success" disabled>
                                         غير محجوز
                                     </button>
-                                    <button class="btn btn-danger" (click)="deleteSession(time)">
+                                    <button  style="width: 110px;"  class="btn btn-danger" (click)="deleteSession(time)">
                                         إلغاء الميعاد
                                     </button>
                                 </ng-template>
@@ -448,12 +448,12 @@
                         <td>
 
                             <span *ngIf="time.isBooked == 1; else Doc">
-                                <button class="btn btn-success" disabled>
+                                <button style="width: 110px;" class="btn btn-success" disabled>
                                     محجوز
                                 </button>
                             </span>
                             <ng-template #Doc>
-                                <a  class="btn btn-success" routerLink="/login" >  
+                                <a  style="width: 110px;"  class="btn btn-success" routerLink="/login" >  
                                     احجز الآن
                                 </a>
                             </ng-template>

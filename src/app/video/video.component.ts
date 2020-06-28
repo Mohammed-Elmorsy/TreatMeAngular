@@ -14,6 +14,7 @@ import { Patient } from '../_models/patient';
 import { ScheduleService } from '../core/services/schedule/schedule.service';
 import { Schedule } from '../_models/schedule';
 import { doctorPatientSchedule } from '../_models/doctorPatientSchedule';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
@@ -44,7 +45,8 @@ constructor(private auth:AuthService,
 
   private scheduleService:ScheduleService,
   private patientService:PatientService,
-  private router: Router
+  private router: Router,
+  private toastr:ToastrService
 ) { 
  
   this.observableTimer();
@@ -192,7 +194,21 @@ ngAfterViewInit(): void {
   
 }
 ngOnDestroy() { 
- 
+ if (this.sessionEnd==false) {
+   
+  var r = confirm("Are you sure you want to leave the meeting?");
+  if (r==true) {
+    this.session.disconnect();
+
+  if (this.role=="Doctor") {
+    this.router.navigate(['/doctor/profile']);
+  }
+  else{
+    this.router.navigate(['/doctor/details/'+this.docId]);
+  }
+ }
+
+ }
   this.session.disconnect();
 
   if (this.role=="Doctor") {
@@ -210,8 +226,11 @@ ngOnDestroy() {
   
 
   endMeeting(){
+    
+
     var r = confirm("Are you sure you want to leave the meeting?");
     if (r==true) {
+      this.sessionEnd=true;
       this.session.disconnect();
 
     if (this.role=="Doctor") {
