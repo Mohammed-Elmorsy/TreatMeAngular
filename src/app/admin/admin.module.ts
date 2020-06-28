@@ -17,7 +17,7 @@ import{NgxExtendedPdfViewerModule} from 'ngx-extended-pdf-viewer'
     AdminRoutingModule,
     SharedModule,
     NgxExtendedPdfViewerModule
-
+  
   ]
 })
 export class AdminModule { }

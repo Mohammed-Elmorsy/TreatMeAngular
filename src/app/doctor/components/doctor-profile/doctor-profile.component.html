@@ -648,13 +648,13 @@
         </div>
         <div class="modal-body" *ngIf="feedback == NULL ; else feedBackExists">
 
-          
-         
             <div style="text-align:center">
                 <h1>
-                 doctor feedBack
+                 Add feedBack 
                 </h1>
               </div>
+         
+         
 
               <div class="form-group col-md-12">
                 <textarea rows="5" class="form-control" name="feedBack" placeholder="write FeedBack"
@@ -662,7 +662,9 @@
     
             </div> 
              <div class="form-group col-md-12">
-                <input type="datetime" class="form-control" name="Discription" 
+                <label for="form-group">Enter Next Session Date :</label>
+
+                <input type="date" class="form-control" name="Discription" 
                 [(ngModel)]="doctorPatientRaoucheh.description">
     
             </div>
@@ -685,11 +687,13 @@
               </div>
 
               <div class="form-group col-md-12">
+
                 <textarea rows="5" class="form-control" name="x"
-                [(ngModel)]="feedback.doctorFeedback"></textarea>
+                [(ngModel)]="feedback.doctorFeedback" ></textarea>
     
             </div> 
             <div class="form-group col-md-12">
+                <label for="form-group">enter Next Session Date :</label>
                 <input type="date" class="form-control" name="Discription" 
                 [(ngModel)]="feedback.description">
     
