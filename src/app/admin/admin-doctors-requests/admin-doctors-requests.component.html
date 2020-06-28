@@ -14,27 +14,18 @@
       <td>{{doctor.user.lastName}}</td> 
       <td>{{doctor.user.userName}}</td>
 
-     
-        <td *ngIf="doctor.cvName == '' ; else elseCode2">
-          <h5>
+      <td >
+          <h5 *ngIf="doctor.cvName == '' ; else elseCode2">
             no Cv
           </h5>
-
-
-        </td>
-
 
         <ng-template #elseCode2>
           <span class="btn btn-danger" (click)="SelectDoctorForViewCV(doctor)" data-toggle="modal" data-target="#CvModal" >View Cv</span> 
 
-
-
-
         </ng-template>
-
-     
+      </td>    
       <td>
-          <span class="btn btn-info" (click)="SelectDoctorToDelete(doctor)" data-toggle="modal" data-target="#DetailsModal1">Details</span> |
+          <span class="btn btn-info" (click)="SelectDoctorToDelete(doctor)" data-toggle="modal" data-target="#DetailsModal1"> Details</span> |
           <span class="btn btn-success" (click)="confirmRequest(doctor);">Confirm</span> |
             <span class="btn btn-danger" (click)="SelectDoctorToDelete(doctor);" data-toggle="modal" data-target="#DeleteModal1" >Cancel</span> 
         </td>
@@ -155,12 +146,7 @@
 
   
   
- <div class="modal fade 
- 
- 
- 
- 
- " id="CvModal" tabindex="-1" role="dialog"  aria-hidden="true" style=" width: 1200px;">
+ <div class="modal fade" id="CvModal" tabindex="-1" role="dialog"  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

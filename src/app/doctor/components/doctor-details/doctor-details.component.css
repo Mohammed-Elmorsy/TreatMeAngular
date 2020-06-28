@@ -6,8 +6,8 @@
 }
 
 .container-fluid {
-    background-image: linear-gradient(to right, #7B1FA2, #E91E63)
-}
+    background-image: linear-gradient(to left, #7B1FA2, #E91E63)
+} 
 
 .sm-text {
     font-size: 10px;
@@ -108,4 +108,9 @@ tr:hover{
 
 .card{
     border:0;
+}
+
+#doctorCard{
+    border-radius: 15px;
+    margin-bottom: 20px; 
 }

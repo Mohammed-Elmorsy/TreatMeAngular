@@ -262,9 +262,9 @@
  -->
 
 <!-- new -->
-<div class="container-fluid pt-4">
-    <div class="row">
-        <div id="doctorCard" class="col-12 col-md-6 bg-light">
+<div class="container-fluid p-5" style="height:100%;">     
+    <div class="row" style="height:100%;">
+        <div id="doctorCard" class="col-12 col-lg-6 bg-light">
             <div class="card mb-3 bg-light">
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -332,7 +332,7 @@
 
                     </div>
                     <div class="tab-pane fade" id="nav-reviews">
-                        <div *ngIf="reviews != NULL">
+                        <div *ngIf="reviews != NULL" style="height: 500px; overflow-y: scroll; overflow-x: hidden;">
                             <div *ngFor="let _review of reviews">
                                 <div class="review p-5">
                                     <div class="row d-flex">
@@ -366,11 +366,14 @@
 
                             </div>
                         </div>
+                        <div *ngIf="reviews.length == 0 " class="alert alert-secondary p-3 text-center" style="margin-bottom: 40px; margin-top: 40px;">
+                                no reviews have been submitted on the doctor yet
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="sessionsBook" class="col-12 col-md-6 text-center">
+        <div id="sessionsBook" class="col-12 col-lg-6 text-center">  
             <span class="badge badge-dark">
                 <h3>Select Date For Sessions </h3>
                 <input class="date" type="date" [value]="choocedDate" (input)="choocedDate =$event.target.value"
@@ -404,15 +407,15 @@
                             <td *ngIf="time.isBooked == 1; else elseBlock">
 
                                 <span *ngIf="role == 'Patient'; else Doc">
-                                    <button class="btn btn-success" disabled>
+                                    <button  style="width: 110px;" class="btn btn-success" disabled>
                                         محجوز
                                     </button>
                                 </span>
                                 <ng-template #Doc>
-                                    <button class="btn btn-success" disabled>
+                                    <button style="width: 110px;"  class="btn btn-success" disabled>
                                         محجوز
                                     </button>
-                                    <button class="btn btn-danger" (click)="cancelSession(time.id)">
+                                    <button style="width: 110px;"  class="btn btn-danger" (click)="cancelSession(time.id)">
                                         إلغاء الحجز
                                     </button>
                                 </ng-template>
@@ -420,15 +423,15 @@
                             <ng-template #elseBlock>
 
                                 <span *ngIf="role == 'Patient'; else Doc2">
-                                    <button class="btn btn-success" (click)="bookSession(time.id)">
+                                    <button style="width: 110px;"  class="btn btn-success" (click)="bookSession(time.id)">
                                         إحجز الآن
                                     </button>
                                 </span>
                                 <ng-template #Doc2>
-                                    <button class="btn btn-success" disabled>
+                                    <button  style="width: 110px;"  class="btn btn-success" disabled>
                                         غير محجوز
                                     </button>
-                                    <button class="btn btn-danger" (click)="deleteSession(time)">
+                                    <button  style="width: 110px;"  class="btn btn-danger" (click)="deleteSession(time)">
                                         إلغاء الميعاد
                                     </button>
                                 </ng-template>
@@ -454,14 +457,14 @@
                         <td>
 
                             <span *ngIf="time.isBooked == 1; else Doc">
-                                <button class="btn btn-success" disabled>
+                                <button style="width: 110px;" class="btn btn-success" disabled>
                                     محجوز
                                 </button>
                             </span>
                             <ng-template #Doc>
-                                <button  class="btn btn-success"  >
+                                <a  style="width: 110px;"  class="btn btn-success" routerLink="/login" >  
                                     احجز الآن
-                                </button>
+                                </a>
                             </ng-template>
                         </td>
 
