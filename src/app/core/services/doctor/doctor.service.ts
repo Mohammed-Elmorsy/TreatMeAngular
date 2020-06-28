@@ -11,6 +11,7 @@ import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
 import { DoctorPatientScheduleOpject } from 'src/app/_models/doctor-patient-schedule-opject';
 import { DoctorPatientReview } from 'src/app/_models/doctor-patient-review';
 import { doctorPatientMeeting } from 'src/app/_models/doctorPatientMeeting';
+import { DoctorPatientRaoucheh } from 'src/app/_models/doctor-patient-raoucheh';
 
 @Injectable({
   providedIn: 'root'
@@ -71,7 +72,7 @@ DeleteDoctor(id)
     return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/getTodayTomorrowSchedules/"+id);
   } 
   MonthBookedSessom(id){
-    return this.httpClient.get<doctorPatientMeeting>(environment.baseURL+"api/DoctorPatientSchedules/getBookedSessionsInMonth/"+id);
+    return this.httpClient.get<doctorPatientMeeting[]>(environment.baseURL+"api/DoctorPatientSchedules/getBookedSessionsInMonth/"+id);
   }
 
   deleteSession(id:number){
@@ -98,4 +99,25 @@ DeleteDoctor(id)
     return this.httpClient.get<DoctorPatientReview[]>(environment.baseURL+"api/DoctorPatientReviews/GetDoctorReviews/"+DoctorId);
 
   }
+
+AddDoctorPatientRaoucheh(_DoctorPatientRaoucheh:DoctorPatientRaoucheh)
+{
+
+
+  return this.httpClient.post<DoctorPatientRaoucheh>(environment.baseURL+"api/DoctorPatientRaoucheh",_DoctorPatientRaoucheh);
+
+}
+
+GetDoctorPatientRaoucheh()
+{
+  return this.httpClient.get<DoctorPatientRaoucheh[]>(environment.baseURL+"api/DoctorPatientRaoucheh");
+}
+EditDoctorPatientRaoucheh(_DoctorPatientRaoucheh:DoctorPatientRaoucheh)
+{
+
+
+  return this.httpClient.put<DoctorPatientRaoucheh>(environment.baseURL+"api/DoctorPatientRaoucheh",_DoctorPatientRaoucheh);
+
+}
+
 }

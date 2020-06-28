@@ -6,6 +6,7 @@ import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/output_ast';
 import { Schedule } from 'src/app/_models/schedule';
 import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
 import { DoctorPatientReview } from 'src/app/_models/doctor-patient-review';
+import { DoctorPatientRaoucheh } from 'src/app/_models/doctor-patient-raoucheh';
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +58,10 @@ export class PatientService {
     return this.httpclient.put(environment.baseURL+"api/DoctorPatientReviews/Edit",modifiedReview)
 
   }
+
+  GetPatientRaoucheh(id:Number)
+{
+  return this.httpclient.get<DoctorPatientRaoucheh[]>(environment.baseURL+"api/DoctorPatientRaoucheh/"+id);
+}
 
 }
