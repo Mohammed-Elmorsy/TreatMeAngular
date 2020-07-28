@@ -1,11 +1,11 @@
 <div class="container-fluid row mx-auto ">
-    <div class="col-md-4 col-lg-3 mb-4" id="cardWrapper" style="height: 80%;" style="height: 630px;">
+    <div class="col-md-4 col-lg-3 mb-4" id="cardWrapper" style="height: 80%;">
         <div class="card bg-light text-center" id="profileCard" style="height: 100%">
                 <div class="text-center" style="position: relative;"> 
                     <img *ngIf="doctor.user.imageName == NULL; else elseblock" 
                     class="card-img-top" style="margin-top: 10px;" [src]="docImg"
                     alt="profile pic">
-                    <ng-template #elseblock>
+                    <ng-template #elseblock> 
                         <img class="card-img-top" [src]="DoctorImage" style="margin-top: 10px;"  alt="profile pic"> 
                     </ng-template>
 
@@ -29,7 +29,7 @@
                 </div>
         </div>
     </div>
-    <div class="col-md-8 col-lg-9 mb-2" id="tabsWrapper" style="height:100%;">   
+    <div class="col-md-8 col-lg-9 mb-2" id="tabsWrapper" style="height:90%;">    
  
         <nav class="bg-light justify-content-center" style="padding: 10px;">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -365,7 +365,7 @@
                             
                            
                                         <th *ngIf="session.schedule.isBooked == 1;" scope="row">{{i+1}}</th>
-                                        <td *ngIf="session.schedule.isBooked == 1;"> {{session.patient.user.firstName}}{{session.patient.user.lastName}}</td>
+                                        <td *ngIf="session.schedule.isBooked == 1;"> {{session.patient.user.firstName}} {{session.patient.user.lastName}}</td>
 
                                         <td *ngIf="session.schedule.isBooked == 1;"> 
                                             <span class="btn btn-danger" (click)="SelectPatientForViewMd(session.patient);SelecToViewPDF(session.patient)" data-toggle="modal" data-target="#CVModal" >View </span> 
