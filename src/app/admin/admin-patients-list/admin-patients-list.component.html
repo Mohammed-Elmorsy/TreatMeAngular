@@ -1,0 +1,305 @@
+
+<table class="table table-hover text-center">
+    <thead class="bg-primary text-light">  
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patient of patients">
+        <td>{{patient.user.firstName}}</td>
+        <td>{{patient.user.lastName}}</td>
+        <td>{{patient.user.userName}}</td>
+      
+
+
+
+
+        <td><span class="btn btn-info" (click)="SelectDoctorToOperation(patient)" data-toggle="modal" data-target="#PatientDetails">Details</span> |
+            <span class="btn btn-warning"(click)="SelectDoctorToOperation(patient)"class="btn btn-primary" data-toggle="modal" data-target="#PatientEdit" > edit
+          </span> |
+          <span class="btn btn-danger" (click)="SelectDoctorToOperation(patient)" data-toggle="modal" data-target="#DeletePatient" >Delete</span> 
+
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!------------ details Modal ----->
+  
+  <div class="modal fade" id="PatientDetails" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">معلومات عن المريض</h5>
+          <span  class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </span>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="row">
+                        <div class="col-sm-6 col-md-4">
+
+                          <span *ngIf="patientFoOperation.user.imageName == NULL ; else elseCode"> 
+                            <img [src]="patientImg" alt="" class="img-rounded img-responsive" style="width:90%; height:120px;" />
+
+                          </span>
+                          <ng-template #elseCode>
+                            <img [src]="PatientImage" alt="" class="img-rounded img-responsive" style="width:90%; height:120px;" />
+
+                          </ng-template>
+                        </div>
+                        <div class="col-sm-6 col-md-8">
+                            <h5>
+                            Mr. {{patientFoOperation.user.firstName}}  {{patientFoOperation.user.lastName}} </h5>
+                              
+                            <p>
+                                <i class="glyphicon glyphicon-envelope"></i>{{patientFoOperation.user.mail}}
+                                <br />
+                                <span class="glyphicon glyphicon-envelope"> العنوان :</span>{{patientFoOperation.user.address}}
+                                <br />
+                                <span class="glyphicon glyphicon-envelope">رقم الهاتف :</span>{{patientFoOperation.user.phoneNumber}}
+                               
+                                <br />
+                                <span class="glyphicon glyphicon-envelope">العمر       :</span> <span class="badge badge-warning"></span>{{patientFoOperation.user.age}} 
+                                <br />
+                               
+                               
+                            <!-- Split span -->
+                           
+                        </div>
+               
+          
+        </div>
+
+         
+     
+         
+        </div><!-- end of modal body -->
+        <div class="modal-footer">
+          <span  class="btn btn-secondary" data-dismiss="modal">إغلاق</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+   
+  <!-- Edit Modal -->
+  <div class="modal fade" id="PatientEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">edit Profile</h5>
+          <span  class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </span>
+        </div>
+        <div class="modal-body">
+            <form name="form" #form="ngForm" class="text-right" dir="rtl">
+                <div class="form-row"> 
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" name="fName"
+                        #fName="ngModel"
+                        [(ngModel)]="patientFoOperation.user.firstName"
+                        required 
+                        maxlength="20"
+                        minlength="3"
+                        noWhiteSpaces
+                        [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }">
+                    <!--cs validation -->
+                        <div *ngIf="fName.invalid" class="invalid-feedback">
+                            <span *ngIf="fName.errors?.required && fName.dirty">
+                                *</span>
+                            <span *ngIf="fName.errors?.minlength && fName.dirty">
+                                يجب أن لا يقل الاسم عن 3 أحرف</span>
+                            <span *ngIf="fName.errors.hasWhiteSpace && fName.dirty">
+                                يجب أن لا يحتوى الاسم على مسافات</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control"  name="lName"
+                        #lName="ngModel"
+                        [(ngModel)]="patientFoOperation.user.lastName"
+
+                        required 
+                        maxlength="20"
+                        minlength="3"
+                        noWhiteSpaces
+                        [ngClass]="{ 'is-invalid': lName.invalid && lName.dirty }">
+                    <!--cs validation -->
+                        <div *ngIf="lName.invalid" class="invalid-feedback">
+                            <span *ngIf="lName.errors?.required && lName.dirty">
+                                *</span>
+                            <span *ngIf="lName.errors?.minlength && lName.dirty">
+                                يجب أن لا يقل الاسم عن 3 أحرف</span>
+                            <span *ngIf="lName.errors.hasWhiteSpace && lName.dirty">
+                                يجب أن لا يحتوى الاسم على مسافات</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control"  name="userName"
+                    #userName="ngModel"
+                    [(ngModel)]="patientFoOperation.user.userName"
+
+                    required 
+                    maxlength="20"
+                    minlength="6"
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': userName.invalid && userName.dirty }">
+                <!--cs validation -->
+                    <div *ngIf="userName.invalid" class="invalid-feedback">
+                        <span *ngIf="userName.errors?.required && userName.dirty">
+                            *</span>
+                        <span *ngIf="userName.errors?.minlength && userName.dirty">
+                            يجب أن لا يقل الاسم عن 6 أحرف</span>
+                        <span *ngIf="userName.errors.hasWhiteSpace && userName.dirty">
+                            يجب أن لا يحتوى الاسم على مسافات</span>
+                    </div>
+                </div>   
+                <div class="form-group">
+                    <input type="email" class="form-control"  name="email"
+                    #email="ngModel"
+                    [(ngModel)]="patientFoOperation.user.mail"
+
+                    required 
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': email.invalid && email.dirty }">
+                <!--cs validation -->
+                    <div *ngIf="email.invalid" class="invalid-feedback">
+                        <span *ngIf="email.errors?.required && email.dirty">
+                            *</span>
+                        <span *ngIf="email.errors?.email && email.dirty">
+                            ادخل صيغة صحيحة</span>
+                        <span *ngIf="email.errors.hasWhiteSpace && email.dirty">
+                            يجب أن لا يحتوى الاسم على مسافات</span>
+                    </div>
+                </div>  
+              
+
+                <div class="form-group">
+                    <input type="text" class="form-control"  name="address"
+                    #address="ngModel"
+                    [(ngModel)]="patientFoOperation.user.address"
+
+                    required 
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': address.invalid && address.dirty }">
+                <!--cs validation -->
+                   
+                </div>  
+                <div class="form-group">
+                    <input type="text" class="form-control"  name="phoneNumber"
+                    #phoneNumber="ngModel"
+                    [(ngModel)]="patientFoOperation.user.phoneNumber"
+
+                    required 
+                    noWhiteSpaces
+                    [ngClass]="{ 'is-invalid': phoneNumber.invalid && phoneNumber.dirty }">
+                <!--cs validation -->
+                   
+                </div>  
+              
+              
+ 
+              
+
+
+                   
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>الجنس</label>
+                        <select class="form-control" name="gender" [(ngModel)]="patientFoOperation.user.gender"
+                        >
+                            <option  selected disabled>
+                                <p *ngIf="patientFoOperation.user.gender == 1; else elseBlock">ذكر</p>
+                            </option>
+                                            <ng-template #elseBlock>
+                                                <p>
+                                                    أنثى
+                                                </p>
+                                              </ng-template>
+
+
+
+
+
+                           
+                            <option value="1">ذكر</option>
+                            <option value="2">أنثى</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>فصيلة الدم</label>
+                        <select class="form-control" name="BloodType"  [(ngModel)]="patientFoOperation.BloodType"
+                        >
+                            <option selected disabled>اختر من هنا</option>
+                            <option value="28">A+</option>
+                            <option value="3">A-</option>
+                            <option value="36">O+</option>
+                            <option value="1">B-</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>السن </label>
+                        <input type="text" class="form-control" name="age"  [(ngModel)]="patientFoOperation.user.age"  >
+                    </div>
+                </div>
+      
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" [disabled]="form.invalid" (click)="Update()" data-dismiss="modal" > Edit</button>
+
+                    <span  class="btn btn-secondary" data-dismiss="modal">Close</span>
+                  </div>
+            </form>
+        
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+  <div class="modal fade" id="DeletePatient" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">تأكيد الحذف</h5>
+          <span  class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </span>
+        </div>
+        <div class="modal-body">
+         
+          <div class="row">
+            <div class="col-md-12" style="text-align: center;">
+            <p style="font-size:x-large; color: red;">  هل تريد حذف المريض  / {{patientFoOperation.user.firstName}}  {{patientFoOperation.user.lastName}} ؟؟
+            </p>
+            </div>
+
+          </div>
+            
+
+
+        </div>
+        <div class="modal-footer">
+          <span  class="btn btn-secondary" data-dismiss="modal">Close</span>
+          <span  class="btn btn-danger" (click)="DeletePatient()" data-dismiss="modal">حذف</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

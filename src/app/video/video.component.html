@@ -1,0 +1,26 @@
+<div style="padding: 10px;">   
+
+  <div class="publishingDiv" [ngClass]="{'publishing': publishing}" #publisherDiv><h3><button class="btn btn-warning">{{myName}}</button></h3></div>
+  <div>  
+    <ng-template #subscriberHost></ng-template>
+  </div>
+
+</div>
+<div class="container" >
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-2">
+      <button class="btn btn-danger" (click)="endMeeting()">End Meeting</button>
+    </div>
+    <div class="col-3">
+    </div> 
+    <div class="col-2">
+      <span class="badge badge-light">{{time}}</span>
+    </div>
+   
+    <div class="col-3"> 
+    </div>
+    <div class="col-2">
+      <h3><button class="btn btn-warning">{{hisName}}</button></h3>  
+    </div>
+  </div>
+</div>

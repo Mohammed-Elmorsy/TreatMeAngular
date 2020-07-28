@@ -1,4 +1,88 @@
 /* You can add global styles to this file, and also import other style files */
-body{
-    user-select: none;
+
+html {
+    height: 100%;  
 }
+  
+body{
+    margin: 0; 
+    padding: 0;  
+    min-height: 100%;  
+    padding-top: 50px;  
+    user-select: none; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-image: url(./assets/images/common/clear-blue-sky.png);
+    position:relative;
+    padding-bottom:55px;       
+}
+
+.footer {
+    position: absolute !important; 
+    left: 0 ; right: 0; bottom: 0 !important;   
+}
+
+#doc{
+ 
+    background: no-repeat;
+    background-position: center;
+    
+    
+    background-image: url(./assets/images/doctors/background.jpg);
+}
+#docProfile{
+    background: no-repeat;
+    background-position: center;
+    background-image: url(./assets/images/doctors/docback.jpg);
+}
+
+
+#hide{
+    margin-top: -32px;
+    margin-left: 150px;
+}
+#hide input[type=file] {
+    margin:15px;
+    display: none;
+    }
+    #hide input[type=file] + label {
+    display:inline-block;
+    margin:20px;
+    padding: 4px 32px;
+    background-color: #FFFFFF;
+    border:solid 1px #666F77;
+    border-radius: 6px;
+    color:#666F77;
+    }
+    #hide input[type=file]:active + label {
+    background-image: none;
+    background-color:#2D6C7A;
+    color:#FFFFFF;
+    }
+    .fa:hover{
+        color: darkred;
+    }
+
+#loading img{ 
+    position: fixed; 
+    top:40%; 
+    left:40%;      
+    height: 300px;
+    width: 300px;   
+}
+
+.nav-tabs .nav-item{ 
+    border:0 !important;  
+    background-color: #f8f9fa !important; 
+}  
+      
+.nav-tabs .nav-item:hover{ 
+    background-color: #bad9f8 !important;
+}  
+.nav-tabs{
+    border:0 !important;
+}
+.nav-tabs .active { 
+    border-bottom:3px solid rgb(2, 7, 78) !important; 
+    color: rgb(2, 7, 78) !important;   
+    font-weight: bold !important;   
+} 

@@ -1,0 +1,99 @@
+{
+    "Header":{
+        "Home":"Home",
+        "Login":"Login",
+        "Register":"Register",
+        "Join Our Doctors":"Join Our Doctors",
+        "Profile":"Profile",  
+        "Logout":"Logout"
+
+    },
+    "Home":{
+        "Carousel":{
+            "Examine":"Examine yourself online",
+            "ExamineDetails":"Speak online with the specialized doctor without leaving your home",
+            "Medicine":"Do you want a treatment for your disease ?",
+            "MedicineDetails":
+            "Get your prescription from the specialized doctor and you can order it from the nearest pharmacy",
+            "Diagnoses":"Do you want a diagnosis of your condition?",
+            "DiagnosesDetails":  
+            "You can tell the doctor about your medical history and the symptoms you are facing and he will help you to diagnose your condition"          
+        },
+        "Speciality":{
+            "القلب":"Cardiology",
+            "الباطنة":"Gastroenterology",
+            "العظام":"Rheumatology",
+            "الجلدية":"Dermatology",
+            "العيون":"Ophthalmology",
+            "الأطفال":"Pediatrics",
+            "أنف وأذن وحنجرة":"Otolaryngology" 
+        }
+
+    },
+
+    "Register":{
+        "Fname":"First Name",
+        "Lname":"Last Name",
+        "Username":"Username",
+        "Password":"Password",
+        "ConfirmPassword":"Confirm Password",
+        "Email":"Email",
+        "Address":"Address",
+        "Age":"Age",
+        "PhoneNumber":"Phone Number",
+        "Gender":"Gender",
+        "Title":"Title",
+        "TitleDetails":"Title Details",
+        "Speciality":"Speciality",
+        "CV":"Upload your CV",
+        "AcceptTerms":"Accept terms and conditions",
+        "NewAccount":"New Account",
+        "JoinTMDoctors":"Join Treat Me Doctors",
+        "JoinDoctors":"Join Our Doctors",
+        "BloodType":"Blood Type",
+        "Choose":"Choose ..",
+        "MedicalHistory":"Upload your medical history",
+        "Male":"Male",
+        "Female":"Female" ,
+        "Validation":{
+            "Required":"This field is required",
+            "MinLength3":"Minimum length is 3 characters",
+            "MinLength6":"Minimum length is 6 characters",
+            "MaxLength30":"Maximum length is 30 characters",
+            "SpaceStart":"Field mustn't start with a space",
+            "DoubleSpace":"Field mustn't contain double spaces",
+            "NoSpace":"Field mustn't have any space",
+            "LettersOnly":"Field must contain letters only",
+            "Email":"Email is invalid",
+            "ConfirmPassword":"Passwords don't match"
+
+        },
+        "Or":"Or",
+        "SignIn":"SignIn" 
+
+    },
+
+    "Login":{
+        "Login":"Login",
+        "User":"User",
+        "Doctor":"Doctor",
+        "ForgotPassword":"Forgot your password ?",
+        "Enter":"Enter",
+        "Or":"Or",
+        "SignUp":"Sign Up"
+    },
+    
+    "DoctorsList":{
+        "Fees":"Session Fees",
+        "Book":"Book a Session",
+        "P":"P",
+        "D":"D"
+    },
+
+    "Modal":{
+        "EditInfo":"Edit Your Info",
+        "Edit":"Edit" ,
+        "Close":"Close"
+    }
+
+}

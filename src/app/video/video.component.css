@@ -1,0 +1,10 @@
+
+.publishingDiv {
+  height:30%;
+  width: 30%;
+
+  left: 0;
+  bottom: 45px;
+  position: fixed;
+  z-index: 1;
+}

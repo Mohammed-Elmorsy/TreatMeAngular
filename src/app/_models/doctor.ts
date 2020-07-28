@@ -1,12 +1,22 @@
+import { User } from './user';
+import { Speciality } from './speciality';
+import { Form } from '@angular/forms';
+
 export class Doctor {
     constructor(
-       public id:Number,       
-       public fullName:String,
-       public age:Number,
-       public address:String,
-       public speciality:String,
-       public email?:String
-       
+        public specialityId?:number,
+        public speciality?:Speciality,
+        public user?:User,
+        public userId?:Number,       
+        public fees?:Number,
+        public rating?:Number,
+        public  CV?:FormData,
+        public cvName?:String,
+        public title?:string,
+        public titleDescription?:string,
+        public confirmed?:boolean,
+        public about?:string
+
     )
     {}
 }

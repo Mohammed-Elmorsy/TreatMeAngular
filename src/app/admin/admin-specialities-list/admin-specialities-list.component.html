@@ -1,0 +1,96 @@
+<span class="btn btn-success float-right mb-2"  data-toggle="modal" data-target="#AddSpeciality" >Add Speciality</span>
+
+
+<table class="table table-hover text-center" >
+    <thead class="bg-primary text-light">  
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Operations</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr *ngFor="let speciality of specialities">
+        <th scope="row">{{speciality.id}}</th>
+        <td>{{speciality.name}}</td>
+        <td>
+            <span class="btn btn-danger" (click)="selectSpecialityForOperation(speciality)" data-toggle="modal" data-target="#DeleteSpeciality">Delete</span> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- Add speciality modal -->
+
+  
+  <div class="modal fade" id="AddSpeciality" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">إضافة تخصص</h5>
+
+          <span  class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </span>
+        </div>
+        <div class="modal-body">
+         
+          <form class=" border border-dark p-5">
+
+          
+            <!-- Email -->
+            <div class="form-group col-sm-12">
+              <label for="inputSpeciality">اسم التخصص</label>
+
+            <input type="text" id="inputSpeciality" class="form-control mb-4" [(ngModel)]="SpecialityForOperation.name" name="speciality">
+            </div>
+         
+          </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <span  class="btn btn-secondary" data-dismiss="modal">Close</span>
+          <span  class="btn btn-danger" (click)="AddSpeciality()" data-dismiss="modal">إضافة</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- delet speciality modal -->
+
+
+  
+  <div class="modal fade" id="DeleteSpeciality" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">تأكيد الحذف</h5>
+          <span  class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </span>
+        </div>
+        <div class="modal-body">
+         
+          <div class="row">
+            <div class="col-md-12" style="text-align: center;">
+            <p style="font-size:x-large; color: red;">  هل تريد حذف التخصص  / {{SpecialityForOperation.name}}   ؟؟
+            </p>
+            </div>
+
+          </div>
+            
+
+
+        </div>
+        <div class="modal-footer">
+          <span  class="btn btn-secondary" data-dismiss="modal">Close</span>
+          <span  class="btn btn-danger" (click)="DeleteSpeciality()" data-dismiss="modal">حذف</span>
+        </div>
+      </div>
+    </div>
+  </div>

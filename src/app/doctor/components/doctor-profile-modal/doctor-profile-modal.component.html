@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  
+    <label ><h3><span class="badge badge-secondary">First Name <input value="{{doctor.user.firstName}}"  type="text"/>  </span></h3> </label><br>
+    
+    <label ><h3><span class="badge badge-secondary">Last Name <input value="{{doctor.user.lastName}}"  type="text"/>  </span></h3> </label><br>
+    
+    <label ><h3><span class="badge badge-secondary">Speciality <input value="{{doctor.speciality.name}}"  type="text"/>  </span></h3> </label><br>
+
+    <label ><h3><span class="badge badge-secondary">Age <input value="{{doctor.user.age}}"  type="text"/>  </span></h3> </label><br>
+
+
+    <label ><h3><span class="badge badge-secondary">Phone Number <input value="{{doctor.user.phoneNumber}}"  type="text"/>  </span></h3> </label><br>
+
+
+    <label ><h3><span class="badge badge-secondary">E-Mail<input value="{{doctor.user.mail}}"  type="text"/>  </span></h3> </label><br>
+
+    
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Update</button>
+  </div>

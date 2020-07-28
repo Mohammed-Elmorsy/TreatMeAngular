@@ -1,27 +1,38 @@
-<nav class="navbar navbar-expand-lg " id="bar">
-    <a class="navbar-brand" routerLink="/home">Treat Me</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar fixed-top navbar-expand-lg">
+    <a class="navbar-brand" routerLink="/home"><img src="assets/images/common/logo2.png"></a>
+    <span class="navbar-toggle navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>  
+    </span>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+ 
+      <ul class="navbar-nav" id="loginNav" [ngClass]="{'mr-auto':translate.currentLang == 'ar', 'ml-auto':translate.currentLang == 'en'}">    
         <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">الصفحة الرئيسية <span class="sr-only">(current)</span></a>
+          <a class="nav-link" *ngIf = "!authService.isLoggedIn()" routerLink="patient/register" routerLinkActive="active">{{ "Header.Register" | translate }}</a>  
         </li>
-
+        <li class="nav-item">
+          <a class="nav-link" *ngIf = "!authService.isLoggedIn()" routerLink="doctor/register" routerLinkActive="active">{{ "Header.Join Our Doctors" | translate }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf = "!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active">{{ "Header.Login" | translate }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf = "authService.isLoggedIn()" (click)="authService.logout()">{{ "Header.Logout" | translate }}</a>
+        </li>  
       </ul>
-      <ul class="navbar-nav mr-right">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="patient/register" routerLinkActive="active">حساب جديد</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="doctor/register" routerLinkActive="active">انضم للأطباء</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">تسجيل دخول</a>
-        </li>
+        <ul class="navbar-nav" id="homeNav" [ngClass]="{'ml-auto':translate.currentLang == 'ar', 'mr-auto':translate.currentLang == 'en'}">    
+          <li class="nav-item">
+            <a class="nav-link" *ngIf="translate.currentLang == 'ar'" (click)="useLang('en')" > English</a> 
+            <a class="nav-link" *ngIf="translate.currentLang == 'en'" (click)="useLang('ar')" >العربية</a>
+          </li> 
+          <li class="navbar-nav">
+            <a class="nav-link" *ngIf = "authService.isLoggedIn()" routerLink={{authService.navigateByRole()}} routerLinkActive="active" 
+            >{{ "Header.Profile" | translate }}</a>     
+          </li>   
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">{{ "Header.Home" | translate }}<span class="sr-only">(current)</span></a>
+          </li>
 
-      </ul>
+        </ul>
     </div>
   </nav>

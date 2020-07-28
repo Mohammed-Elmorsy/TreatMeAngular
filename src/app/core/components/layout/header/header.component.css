@@ -2,18 +2,36 @@ a:hover{
     cursor: pointer;
 }
 
-#bar{
-    background-color: #333;
-}
-#bar a{
-    color: white;
-}
-#bar a:hover {
-   background-color: rgb(20, 123, 219);
-   border-radius: 10px;
+.navbar{
+    background-color: rgb(2, 7, 78);  
 }
 
-.active{
-    background-color: rgb(20, 123, 219);
-    border-radius: 10px;
- }
+.navbar a{
+    color: white;
+}
+
+nav a.active{
+    color: rgb(59, 197, 251);
+    font-weight: bold;
+    border: 1px solid rgb(59, 197, 251);
+    border-radius: 4px;
+}
+
+nav a:hover{
+    color: rgb(59, 197, 251);
+    font-weight: bold;
+}
+
+.navbar .navbar-toggler .navbar-toggler-icon{
+    color: white !important;
+}
+
+.navbar-brand img{
+    height: 50px;    
+    margin-top: -10px; 
+}   
+
+.fa-bars{
+    color: white;
+}
+

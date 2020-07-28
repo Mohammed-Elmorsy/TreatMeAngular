@@ -1,0 +1,48 @@
+<div class="container-fluid row mx-auto">
+  <div class="col-md-4 col-lg-3 mb-4" id="cardWrapper">
+        <div class="card bg-light text-center" id="profileCard" style="height: 100%;">
+            <div class="text-center" style="position: relative;"> 
+              <img *ngIf="admin.imageName == NULL; else elseblock" 
+              class="card-img-top" style="margin-top: 10px;" src="assets/images/doctors/profile-pic.png"
+              alt="profile pic">
+              <ng-template #elseblock>
+                  <img class="card-img-top" style="margin-top: 10px;" [src]="imageFromApi" alt="profile pic">
+              </ng-template>
+
+              <div id="uploadDiv">
+                  <label for="file-upload" class="custom-file-upload">
+                      <input type="file" id="file-upload"  name="file"
+                      (change)="handleFileInput($event.target.files)" /> 
+                      <i class="fas fa-2x fa-camera"></i>    
+                  </label> <br>  
+                  <span class="photo_text hidden-xs" style="color:black;">Upload</span>
+              </div>
+          </div> 
+          <div class="card-body">
+            <h5 class="card-title">{{admin.firstName}} {{admin.lastName}}</h5>
+            <span class="badge badge-warning">Admin</span><br><br>  
+            <span class="btn btn-info" data-toggle="modal" data-target="#editData">Edit your information</span>
+
+          </div>
+        </div>
+  </div>  
+  <div class="col-md-8 col-lg-9 mb-3" id="tabsWrapper" style="height: 100%;">   
+            <nav class="bg-light justify-content-center" style="padding: 10px;">
+              <div class="nav nav-tabs bg-light" id="nav-tab" role="tablist"> 
+                <a class="nav-item nav-link active" id="nav-doctorsRequests-tab" data-toggle="tab" href="#nav-doctorsRequests" aria-selected="true">
+                      Doctors Requests <span *ngIf="requestsNumber > 0" class="badge badge-danger">{{requestsNumber}}</span> 
+                </a>    
+                <a class="nav-item nav-link" id="nav-doctors-tab" data-toggle="tab" href="#nav-doctors" aria-selected="false">Doctors</a>
+                <a class="nav-item nav-link" id="nav-specialities-tab" data-toggle="tab" href="#nav-specialities"  aria-selected="false">Specialities</a>
+                <a class="nav-item nav-link" id="nav-patients-tab" data-toggle="tab" href="#nav-patients"  aria-selected="false">Patients</a>
+              </div>   
+            </nav>   
+            <div class="tab-content bg-light p-3" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-doctorsRequests" ><app-admin-doctors-requests (requestsChanged)="requestsNumber = $event"></app-admin-doctors-requests></div>
+              <div class="tab-pane fade" id="nav-doctors" ><app-admin-doctors-list></app-admin-doctors-list> </div>
+              <div class="tab-pane fade" id="nav-specialities" ><app-admin-specialities-list></app-admin-specialities-list></div>
+              <div class="tab-pane fade" id="nav-patients" ><app-admin-patients-list></app-admin-patients-list></div>  
+            </div>
+
+  </div>
+</div>    

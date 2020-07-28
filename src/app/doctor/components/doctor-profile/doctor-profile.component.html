@@ -1,0 +1,743 @@
+<div class="container-fluid row mx-auto ">
+    <div class="col-md-4 col-lg-3 mb-4" id="cardWrapper" style="height: 80%;">
+        <div class="card bg-light text-center" id="profileCard" style="height: 100%">
+                <div class="text-center" style="position: relative;"> 
+                    <img *ngIf="doctor.user.imageName == NULL; else elseblock" 
+                    class="card-img-top" style="margin-top: 10px;" [src]="docImg"
+                    alt="profile pic">
+                    <ng-template #elseblock> 
+                        <img class="card-img-top" [src]="DoctorImage" style="margin-top: 10px;"  alt="profile pic"> 
+                    </ng-template>
+
+                    <div id="uploadDiv">
+                        <label for="file-upload" class="custom-file-upload">
+                            <input type="file" id="file-upload"  name="file"
+                            (change)="handleFileInput($event.target.files)" /> 
+                            <i class="fas fa-2x fa-camera"></i>    
+                        </label> <br>  
+                        <span class="photo_text hidden-xs" style="color:black;">Upload</span>
+                    </div>
+                </div> 
+
+                <div class="card-body">
+                    <h5 class="card-title">{{doctor.user.firstName}} {{doctor.user.lastName}}</h5>
+                    <span class="badge badge-success">Doctor</span><br><br> 
+                    <span class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter">Edit your information</span>
+                    <br><br>
+                    <a class="btn btn-warning" routerLink="/doctor/details/{{docId}}">View Your Details</a>
+
+                </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-lg-9 mb-2" id="tabsWrapper" style="height:90%;">    
+ 
+        <nav class="bg-light justify-content-center" style="padding: 10px;">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-about-tab" data-toggle="tab" href="#nav-about"
+                    aria-selected="true">
+                    About you
+                </a>
+                <a class="nav-item nav-link" id="nav-commingSessions-tab" data-toggle="tab" href="#nav-commingSessions"
+                    aria-selected="false">Coming Sessions</a>
+                <a class="nav-item nav-link" id="nav-addSessions-tab" data-toggle="tab" href="#nav-addSessions"
+                    aria-selected="false">Add Sessions</a>
+                <a class="nav-item nav-link" id="nav-bookedSessions-tab" data-toggle="tab" href="#nav-bookedSessions"
+                    aria-selected="false">Booked Sessions</a>
+<!--                 <a class="nav-item nav-link" id="nav-notifications-tab" data-toggle="tab" href="#nav-notifications"
+                    aria-selected="false">Notifications</a>
+                <a class="nav-item nav-link" id="nav-issues-tab" data-toggle="tab" href="#nav-issues"
+                    aria-selected="false">Report Issues</a> -->
+            </div>
+        </nav>
+        <div class="tab-content bg-light p-3" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-about"><!-- about tab -->
+                
+                <div class="container bootstrap snippet">
+                    <div class="panel-body">
+                        <div class="row"> 
+                            <strong>Information</strong>
+                            <br>  
+                            <div class="table-responsive">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="far fa-address-card"></i>
+                                                    First Name
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.firstName}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="far fa-address-card"></i>
+                                                    Last Name
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.lastName}}
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-user-circle"></i>
+                                                    Username
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.userName}}
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="far fa-envelope"></i>
+                                                    Email
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.mail}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-user-tie"></i>                                                    Title
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.title}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-user-tie"></i>                                                    Title Details
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.titleDescription}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fa fa-birthday-cake" aria-hidden="true"></i> 
+                                                    Age
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.age}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-venus-mars"></i>
+                                                    Gender
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                <span *ngIf="doctor.user.gender == 1; else elseBlock">male</span>
+                                                <ng-template #elseBlock>
+                                                    <span>
+                                                        female
+                                                    </span>  
+                                              </ng-template>                                            
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    Address
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.address}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-phone"></i>
+                                                    Phone Number
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.user.phoneNumber}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-dollar-sign"></i>
+                                                    Fees
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                {{doctor.fees}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-file-pdf"></i>  
+                                                      CV
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+
+                                                      <label for="cv-upload" class="pdf-upload">
+                                                        <input type="file" id="cv-upload" class=""   name="file" (change)="handleCVeInput($event.target.files)"  />
+                                                        <i class="fas fa-2x fa-file-pdf"></i><br>
+                                                         <span>update</span>
+                                                    </label>
+                                                    <div style="margin-left: 100px; margin-top: -60px;" >    
+                                                        <span class="btn btn-success" (click)="SelecToViewPDF(doctor)" data-toggle="modal" data-target="#CVModal">View </span> 
+
+                                                    </div> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    <i class="fas fa-address-card"></i>  
+                                                      About you
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                <textarea style="width: 100%; height: 200px; 
+                                                overflow-y: auto; overflow-x: hidden; resize: none;"
+                                                placeholder="write about your experience and certificates"
+                                                [(ngModel)]="doctor_modified.about" >
+
+                                                </textarea>
+                                                <span *ngIf="doctor.about == NULL || doctor.about == ''; else aboutDoctor"
+                                                 class="btn btn-success" (click)="editDoctor()">Add to your details page</span>
+                                                 <ng-template #aboutDoctor>
+                                                    <span
+                                                    class="btn btn-success" (click)="editDoctor()">Update in your details page</span> 
+                                                 </ng-template>
+                                            </td>  
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-commingSessions"><!--comming sessions tab -->
+                
+                <div  *ngIf="comingSessions.length>0; else noComingSessions"> 
+                    <table class="table table-primary table-hover"> 
+                    <thead class="bg-primary text-light">
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Start Time</th>
+                        <th scope="col">End Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let session of comingSessions;let i=index">
+    
+                        <th scope="row">{{i+1}}</th>
+                        <td> {{session.date  | date:'shortDate'}}</td>
+                        <td> {{session.startTime | date:'mediumTime'}}</td>
+                        <td> {{session.endTime | date:'mediumTime'}}</td>    
+                        </tr>
+                    
+                    </tbody>
+                    </table>
+                </div>
+                <ng-template #noComingSessions>
+                    <div class="alert alert-primary text-center" role="alert" >
+                       There is no sessions for the coming two days
+                      </div>
+                </ng-template>
+
+            </div>
+            <div class="tab-pane fade" id="nav-addSessions"><!--add sessions tab -->
+                <div  style=" padding: 10px; border: solid black 1px ; background-color:rgb(199, 225, 250);">
+                    <div class="row">
+                      <div class="col-5 ml-5" >  
+                          <!-- <h3>Days</h3> -->
+                          <label><h3>Days</h3> </label>
+                          <div *ngFor="let option of days; let i = index" class="form-check">
+                                  <label class="form-check-label">  
+                                      <input type="checkbox" class="form-check-input"
+                                             name="days"
+                                             value="{{option}}"
+                  
+                                             (change)="updateCheckedOptions(option, $event)"/>
+                                      {{option}}
+                                  </label>
+                          </div>
+                       
+                          <br>
+                      </div>
+                      <div class="col-5 text-center" >
+                          <h3> Duration (min)</h3> 
+                          <select id="" class="form-control" [value]="sessionDuration" (input)="sessionDuration=$event.target.value">
+                             
+                              <option value="{{min}}" *ngFor="let min of duration">{{min}}</option>
+                          </select>
+                         
+                          <br>
+                      </div>
+                    </div>
+              
+                      
+                    <hr>
+                <div class="row">
+                      
+                  <div class="col-6 text-center" >
+                      <h3>AM Hours</h3>
+                      <span>if there is no AM work hours,<br> check here &nbsp;&nbsp;</span><input (change)="AMworkHours=!AMworkHours" type="checkbox"/><br>
+                      <label>From <select  id="hoursFrom" class="form-control" [value]="AMhour1" (input)="AMhour1=$event.target.value" >
+                      
+                          <option value="{{hour}}" *ngFor="let hour of AMhours">{{hour}}</option>
+                      </select></label><br>
+                      <label>To &nbsp; &nbsp;<select id="hoursTo" class="form-control" [value]="AMhour2" (input)="AMhour2=$event.target.value">
+                          
+                          <option value="{{hour}}" *ngFor="let hour of AMhours">{{hour}}</option>
+                      </select></label>
+                      
+                      <br>
+                  </div>
+                  <div class="col-6 text-center">
+                      
+                      <h3> PM Hours</h3>
+                      <span>if there is no PM work hours,<br> check here &nbsp;&nbsp;</span><input (change)="PMworkHours=!PMworkHours" type="checkbox"/><br>
+                      <label>From <select  id="hoursFrom" class="form-control" [value]="PMhour1" (input)="PMhour1=$event.target.value" >
+                      
+                          <option value="{{hour}}" *ngFor="let hour of PMhours">{{hour}}</option>
+                      </select></label><br>
+                      <label>To &nbsp; &nbsp;<select id="hoursTo" class="form-control" [value]="PMhour2" (input)="PMhour2=$event.target.value">
+                          
+                          <option value="{{hour}}" *ngFor="let hour of PMhours">{{hour}}</option>
+                      </select></label>
+                      <br>
+                  </div>
+                  
+        
+                </div><hr>
+                  <br>
+              
+                    <div class="col-12 text-center">
+                        
+                        <button style="width: 30%;" class="btn btn-success" (click)="addSessions();"> Add Sessions</button>
+                       
+                        <span  style="width: 30%;"></span>
+                        
+                        <button style="width: 30%;" class="btn btn-danger" (click)="modifySessions();"> Modify Sessions</button>
+              
+              
+                    </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="nav-bookedSessions"><!--booked sessions tab -->
+                <div *ngIf="BookedSessions.length>0; else noBookedSessions">  
+                    <table  class="table table-primary table-hover">
+                    <thead class="bg-primary text-light">   
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Patient Name</th>
+                            <th scope="col">MedicalHistory</th>
+                            <th scope="col"> medicine</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let session of BookedSessions;let i=index">
+                            
+                           
+                                        <th *ngIf="session.schedule.isBooked == 1;" scope="row">{{i+1}}</th>
+                                        <td *ngIf="session.schedule.isBooked == 1;"> {{session.patient.user.firstName}} {{session.patient.user.lastName}}</td>
+
+                                        <td *ngIf="session.schedule.isBooked == 1;"> 
+                                            <span class="btn btn-danger" (click)="SelectPatientForViewMd(session.patient);SelecToViewPDF(session.patient)" data-toggle="modal" data-target="#CVModal" >View </span> 
+
+                                            
+                                        </td>
+                                        <td >
+                                            <button   class="btn btn-primary" (click)="SelecToAddMedicine(session.patient)" data-toggle="modal" data-target="#feedBackModal" >FeedBack </button> 
+
+                                           
+                                        </td>
+
+                                        <td *ngIf="session.schedule.isBooked == 1;"> {{session.schedule.date  | date:'shortDate'}}</td>
+
+                                        <td *ngIf="session.schedule.isBooked == 1;"> {{session.schedule.startTime | date:'mediumTime'}}</td>
+                                        <!-- if start time is now join else coming soon-->
+
+                                        <td *ngIf="session.schedule.isBooked == 1;"><span class="btn btn-primary" [ngClass]="{ 'active' :false }" (click)="joinMeeting(session.scheduleId)">Join</span></td>
+                                
+                            
+                    
+    
+                           
+                        </tr>
+                    
+                    </tbody>
+                    </table>
+                </div>  
+                <ng-template #noBookedSessions>
+                    <div class="alert alert-primary text-center" role="alert" >
+                       There is no booked sessions
+                      </div>
+                </ng-template>
+
+            </div>
+<!--             <div class="tab-pane fade" id="nav-notifications"><!-- notifications tab --
+                notifications
+            </div>
+            <div class="tab-pane fade" id="nav-issues"><!-- issues tab --
+                issues
+            </div> -->
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">{{"Modal.EditInfo" | translate}}</h5>
+          <span  class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>  
+          </span>
+        </div>
+        <div class="modal-body">
+            <form name="form" #form="ngForm" class="formRegister" (ngSubmit)="onSubmit()">
+                <div class="form-row"> 
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" placeholder="{{'Register.Fname' | translate}} *" name="fName"
+                        #fName="ngModel"
+                        [(ngModel)]="doctor_modified.user.firstName" 
+                        required 
+                        maxlength="20"
+                        minlength="3"
+                        noStartOrDoubleSpaces
+                        pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
+                        [ngClass]="{ 'is-invalid': fName.invalid && fName.dirty }"> 
+                        <span *ngIf="fName.dirty && fName.errors?.required" class="invalid-feedback">
+                           {{"Register.Validation.Required" | translate}}</span> 
+                    <!--cs validation -->
+                        <div *ngIf="fName.invalid" class="invalid-feedback">
+                            <span *ngIf="fName.errors?.minlength && fName.dirty">
+                                {{"Register.Validation.MinLength3" | translate}}</span>
+                            <span *ngIf="fName.errors?.startsWithSpace && fName.dirty">
+                                {{"Register.Validation.SpaceStart" | translate}}</span>
+                            <span *ngIf="fName.errors?.hasDoubleSpace && fName.dirty">
+                                {{"Register.Validation.DoubleSpace" | translate}}</span>
+                            <span *ngIf="fName.errors?.pattern&& fName.dirty">  
+                                {{"Register.Validation.LettersOnly" | translate}}</span>
+                        </div>
+                    </div> 
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" placeholder="{{'Register.Lname' | translate}} *" name="lName"
+                        #lName="ngModel"
+                        [(ngModel)]="doctor_modified.user.lastName"
+                        required 
+                        maxlength="20"
+                        minlength="3"
+                        noStartOrDoubleSpaces
+                        pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
+                        [ngClass]="{ 'is-invalid': lName.invalid && lName.dirty }">
+                        <span *ngIf="lName.dirty && lName.errors?.required" class="invalid-feedback">
+                            {{"Register.Validation.Required" | translate}}</span>
+                    <!--cs validation -->
+                        <div *ngIf="lName.invalid" class="invalid-feedback">
+                            <span *ngIf="lName.errors?.minlength && lName.dirty">
+                                {{"Register.Validation.MinLength3" | translate}}</span>
+                            <span *ngIf="lName.errors?.startsWithSpace && lName.dirty">
+                                {{"Register.Validation.SpaceStart" | translate}}</span>
+                            <span *ngIf="lName.errors?.hasDoubleSpace && lName.dirty">
+                                {{"Register.Validation.DoubleSpace" | translate}} </span>
+                            <span *ngIf="lName.errors?.pattern&& lName.dirty">
+                                {{"Register.Validation.LettersOnly" | translate}}</span> 
+                        </div>
+                    </div>   
+                </div> 
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="{{'Register.Username' | translate}} *" name="userName"
+                    #userName="ngModel"  
+                    [(ngModel)]="doctor_modified.user.userName"   
+                    required
+                    maxlength="30"
+                    minlength="6"
+                    noWhiteSpaces
+                    pattern="^(?:[a-zA-Z0-9\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
+                    [ngClass]="{ 'is-invalid': userName.invalid && userName.dirty }" /> 
+                    <span *ngIf="userName.dirty && userName.errors?.required" class="invalid-feedback">
+                        {{"Register.Validation.Required" | translate}}</span>    
+                    <!--cs validation --> 
+                    <div *ngIf="userName.invalid" class="invalid-feedback">
+                        <span  *ngIf="userName.errors?.minlength && userName.dirty">
+                            {{"Register.Validation.MinLength6" | translate}}</span>
+                        <span  *ngIf="userName.errors?.maxlength && userName.dirty">
+                            </span>
+                        <span *ngIf="userName.errors?.hasWhiteSpace && userName.dirty">
+                            {{"Register.Validation.NoSpace" | translate}}</span>  
+                        <span *ngIf="userName.errors?.pattern && userName.dirty">
+                            {{"Register.Validation.LettersOnly" | translate}}</span>  
+    
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="{{'Register.Email' | translate}} *" name="email"
+                    #email="ngModel"
+                    [(ngModel)]="doctor_modified.user.mail"   
+                    required
+                    pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                    [ngClass]="{ 'is-invalid': email.invalid && email.dirty }" />
+                    <span *ngIf="email.dirty && email.errors?.required" class="invalid-feedback">
+                        {{"Register.Validation.Required" | translate}}</span>  
+                    <!--cs validation -->  
+                    <div *ngIf="email.invalid" class="invalid-feedback">
+                        <span  *ngIf="email.errors?.pattern && email.dirty"><!-- still need work -->
+                            {{"Register.Validation.Email" | translate}}</span>
+                        
+                   </div> 
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="inputTitle">{{"Register.Title" | translate}} *</label>
+                        <select id="inputTitle" class="form-control" name="title" 
+                        #title="ngModel"
+                        [(ngModel)]="doctor_modified.title"
+                        [ngClass]="{ 'is-invalid': title.invalid && title.touched }"
+                        required > 
+                            <option selected disabled>{{"Register.Choose" | translate}}</option>
+                            <option>{{"DoctorsList.P" | translate}}</option> 
+                            <option>{{"DoctorsList.D" | translate}}</option>    
+                        </select>  
+                        <div *ngIf="title.touched && title.errors?.required" class="invalid-feedback">
+                            <span >{{"Register.Validation.Required" | translate}}</span>  
+                        </div>
+                          
+    
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>{{"Register.TitleDetails" | translate}} *</label><!-- still need work -->
+                        <input type="text" class="form-control" name="titleDescription" 
+                        #titleDescription = "ngModel" 
+                        [(ngModel)] = "doctor_modified.titleDescription"     
+                        noStartOrDoubleSpaces
+                        required
+                        pattern="^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
+                        [ngClass]="{ 'is-invalid': titleDescription.invalid && titleDescription.dirty }"
+    
+                        >
+                        <span *ngIf="titleDescription.dirty && titleDescription.errors?.required" class="invalid-feedback">
+                            {{"Register.Validation.Required" | translate}}</span> 
+                     <!--cs validation -->
+                         <div *ngIf="titleDescription.invalid" class="invalid-feedback">
+                             <span *ngIf="titleDescription.errors?.startsWithSpace && titleDescription.dirty">
+                                 {{"Register.Validation.SpaceStart" | translate}}</span>
+                             <span *ngIf="titleDescription.errors?.hasDoubleSpace && titleDescription.dirty">
+                                 {{"Register.Validation.DoubleSpace" | translate}}</span>
+                             <span *ngIf="titleDescription.errors?.pattern && titleDescription.dirty">  
+                                 {{"Register.Validation.LettersOnly" | translate}}</span>
+                         </div>
+                    </div>  
+                    <div class="form-group col-md-4">
+                        <label for="inputSpeciality">{{"Register.Speciality" | translate}} *</label>  
+                        <select id="inputSpeciality" class="form-control" name="speciality" [(ngModel)]="doctor_modified.specialityId"
+                        required 
+                        #speciality="ngModel"
+                        [ngClass]="{ 'is-invalid': speciality.invalid && speciality.touched }" 
+                        > 
+                            <option  [ngValue]="null" disabled>{{"Register.Choose" | translate}}</option>  
+                            <option *ngFor='let speciality of specialities' value="{{speciality.id}}">{{ ("Home.Speciality." + speciality.name) | translate}}</option>
+                        </select>
+                        <div *ngIf="speciality.touched && speciality.errors?.required" class="invalid-feedback">
+                            <span >{{"Register.Validation.Required" | translate}}</span>  
+                        </div>  
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" placeholder="{{'Register.Address' | translate}}" name="address"
+                        #address="ngModel"
+                        [(ngModel)]="doctor_modified.user.address"
+                        >
+                    </div>  
+                    <div class="form-group col-md-6">
+                        <input type="number" class="form-control" placeholder="{{'Register.PhoneNumber' | translate}}" 
+                        name="phone"
+                        #phone="ngModel"  
+                        [(ngModel)]="doctor_modified.user.phoneNumber"  
+                        >  
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>{{'Register.Gender' | translate}} *</label>
+                        <select class="form-control" name="gender" #gender="ngModel" 
+                        [(ngModel)]="doctor_modified.user.gender"
+                        required
+                        [ngClass]="{ 'is-invalid': gender.invalid && gender.touched }" 
+                        >
+                            <option  [ngValue]="null" disabled>{{'Register.Choose' | translate}}</option> 
+                            <option value=1 >{{'Register.Male' | translate}}</option>
+                            <option value=2>{{'Register.Female' | translate}}</option>
+                        </select>
+                        <div *ngIf="gender.touched && gender.errors?.required" class="invalid-feedback">
+                            <span >{{"Register.Validation.Required" | translate}}</span>  
+                        </div>  
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>{{'Register.Age' | translate}} *</label>
+                        <input type="number" class="form-control" min="1" max="110" name="age" 
+                        #age="ngModel"
+                        [(ngModel)]="doctor_modified.user.age"
+                        required
+                        maxlength="3" 
+                        [ngClass]="{ 'is-invalid': age.invalid && age.dirty }"   
+                        >
+                        <div *ngIf="age.invalid && age.errors?.required" class="invalid-feedback">
+                            <span >{{"Register.Validation.Required" | translate}}</span>  
+                        </div>  
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" [disabled]="form.invalid" (click)="editDoctor()" data-dismiss="modal"> تعديل</button>
+
+                    <span  class="btn btn-secondary" data-dismiss="modal">Close</span>
+                  
+                </div>  
+            </form>
+        </div>
+       
+      </div>
+    </div>
+
+</div>
+
+
+
+ 
+ 
+<div class="modal fade  " id="CVModal" tabindex="-1" role="dialog"  aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span  class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </span>
+        </div>
+        <div class="modal-body">
+         
+        <div>
+          <ngx-extended-pdf-viewer [src]='PdfUrl' 
+          useBrowserLocale="true" height="70vh"></ngx-extended-pdf-viewer>
+
+      </div>
+  
+        </div>
+        <div class="modal-footer">
+          <span  class="btn btn-secondary" data-dismiss="modal">Close</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="feedBackModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Docror's FeedBack</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" *ngIf="feedback == NULL ; else feedBackExists">
+
+            <div style="text-align:center">
+                <h1>
+                 Add feedBack 
+                </h1>
+              </div>
+         
+         
+
+              <div class="form-group col-md-12">
+                <textarea rows="5" class="form-control" name="feedBack" placeholder="write FeedBack"
+                [(ngModel)]="doctorPatientRaoucheh.doctorFeedback"></textarea>
+    
+            </div> 
+             <div class="form-group col-md-12">
+                <label for="form-group">Enter Next Session Date :</label>
+
+                <input type="date" class="form-control" name="Discription" 
+                [(ngModel)]="doctorPatientRaoucheh.description">
+    
+            </div>
+            <div class="form-group col-md-4">
+
+             <button type="button" class="btn btn-success"  data-dismiss="modal" (click)="AddFeeddBack()">Add feedBack</button>
+           </div>
+        </div>
+
+          
+
+     
+
+        <ng-template #feedBackExists>
+
+            <div style="text-align:center">
+                <h1>
+                 Edit feedBack
+                </h1>
+              </div>
+
+              <div class="form-group col-md-12">
+
+                <textarea rows="5" class="form-control" name="x"
+                [(ngModel)]="feedback.doctorFeedback" ></textarea>
+    
+            </div> 
+            <div class="form-group col-md-12">
+                <label for="form-group">enter Next Session Date :</label>
+                <input type="date" class="form-control" name="Discription" 
+                [(ngModel)]="feedback.description">
+    
+            </div>
+  
+        
+
+            <div class="form-group col-md-4">
+                <button type="button" class="btn btn-primary"  data-dismiss="modal" (click)="UpdateFeedBack()">Update</button>
+            </div>
+
+
+
+        </ng-template>
+
+
+
+
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger"  data-dismiss="modal" (click)="AddFeeddBack()">close</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,17 +1,33 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './home/components/home.component';
+import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
+import { DoctorRegisterComponent } from './core/components/doctor-register/doctor-register.component';
+import { PatientRegisterComponent } from './core/components/patient-register/patient-register.component'
+import { LoginComponent } from './core/components/login/login.component';
+import { LoginGuard } from './core/guards/login.guard';
+import { HomeResolver } from './core/resolvers/home.resolver';
+import { VideoComponent } from './video/video.component';
+import { SubscriberComponent } from './subscriber/subscriber.component';
+import { PaymentComponent } from './payment/payment.component';
+   
 
-import { DoctorComponent } from './doctor/doctor-profile/doctor.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
-
-const routes: Routes = [
+const routes: Routes = [  
   {path:"",redirectTo:"home" ,pathMatch:"full"},
-  {path:"home",component:HomeComponent},
-  {path:"doctor",component:DoctorComponent},
-  {path:"**",component:PageNotFoundComponent}
+  {path:"home",component:HomeComponent, resolve:{home:HomeResolver}},
+ 
+  {path:"doctor/register",component:DoctorRegisterComponent, canActivate:[LoginGuard]},
+  {path:"patient/register",component:PatientRegisterComponent, canActivate:[LoginGuard]},
+  {path:"login",component:LoginComponent, canActivate:[LoginGuard]},
+  {path:"payment/:id",component:PaymentComponent},
+  {path:"video/:id",component:VideoComponent},
+
+  {path:"subscriber",component:SubscriberComponent},
+  {path:"**",component:PageNotFoundComponent},
+ 
+
+
  
 ];
 

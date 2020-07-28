@@ -1,61 +1,36 @@
 import { Injectable } from '@angular/core';
 import {Schedule} from '../../../_models/schedule'
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { doctorPatientSchedule } from 'src/app/_models/doctorPatientSchedule';
+import { doctorPatientMeeting } from 'src/app/_models/doctorPatientMeeting';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScheduleService {
 
-  constructor() { }
-  scheduleTimes:Schedule[]=[
-    {
-      Id:1,
-      date:1/6/2020,
-      StartTime:'10.30 AM',
-        EndTime:'11.00 PM',
-        IsBooked:true,
-        DoctorId :1
+  constructor(private httpClient:HttpClient) { }
 
 
 
-    },
-    {
-      Id:2,
-      date:1/6/2020,
-      StartTime:'12.30 PM',
-        EndTime:'1.00 PM',
-        IsBooked:false,
-        DoctorId :1
+  getSchedules()
+  {
+
+      return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/Index")
+
+  }
+getScheduleByDoctorId(Id:Number,date:Date)
+{
+
+return this.httpClient.get<Schedule[]>(environment.baseURL+"api/Schedule/GetDoctorSchedules/"+Id+"/"+date)
+
+}
 
 
-
-    },
-    {
-      Id:3,
-      date:1/6/2020,
-      StartTime:'2.30 PM',
-        EndTime:'3.00 PM',
-        IsBooked:true,
-        DoctorId :1
-
-
-
-    },
-    {
-      Id:1,
-      date:1/6/2020,
-      StartTime:'5.30 PM',
-        EndTime:'6.30 PM',
-        IsBooked:false,
-        DoctorId :1
-
-
-
-    },
-
-
-
-
-  ];
-
+  getScheduleById(id:number)
+  {
+    return this.httpClient.get<doctorPatientMeeting>(environment.baseURL+"api/DoctorPatientSchedules/GetByScheduleId/"+id);
+  }
 }

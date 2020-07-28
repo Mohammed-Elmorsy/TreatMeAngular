@@ -1,0 +1,79 @@
+<div id="login">
+  <div class="col-12 col-md-7 float-left" id="imgDiv"><!-- image -->
+    <img src="assets/images/doctors/{{pictureName}}-register.jpg" alt="loading"> 
+  </div>  
+  <div class="col-12 col-md-5 float-right p-4" id="formDiv"><!-- form -->
+    <h4 class="text-center mb-5 mt-5">{{"Login.Login" | translate}}</h4> 
+    <div class="text-center" id="radioBtnGroup">
+      <div class="form-check form-check-inline">
+        <label class="form-check-label mr-1">{{"Login.User" | translate}}</label>
+        <input class="form-check-input" type="radio" name="user" value="patient" [(ngModel)]="this.pictureName">
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label mr-1" for="inlineRadio2">{{"Login.Doctor" | translate}}</label>
+        <input class="form-check-input" type="radio" name="user" value="doctor" [(ngModel)]="this.pictureName">
+      </div>
+    </div>
+    <form #form="ngForm" name="form" (ngSubmit)="onSubmit()" class="formRegister">
+      <div class="form-group">
+        <label>{{"Register.Username" | translate}}</label>
+        <input type="text" class="form-control" name="userName"
+        #userName="ngModel"
+        [(ngModel)]="loginCredentials.userName"      
+        required
+        maxlength="30"
+        minlength="6"
+        noWhiteSpaces
+        pattern="^(?:[a-zA-Z0-9\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,30}$" 
+        [ngClass]="{ 'is-invalid': userName.invalid && userName.dirty }" />  
+        <!--cs validation --> 
+        <div *ngIf="userName.invalid" class="invalid-feedback">
+            <span  *ngIf="userName.errors?.required && userName.dirty">
+              {{"Register.Validation.Required" | translate}}</span>  
+            <span  *ngIf="userName.errors?.minlength && userName.dirty">
+              {{"Register.Validation.MinLength6" | translate}}</span>
+            <span *ngIf="userName.errors?.hasWhiteSpace && userName.dirty">
+              {{"Register.Validation.NoSpace" | translate}}</span>
+            <span *ngIf="userName.errors?.pattern && userName.dirty">
+              {{"Register.Validation.LettersOnly" | translate}}</span>  
+        </div> 
+      </div>
+      <div class="form-group">
+        <label>{{"Register.Password" | translate}}</label>  
+        <input type="password" class="form-control" name="password"
+        #password="ngModel"
+        [(ngModel)]="loginCredentials.password"  
+        required 
+        maxlength="30"
+        minlength="6"
+        noWhiteSpaces
+        [ngClass]="{ 'is-invalid': password.invalid && password.dirty }">  
+    <!--cs validation -->
+        <div *ngIf="password.invalid" class="invalid-feedback">
+            <span *ngIf="password.errors?.required && password.dirty">
+              {{"Register.Validation.Required" | translate}}</span>
+            <span *ngIf="password.errors?.minlength && password.dirty">
+              {{"Register.Validation.MinLength6" | translate}}</span>
+            <span *ngIf="password.errors?.hasWhiteSpace && password.dirty">
+              {{"Register.Validation.NoSpace" | translate}}</span>
+                
+        </div>
+      </div>
+      <div class="form-group">
+        <a routerLink="#">{{"Login.ForgotPassword" | translate}}</a>
+      </div>
+      <div class="text-center">
+        <button type="submit"   class="btn btn-success" [disabled]="form.invalid || form.submitted"
+          
+        >{{"Login.Enter" | translate}}</button>
+      </div>
+    </form>
+    <br>
+    <div *ngIf="pictureName == 'patient'" class="text-center">
+      {{"Login.Or" | translate}} &nbsp; <a routerLink="/patient/register">{{"Login.SignUp"| translate}}</a>
+    </div>
+    <div *ngIf="pictureName == 'doctor'" class="text-center">
+      {{"Login.Or" | translate}} &nbsp; <a routerLink="/doctor/register">{{"Login.SignUp"| translate}}</a>
+    </div>   
+  </div> 
+</div>
