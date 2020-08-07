@@ -17,6 +17,15 @@ const routes: Routes = [
   {path:"",redirectTo:"home" ,pathMatch:"full"},
   {path:"home",component:HomeComponent, resolve:{home:HomeResolver}},
  
+  {path: 'doctor', //lazy loading
+  loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)},
+  {path: 'patient', //lazy loading
+  loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)},
+  {path: 'admin', //lazy loading
+  loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
+  {path: 'schedule', //lazy loading
+  loadChildren: () => import('./schedule/schedule.module').then(m => m.ScheduleModule)},
+  
   {path:"doctor/register",component:DoctorRegisterComponent, canActivate:[LoginGuard]},
   {path:"patient/register",component:PatientRegisterComponent, canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent, canActivate:[LoginGuard]},
