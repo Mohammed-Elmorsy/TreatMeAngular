@@ -41,6 +41,7 @@ import { PaymentComponent } from './payment/payment.component';
   entryComponents:[DoctorProfileModalComponent],
   imports: [ //modules
     BrowserModule, //always the first one
+    BrowserAnimationsModule,
     CoreModule,
     HomeModule,
     DoctorModule,
