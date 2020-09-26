@@ -383,7 +383,7 @@
                                         <td *ngIf="session.schedule.isBooked == 1;"> {{session.schedule.startTime | date:'mediumTime'}}</td>
                                         <!-- if start time is now join else coming soon-->
 
-                                        <td *ngIf="session.schedule.isBooked == 1;"><span class="btn btn-primary" [ngClass]="{ 'active' :false }" (click)="joinMeeting(session.scheduleId)">Join</span></td>
+                                        <td *ngIf="session.schedule.isBooked == 1;"><span class="btn btn-success" [ngClass]="{ 'active' :false }" (click)="joinMeeting(session.scheduleId)">Join <i class="fas fa-video"></i></span></td>
                                 
                             
                     

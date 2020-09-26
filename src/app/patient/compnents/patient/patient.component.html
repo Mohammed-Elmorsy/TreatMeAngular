@@ -158,7 +158,7 @@
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                {{patient.user.bloodType}}
+                                                {{patient.bloodType}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -211,7 +211,7 @@
                             <th scope="row">{{session.doctor.user.firstName}} {{session.doctor.user.lastName}}</th>
                             <td> {{session.schedule.date  | date:'shortDate'}}</td>
                             <td> {{session.schedule.startTime | date:'mediumTime'}}</td>
-                            <td><span class="btn btn-primary" (click)="joinMeeting(session.scheduleId)">Join <i class="fas fa-video"></i></span></td>
+                            <td><span class="btn btn-success" (click)="joinMeeting(session.scheduleId)">Join <i class="fas fa-video"></i></span></td>
                             <td><span class="btn btn-danger" (click)="cancelSession(session)">Cancel</span></td>
                         </tr>
 

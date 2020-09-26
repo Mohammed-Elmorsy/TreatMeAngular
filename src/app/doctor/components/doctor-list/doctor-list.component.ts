@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 })
 export class DoctorListComponent implements OnInit { 
 
-  private doctors:Doctor[];   
+  private doctors:Doctor[] = [];   
 
   constructor(
     private route:ActivatedRoute , private router:Router,private authService:AuthService) { }
